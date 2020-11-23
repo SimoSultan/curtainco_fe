@@ -1,0 +1,47 @@
+[The Curtain Co](https://github.com/SimoSultan/curtainco_fe)
+
+
+## Development Log:
+###### By Simon Curran and Phil Antiporda
+
+----
+
+### with status updates:
+
+
+> Monday 23rd November 2020
+
+
+- 23/11/20 `14:00` - **Outlined tasks in [Trello Board](https://trello.com/b/JUx9nN3o/drivinglessonmarketplace)**
+
+
+
+> Tuesday 24th November 2020
+
+- 24/11/20 `12:00` - **Working on more wireframes**
+
+
+> Wednesday 25th November 2020
+
+- 25/11/20 `10:00` - **Added in more detail to my Trello**
+
+
+
+> Thursday 26th November 2020
+
+- 26/11/20 `03:00` - **Implemented Bootstrap 4 with header and footer to start off with**
+
+
+> Friday 27th November 2020
+
+- 27/11/20 `10:00` - **Added in relationships to ERD on a note**
+
+
+
+----
+
+
+## Authors
+
+© Simon Curran [simonmcurran.com](https://www.simonmcurran.com/)  
+© Phil Antiporda [philantiporda.netlify.com](https://philantiporda.netlify.app/index.html)
