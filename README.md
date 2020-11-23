@@ -129,7 +129,7 @@ Built with Figma
 ### Trello
 
 - [Part A Documentation Board](https://trello.com/b/VF6Vc7Ri/part-1-documentation)
-- [part B Development Board](https://trello.com/b/bWDaFBft/part-2-code)
+- [Part B Development Board](https://trello.com/b/bWDaFBft/part-2-code)
 
 ### Development Log
 - [Log](./docs/dev-log.md)
