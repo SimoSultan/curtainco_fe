@@ -2,17 +2,17 @@
 
 <!-- The app: [thecurtain.co]()   -->
 Link to live app in development  
-Front-End Source code: [FE Repo](https://github.com/SimoSultan/curtainco_fe)
-Back-End Source code: [BE Repo]()
+Front-End Source code: [FE Repo](https://github.com/SimoSultan/curtainco_fe)  
+Back-End Source code: [BE Repo](https://github.com/philrussel21/curtain_co_BE)  
 
 [simonmcurran.com](https://www.simonmcurran.com/)  
 ![SimoSultan's GitHub](https://img.shields.io/github/followers/SimoSultan?logo=GitHub&style=for-the-badge)  
 ![@simo_sultan's Twitter](https://img.shields.io/twitter/follow/simo_sultan?color=%234183C4&logo=twitter&style=for-the-badge)  
-![Simons's LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white)
+<!-- ![Simons's LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white) -->
 
 [philantiporda.netlify.com](https://philantiporda.netlify.app/index.html)  
 ![phil's GitHub](https://img.shields.io/github/followers/philrussel21?logo=GitHub&style=for-the-badge)  
-![@PeelRasel's Twitter](https://img.shields.io/twitter/follow/philrussel21?color=%234183C4&logo=twitter&style=for-the-badge)  
+![@PeelRasel's Twitter](https://img.shields.io/twitter/follow/PeelRasel?color=%234183C4&logo=twitter&style=for-the-badge)  
 <!-- ![Phil's LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white) -->
 
 
