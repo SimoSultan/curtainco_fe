@@ -26,7 +26,7 @@ Back-End Source code: [BE Repo](https://github.com/philrussel21/curtain_co_BE)
 - [**Dataflow Diagram**](#Dataflow-Diagram) - how data flows through the app
 - [**Application Architecture Diagram**](#Application-Architecture-Diagram) - how the app is connected
 - [**Wireframes and Sitemap**](#Wireframes-and-Sitemap) - the look and feel of the app
-- [**Development Timeline**](#Development-Timeline) - dev log and trello
+- [**Development Timeline**](#Development-Timeline) - development log and Trello
 - [**Resources**](#Resources) - links to resources we used
 
 
@@ -138,11 +138,11 @@ Built with Figma
 
 
 
-## Copyright
+<!-- ## Copyright
 
 MIT License
 
-Copyright (c) 2020 Simon Curran & Daniel Keefer
+Copyright (c) 2020 Simon Curran & Phil Antiporda
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -160,7 +160,7 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+SOFTWARE. -->
 
 
 ---
