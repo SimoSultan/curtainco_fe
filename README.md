@@ -1,23 +1,25 @@
 # Phil Antiporda's and Simon Curran's Curtain Co Marketplace
 
 <!-- The app: [thecurtain.co]()   -->
+
 Link to live app in development  
 Front-End Source code: [FE Repo](https://github.com/SimoSultan/curtainco_fe)  
-Back-End Source code: [BE Repo](https://github.com/philrussel21/curtain_co_BE)  
+Back-End Source code: [BE Repo](https://github.com/philrussel21/curtain_co_BE)
 
 [simonmcurran.com](https://www.simonmcurran.com/)  
 ![SimoSultan's GitHub](https://img.shields.io/github/followers/SimoSultan?logo=GitHub&style=for-the-badge)  
-![@simo_sultan's Twitter](https://img.shields.io/twitter/follow/simo_sultan?color=%234183C4&logo=twitter&style=for-the-badge)  
+![@simo_sultan's Twitter](https://img.shields.io/twitter/follow/simo_sultan?color=%234183C4&logo=twitter&style=for-the-badge)
+
 <!-- ![Simons's LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white) -->
 
 [philantiporda.netlify.com](https://philantiporda.netlify.app/index.html)  
 ![phil's GitHub](https://img.shields.io/github/followers/philrussel21?logo=GitHub&style=for-the-badge)  
-![@PeelRasel's Twitter](https://img.shields.io/twitter/follow/PeelRasel?color=%234183C4&logo=twitter&style=for-the-badge)  
+![@PeelRasel's Twitter](https://img.shields.io/twitter/follow/PeelRasel?color=%234183C4&logo=twitter&style=for-the-badge)
+
 <!-- ![Phil's LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white) -->
 
-
-
 #### Index:
+
 - [**Description**](#Description) - what the app does
 - [**Purpose**](#Purpose) - why the app was built
 - [**Features**](#Features) - what can the app do
@@ -29,16 +31,11 @@ Back-End Source code: [BE Repo](https://github.com/philrussel21/curtain_co_BE)
 - [**Development Timeline**](#Development-Timeline) - development log and Trello
 - [**Resources**](#Resources) - links to resources we used
 
-
-
 ---
-
 
 ## Description
 
-
 ---
-
 
 ## Purpose
 
@@ -47,18 +44,38 @@ It would be the client’s platform where she can share her suggestions and expe
 
 ---
 
-## Features	
+## Features and Functionalities
 
-### Current features:  
+### Current features:
 
-- 
+#### Admin Role
+
+- Admin Authentication
+- Admin Authorisation
+- CRUD Actions to _Collections_
+- CRUD Actions to _Products_
+- All Users dashboard
+- Company Profile Updates
+
+#### User Role
+
+- User Authentication
+- User Authorisation
+- Browsing anonymity for Casual Users
+- Filtering Categories
+- Searching Functionality
+- Secured Payment with Stripe/Paypal
+- User Profile Customization
+- Pagination Viewing Experience
+- _Collection_ Customization
 
 ### Future features:
 
-- 
-
----
-
+- Booking System for appointments
+- User Dashboard containing Booking/Appointment details
+- Anonymous casual user's ability to add to Cart before authentication
+- User's ability to leave reviews on a _Collection_ or _Product_
+- Third Party OAuth (Google, Yahoo, Facebook, Apple, Microsoft)
 
 ## Target Audience
 
@@ -66,65 +83,69 @@ The target audience of this website are users that are willing to spend a little
 
 ---
 
-
 ## Tech Stack and Resources
 
 - MongoDB
 - ExpressJS
 - ReactJS
 - NodeJS
+- Stripe/Paypal API Integration
 
 ### Netlify
+
 <!-- - [Netlify](https://www.netlify.com/)
   - for deployment -->
 
 ### Material UI
+
 - [Material UI](https://material-ui.com/)
   - for the styling
 
 ### Icons
+
 <!-- - [Font Awesome](https://fontawesome.com/)
   - for the GitHub and Twitter icons in the footer -->
 
 ### Images
+
 <!-- - [Canva](https://www.canva.com/design/DAEIOVa5ems/q-Y-EyYIIxNcoSLm1ATabA/edit)
   - for the logo... -->
 
 ### Page Templates
+
 <!-- - [404 Page]()
   - 404 page... -->
 
 ### Stack Overflow
+
 - [Stack Overflow](https://stackoverflow.com/)
   - for the problem solving
 
 ---
 
-
 ## Dataflow Diagram
 
+![Curtain Co Dataflow Diagram](/docs/DataFlow_Diagram.png)
 
 ---
-
 
 ## Application Architecture Diagram
 
+![Curtain Co Application Arhictecture Diagram](/docs/Curtain_Co_AAD.png)
 
 ---
-
 
 ## Wireframes and Sitemap
 
 Built with Figma
 
 - [Sitemap](https://www.figma.com/file/UHm86rh8y2z1ELencrFId1/Sitemap?node-id=0%3A1)
+  ![Curtain Co Sitemap](/docs/Curtain_Co_Sitemap.png)
 - [Wireframes](https://material-ui.com/)
 
 ---
 
-
 ## Development Timeline
-
 
 ### Trello
 
@@ -132,11 +153,10 @@ Built with Figma
 - [Part B Development Board](https://trello.com/b/bWDaFBft/part-2-code)
 
 ### Development Log
+
 - [Log](./docs/dev-log.md)
 
 ---
-
-
 
 <!-- ## Copyright
 
@@ -161,7 +181,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. -->
-
 
 ---
 
