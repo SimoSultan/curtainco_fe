@@ -27,6 +27,7 @@ Back-End Source code: [BE Repo](https://github.com/philrussel21/curtain_co_BE)
 - [**Tech Stack**](#Tech-Stack-and-Resources) - the languages that make up the app
 - [**Dataflow Diagram**](#Dataflow-Diagram) - how data flows through the app
 - [**Application Architecture Diagram**](#Application-Architecture-Diagram) - how the app is connected
+- [**User Stories**](#User-Stories) - how the app would behave according to different user roles
 - [**Wireframes and Sitemap**](#Wireframes-and-Sitemap) - the look and feel of the app
 - [**Development Timeline**](#Development-Timeline) - development log and Trello
 - [**Resources**](#Resources) - links to resources we used
