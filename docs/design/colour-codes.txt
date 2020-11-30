@@ -1,0 +1,4 @@
+black - #1D1C1A
+dark blue - #172031
+light blue - #566A73
+very light - #ACB1AB
