@@ -77,6 +77,8 @@ It would be the client’s platform where she can share her suggestions and expe
 - Anonymous casual user's ability to add to Cart before authentication
 - User's ability to leave reviews on a _Collection_ or _Product_
 - Third Party OAuth (Google, Yahoo, Facebook, Apple, Microsoft)
+- Wishlist feature for users
+- Testimonial Adding Feature
 
 ## Target Audience
 

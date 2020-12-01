@@ -46,6 +46,13 @@
 - **Finalized MVP Functionality/Features**
 - **Documentation Preparation**
 
+> Tuesday 1st December 2020
+
+- **Mobile Wireframes**
+- **Server Auth and User CRUD Actions**
+- **Refactoring according to client requirements**
+- **Document Preparation**
+
 ---
 
 ## Authors
