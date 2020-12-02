@@ -35,7 +35,8 @@ Back-End Source code: [BE Repo](https://github.com/philrussel21/curtain_co_BE)
 - [**Sitemap**](#Sitemap) - how the user gets around the app 
 - [**Wireframes**](#Wireframes) - the look and feel of the app
 - [**Development Timeline**](#Development-Timeline) - development log and Trello
-- [**Resources**](#Resources) - links to resources we used
+- [**Copyright and Legal**](#Copyright-and-Legal) - legal information
+- [**Authors**](#Authors) - who wrote this README doc
 
 
 
@@ -279,29 +280,10 @@ The target audience of this website are users that are willing to spend a little
 
 
 
-<!-- ## Copyright
+## Copyright and Legal
 
-MIT License
+Copyright © 2020 Simon Curran & Phil Antiporda
 
-Copyright (c) 2020 Simon Curran & Phil Antiporda
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE. -->
 
 ---
 
