@@ -34,10 +34,6 @@ Back-End Source code: [BE Repo](https://github.com/philrussel21/curtain_co_BE)
 
 ---
 
-## Description
-
----
-
 ## Purpose
 
 The purpose of the app is to migrate the client’s business, along with her ideas, into a dynamic website. This website embodies elegance and sophistication to bring a unique experience to its users.
@@ -47,7 +43,7 @@ It would be the client’s platform where she can share her suggestions and expe
 
 ## Features and Functionalities
 
-### Current features:
+### MVP features:
 
 #### Admin Role
 
@@ -84,18 +80,45 @@ The target audience of this website are users that are willing to spend a little
 
 ---
 
-## Tech Stack and Resources
+## Tech Stack
 
-- MongoDB
-- ExpressJS
-- ReactJS
-- NodeJS
-- Stripe/Paypal API Integration
+### ReactJS
+
+- A Javascript library used for building user interfaces and the overall Front End of the app.
+
+### NodeJS
+
+- A Javascript runtime built on Chrome's V8 Javascript engine used for building the back-end API service of the app.
+
+### MongoDB - Atlas
+
+- A global cloud database service for modern applications used as the database for this app.
+
+### Paypal API Integration
+
+- The faster, safer way to pay online without sharing financial details used to handle payments securely for this app.
 
 ### Netlify
 
-<!-- - [Netlify](https://www.netlify.com/)
-  - for deployment -->
+- Hosting service to be used for deploying the React Front-End side of the app.
+
+### Heroku
+
+- Hosting service to be used for deploying the Node-Express Back-End side of the app.
+
+### Figma
+
+- Web App used to create wireframes and initial mockups.
+
+### Trello
+
+- Workflow and Task management system used throughout the life of the project.
+
+### Git & Github
+
+- Version control system along with its hosting service used for collaboration.
+
+## Resources
 
 ### Material UI
 
@@ -124,6 +147,18 @@ The target audience of this website are users that are willing to spend a little
 
 ---
 
+## Dependancies
+
+- Express
+- Passport
+- passport-local
+- Mongoose
+- Connect-mongo
+- express-session
+- Mongoose-bcrypt
+- nodemon
+- dotenv
+
 ## Dataflow Diagram
 
 ![Curtain Co Dataflow Diagram](/docs/DataFlow_Diagram.png)
@@ -132,7 +167,7 @@ The target audience of this website are users that are willing to spend a little
 
 ## Application Architecture Diagram
 
-![Curtain Co Application Arhictecture Diagram](/docs/Curtain_Co_AAD.png)
+![Curtain Co Application Arhictecture Diagram](/docs/Curtain_co_AAD.png)
 
 ---
 
@@ -190,7 +225,7 @@ The target audience of this website are users that are willing to spend a little
 Built with Figma
 
 - [Sitemap](https://www.figma.com/file/UHm86rh8y2z1ELencrFId1/Sitemap?node-id=0%3A1)
-  ![Curtain Co Sitemap](/docs/Curtain_Co_Sitemap.png)
+  ![Curtain Co Sitemap](/docs/CurtainCoSitemap.png)
 - [Wireframes](https://material-ui.com/)
 
 ---
