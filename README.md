@@ -136,28 +136,28 @@ The target audience of this website are users that are willing to spend a little
 ## Dependencies and Resources
 
 - ### Back-End
-  - [Express JS]() - for the server that handles requests between the client and database 
-  - [Passport]() - for user authentication
-  - [passport-local]() - for
-  - [Mongoose]() - for connecting Express and Mongo DB Atlas
-  - [Connect-mongo]() - for
-  - [express-session]() - for
-  - [Mongoose-bcrypt]() - for
-  - [nodemon]() - a developer dependency that automatically restarts the server on a file change to save time
-  - [dotenv]() - for storing environment variables that are hidden from the client
+  - [**Express JS**]() - for the server that handles requests between the client and database 
+  - [**Passport**]() - for user authentication
+  - [**Passport-Local**]() - for
+  - [**Mongoose**]() - for connecting Express and Mongo DB Atlas
+  - [**Connect-Mongo**]() - for
+  - [**Express-Session**]() - for
+  - [**Mongoose-Bcrypt**]() - for
+  - [**Nodemon**]() - a developer dependency that automatically restarts the server on a file change to save time
+  - [**Dotenv**]() - for storing environment variables that are hidden from the client
 
 - ### Front-End
-  - [Material UI](https://material-ui.com/) - for the client side styling
-  - [Material UI Icons](https://material-ui.com/components/material-icons/) for the icons used throughout the app
+  - [**Material UI**](https://material-ui.com/) - for the client side styling
+  - [**Material UI Icons**](https://material-ui.com/components/material-icons/) for the icons used throughout the app
     <!-- - [404 Page]() the page that shows when a URL is not found... -->
 
 
 
 - ### General
-  - [Trello](https://trello.com/en) - for project management
-  - [Draw.io](https://app.diagrams.net/) - for the [Sitemap](#Sitemap), [DFD](#Dataflow-Diagram) and [AAD](#Application-Architecture-Diagram)
-  - [Figma](https://www.figma.com/) - for the [Wireframes](#Wireframes)
-  - [Stack Overflow](https://stackoverflow.com/) for the problem solving
+  - [**Trello**](https://trello.com/en) - for project management
+  - [**Draw.io**](https://app.diagrams.net/) - for the [Sitemap](#Sitemap), [DFD](#Dataflow-Diagram) and [AAD](#Application-Architecture-Diagram)
+  - [**Figma**](https://www.figma.com/) - for the [Wireframes](#Wireframes)
+  - [**Stack Overflow**](https://stackoverflow.com/) for the problem solving
 
 
 
