@@ -167,7 +167,7 @@ The target audience of this website are users that are willing to spend a little
 
 ## Dataflow Diagram
 
-![Curtain Co Dataflow Diagram](/docs/DataFlow_Diagram.png)
+![Curtain Co Dataflow Diagram](/docs/Curtain_Co_DFD.png)
 
 
 
@@ -177,7 +177,7 @@ The target audience of this website are users that are willing to spend a little
 
 ## Application Architecture Diagram
 
-![Curtain Co Application Arhictecture Diagram](/docs/Curtain_co_AAD.png)
+![Curtain Co Application Arhictecture Diagram](/docs/Curtain_Co_AAD.png)
 
 
 
