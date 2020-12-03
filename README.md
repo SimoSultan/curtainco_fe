@@ -9,18 +9,16 @@ Back-End Source code: [BE Repo](https://github.com/philrussel21/curtain_co_BE)
 [simonmcurran.com](https://www.simonmcurran.com/)  
 ![SimoSultan's GitHub](https://img.shields.io/github/followers/SimoSultan?logo=GitHub&style=for-the-badge)  
 ![@simo_sultan's Twitter](https://img.shields.io/twitter/follow/simo_sultan?color=%234183C4&logo=twitter&style=for-the-badge)
+
 <!-- ![Simons's LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white) -->
 
 [philantiporda.netlify.com](https://philantiporda.netlify.app/index.html)  
 ![phil's GitHub](https://img.shields.io/github/followers/philrussel21?logo=GitHub&style=for-the-badge)  
 ![@PeelRasel's Twitter](https://img.shields.io/twitter/follow/PeelRasel?color=%234183C4&logo=twitter&style=for-the-badge)
+
 <!-- ![Phil's LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white) -->
 
-
-
 ---
-
-
 
 ## Index:
 
@@ -32,38 +30,26 @@ Back-End Source code: [BE Repo](https://github.com/philrussel21/curtain_co_BE)
 - [**Dataflow Diagram**](#Dataflow-Diagram) - how data flows through the app
 - [**Application Architecture Diagram**](#Application-Architecture-Diagram) - how the app is connected
 - [**User Stories**](#User-Stories) - how the app would behave according to different user roles
-- [**Sitemap**](#Sitemap) - how the user gets around the app 
+- [**Sitemap**](#Sitemap) - how the user gets around the app
 - [**Wireframes**](#Wireframes) - the look and feel of the app
 - [**Development Timeline**](#Development-Timeline) - development log and Trello
 - [**Copyright and Legal**](#Copyright-and-Legal) - legal information
 - [**Authors**](#Authors) - who wrote this README doc
 
-
-
 ---
-
 
 ## Purpose
 
 The purpose of the app is to migrate the client’s business, along with her ideas, into a dynamic website. This website embodies elegance and sophistication to bring a unique experience to its users.
 It would be the client’s platform where she can share her suggestions and expertise in the industry while selling curtains and product samples. The website would also allow interested parties to communicate with the client through email thus expanding her own clientele.
 
-
-
 ---
-
-
-
 
 ## Target Audience
 
 The target audience of this website are users that are willing to spend a little bit more in exchange for quality experience and designer-picked products that would help turn a house into a home.
 
-
-
 ---
-
-
 
 ## Features and Functionalities
 
@@ -103,17 +89,11 @@ The target audience of this website are users that are willing to spend a little
   - Third Party OAuth (Google, Yahoo, Facebook, Apple, Microsoft)
   - Wishlist feature for users
 
-
-
 ---
-
-
-
 
 ## Tech Stack
 
 - [**ReactJS**](https://reactjs.org/) - A Javascript library used for building user interfaces and the overall Front End of the app.
-  
 - [**NodeJS**](https://nodejs.org/en/) - A Javascript runtime built on Chrome's V8 Javascript engine used for building the back-end API service of the app.
 
 - [**MongoDB - Atlas**](https://www.mongodb.com/cloud/atlas) - A global cloud database service for modern applications used as the database for this app.
@@ -124,34 +104,31 @@ The target audience of this website are users that are willing to spend a little
 
 - [**Heroku**](https://www.heroku.com/) - Hosting service to be used for deploying the Node-Express Back-End side of the app.
 
-- [**Git**](https://git-scm.com/) - Version control system along
+- [**Git**](https://git-scm.com/) - Version control system used throughout the development life of the project.
 
-- [**GitHub**](https://github.com/) - The hosting service of the version control system
-
+- [**GitHub**](https://github.com/) - The hosting service used for the version control system.
 
 ---
-
-
 
 ## Dependencies and Resources
 
 - ### Back-End
-  - [**Express JS**]() - for the server that handles requests between the client and database 
+
+  - [**Express JS**]() - for the server that handles requests between the client and database
   - [**Passport**]() - for user authentication
-  - [**Passport-Local**]() - for
-  - [**Mongoose**]() - for connecting Express and Mongo DB Atlas
-  - [**Connect-Mongo**]() - for
-  - [**Express-Session**]() - for
-  - [**Mongoose-Bcrypt**]() - for
+  - [**Passport-Local**]() - for the Passport-Strategy. This module lets the app authenticate users using usernames and passwords.
+  - [**Mongoose**]() - An Object Data Modeling (ODM) library used for MongoDB and Nodejs. Manages relationships with between data and provide schema validations.
+  - [**Connect-Mongo**]() - for storing the session into the MongoDB database.
+  - [**Express-Session**]() - for letting the app store session data to the server instead of the client.
+  - [**Mongoose-Bcrypt**]() - for encrypting, decrypting and verifying fields when stored in the database using bcrypt password-hashing function.
   - [**Nodemon**]() - a developer dependency that automatically restarts the server on a file change to save time
-  - [**Dotenv**]() - for storing environment variables that are hidden from the client
+  - [**Dotenv**]() - for storing environment variables containing sensitive information that should remain hidden from the codebase.
 
 - ### Front-End
+
   - [**Material UI**](https://material-ui.com/) - for the client side styling
   - [**Material UI Icons**](https://material-ui.com/components/material-icons/) for the icons used throughout the app
     <!-- - [404 Page]() the page that shows when a URL is not found... -->
-
-
 
 - ### General
   - [**Trello**](https://trello.com/en) - for project management
@@ -159,32 +136,19 @@ The target audience of this website are users that are willing to spend a little
   - [**Figma**](https://www.figma.com/) - for the [Wireframes](#Wireframes)
   - [**Stack Overflow**](https://stackoverflow.com/) for the problem solving
 
-
-
 ---
-
-
 
 ## Dataflow Diagram
 
 ![Curtain Co Dataflow Diagram](/docs/Curtain_Co_DFD.png)
 
-
-
 ---
-
-
 
 ## Application Architecture Diagram
 
 ![Curtain Co Application Arhictecture Diagram](/docs/Curtain_Co_AAD.png)
 
-
-
 ---
-
-
-
 
 ## User Stories
 
@@ -237,25 +201,15 @@ The target audience of this website are users that are willing to spend a little
 - As a user, I want to be able to see all my upcoming booking appointments in my profile page.
 - As a user, I want to be shown different deals during different seasons or events.
 
-
-
 ---
-
-
-
-
 
 ## Sitemap
 
 [Link to Sitemap in Draw.io](https://www.figma.com/file/UHm86rh8y2z1ELencrFId1/Sitemap?node-id=0%3A1)
 
-![Curtain Co Sitemap](/docs/CurtainCoSitemap.png)
-
-
+![Curtain Co Sitemap](/docs/Curtain_Co_Sitemap.png)
 
 ---
-
-
 
 ## Wireframes
 
@@ -265,25 +219,17 @@ The target audience of this website are users that are willing to spend a little
 
 ---
 
-
-
-
 ## Development Timeline
 
 - [Development Log](./docs/dev-log.md)
 - [Trello - Part A Documentation Board](https://trello.com/b/VF6Vc7Ri/part-1-documentation)
 - [Trello - Part B Development Board](https://trello.com/b/bWDaFBft/part-2-code)
 
-
-
 ---
-
-
 
 ## Copyright and Legal
 
 Copyright © 2020 Simon Curran & Phil Antiporda
-
 
 ---
 
