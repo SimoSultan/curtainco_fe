@@ -370,6 +370,48 @@ For tablet, we only decided to do the landing page as to see which nav bar and f
 - [Trello - Part A Documentation Board](https://trello.com/b/VF6Vc7Ri/part-1-documentation)
 - [Trello - Part B Development Board](https://trello.com/b/bWDaFBft/part-2-code)
 
+### Part A Progress Screenshots
+
+<details>
+
+#### Part A: 01.
+![Part A Trello Progress 01](docs/trello/part_a_progress_01.png)
+#### Part A: 02.
+![Part A Trello Progress 02](docs/trello/part_a_progress_02.png)
+
+#### Part A: 03.
+![Part A Trello Progress 03](docs/trello/part_a_progress_03.png)
+
+#### Part A: 04.
+![Part A Trello Progress 04](docs/trello/part_a_progress_04.png)
+
+#### Part A: 05.
+![Part A Trello Progress 05](docs/trello/part_a_progress_05.png)
+
+#### Part A: 06.
+![Part A Trello Progress 06](docs/trello/part_a_progress_06.png)
+
+
+</details>
+
+
+### Part B Progress Screenshots
+ 
+<details>
+
+#### Part B: 01.
+![Part B Trello Progress 01](docs/trello/part_b_progress_01.png)
+
+#### Part B: 02.
+![Part B Trello Progress 02](docs/trello/part_b_progress_02.png)
+
+#### Part B: 03.
+![Part B Trello Progress 03](docs/trello/part_b_progress_03.png)
+
+
+
+</details>
+
 
 
 ---
