@@ -213,9 +213,144 @@ The target audience of this website are users that are willing to spend a little
 
 ## Wireframes
 
-[Link to Wireframes in Figma]()
+[Link to Wireframes in Figma](https://www.figma.com/file/5XJkinZQlwqhF5iCxfvSbK/Curtain-Co.?node-id=270773%3A0)
 
-![]()
+
+### Desktop
+
+Below are the desktop views of the site. In the essence of time, we have focused on desktop and mobile portrait views of the app and used our spare time to ensure a solid layout and design that the client was happy with. We foresee some small issues and time being spent on ensuring the rest of the tablet views and mobile landscape views, however, when designing these wireframes, a grid like layout was an underlying choice so that Material UI will handle the heavy lifting of the responsive layouts, with small adjustments of course.
+
+<details>
+
+##### Landing Page
+![Landing Page](docs/wireframes/desktop/Landing%20V4.png)
+
+##### About Me
+![About Me](docs/wireframes/desktop/About%20Me.png)
+
+##### User Account Page
+![User Account Page](docs/wireframes/desktop/User%20Account%20Page.png)
+
+##### Admin Page - All Users
+![Admin Page - All Users](docs/wireframes/desktop/Admin%20Page%20-%20All%20Users.png)
+
+##### Admin Pge - Collections
+![Admin Pge - Collections](docs/wireframes/desktop/Admin%20Page%20-%20Collections.png)
+##### Admin Page - Company Deets
+![Admin Page - Company Deets](docs/wireframes/desktop/Admin%20Page%20-%20Company%20Deets.png)
+
+##### Admin Page - Products
+![Admin Page - Products](docs/wireframes/desktop/Admin%20Page%20-%20Products.png)
+
+##### Admin Page - Requests
+![Admin Page - Requests](docs/wireframes/desktop/Admin%20Page%20-%20Requests.png)
+
+##### Admin Page - Testimonials
+![Admin Page - Testimonials](docs/wireframes/desktop/Admin%20Page%20-%20Testimonials.png)
+
+##### All Products Page
+![All Products Page](docs/wireframes/desktop/All%20Product%20Page.png)
+
+##### All Products Show Page - Modal
+![All Products Show Page - Modal](docs/wireframes/desktop/All%20Products%20Show%20Page%20-%20Modal.png)
+
+##### Auth Path - Login
+![Auth Path - Login](docs/wireframes/desktop/Auth%20Page%20-%20LOGIN.png)
+
+##### Auth Page - Register
+![Auth Page - Register](docs/wireframes/desktop/Auth%20Page%20-%20REGISTER.png)
+
+##### Cart Page
+![Cart Page](docs/wireframes/desktop/Cart%20Page.png)
+
+##### Collections Page
+![Collections Page](docs/wireframes/desktop/Collection%20Page.png)
+
+##### Customise Collection Page
+![Customise Collection Page](docs/wireframes/desktop/Customise%20Collection%20#3.png)
+
+##### Invalid Page - 404
+![Invalid Page - 404](docs/wireframes/desktop/Invalid%20-%20404.png)
+
+##### Request Consultation Page
+![Request Consultation Page](docs/wireframes/desktop/Request%20Consultation%20Page.png)
+
+</details>
+
+
+
+### Mobile
+
+Below are all the mobile portrait views of the app. In regards to landscape views, we intend to force the portrait view in this orientation but use a container to center it a bit more so that it is not too stretched. We foresee some tweaking of these views however.
+
+<details>
+
+##### Landing Page
+![Landing Page](docs/wireframes/mobile/Landing%20Page.png)
+
+##### About Me
+![About Me](docs/wireframes/mobile/About%20Me.png)
+
+##### User Account Page
+![User Account Page](docs/wireframes/mobile/User%20Account%20Page.png)
+
+##### Admin Page - Requests
+![Admin Page - Requests](docs/wireframes/mobile/Admin%20Page%20-%20Requests.png)
+
+##### All Products Page
+![All Products Page](docs/wireframes/mobile/All%20Product%20Page.png)
+
+##### All Products Show Page - Modal
+![All Products Show Page - Modal](docs/wireframes/mobile/Product%20Show%20Page%20-%20Modal.png)
+
+##### Auth Path - Login
+![Auth Path - Login](docs/wireframes/mobile/Auth%20Page%20-%20LOGIN.png)
+
+##### Auth Page - Register
+![Auth Page - Register](docs/wireframes/mobile/Auth%20Page%20-%20REGISTER.png)
+
+##### Cart Page
+![Cart Page](docs/wireframes/mobile/Cart%20Page.png)
+
+##### Collections Page
+![Collections Page](docs/wireframes/mobile/Collection%20Page.png)
+
+##### Customise Collection Page
+![Customise Collection Page](docs/wireframes/mobile/Collection%20Customisation%20Page.png)
+
+##### Invalid Page - 404
+![Invalid Page - 404](docs/wireframes/mobile/Invalid%20Page%20-%20404.png)
+
+##### Request Consultation Page
+![Request Consultation Page](docs/wireframes/mobile/Request%20Consultation%20Page.png)
+
+
+</details>
+
+
+
+### Tablet
+
+For tablet, we only decided to do the landing page as to see which nav bar and footer would look the best on each screen size and orientation. That was the main objective for these first few preliminary designs shown below. Tablet landscape orientation is intended to replicate the  desktop views. But tablet portrait may require some on the fly tweaking.
+
+
+<details>
+
+##### Landing Page PV1
+![Landing Page PV1](docs/wireframes/tablet/Landing%20Page%20PV1.png)
+
+##### Landing Page PV2
+![Landing Page PV2](docs/wireframes/tablet/Landing%20Page%20PV2.png)
+
+##### Landing Page PV3
+![Landing Page PV3](docs/wireframes/tablet/Landing%20Page%20PV3.png)
+
+##### Landing Page PV4
+![Landing Page PV4](docs/wireframes/tablet/Landing%20Page%20PV4.png)
+
+##### Landing Page L
+![Landing Page L](docs/wireframes/tablet/Landing%20Page%20L.png)
+
 
 ---
 
