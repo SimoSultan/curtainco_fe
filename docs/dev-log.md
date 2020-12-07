@@ -6,7 +6,7 @@
 
 <br>
 
-<!-- The Curtain Co App: [thecurtain.co]() -->
+The Curtain Co App: [thecurtainco.com.au](https://thecurtainco.com.au)  
 Front-End source code: [FE Repo](https://github.com/SimoSultan/curtainco_fe)  
 Back-End source code: [BE Repo](https://github.com/philrussel21/curtain_co_BE)
 
@@ -22,7 +22,7 @@ Back-End source code: [BE Repo](https://github.com/philrussel21/curtain_co_BE)
 > Monday 23rd November 2020
 
 - *Prepared initial documentation layout*
-- *Outlined tasks in [Trello Board](https://trello.com/b/VF6Vc7Ri/part-1-documentation)*
+- *Outlined tasks for documentation preparation in [Part 1 Trello](https://trello.com/b/VF6Vc7Ri/part-1-documentation)*
 - *Started working on initial [Sitemap](docs/../Curtain_Co_Sitemap.png)*
 - *Written [User Stories](../README.md#User-Stories) mostly for the app's MVP*
 - *Completed the [Statement of Purpose](../README.md#Purpose) in the README*
@@ -38,11 +38,11 @@ Back-End source code: [BE Repo](https://github.com/philrussel21/curtain_co_BE)
 > Wednesday 25th November 2020
 
 - *Worked on the [Application Architecture Diagram](../README.md#Application-Architecture-Diagram)*
-- *Worked on the [DataFlow Diagram](../README.md#Dataflow-Diagram)*
+- *Worked on the [Dataflow Diagram](../README.md#Dataflow-Diagram)*
 
 > Thursday 26th November 2020
 
-- *Finalised DataFlow Diagram*
+- *Finalised Dataflow Diagram*
 
 > Friday 27th November 2020
 
@@ -52,15 +52,30 @@ Back-End source code: [BE Repo](https://github.com/philrussel21/curtain_co_BE)
 
 - *Second meeting with the client to discuss planning components (features, sitemap, wireframes, layout)*
 - *Initial presentation of wireframes to the client*
-- *Finalized MVP functionality/features*
+- *Finalized MVP [functionality/features](../README.md#Features-and-Functionalities)*
 - *Documentation preparation*
 
 > Tuesday 1st December 2020
 
-- *Mobile wireframes*
+- *Worked on [mobile wireframes](../README.md#mobile)*
 - *Server auth and user CRUD actions*
 - *Refactoring according to client requirements*
 - *Documentation preparation*
+
+> Wednesday 2nd December 2020
+
+
+> Thursday 3rd December 2020
+
+
+> Friday 4th December 2020
+
+
+> Saturday 5th December 2020
+- *Back-end implementation plan*
+  
+> Sunday 6th December 2020
+- *Back-end implementation plan written up on [Part 2 Trello](https://trello.com/b/bWDaFBft/part-2-code)*
 
 ---
 
