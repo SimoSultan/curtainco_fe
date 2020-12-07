@@ -399,12 +399,12 @@ We may change these terms of use from time to time. Check before re-using any co
 ## Authors
 
 - ### Owner
-© Marie Gjorgioski  
+Marie Gjorgioski  
 Contact: <a linkTo="mailto:simosultan2020@email.com?">marie@marieg.com.au</a>
 
-- ### Developers
+- ### Developers - Team SiPhi
 
-© Simon Curran [simonmcurran.com](https://www.simonmcurran.com/)  
-© Phil Antiporda [philantiporda.netlify.com](https://philantiporda.netlify.app/index.html)   
+Simon Curran [simonmcurran.com](https://www.simonmcurran.com/)  
+Phil Antiporda [philantiporda.netlify.com](https://philantiporda.netlify.app/index.html)   
 
 <div style="width:30%; margin: 0 auto"><img src="docs/{SiPhi}_logo_transparent.png" /></div>
