@@ -2,7 +2,7 @@
 
 <br>
 
-<div style="width:70%; margin: 0 auto;"><img src="docs/curtain_co_logo.png"/></div>
+<div style="width:40%; margin: 0 auto;"><img src="docs/curtain_co_logo.png"/></div>
 
 <br>
 
