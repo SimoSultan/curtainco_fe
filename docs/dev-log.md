@@ -2,7 +2,8 @@
 
 <br>
 
-<div style="width:70%; margin: 0 auto;"><img src="docs/curtain_co_logo.png"/></div>
+
+<div style="width:40%; margin: 0 auto;"><img src="curtain_co_logo.png"/></div>
 
 <br>
 
@@ -84,7 +85,7 @@ Back-End source code: [BE Repo](https://github.com/philrussel21/curtain_co_BE)
 > Monday 7th December 2020
 - *Completed [tablet wireframes](../README.md#Tablet) of landing page in Figma*
 - *Front-end implementation plan finished on [Part 2 Trello](https://trello.com/b/bWDaFBft/part-2-code)*
-- *Developed [client's logo in Figma]()*
+- *Developed client's logo in Figma*
 - *Updated and finished the development log*
 - *Finished and submitted [The Curtain Co Documentation](../README.md)*
 
