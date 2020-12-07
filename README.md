@@ -1,10 +1,14 @@
-# Phil Antiporda's and Simon Curran's Curtain Co Marketplace
+# The Curtain Co
 
-<!-- The app: [thecurtain.co]()   -->
+<br>
 
-Link to live app in development  
-Front-End Source code: [FE Repo](https://github.com/SimoSultan/curtainco_fe)  
-Back-End Source code: [BE Repo](https://github.com/philrussel21/curtain_co_BE)
+<div style="width:70%; margin: 0 auto;"><img src="docs/curtain_co_logo.png"/></div>
+
+<br>
+
+<!-- The Curtain Co App: [thecurtain.co]()  -->
+Front-End source code: [FE Repo](https://github.com/SimoSultan/curtainco_fe)  
+Back-End source code: [BE Repo](https://github.com/philrussel21/curtain_co_BE)
 
 [simonmcurran.com](https://www.simonmcurran.com/)  
 ![SimoSultan's GitHub](https://img.shields.io/github/followers/SimoSultan?logo=GitHub&style=for-the-badge)  
@@ -33,7 +37,7 @@ Back-End Source code: [BE Repo](https://github.com/philrussel21/curtain_co_BE)
 - [**Sitemap**](#Sitemap) - how the user gets around the app
 - [**Wireframes**](#Wireframes) - the look and feel of the app
 - [**Development Timeline**](#Development-Timeline) - development log and Trello
-- [**Copyright and Legal**](#Copyright-and-Legal) - legal information
+- [**Copyright**](#Copyright) - legal information
 - [**Authors**](#Authors) - who wrote this README doc
 
 ---
@@ -351,6 +355,7 @@ For tablet, we only decided to do the landing page as to see which nav bar and f
 ##### Landing Page L
 ![Landing Page L](docs/wireframes/tablet/Landing%20Page%20L.png)
 
+</details>
 
 ---
 
@@ -360,15 +365,42 @@ For tablet, we only decided to do the landing page as to see which nav bar and f
 - [Trello - Part A Documentation Board](https://trello.com/b/VF6Vc7Ri/part-1-documentation)
 - [Trello - Part B Development Board](https://trello.com/b/bWDaFBft/part-2-code)
 
----
 
-## Copyright and Legal
-
-Copyright © 2020 Simon Curran & Phil Antiporda
 
 ---
+
+
+
+## Copyright Legal
+
+**© The Curtain Co 2020**:
+
+_7th December 2020_
+
+Except as permitted by the copyright law applicable to you, you may not reproduce or communicate any of the content on this website, including files downloadable from this website, without the permission of the copyright owner.
+
+The Australian Copyright Act allows certain uses of content from the internet without the copyright owner’s permission. This includes uses by educational institutions and by Commonwealth and State governments, provided fair compensation is paid. For more information, see www.[copyright.com.au](https://www.copyright.com.au/) and [www.copyright.org.au](http://www.copyright.org.au/).
+
+The owners of copyright in the content on this website may receive compensation for the use of their content by educational institutions and governments, including from licensing schemes managed by Copyright Agency.
+
+We may change these terms of use from time to time. Check before re-using any content from this website.
+
+
+
+---
+
+
 
 ## Authors
 
+#### Owner
+© Marie Gjorgioski  
+Contact: [marie@marieg.com.au](marie@marieg.com.au)  
+
+
+#### Developers
+
 © Simon Curran [simonmcurran.com](https://www.simonmcurran.com/)  
-© Phil Antiporda [philantiporda.netlify.com](https://philantiporda.netlify.app/index.html)
+© Phil Antiporda [philantiporda.netlify.com](https://philantiporda.netlify.app/index.html)   
+
+<div style="width:50%; margin: 0 auto"><img src="docs/{SiPhi}_logo_transparent.png" /></div>
