@@ -5,7 +5,7 @@ import { useCurtainContext } from '../../config/CurtainCoContext'
 import { ACTIONS } from '../../config/stateReducer'
 
 // routing
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 // material ui
 import Avatar from '@material-ui/core/Avatar';
@@ -112,79 +112,88 @@ export default function SignIn() {
 
     return (
 
-        <Container component="main" maxWidth="xs">
+        <>
+            {
+                state.loggedIn
+                ?   <Redirect to="/" />
+                :    <Container component="main" maxWidth="xs">
 
-            <CssBaseline />
+                        <CssBaseline />
 
-            <div className={classes.paper}>
+                        <div className={classes.paper}>
 
-                <Avatar className={classes.avatar}>
-                    <LockOutlinedIcon />
-                </Avatar>
+                            <Avatar className={classes.avatar}>
+                                <LockOutlinedIcon />
+                            </Avatar>
 
-                <Typography component="h1" variant="h5">
-                    Sign in
-                </Typography>
+                            <Typography component="h1" variant="h5">
+                                Sign in
+                            </Typography>
 
-                <form className={classes.form} noValidate onSubmit={handleLogin}>
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="email"
-                        label="Email Address"
-                        name="email"
-                        autoComplete="email"
-                        autoFocus
-                        onChange={handleEmailChange}
-                    />
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="password"
-                        label="Password"
-                        type="password"
-                        id="password"
-                        autoComplete="current-password"
-                        onChange={handlePasswordChange}
-                    />
-                    <FormControlLabel
-                        control={<Checkbox value="remember" color="primary" />}
-                        label="Remember me"
-                    />
+                            <form className={classes.form} noValidate onSubmit={handleLogin}>
+                                <TextField
+                                    variant="outlined"
+                                    margin="normal"
+                                    required
+                                    fullWidth
+                                    id="email"
+                                    label="Email Address"
+                                    name="email"
+                                    autoComplete="email"
+                                    autoFocus
+                                    onChange={handleEmailChange}
+                                />
+                                <TextField
+                                    variant="outlined"
+                                    margin="normal"
+                                    required
+                                    fullWidth
+                                    name="password"
+                                    label="Password"
+                                    type="password"
+                                    id="password"
+                                    autoComplete="current-password"
+                                    onChange={handlePasswordChange}
+                                />
+                                <FormControlLabel
+                                    control={<Checkbox value="remember" color="primary" />}
+                                    label="Remember me"
+                                />
 
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={classes.submit}
-                    >Sign In
-                    </Button>
+                                <Button
+                                    type="submit"
+                                    fullWidth
+                                    variant="contained"
+                                    color="primary"
+                                    className={classes.submit}
+                                >Sign In
+                                </Button>
 
-                    <Grid container>
-                        <Grid item xs>
-                            <Link className={classes.link} to="/">
-                                Forgot password?
-                            </Link>
-                        </Grid>
-                        <Grid item>
-                            <Link className={classes.link} to="/register">
-                                {"Don't have an account? Sign Up"}
-                            </Link>
-                        </Grid>
-                    </Grid>
-                </form>
-            </div>
+                                <Grid container>
+                                    <Grid item xs>
+                                        <Link className={classes.link} to="/">
+                                            Forgot password?
+                                        </Link>
+                                    </Grid>
+                                    <Grid item>
+                                        <Link className={classes.link} to="/register">
+                                            {"Don't have an account? Sign Up"}
+                                        </Link>
+                                    </Grid>
+                                </Grid>
+                            </form>
+                        </div>
 
-            <Box mt={8}>
-                <Copyright />
-            </Box>
+                        <Box mt={8}>
+                            <Copyright />
+                        </Box>
 
-        </Container>
+                    </Container>
+
+            }
+
+        </>
+
 
     );
 }

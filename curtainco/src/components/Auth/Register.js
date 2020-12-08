@@ -5,7 +5,7 @@ import { useCurtainContext } from '../../config/CurtainCoContext'
 import { ACTIONS } from '../../config/stateReducer'
 
 // routing
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 // material ui
 import Avatar from '@material-ui/core/Avatar';
@@ -115,112 +115,124 @@ export default function SignUp() {
 
     return (
 
-        <Container component="main" maxWidth="xs">
+        <>
 
-            <CssBaseline />
 
-            <div className={classes.paper}>
+        {
+            state.loggedIn
+            ?   <Redirect to="/" />
+            :   <Container component="main" maxWidth="xs">
 
-                <Avatar className={classes.avatar}>
-                    <LockOutlinedIcon />
-                </Avatar>
+                    <CssBaseline />
 
-                <Typography component="h1" variant="h5">
-                    Sign up
-                </Typography>
+                    <div className={classes.paper}>
 
-                <form className={classes.form} noValidate onSubmit={handleRegister}>
+                        <Avatar className={classes.avatar}>
+                            <LockOutlinedIcon />
+                        </Avatar>
 
-                    <Grid container spacing={2}>
+                        <Typography component="h1" variant="h5">
+                            Sign up
+                        </Typography>
 
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                autoComplete="fname"
-                                name="firstName"
-                                variant="outlined"
-                                required
+                        <form className={classes.form} noValidate onSubmit={handleRegister}>
+
+                            <Grid container spacing={2}>
+
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                        autoComplete="fname"
+                                        name="firstName"
+                                        variant="outlined"
+                                        required
+                                        fullWidth
+                                        id="firstName"
+                                        label="First Name"
+                                        autoFocus
+                                        onChange={handleFirstNameChange}
+                                    />
+                                </Grid>
+
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                        variant="outlined"
+                                        required
+                                        fullWidth
+                                        id="lastName"
+                                        label="Last Name"
+                                        name="lastName"
+                                        autoComplete="lname"
+                                        onChange={handleLastNameChange}
+                                    />
+                                </Grid>
+
+                                <Grid item xs={12}>
+                                    <TextField
+                                        variant="outlined"
+                                        required
+                                        fullWidth
+                                        id="email"
+                                        label="Email Address"
+                                        name="email"
+                                        autoComplete="email"
+                                        onChange={handleEmailChange}
+                                    />
+                                </Grid>
+
+                                <Grid item xs={12}>
+                                    <TextField
+                                        variant="outlined"
+                                        required
+                                        fullWidth
+                                        name="password"
+                                        label="Password"
+                                        type="password"
+                                        id="password"
+                                        autoComplete="current-password"
+                                        onChange={handlePasswordChange}
+                                    />
+                                </Grid>
+
+                                <Grid item xs={12}>
+                                    <FormControlLabel
+                                        control={<Checkbox value="allowExtraEmails" color="primary" />}
+                                        label="I want to receive inspiration, marketing promotions and updates via email."
+                                    />
+                                </Grid>
+                            </Grid>
+
+                            <Button
+                                type="submit"
                                 fullWidth
-                                id="firstName"
-                                label="First Name"
-                                autoFocus
-                                onChange={handleFirstNameChange}
-                            />
-                        </Grid>
+                                variant="contained"
+                                color="primary"
+                                className={classes.submit}
+                            >
+                                Sign Up
+                            </Button>
 
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                variant="outlined"
-                                required
-                                fullWidth
-                                id="lastName"
-                                label="Last Name"
-                                name="lastName"
-                                autoComplete="lname"
-                                onChange={handleLastNameChange}
-                            />
-                        </Grid>
+                            <Grid container justify="flex-end">
+                                <Grid item>
+                                    <Link className={classes.link} to="/login">
+                                        {"Already have an account? Sign In"}
+                                    </Link>
+                                </Grid>
+                            </Grid>
 
-                        <Grid item xs={12}>
-                            <TextField
-                                variant="outlined"
-                                required
-                                fullWidth
-                                id="email"
-                                label="Email Address"
-                                name="email"
-                                autoComplete="email"
-                                onChange={handleEmailChange}
-                            />
-                        </Grid>
+                        </form>
 
-                        <Grid item xs={12}>
-                            <TextField
-                                variant="outlined"
-                                required
-                                fullWidth
-                                name="password"
-                                label="Password"
-                                type="password"
-                                id="password"
-                                autoComplete="current-password"
-                                onChange={handlePasswordChange}
-                            />
-                        </Grid>
+                    </div>
 
-                        <Grid item xs={12}>
-                            <FormControlLabel
-                                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                                label="I want to receive inspiration, marketing promotions and updates via email."
-                            />
-                        </Grid>
-                    </Grid>
+                    <Box mt={5}>
+                        <Copyright />
+                    </Box>
 
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={classes.submit}
-                    >
-                        Sign Up
-                    </Button>
+                </Container>
 
-                    <Grid container justify="flex-end">
-                        <Grid item>
-                            <Link className={classes.link} to="/login">
-                                {"Already have an account? Sign In"}
-                            </Link>
-                        </Grid>
-                    </Grid>
+            }
 
-                </form>
 
-            </div>
+        </>
 
-            <Box mt={5}>
-                <Copyright />
-            </Box>
-
-        </Container>
     );
 }
