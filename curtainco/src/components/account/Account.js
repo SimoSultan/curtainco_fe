@@ -1,34 +1,29 @@
 import React from 'react'
 
 // global state
-// import { useCurtainContext } from '../config/CurtainCoContext'
+import { useCurtainContext } from '../../config/CurtainCoContext'
 
-// material ui
 import {
     Container,
     Typography
 } from '@material-ui/core'
 
+function Account() {
 
-
-
-function Home() {
-
-    // const { state, dispatch } = useCurtainContext()
-
+    const { state, dispatch } = useCurtainContext()
 
     return (
         <Container>
             <Typography variant="h3">
-                Home Page
+                Account Page
             </Typography>
-            {/* <Typography variant="body1">
+            <Typography variant="h5">
                 {
                     `Hello ${state.currentUser !== null ? state.currentUser.fullName : "not logged in"}`
                 }
-            </Typography> */}
+            </Typography>
         </Container>
     )
 }
 
-export default Home
+export default Account
