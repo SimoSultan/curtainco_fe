@@ -23,6 +23,7 @@ import Container from '@material-ui/core/Container';
 // material icons
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
+import { registerUser, loginUser } from "../../services/authServices";
 
 function Copyright() {
   return (
@@ -78,19 +79,57 @@ export default function SignUp() {
     function handleRegister(e) {
         e.preventDefault()
 
-        dispatch({
-            type: ACTIONS.REGISTER,
-            payload: {
-                email,
-                password,
-                name: firstName + ',' + lastName,
-            }
+        let userDetails = {
+            email: email,
+            password: password,
+            title: "Mr",
+            fullName: `${firstName} ${lastName}`,
+            phone: '0400123456',
+            // companyName: "My Company",
+            address1: "45 Street Ave",
+            suburb: "Brisbane City",
+            state: "QLD",
+            postcode: '4000',
+        }
+
+
+        registerUser(userDetails).then((regResp) => {
+            console.log(regResp);
+
+            dispatch({
+                type: ACTIONS.REGISTER,
+                payload: {
+                    email,
+                    password,
+                    name: firstName + ',' + lastName,
+                }
+            })
+
+        }).then(() => {
+            
+            let emailPass = { email, password }
+
+            loginUser(emailPass).then((logResp) => {
+                let currentUser = logResp.user
+                dispatch({
+                    type: ACTIONS.LOGIN,
+                    payload: currentUser
+                })
+    
+                setEmail('')
+                setPassword('')
+                setFirstName('')
+                setLastName('')
+
+            }).catch((error) => {
+                console.log(`An error ocurred on login: ${error}.`);
+            })
+        })
+        
+        .catch((error) => {
+            console.log(`An error ocurred on register: ${error}.`);
         })
 
-        setEmail('')
-        setPassword('')
-        setFirstName('')
-        setLastName('')
     }
 
     function handleEmailChange(e) {

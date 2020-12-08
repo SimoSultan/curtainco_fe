@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // global state
 import { useCurtainContext } from '../../config/CurtainCoContext'
@@ -23,7 +23,7 @@ import Container from '@material-ui/core/Container';
 // material icons
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
-
+import { loginUser } from '../../services/authServices'
 
 function Copyright() {
     const classes = useStyles();
@@ -70,7 +70,6 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-
 export default function SignIn() {
     const classes = useStyles();
 
@@ -81,23 +80,25 @@ export default function SignIn() {
     function handleLogin(e) {
         e.preventDefault()
 
+        // if(state.users.length < 1) return (alert('Please sign up first'))
+        // const user = state.users.find(user => user.email === email && user.password === password)
+        // if(!user) return (alert("User doesn't exist"))
 
-        if(state.users.length < 1) return (alert('Please sign up first'))
-        const user = state.users.find(user => user.email === email && user.password === password)
-        const userExists = user && true
+        const userDetails = {email, password}
 
-        if(!userExists) return (alert("User doesn't exist"))
+        loginUser(userDetails).then((resp) => {
+            let currentUser = resp.user
+            dispatch({
+                type: ACTIONS.LOGIN,
+                payload: currentUser
+            })
 
-        dispatch({
-            type: ACTIONS.LOGIN,
-            payload: {
-                email,
-                password,
-            }
+            setEmail('')
+            setPassword('')
+
+        }).catch((error) => {
+            console.log(`An error ocurred on login: ${error}.`);
         })
-
-        setEmail('')
-        setPassword('')
     }
 
     function handleEmailChange(e) {
@@ -108,7 +109,9 @@ export default function SignIn() {
         setPassword(e.target.value)
     }
 
-
+    useEffect(() => {
+        console.log(state);
+    }, [state])
 
     return (
 
@@ -116,7 +119,7 @@ export default function SignIn() {
             {
                 state.loggedIn
                 ?   <Redirect to="/" />
-                :    <Container component="main" maxWidth="xs">
+                :   <Container component="main" maxWidth="xs">
 
                         <CssBaseline />
 

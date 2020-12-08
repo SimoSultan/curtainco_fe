@@ -1,5 +1,10 @@
 import React from 'react'
 
+// global state
+import { useCurtainContext } from '../config/CurtainCoContext'
+import { ACTIONS } from '../config/stateReducer';
+
+// material ui
 import { 
     AppBar,
     Toolbar,
@@ -7,13 +12,18 @@ import {
     Typography,
     Button,
 } from '@material-ui/core'
-import MenuIcon from '@material-ui/icons/Menu';
 import { makeStyles } from '@material-ui/core/styles';
 
+// material icons
+import MenuIcon from '@material-ui/icons/Menu';
+
+// routing
 import { Link, withRouter } from "react-router-dom";
 
-import { useCurtainContext } from '../config/CurtainCoContext'
-import { ACTIONS } from '../config/stateReducer';
+// authentication services
+import { logoutUser } from '../services/authServices'
+
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -32,15 +42,25 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
+
+
+
 function Navigation() {
     const classes = useStyles();
 
     const { state, dispatch } = useCurtainContext()
 
-
     function handleLogout(e) {
         e.preventDefault()
+
+        logoutUser().then((response) => {
+            console.log("Got back response on logout", response.status)
+        }).catch ((error) => {
+            console.log("The server may be down - caught an exception on logout:", error)
+        })
+        // Even if we catch an error, logout the user locally
         dispatch({type: ACTIONS.LOGOUT})
+
     }
 
     return (
@@ -74,6 +94,14 @@ function Navigation() {
                 <Button color="inherit">
                     <Link className={classes.link} to="/cart">Cart</Link>
                 </Button>
+
+                {
+                    state.loggedIn
+                    ?   <Button color="inherit">
+                            <Link className={classes.link} to="/account" >Account</Link>
+                        </Button>
+                    :   ''
+                }
 
                 {
                     state.loggedIn
