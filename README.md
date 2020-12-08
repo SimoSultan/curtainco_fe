@@ -7,6 +7,8 @@
 <br>
 
 Link to App: [thecurtainco.com.au](https://thecurtainco.com.au)  
+[![Netlify Status](https://api.netlify.com/api/v1/badges/d628d0e4-60dc-4b78-a83d-9bc459d396e5/deploy-status)](https://app.netlify.com/sites/thecurtainco/deploys)  
+
 Front-End source code: [FE Repo](https://github.com/SimoSultan/curtainco_fe)  
 Back-End source code: [BE Repo](https://github.com/philrussel21/curtain_co_BE)
 
