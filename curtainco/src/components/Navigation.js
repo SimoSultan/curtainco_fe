@@ -12,6 +12,8 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import { Link, withRouter } from "react-router-dom";
 
+import { useCurtainContext } from '../config/CurtainCoContext'
+import { ACTIONS } from '../config/stateReducer';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -33,6 +35,14 @@ const useStyles = makeStyles((theme) => ({
 function Navigation() {
     const classes = useStyles();
 
+    const { state, dispatch } = useCurtainContext()
+
+
+    function handleLogout(e) {
+        e.preventDefault()
+        dispatch({type: ACTIONS.LOGOUT})
+    }
+
     return (
         <AppBar position="static">
             <Toolbar>
@@ -42,7 +52,7 @@ function Navigation() {
                 </IconButton>
 
                 <Typography variant="h6" className={classes.title}>
-                    The Curtain Co
+                    <Link className={classes.link} to="/">The Curtain Co</Link>
                 </Typography>
 
                 <Button color="inherit">
@@ -50,9 +60,32 @@ function Navigation() {
                 </Button>
 
                 <Button color="inherit">
-                    <Link className={classes.link} to="/login">Login</Link>
+                    <Link className={classes.link} to="/collections">Collections</Link>
                 </Button>
+
+                <Button color="inherit">
+                    <Link className={classes.link} to="/products">Products</Link>
+                </Button>
+
+                <Button color="inherit">
+                    <Link className={classes.link} to="/about">About</Link>
+                </Button>
+
+                <Button color="inherit">
+                    <Link className={classes.link} to="/cart">Cart</Link>
+                </Button>
+
+                {
+                    state.loggedIn
+                    ?   <Button color="inherit" onClick={handleLogout}>
+                            <Link className={classes.link} to="/" >Logout</Link>
+                        </Button>
+                    :   <Button color="inherit">
+                            <Link className={classes.link} to="/login" >Login</Link>
+                        </Button>
+                }
                 
+
             </Toolbar>
         </AppBar>
     )
