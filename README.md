@@ -173,7 +173,7 @@ The target audience of this website are users that are willing to spend a little
 - As an admin, I can upload photos to the website when listing a new _Product_ or when setting up a new _Collection_ so I can better catch my user's attention.
 - As an admin, I want casual users to not have access to certain pages so I can better secure my website.
 - As the company owner, I want to have a page where I can tell my potential customers about myself and my business so that I can connect and develop relationship with them.
-- As the company owner, I want a seemless flow where users can float through the site so I can offer them better interface compared to other company's website.
+- As the company owner, I want a seamless flow where users can float through the site so I can offer them better interface compared to other company's website.
 - As the company owner, I want a clean crisp, airy but with warmth user experience so I can differentiate my website to other competitor's website.
 - As an admin, I want to be able to edit my business details shown on my site so I can update my users for any changes.
 
@@ -195,7 +195,7 @@ The target audience of this website are users that are willing to spend a little
 - As a user, I want to be redirected to a certain page when I accidentally visited an invalid or unauthorized link.
 - As a user, I want to be able to add multiple items in my cart so I can pay for them all at the same time when I'm done choosing.
 - As a user, I want to be able to set the quantity of the products I wish to purchase so that I can buy more than one in one transaction.
-- As a user, I want to be able to communicate with the owner by providing them with my email.
+- As a user, I want to be able to request a consultation by providing my details.
 
 > ### Nice-to-Have User Stories
 
@@ -220,7 +220,7 @@ The target audience of this website are users that are willing to spend a little
 
 > ### Front-End
 **Jest** is the chosen framework for testing client side code, and if time permits, look into implementing end-to-end testing with Cypress.
--  Unit testing functions, methods, modules or objects
+-  Unit testing functions, methods, modules and objects
 -  Component testing
 -  Snapshot testing
 
@@ -242,15 +242,11 @@ The target audience of this website are users that are willing to spend a little
 
 ## Sitemap
 
-[Link to Sitemap in Draw.io](https://www.figma.com/file/UHm86rh8y2z1ELencrFId1/Sitemap?node-id=0%3A1)
-
 ![Curtain Co Sitemap](/docs/Curtain_Co_Sitemap.png)
 
 ---
 
 ## Wireframes
-
-[Link to Wireframes in Figma](https://www.figma.com/file/5XJkinZQlwqhF5iCxfvSbK/Curtain-Co.?node-id=270773%3A0)
 
 
 > ### Desktop
@@ -259,57 +255,57 @@ Below are the desktop views of the site. In the essence of time, we have focused
 
 <details>
 
-##### Landing Page
+#### Landing Page
 ![Landing Page](docs/wireframes/desktop/Landing%20V4.png)
 
-##### About Me
+#### About Me
 ![About Me](docs/wireframes/desktop/About%20Me.png)
 
-##### User Account Page
-![User Account Page](docs/wireframes/desktop/User%20Account%20Page.png)
+#### Account Page - User
+![Account Page - User](docs/wireframes/desktop/User%20Account%20Page.png)
 
-##### Admin Page - All Users
+#### Admin Page - All Users
 ![Admin Page - All Users](docs/wireframes/desktop/Admin%20Page%20-%20All%20Users.png)
 
-##### Admin Pge - Collections
+#### Admin Pge - Collections
 ![Admin Pge - Collections](docs/wireframes/desktop/Admin%20Page%20-%20Collections.png)
-##### Admin Page - Company Deets
+#### Admin Page - Company Deets
 ![Admin Page - Company Deets](docs/wireframes/desktop/Admin%20Page%20-%20Company%20Deets.png)
 
-##### Admin Page - Products
+#### Admin Page - Products
 ![Admin Page - Products](docs/wireframes/desktop/Admin%20Page%20-%20Products.png)
 
-##### Admin Page - Requests
+#### Admin Page - Requests
 ![Admin Page - Requests](docs/wireframes/desktop/Admin%20Page%20-%20Requests.png)
 
-##### Admin Page - Testimonials
+#### Admin Page - Testimonials
 ![Admin Page - Testimonials](docs/wireframes/desktop/Admin%20Page%20-%20Testimonials.png)
 
-##### All Products Page
+#### All Products Page
 ![All Products Page](docs/wireframes/desktop/All%20Product%20Page.png)
 
-##### All Products Show Page - Modal
+#### All Products Show Page - Modal
 ![All Products Show Page - Modal](docs/wireframes/desktop/All%20Products%20Show%20Page%20-%20Modal.png)
 
-##### Auth Path - Login
+#### Auth Path - Login
 ![Auth Path - Login](docs/wireframes/desktop/Auth%20Page%20-%20LOGIN.png)
 
-##### Auth Page - Register
+#### Auth Page - Register
 ![Auth Page - Register](docs/wireframes/desktop/Auth%20Page%20-%20REGISTER.png)
 
-##### Cart Page
+#### Cart Page
 ![Cart Page](docs/wireframes/desktop/Cart%20Page.png)
 
-##### Collections Page
+#### Collections Page
 ![Collections Page](docs/wireframes/desktop/Collection%20Page.png)
 
-##### Customise Collection Page
+#### Customise Collection Page
 ![Customise Collection Page](docs/wireframes/desktop/Customise%20Collection%20#3.png)
 
-##### Invalid Page - 404
+#### Invalid Page - 404
 ![Invalid Page - 404](docs/wireframes/desktop/Invalid%20-%20404.png)
 
-##### Request Consultation Page
+#### Request Consultation Page
 ![Request Consultation Page](docs/wireframes/desktop/Request%20Consultation%20Page.png)
 
 </details>
@@ -322,43 +318,43 @@ Below are all the mobile portrait views of the app. In regards to landscape view
 
 <details>
 
-##### Landing Page
+#### Landing Page
 ![Landing Page](docs/wireframes/mobile/Landing%20Page.png)
 
-##### About Me
+#### About Me
 ![About Me](docs/wireframes/mobile/About%20Me.png)
 
-##### User Account Page
-![User Account Page](docs/wireframes/mobile/User%20Account%20Page.png)
+#### Account Page - User
+![Account Page - User](docs/wireframes/mobile/User%20Account%20Page.png)
 
-##### Admin Page - Requests
+#### Admin Page - Requests
 ![Admin Page - Requests](docs/wireframes/mobile/Admin%20Page%20-%20Requests.png)
 
-##### All Products Page
+#### All Products Page
 ![All Products Page](docs/wireframes/mobile/All%20Product%20Page.png)
 
-##### All Products Show Page - Modal
+#### All Products Show Page - Modal
 ![All Products Show Page - Modal](docs/wireframes/mobile/Product%20Show%20Page%20-%20Modal.png)
 
-##### Auth Path - Login
+#### Auth Path - Login
 ![Auth Path - Login](docs/wireframes/mobile/Auth%20Page%20-%20LOGIN.png)
 
-##### Auth Page - Register
+#### Auth Page - Register
 ![Auth Page - Register](docs/wireframes/mobile/Auth%20Page%20-%20REGISTER.png)
 
-##### Cart Page
+#### Cart Page
 ![Cart Page](docs/wireframes/mobile/Cart%20Page.png)
 
-##### Collections Page
+#### Collections Page
 ![Collections Page](docs/wireframes/mobile/Collection%20Page.png)
 
-##### Customise Collection Page
+#### Customise Collection Page
 ![Customise Collection Page](docs/wireframes/mobile/Collection%20Customisation%20Page.png)
 
-##### Invalid Page - 404
+#### Invalid Page - 404
 ![Invalid Page - 404](docs/wireframes/mobile/Invalid%20Page%20-%20404.png)
 
-##### Request Consultation Page
+#### Request Consultation Page
 ![Request Consultation Page](docs/wireframes/mobile/Request%20Consultation%20Page.png)
 
 
@@ -373,19 +369,19 @@ For tablet, we only decided to do the landing page as to see which nav bar and f
 
 <details>
 
-##### Landing Page PV1
+#### Landing Page PV1
 ![Landing Page PV1](docs/wireframes/tablet/Landing%20Page%20PV1.png)
 
-##### Landing Page PV2
+#### Landing Page PV2
 ![Landing Page PV2](docs/wireframes/tablet/Landing%20Page%20PV2.png)
 
-##### Landing Page PV3
+#### Landing Page PV3
 ![Landing Page PV3](docs/wireframes/tablet/Landing%20Page%20PV3.png)
 
-##### Landing Page PV4
+#### Landing Page PV4
 ![Landing Page PV4](docs/wireframes/tablet/Landing%20Page%20PV4.png)
 
-##### Landing Page L
+#### Landing Page L
 ![Landing Page L](docs/wireframes/tablet/Landing%20Page%20L.png)
 
 </details>
