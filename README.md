@@ -162,9 +162,9 @@ The target audience of this website are users that are willing to spend a little
 
 ## User Stories
 
-### Current
+> ### MVP User Stories
 
-> #### Admin User Stories
+#### Admin
 
 - As an admin, I want to be able to put new _Products_ in the website, so I can potentially generate more income and offer more selection.
 - As an admin, I want to be able set up a new _Collection_ from my existing _Products_ so I can offer more selection to my users.
@@ -177,7 +177,7 @@ The target audience of this website are users that are willing to spend a little
 - As the company owner, I want a clean crisp, airy but with warmth user experience so I can differentiate my website to other competitor's website.
 - As an admin, I want to be able to edit my business details shown on my site so I can update my users for any changes.
 
-> #### Customer User Stories
+#### Customer
 
 - As a casual user, I want to remain anonymous when just casually browsing the website so I can enjoy my privacy.
 - As a user, I want to be able to sign up so I can have full access to the website.
@@ -197,15 +197,15 @@ The target audience of this website are users that are willing to spend a little
 - As a user, I want to be able to set the quantity of the products I wish to purchase so that I can buy more than one in one transaction.
 - As a user, I want to be able to communicate with the owner by providing them with my email.
 
-### Nice-to-have User Stories
+> ### Nice-to-Have User Stories
 
-> #### Admin User Stories
+#### Admin
 
 - As an admin, I can see the data about the types of users using my site so I can better cater their needs.
 - As an admin, I have an option to set the vibe/experience (summer, spring, winter deals) of my site so I can have a more dynamic website to my users.
 - As an admin, I can see in my dashboard any upcoming appointments with clients.
 
-> #### Customer User Stories
+#### Customer
 
 - As a user, I want to book an appointment in the website and choose a valid time for me and the owner to meet.
 - As a user, I want to be able to see all my upcoming booking appointments in my profile page.
@@ -218,11 +218,11 @@ The target audience of this website are users that are willing to spend a little
 
 ## Testing
 
-> #### Front-End
-**Jest** is the chosen framework for testing client side code.
+> ### Front-End
+**Jest** is the chosen framework for testing client side code, and if time permits, look into implementing end-to-end testing with Cypress.
 -  
 
-> #### Back-End
+> ### Back-End
 **Mocha** and **Chai** are the chosen technologies to implement automated tests for this app. Tests involve:
 - Authorization and Authentication
 - Protected Routes
@@ -396,7 +396,7 @@ For tablet, we only decided to do the landing page as to see which nav bar and f
 - [Trello - Part B Development Board](https://trello.com/b/bWDaFBft/part-2-code)
 - [Development Log](./docs/dev-log.md)
 
-### Trello Part A Progress Screenshots
+> ### Trello Part A Progress Screenshots
 
 <details>
 
@@ -421,7 +421,7 @@ For tablet, we only decided to do the landing page as to see which nav bar and f
 </details>
 
 
-### Trello Part B Progress Screenshots
+> ### Trello Part B Progress Screenshots
  
 <details>
 
