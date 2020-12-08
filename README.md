@@ -220,7 +220,9 @@ The target audience of this website are users that are willing to spend a little
 
 > ### Front-End
 **Jest** is the chosen framework for testing client side code, and if time permits, look into implementing end-to-end testing with Cypress.
--  
+-  Unit testing functions, methods, modules or objects
+-  Component testing
+-  Snapshot testing
 
 > ### Back-End
 **Mocha** and **Chai** are the chosen technologies to implement automated tests for this app. Tests involve:
