@@ -97,6 +97,7 @@ The target audience of this website are users that are willing to spend a little
 - [**NodeJS**](https://nodejs.org/en/) - A Javascript runtime built on Chrome's V8 Javascript engine used for building the back-end API service of the app.
 - [**MongoDB - Atlas**](https://www.mongodb.com/cloud/atlas) - A global cloud database service for modern applications used as the database for this app.
 - [**PayPal API**](https://developer.paypal.com/docs/api/overview/) - The faster, safer way to pay online without sharing financial details used to handle payments securely for this app.
+- [**AWS S3**](https://aws.amazon.com/s3/?nc2=h_ql_prod_st_s3) - An object storage service provided by Amazon where images will be stored for the app.
 - [**Netlify**](https://www.netlify.com/) - Hosting service to be used for deploying the React Front-End side of the app.
 - [**Heroku**](https://www.heroku.com/) - Hosting service to be used for deploying the Node-Express Back-End side of the app.
 - [**Git**](https://git-scm.com/) - Version control system used throughout the development life of the project.
