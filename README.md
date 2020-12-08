@@ -29,6 +29,7 @@ Back-End source code: [BE Repo](https://github.com/philrussel21/curtain_co_BE)
 - [**Dataflow Diagram**](#Dataflow-Diagram) - how data flows through the app
 - [**Application Architecture Diagram**](#Application-Architecture-Diagram) - how the app is connected
 - [**User Stories**](#User-Stories) - how the app would behave according to different user roles
+- [**Testing**](#Testing) - how we intend to test the app
 - [**Sitemap**](#Sitemap) - how the user gets around the app
 - [**Wireframes**](#Wireframes) - the look and feel of the app
 - [**Development Timeline**](#Development-Timeline) - development log and Trello
@@ -94,17 +95,11 @@ The target audience of this website are users that are willing to spend a little
 
 - [**ReactJS**](https://reactjs.org/) - A Javascript library used for building user interfaces and the overall Front End of the app.
 - [**NodeJS**](https://nodejs.org/en/) - A Javascript runtime built on Chrome's V8 Javascript engine used for building the back-end API service of the app.
-
 - [**MongoDB - Atlas**](https://www.mongodb.com/cloud/atlas) - A global cloud database service for modern applications used as the database for this app.
-
 - [**PayPal API**](https://developer.paypal.com/docs/api/overview/) - The faster, safer way to pay online without sharing financial details used to handle payments securely for this app.
-
 - [**Netlify**](https://www.netlify.com/) - Hosting service to be used for deploying the React Front-End side of the app.
-
 - [**Heroku**](https://www.heroku.com/) - Hosting service to be used for deploying the Node-Express Back-End side of the app.
-
 - [**Git**](https://git-scm.com/) - Version control system used throughout the development life of the project.
-
 - [**GitHub**](https://github.com/) - The hosting service used for the version control system.
 
 ---
@@ -113,21 +108,30 @@ The target audience of this website are users that are willing to spend a little
 
 > ### Back-End
 
-- [**Express JS**]() - for the server that handles requests between the client and database
-- [**Passport**]() - for user authentication
-- [**Passport-Local**]() - for the Passport-Strategy. This module lets the app authenticate users using usernames and passwords.
-- [**Mongoose**]() - An Object Data Modeling (ODM) library used for MongoDB and Nodejs. Manages relationships with between data and provide schema validations.
-- [**Connect-Mongo**]() - for storing the session into the MongoDB database.
-- [**Express-Session**]() - for letting the app store session data to the server instead of the client.
-- [**Mongoose-Bcrypt**]() - for encrypting, decrypting and verifying fields when stored in the database using bcrypt password-hashing function.
-- [**Nodemon**]() - a developer dependency that automatically restarts the server on a file change to save time
-- [**Dotenv**]() - for storing environment variables containing sensitive information that should remain hidden from the codebase.
+- [**Express JS**](https://expressjs.com/) - for the server that handles requests between the client and database
+- [**Passport**](http://www.passportjs.org/) - for user authentication
+- [**Passport-Local**](http://www.passportjs.org/packages/passport-local/) - for the Passport-Strategy. This module lets the app authenticate users using usernames and passwords.
+- [**Mocha**](https://mochajs.org/) - for integration testing including routes, functions, middlewares and database transactions.
+- [**Chai**](https://www.chaijs.com/) - Assertion library used for the tests.
+- [**Mongoose**](https://mongoosejs.com/) - An Object Data Modeling (ODM) library used for MongoDB and Nodejs. Manages relationships with between data and provide schema validations.
+- [**Connect-Mongo**](https://www.npmjs.com/package/connect-mongo) - for storing the session into the MongoDB database.
+- [**Express-Session**](https://www.npmjs.com/package/express-session) - for letting the app store session data to the server instead of the client.
+- [**Mongoose-Bcrypt**](https://www.npmjs.com/package/mongoose-bcrypt) - for encrypting, decrypting and verifying fields when stored in the database using bcrypt password-hashing function.
+- [**Nodemon**](https://www.npmjs.com/package/nodemon) - a developer dependency that automatically restarts the server on a file change to save time
+- [**Dotenv**](https://www.npmjs.com/package/dotenv) - for storing environment variables containing sensitive information that should remain hidden from the codebase.
 
 > ### Front-End
 
 - [**Material UI**](https://material-ui.com/) - for the client side styling
-- [**Material UI Icons**](https://material-ui.com/components/material-icons/) for the icons used throughout the app
-  <!-- - [404 Page]() the page that shows when a URL is not found... -->
+- [**Material UI Icons**](https://material-ui.com/components/material-icons/) - for the icons used throughout the app
+- [**React-Spring**](https://www.react-spring.io/) - for animations throughout the app
+- [**React-Reveal**](https://www.react-reveal.com/) - for animations throughout the app
+- [**React-Scroll**](https://www.npmjs.com/package/react-scroll) - for animating vertical scrolling (unsure initially if we will use this package)
+- [**React-Responsive**](https://www.npmjs.com/package/react-responsive) - a media query library to detect device sizes and orientation
+- [**React-Router-Dom**](https://reactrouter.com/web/guides/quick-start) - handles routing through a single-page-app
+- [**Axios**](https://github.com/axios/axios) - to make calls to the [Curtain Co REST API](https://github.com/philrussel21/curtain_co_BE)
+- [**Jest**](https://jestjs.io/) - to run unit tests on client side
+- [**Cypress**](https://www.cypress.io/) - if time permits, end-to-end testing across the app
 
 > ### General
 - [**Trello**](https://trello.com/en) - for project management
@@ -207,7 +211,32 @@ The target audience of this website are users that are willing to spend a little
 - As a user, I want to be able to see all my upcoming booking appointments in my profile page.
 - As a user, I want to be shown different deals during different seasons or events.
 
+
+
 ---
+
+
+## Testing
+
+> #### Front-End
+**Jest** is the chosen framework for testing client side code.
+-  
+
+> #### Back-End
+**Mocha** and **Chai** are the chosen technologies to implement automated tests for this app. Tests involve:
+- Authorization and Authentication
+- Protected Routes
+- User Roles
+- Transactions
+- *Products* CRUD actions
+- *Collections* CRUD actions
+- User CRUD actions
+
+
+
+---
+
+
 
 ## Sitemap
 
@@ -363,11 +392,11 @@ For tablet, we only decided to do the landing page as to see which nav bar and f
 
 ## Development Timeline
 
-- [Development Log](./docs/dev-log.md)
 - [Trello - Part A Documentation Board](https://trello.com/b/VF6Vc7Ri/part-1-documentation)
 - [Trello - Part B Development Board](https://trello.com/b/bWDaFBft/part-2-code)
+- [Development Log](./docs/dev-log.md)
 
-### Part A Progress Screenshots
+### Trello Part A Progress Screenshots
 
 <details>
 
@@ -392,7 +421,7 @@ For tablet, we only decided to do the landing page as to see which nav bar and f
 </details>
 
 
-### Part B Progress Screenshots
+### Trello Part B Progress Screenshots
  
 <details>
 
