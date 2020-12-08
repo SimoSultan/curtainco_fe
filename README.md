@@ -300,7 +300,7 @@ Below are the desktop views of the site. In the essence of time, we have focused
 ![Collections Page](docs/wireframes/desktop/Collection%20Page.png)
 
 #### Customise Collection Page
-![Customise Collection Page](docs/wireframes/desktop/Customise%20Collection.png)
+![Customise Collection Page](docs/wireframes/desktop/Customise%20Collection%20Page.png)
 
 #### Invalid Page - 404
 ![Invalid Page - 404](docs/wireframes/desktop/Invalid%20-%20404.png)
