@@ -327,9 +327,6 @@ Below are all the mobile portrait views of the app. In regards to landscape view
 #### Account Page - User
 ![Account Page - User](docs/wireframes/mobile/User%20Account%20Page.png)
 
-#### Admin Page - Requests
-![Admin Page - Requests](docs/wireframes/mobile/Admin%20Page%20-%20Requests.png)
-
 #### All Products Page
 ![All Products Page](docs/wireframes/mobile/All%20Product%20Page.png)
 
