@@ -1,10 +1,16 @@
 import React from 'react'
+import {
+    Container,
+    Typography
+} from '@material-ui/core'
 
 function Home() {
     return (
-        <div>
-            Home Page
-        </div>
+        <Container>
+            <Typography variant="h3">
+                Home Page
+            </Typography>
+        </Container>
     )
 }
 
