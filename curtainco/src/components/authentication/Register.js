@@ -1,69 +1,57 @@
 import React, { useState } from 'react';
 
-// global state
 import { useCurtainContext } from '../../config/CurtainCoContext'
 import { ACTIONS } from '../../config/stateReducer'
 
-// routing
 import { Link, Redirect } from "react-router-dom";
 
-// material ui
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-
-// material icons
+import Divider from '@material-ui/core/Divider';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import useStyles from './AuthStyles'
 
 import { registerUser, loginUser } from "../../services/authServices";
+import Copyright from './Copyright'
+import { MenuItem } from '@material-ui/core';
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" to="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+const states = [
+    'QLD',
+    'VIC',
+    'NSW',
+    'NT',
+    'ACT',
+    'WA',
+    'SA',
+    'TAS',
+]
+
+const titles = [
+    'Mr',
+    'Mrs',
+    'Miss',
+    'Ms',
+    'Mx',
+    'Sir',
+    'Dr',
+    'Lady',
+    'Lord',
+]
 
 
-
-const useStyles = makeStyles((theme) => ({
-    paper: {
-        marginTop: theme.spacing(8),
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-    },
-    avatar: {
-        margin: theme.spacing(1),
-        backgroundColor: theme.palette.secondary.main,
-    },
-    form: {
-        width: '100%', // Fix IE 11 issue.
-        marginTop: theme.spacing(3),
-    },
-    submit: {
-        margin: theme.spacing(3, 0, 2),
-    },
-    link: {
-        cursor: 'pointer',
-        textDecoration: 'none',
-    }
-}));
-
+const menuItems = states.map(place => <MenuItem value={place}>{place}</MenuItem>)
+const titleItems = titles.map(title => <MenuItem value={title}>{title}</MenuItem>)
 
 
 
@@ -75,21 +63,41 @@ export default function SignUp() {
     const [password, setPassword] = useState('')
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
+    const [phone, setPhone] = useState('')
+    const [companyName, setCompanyName] = useState('')
+    const [address1, setAddress1] = useState('')
+    const [suburb, setSuburb] = useState('')
+    const [addressState, setAddressState] = useState('')
+    const [postCode, setPostCode] = useState('')
+    const [title, setTitle] = useState('')
 
     function handleRegister(e) {
         e.preventDefault()
 
+        // let userDetails = {
+        //     email: email,
+        //     password: password,
+        //     // title: "Mr",
+        //     fullName: `${firstName},${lastName}`,
+        //     phone: '0400123456',
+        //     // companyName: "My Company",
+        //     address1: "45 Street Ave",
+        //     suburb: "Brisbane City",
+        //     state: "QLD",
+        //     postcode: '4000',
+        // }
+        
         let userDetails = {
             email: email,
             password: password,
-            title: "Mr",
-            fullName: `${firstName} ${lastName}`,
-            phone: '0400123456',
-            // companyName: "My Company",
-            address1: "45 Street Ave",
-            suburb: "Brisbane City",
-            state: "QLD",
-            postcode: '4000',
+            fullName: `${firstName},${lastName}`,
+            phone: phone,
+            companyName: companyName,
+            address1: address1,
+            suburb: suburb,
+            state: addressState,
+            postcode: postCode,
+            title: title,
         }
 
 
@@ -156,15 +164,44 @@ export default function SignUp() {
         setLastName(e.target.value)
     }
 
+    function handlePhoneChange(e) {
+        setPhone(e.target.value)
+    }
+
+    function handleCompanyChange(e) {
+        setCompanyName(e.target.value)
+    }
+
+    function handleAddressChange(e) {
+        setAddress1(e.target.value)
+    }
+
+    function handleSuburbChange(e) {
+        setSuburb(e.target.value)
+    }
+
+    function handleAddressStateChange(e) {
+        setAddressState(e.target.value)
+    }
+
+    function handlePostCodeChange(e) {
+        setPostCode(e.target.value)
+    }
+
+    function handleTitleChange(e) {
+        setTitle(e.target.value)
+    }
+
 
     return (
 
-        <>
-
+        <> 
         {
             state.loggedIn
+
             ?   <Redirect to="/" />
-            :   <Container component="main" maxWidth="xs">
+
+            :   <Container component="main" maxWidth="sm">
 
                     <CssBaseline />
 
@@ -182,9 +219,26 @@ export default function SignUp() {
 
                             <Grid container spacing={2}>
 
-                                <Grid item xs={12} sm={6}>
+                                <Grid item xs={12} sm={2}>
+                                    <TextField 
+                                        id="title" 
+                                        variant="outlined" 
+                                        label="Title" 
+                                        value={title} 
+                                        required 
+                                        select 
+                                        onChange={handleTitleChange}
+                                        fullWidth
+                                        autoComplete="honorific-prefix"
+                                    >
+                                        { titleItems } 
+                                    </TextField>
+                                </Grid>
+
+
+                                <Grid item xs={12} sm={5}>
                                     <TextField
-                                        autoComplete="fname"
+                                        autoComplete="given-name"
                                         name="firstName"
                                         variant="outlined"
                                         required
@@ -192,11 +246,12 @@ export default function SignUp() {
                                         id="firstName"
                                         label="First Name"
                                         autoFocus
+                                        value={firstName}
                                         onChange={handleFirstNameChange}
                                     />
                                 </Grid>
 
-                                <Grid item xs={12} sm={6}>
+                                <Grid item xs={12} sm={5}>
                                     <TextField
                                         variant="outlined"
                                         required
@@ -204,7 +259,8 @@ export default function SignUp() {
                                         id="lastName"
                                         label="Last Name"
                                         name="lastName"
-                                        autoComplete="lname"
+                                        autoComplete="family-name"
+                                        value={lastName}
                                         onChange={handleLastNameChange}
                                     />
                                 </Grid>
@@ -218,6 +274,7 @@ export default function SignUp() {
                                         label="Email Address"
                                         name="email"
                                         autoComplete="email"
+                                        value={email}
                                         onChange={handleEmailChange}
                                     />
                                 </Grid>
@@ -232,7 +289,102 @@ export default function SignUp() {
                                         type="password"
                                         id="password"
                                         autoComplete="current-password"
+                                        value={password}
                                         onChange={handlePasswordChange}
+                                    />
+                                </Grid>
+
+                                <Grid item xs={12}>
+                                    <Divider variant="middle"/>
+                                </Grid>
+
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                        variant="outlined"
+                                        required
+                                        fullWidth
+                                        name="phone"
+                                        label="Mobile Number"
+                                        type="text"
+                                        id="phone"
+                                        autoComplete="tel"
+                                        value={phone}
+                                        onChange={handlePhoneChange}
+                                    />
+                                </Grid>
+
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                        variant="outlined"
+                                        fullWidth
+                                        name="companyName"
+                                        label="Company"
+                                        type="text"
+                                        id="companyName"
+                                        autoComplete="organization"
+                                        value={companyName}
+                                        onChange={handleCompanyChange}
+                                    />
+                                </Grid>
+
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                        variant="outlined"
+                                        required
+                                        fullWidth
+                                        name="address1"
+                                        label="Street Address"
+                                        type="text"
+                                        id="address1"
+                                        autoComplete="address-line1"
+                                        value={address1}
+                                        onChange={handleAddressChange}
+                                    />
+                                </Grid>
+
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                        variant="outlined"
+                                        required
+                                        fullWidth
+                                        name="suburb"
+                                        label="Suburb"
+                                        type="text"
+                                        id="suburb"
+                                        autoComplete="address-level2"
+                                        value={suburb}
+                                        onChange={handleSuburbChange}
+                                    />
+                                </Grid>
+
+                                <Grid item xs={12} sm={6}>
+                                    <TextField 
+                                        id="state" 
+                                        variant="outlined" 
+                                        label="State" 
+                                        value={addressState} 
+                                        required 
+                                        select 
+                                        onChange={handleAddressStateChange}
+                                        fullWidth
+                                        autoComplete="address-level1"
+                                    >
+                                        { menuItems } 
+                                    </TextField>
+                                </Grid>
+
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                        variant="outlined"
+                                        required
+                                        fullWidth
+                                        name="postcode"
+                                        label="Post Code"
+                                        type="text"
+                                        id="postcode"
+                                        autoComplete="postal-code"
+                                        value={postCode}
+                                        onChange={handlePostCodeChange}
                                     />
                                 </Grid>
 
@@ -272,9 +424,7 @@ export default function SignUp() {
 
                 </Container>
 
-            }
-
-
+        } 
         </>
 
     );
