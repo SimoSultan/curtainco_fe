@@ -1,12 +1,13 @@
 import React from 'react'
 
-// global state
 import { useCurtainContext } from '../../config/CurtainCoContext'
 
 import {
     Container,
     Typography
 } from '@material-ui/core'
+import AdminDashboard from './admin/AdminDashboard'
+import UserDashboard from './user/UserDashboard'
 
 function Account() {
 
@@ -22,6 +23,12 @@ function Account() {
                     `Hello ${state.currentUser !== null ? state.currentUser.fullName : "not logged in"}`
                 }
             </Typography>
+
+            { 
+                state.currentUser !== null && state.currentUser.role === 'admin'
+                ? <AdminDashboard />
+                : <UserDashboard />
+            }
         </Container>
     )
 }

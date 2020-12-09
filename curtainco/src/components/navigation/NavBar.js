@@ -1,8 +1,11 @@
 import React from 'react'
-
 // global state
-import { useCurtainContext } from '../config/CurtainCoContext'
-import { ACTIONS } from '../config/stateReducer';
+import { useCurtainContext } from '../../config/CurtainCoContext'
+import { ACTIONS } from '../../config/stateReducer';
+// authentication services
+import { logoutUser } from '../../services/authServices'
+// routing
+import { Link, withRouter } from "react-router-dom";
 
 // material ui
 import { 
@@ -13,15 +16,8 @@ import {
     Button,
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
-
 // material icons
 import MenuIcon from '@material-ui/icons/Menu';
-
-// routing
-import { Link, withRouter } from "react-router-dom";
-
-// authentication services
-import { logoutUser } from '../services/authServices'
 
 
 
@@ -45,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-function Navigation() {
+function NavBar() {
     const classes = useStyles();
 
     const { state, dispatch } = useCurtainContext()
@@ -119,4 +115,4 @@ function Navigation() {
     )
 }
 
-export default withRouter(Navigation);
+export default withRouter(NavBar);

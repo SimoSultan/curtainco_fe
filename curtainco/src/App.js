@@ -1,6 +1,4 @@
 import React, { useEffect } from 'react'
-// context provider
-// import CurtainContext from './config/CurtainCoContext'
 // global state
 import { useCurtainContext } from './config/CurtainCoContext'
 import { ACTIONS } from './config/stateReducer'
@@ -12,7 +10,7 @@ import { getLoggedInUser } from "./services/authServices";
 
 // components
 import {
-    Navigation,
+    NavBar,
     Home,
     Footer,
     About,
@@ -53,7 +51,7 @@ function App() {
             
             <Router>
 
-                <Navigation />
+                <NavBar />
 
                 <Switch>
                     <Route exact path="/" component={Home} />

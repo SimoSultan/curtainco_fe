@@ -76,11 +76,12 @@ export default function SignIn() {
     const { state, dispatch } = useCurtainContext()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [rememberMe, setRememberMe] = useState(false)
 
     function handleLogin(e) {
         e.preventDefault()
 
-        const userDetails = {email, password}
+        const userDetails = {email, password, rememberMe}
 
         // LOG THE USER IN
         loginUser(userDetails).then((resp) => {
@@ -110,6 +111,10 @@ export default function SignIn() {
 
     function handlePasswordChange(e) {
         setPassword(e.target.value)
+    }
+
+    function handleRememberMe() {
+        setRememberMe(!rememberMe)
     }
 
 
@@ -161,6 +166,8 @@ export default function SignIn() {
                                 <FormControlLabel
                                     control={<Checkbox value="remember" color="primary" />}
                                     label="Remember me"
+                                    checked={rememberMe}
+                                    onClick={handleRememberMe}
                                 />
 
                                 <Button
