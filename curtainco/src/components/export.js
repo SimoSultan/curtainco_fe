@@ -9,3 +9,5 @@ export { default as Login } from "./authentication/Login";
 export { default as Register } from "./authentication/Register";
 export { default as Footer } from "./navigation/Footer";
 export { default as NavBar } from "./navigation/NavBar";
+export { default as Modal } from "./navigation/Modal";
+export { default as RequestConsultation } from "./consultations/RequestConsultation";

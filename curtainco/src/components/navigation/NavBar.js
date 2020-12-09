@@ -1,43 +1,19 @@
 import React from 'react'
-// global state
+
 import { useCurtainContext } from '../../config/CurtainCoContext'
 import { ACTIONS } from '../../config/stateReducer';
-// authentication services
+
 import { logoutUser } from '../../services/authServices'
-// routing
 import { Link, withRouter } from "react-router-dom";
 
-// material ui
 import { 
     AppBar,
     Toolbar,
-    IconButton,
     Typography,
     Button,
 } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles';
-// material icons
-import MenuIcon from '@material-ui/icons/Menu';
 
-
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-      flexGrow: 1,
-    },
-    menuButton: {
-      marginRight: theme.spacing(2),
-    },
-    title: {
-      flexGrow: 1,
-    },
-    link: {
-        color: '#fff',
-        textDecoration: 'none'
-    },
-}));
-
-
+import useStyles from './NavigationStyles'
 
 
 
@@ -62,10 +38,6 @@ function NavBar() {
     return (
         <AppBar position="static">
             <Toolbar>
-
-                <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                    <MenuIcon />
-                </IconButton>
 
                 <Typography variant="h6" className={classes.title}>
                     <Link className={classes.link} to="/">The Curtain Co</Link>

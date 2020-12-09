@@ -20,6 +20,7 @@ import {
     Account,
     Login,
     Register,
+    RequestConsultation,
 } from './components/export.js'
 
 
@@ -62,6 +63,7 @@ function App() {
                     <Route exact path="/products" component={Products} />
                     <Route exact path="/cart" component={Cart} />
                     <Route exact path="/account" component={Account} />
+                    <Route exact path="/request" component={RequestConsultation} />
                 </Switch>
 
                 <Footer />

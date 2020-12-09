@@ -3,7 +3,7 @@ import React from 'react'
 
 import ProfileInformation from './ProfileInformation'
 import PurchaseHistory from './PurchaseHistory'
-import RequestConsultation from './RequestConsultation'
+import CTARequestConsultation from './CTARequestConsultation'
 
 
 import Container from '@material-ui/core/Container'
@@ -21,7 +21,7 @@ function UserDashboard() {
                     <PurchaseHistory />
                 </Grid>
             </Grid>
-            <RequestConsultation />
+            <CTARequestConsultation />
         </Container>
     )
 }
