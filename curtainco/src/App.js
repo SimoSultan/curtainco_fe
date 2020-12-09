@@ -1,4 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+// context provider
+// import CurtainContext from './config/CurtainCoContext'
+// global state
+import { useCurtainContext } from './config/CurtainCoContext'
+import { ACTIONS } from './config/stateReducer'
+// styles
+import './styles/Main.css'
+// routing
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { getLoggedInUser } from "./services/authServices";
 
 // components
 import {
@@ -14,22 +24,34 @@ import {
     Register,
 } from './components/export.js'
 
-// global states
-import CurtainContext from './config/CurtainCoContext'
 
-// styles
-import './styles/Main.css'
-
-// routing
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 
 function App() {
+
+    const { state, dispatch } = useCurtainContext()
+
+    useEffect(() => {
+
+        if (state.currentUser === null) {
+            getLoggedInUser().then((resp) => {
+                let currentUser = resp.data.user
+                if(currentUser) {
+                    dispatch({type: ACTIONS.SET_CURRENT_USER, payload: currentUser})
+                } else {
+                    console.log("No user logged in on page reload")
+                }
+            }).catch((error) => {
+                console.log(`An error ocurred on getLoggedInUser: ${error}.`);
+            })
+        }
+
+    }, [])
+
     return (
 
-        <Router>
-
-            <CurtainContext>
+            
+            <Router>
 
                 <Navigation />
 
@@ -46,9 +68,8 @@ function App() {
 
                 <Footer />
 
-            </CurtainContext>
+            </Router>
 
-        </Router>
 
     );
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 // global state
 import { useCurtainContext } from '../../config/CurtainCoContext'
@@ -93,33 +93,41 @@ export default function SignUp() {
         }
 
 
+        // REGISTER THE USER
         registerUser(userDetails).then((regResp) => {
-            console.log(regResp);
 
-            dispatch({
-                type: ACTIONS.REGISTER,
-                payload: {
-                    email,
-                    password,
-                    name: firstName + ',' + lastName,
-                }
-            })
+            if(regResp.status === 201) {
+                dispatch({
+                    type: ACTIONS.REGISTER,
+                    payload: {
+                        email,
+                        password,
+                        name: firstName + ',' + lastName,
+                    }
+                })
+            }
 
         }).then(() => {
             
-            let emailPass = { email, password }
+            // AFTER THE USER HAS BEEN CREATED LOG THE USER IN
+            loginUser({ email, password }).then((logResp) => {
+                let currentUser = logResp.data.user
 
-            loginUser(emailPass).then((logResp) => {
-                let currentUser = logResp.user
-                dispatch({
-                    type: ACTIONS.LOGIN,
-                    payload: currentUser
-                })
-    
-                setEmail('')
-                setPassword('')
-                setFirstName('')
-                setLastName('')
+                if(currentUser && logResp.status === 200) {
+                    dispatch({
+                        type: ACTIONS.LOGIN,
+                        payload: currentUser
+                    })
+
+                    // UPON SUCCESSFUL CREATION AND LOGIN, CLEAR THE FIELDS
+                    setEmail('')
+                    setPassword('')
+                    setFirstName('')
+                    setLastName('')
+
+                } else {
+                    console.log("didn't get the user returned when signing up");
+                }
 
             }).catch((error) => {
                 console.log(`An error ocurred on login: ${error}.`);
@@ -148,14 +156,10 @@ export default function SignUp() {
         setLastName(e.target.value)
     }
 
-    useEffect(() => {
-        console.log(state);
-    }, [state])
 
     return (
 
         <>
-
 
         {
             state.loggedIn

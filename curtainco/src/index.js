@@ -1,11 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import CurtainContext from './config/CurtainCoContext'
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+    <React.StrictMode>
+
+        <CurtainContext>
+
+            <App />
+            
+        </CurtainContext>
+
+    </React.StrictMode>,
   document.getElementById('root')
 );
 

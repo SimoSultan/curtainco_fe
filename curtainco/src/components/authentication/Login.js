@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 // global state
 import { useCurtainContext } from '../../config/CurtainCoContext'
@@ -80,18 +80,20 @@ export default function SignIn() {
     function handleLogin(e) {
         e.preventDefault()
 
-        // if(state.users.length < 1) return (alert('Please sign up first'))
-        // const user = state.users.find(user => user.email === email && user.password === password)
-        // if(!user) return (alert("User doesn't exist"))
-
         const userDetails = {email, password}
 
+        // LOG THE USER IN
         loginUser(userDetails).then((resp) => {
-            let currentUser = resp.user
-            dispatch({
-                type: ACTIONS.LOGIN,
-                payload: currentUser
-            })
+            let currentUser = resp.data.user
+
+            if(currentUser && resp.status === 200) {
+                dispatch({
+                    type: ACTIONS.LOGIN,
+                    payload: currentUser
+                })
+            } else {
+                console.log("didn't get the user returned when logging in");
+            }
 
             setEmail('')
             setPassword('')
@@ -101,6 +103,7 @@ export default function SignIn() {
         })
     }
 
+
     function handleEmailChange(e) {
         setEmail(e.target.value)
     }
@@ -109,9 +112,6 @@ export default function SignIn() {
         setPassword(e.target.value)
     }
 
-    useEffect(() => {
-        console.log(state);
-    }, [state])
 
     return (
 
