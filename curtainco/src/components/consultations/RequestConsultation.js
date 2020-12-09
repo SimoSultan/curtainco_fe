@@ -8,9 +8,6 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import Select from '@material-ui/core/Select';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
@@ -19,8 +16,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import useStyles from './ConsultationStyles'
 
 import { submitConsultationRequest } from '../../services/consultationServices'
-
 import Copyright from '../authentication/Copyright'
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 
 export default function SignUp() {
@@ -32,9 +29,11 @@ export default function SignUp() {
     function handleSubmitRequest(e) {
         e.preventDefault()
 
-        submitConsultationRequest({ message }).then((resp) => {
-            console.log(resp);
-        })
+        alert('uncomment below code when phil has BE route set up')
+
+        // submitConsultationRequest({ message }).then((resp) => {
+        //     console.log(resp);
+        // })
     }
 
     function handleMessageChange(e) {
@@ -84,6 +83,7 @@ export default function SignUp() {
                         variant="contained"
                         color="primary"
                         className={classes.submit}
+                        onClick={handleSubmitRequest}
                     >
                         Submit
                     </Button>

@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
     link: {
         cursor: 'pointer',
         textDecoration: 'none',
+        color: 'inherit',
     },
     formControl: {
         minWidth: 120,
