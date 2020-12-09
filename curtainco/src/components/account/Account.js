@@ -2,10 +2,9 @@ import React from 'react'
 
 import { useCurtainContext } from '../../config/CurtainCoContext'
 
-import {
-    Container,
-    Typography
-} from '@material-ui/core'
+import Container from '@material-ui/core/Container'
+import Typography from '@material-ui/core/Typography'
+
 import AdminDashboard from './admin/AdminDashboard'
 import UserDashboard from './user/UserDashboard'
 
@@ -17,11 +16,6 @@ function Account() {
         <Container>
             <Typography variant="h3">
                 Account Page
-            </Typography>
-            <Typography variant="h5">
-                {
-                    `Hello ${state.currentUser !== null ? state.currentUser.fullName : "not logged in"}`
-                }
             </Typography>
 
             { 

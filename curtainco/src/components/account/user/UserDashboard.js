@@ -12,7 +12,6 @@ import Grid from '@material-ui/core/Grid'
 function UserDashboard() {
     return (
         <Container>
-            User Dashboard
 
             <Grid container direction="row" justify="center" alignItems="center">
                 <Grid item xs={6}>
