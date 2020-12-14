@@ -18,6 +18,12 @@ function CurtainContext({ children }) {
             message: "May the force be with you",
             open: false,
         },
+        modal: {
+            open: false,
+            title: "This is a title",
+            message: "This is a message",
+            data: {},
+        },
     };
 
     const [state, dispatch] = useReducer(stateReducer, initialState);

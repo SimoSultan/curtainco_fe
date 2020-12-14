@@ -4,6 +4,7 @@ export const ACTIONS = {
     REGISTER: "register-user",
     SET_CURRENT_USER: "get-user-on-page-refresh",
     SET_SNACKBAR: "update-snackbar",
+    SET_MODAL: "update-modal",
 };
 
 export default function stateReducer(state, action) {
@@ -41,6 +42,12 @@ export default function stateReducer(state, action) {
             return {
                 ...state,
                 snackbar: action.payload,
+            };
+        }
+        case ACTIONS.SET_MODAL: {
+            return {
+                ...state,
+                modal: action.payload,
             };
         }
         default:

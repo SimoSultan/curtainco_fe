@@ -21,6 +21,7 @@ import {
     Register,
     RequestConsultation,
     CustomSnackbar,
+    CustomModal,
 } from "./components/export.js";
 
 function App() {
@@ -65,9 +66,15 @@ function App() {
             </Switch>
 
             <CustomSnackbar
-                severity={state.snackbarSeverity}
-                open={state.snackbar}
-                message={state.snackbarMessage}
+                severity={state.snackbar.severity}
+                open={state.snackbar.open}
+                message={state.snackbar.message}
+            />
+            <CustomModal
+                title={state.modal.title}
+                open={state.modal.open}
+                message={state.modal.message}
+                data={state.modal.data}
             />
             <Footer />
         </Router>
