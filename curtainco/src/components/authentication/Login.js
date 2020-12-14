@@ -31,6 +31,7 @@ export default function SignIn() {
 
     function handleLogin(e) {
         e.preventDefault();
+        let loginError = false;
 
         const userDetails = { email, password, rememberMe };
 
@@ -45,14 +46,17 @@ export default function SignIn() {
                         payload: currentUser,
                     });
                 } else {
-                    console.log("didn't get the user returned when logging in");
+                    loginError = `An error ocurred on login: Error Code: ${resp.status}. Message: ${resp.message}.`;
+                    console.log(loginError);
                 }
 
                 setEmail("");
                 setPassword("");
             })
             .catch((error) => {
-                console.log(`An error ocurred on login: ${error}.`);
+                loginError = `An error ocurred on login: Error Code: ${error.status}. Message: ${error.message}.`;
+                console.log(loginError);
+                // console.log(error);
             });
     }
 

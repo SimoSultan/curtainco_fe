@@ -4,6 +4,9 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
+// import FormControl from "@material-ui/core/FormControl";
+// import InputLabel from "@material-ui/core/InputLabel";
+// import Select from "@material-ui/core/Select";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import Grid from "@material-ui/core/Grid";
@@ -21,26 +24,37 @@ import useStyles from "./UserDataFormStyles";
 import {
     getFirstNameFromFullName,
     getLastNameFromFullName,
+    checkIfRequiredUserDataFormFieldsAreEmpty,
 } from "../../helpers/userHelpers";
 
 const states = ["QLD", "VIC", "NSW", "NT", "ACT", "WA", "SA", "TAS"];
 const titles = ["Mr", "Mrs", "Miss", "Ms", "Mx", "Sir", "Dr", "Lady", "Lord"];
 
 const menuItems = states.map((place) => (
-    <MenuItem value={place}>{place}</MenuItem>
+    <MenuItem value={place} key={place}>
+        {place}
+    </MenuItem>
 ));
 const titleItems = titles.map((title) => (
-    <MenuItem value={title}>{title}</MenuItem>
+    <MenuItem value={title} key={title}>
+        {title}
+    </MenuItem>
 ));
 
 export default function UserDataForm({
     user,
     formTitle,
     handleFunctionFromParent,
+    withAuth,
+    buttonText,
+    // buttonColor,
 }) {
     const classes = useStyles();
 
+    console.log(user);
+
     if (!user) {
+        user = {};
         user.email = "";
         user.password = "";
         user.title = "";
@@ -68,7 +82,7 @@ export default function UserDataForm({
     const [address1, setAddress1] = useState(user.address1);
     const [suburb, setSuburb] = useState(user.suburb);
     const [addressState, setAddressState] = useState(user.addressState);
-    const [postCode, setPostCode] = useState(user.postCode);
+    const [postCode, setPostCode] = useState(user.postcode);
     const [title, setTitle] = useState(user.title);
 
     function handleEmailChange(e) {
@@ -130,6 +144,8 @@ export default function UserDataForm({
     }
 
     async function handleSubmitForm(e) {
+        e.preventDefault();
+
         let userDetails = {
             email: email,
             password: password,
@@ -142,6 +158,10 @@ export default function UserDataForm({
             postcode: postCode,
             title: title,
         };
+
+        if (checkIfRequiredUserDataFormFieldsAreEmpty(userDetails)) {
+            return alert("Please complete all required fields.");
+        }
 
         let error = await handleFunctionFromParent(userDetails);
         // if there is not error then clear the fields
@@ -172,17 +192,31 @@ export default function UserDataForm({
                                 id="title"
                                 variant="outlined"
                                 label="Title"
-                                value={title}
-                                required
+                                // value={title ? title : ""}
                                 select
                                 onChange={handleTitleChange}
                                 fullWidth
+                                defaultValue=""
                                 autoComplete="honorific-prefix"
                             >
                                 {titleItems}
                             </TextField>
+                            {/* <FormControl variant="outlined">
+                                <InputLabel id="demo-simple-select-outlined-label">
+                                    Title
+                                </InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-outlined-label"
+                                    id="demo-simple-select-outlined"
+                                    // value={title}
+                                    variant="outlined"
+                                    onChange={handleTitleChange}
+                                    label="Title"
+                                >
+                                    {titleItems}
+                                </Select>
+                            </FormControl> */}
                         </Grid>
-
                         <Grid item xs={12} sm={5}>
                             <TextField
                                 autoComplete="given-name"
@@ -197,7 +231,6 @@ export default function UserDataForm({
                                 onChange={handleFirstNameChange}
                             />
                         </Grid>
-
                         <Grid item xs={12} sm={5}>
                             <TextField
                                 variant="outlined"
@@ -212,39 +245,44 @@ export default function UserDataForm({
                             />
                         </Grid>
 
-                        <Grid item xs={12}>
-                            <TextField
-                                variant="outlined"
-                                required
-                                fullWidth
-                                id="email"
-                                label="Email Address"
-                                name="email"
-                                autoComplete="email"
-                                value={email}
-                                onChange={handleEmailChange}
-                            />
-                        </Grid>
+                        {withAuth ? (
+                            <>
+                                <Grid item xs={12}>
+                                    <TextField
+                                        variant="outlined"
+                                        required
+                                        fullWidth
+                                        id="email"
+                                        label="Email Address"
+                                        name="email"
+                                        autoComplete="email"
+                                        value={email}
+                                        onChange={handleEmailChange}
+                                    />
+                                </Grid>
 
-                        <Grid item xs={12}>
-                            <TextField
-                                variant="outlined"
-                                required
-                                fullWidth
-                                name="password"
-                                label="Password"
-                                type="password"
-                                id="password"
-                                autoComplete="current-password"
-                                value={password}
-                                onChange={handlePasswordChange}
-                            />
-                        </Grid>
+                                <Grid item xs={12}>
+                                    <TextField
+                                        variant="outlined"
+                                        required
+                                        fullWidth
+                                        name="password"
+                                        label="Password"
+                                        type="password"
+                                        id="password"
+                                        autoComplete="current-password"
+                                        value={password}
+                                        onChange={handlePasswordChange}
+                                    />
+                                </Grid>
+                            </>
+                        ) : (
+                            ""
+                        )}
 
                         <Grid item xs={12}>
                             <Divider variant="middle" />
                         </Grid>
-
                         <Grid item xs={12} sm={6}>
                             <TextField
                                 variant="outlined"
@@ -259,7 +297,6 @@ export default function UserDataForm({
                                 onChange={handlePhoneChange}
                             />
                         </Grid>
-
                         <Grid item xs={12} sm={6}>
                             <TextField
                                 variant="outlined"
@@ -273,7 +310,6 @@ export default function UserDataForm({
                                 onChange={handleCompanyChange}
                             />
                         </Grid>
-
                         <Grid item xs={12} sm={6}>
                             <TextField
                                 variant="outlined"
@@ -288,7 +324,6 @@ export default function UserDataForm({
                                 onChange={handleAddressChange}
                             />
                         </Grid>
-
                         <Grid item xs={12} sm={6}>
                             <TextField
                                 variant="outlined"
@@ -303,23 +338,23 @@ export default function UserDataForm({
                                 onChange={handleSuburbChange}
                             />
                         </Grid>
-
                         <Grid item xs={12} sm={6}>
                             <TextField
                                 id="state"
                                 variant="outlined"
                                 label="State"
-                                value={addressState}
+                                // value={addressState ? addressState : ""}
                                 required
                                 select
                                 onChange={handleAddressStateChange}
                                 fullWidth
+                                defaultValue=""
+                                // helperText="Please select your state"
                                 autoComplete="address-level1"
                             >
                                 {menuItems}
                             </TextField>
                         </Grid>
-
                         <Grid item xs={12} sm={6}>
                             <TextField
                                 variant="outlined"
@@ -330,11 +365,11 @@ export default function UserDataForm({
                                 type="text"
                                 id="postcode"
                                 autoComplete="postal-code"
-                                value={postCode}
+                                value={postCode ? postCode : ""}
                                 onChange={handlePostCodeChange}
                             />
                         </Grid>
-
+                        {/* 
                         <Grid item xs={12}>
                             <FormControlLabel
                                 control={
@@ -345,7 +380,7 @@ export default function UserDataForm({
                                 }
                                 label="I want to receive inspiration, marketing promotions and updates via email."
                             />
-                        </Grid>
+                        </Grid> */}
                     </Grid>
 
                     <Button
@@ -355,7 +390,7 @@ export default function UserDataForm({
                         color="primary"
                         className={classes.submit}
                     >
-                        Sign Up
+                        {buttonText}
                     </Button>
 
                     <Grid container justify="flex-end">

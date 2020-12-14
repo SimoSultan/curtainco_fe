@@ -1,16 +1,14 @@
 import React from "react";
 
+import Container from "@material-ui/core/Container";
+
 import { useCurtainContext } from "../../config/CurtainCoContext";
 import { ACTIONS } from "../../config/stateReducer";
-
-import { Redirect } from "react-router-dom";
-
-import Container from "@material-ui/core/Container";
-// import useStyles from "../reusable/UserDataFormStyles";
-
 import { registerUser, loginUser } from "../../services/authServices";
 import Copyright from "./Copyright";
 import { UserDataForm } from "../export";
+
+import { Redirect } from "react-router-dom";
 
 export default function SignUp() {
     // const classes = useStyles();
@@ -23,22 +21,15 @@ export default function SignUp() {
         registerUser(userDetails)
             .then((regResp) => {
                 if (regResp.status === 201) {
-                    dispatch({
-                        type: ACTIONS.REGISTER,
-                        payload: {
-                            email: userDetails.email,
-                            password: userDetails.password,
-                            name:
-                                userDetails.firstName +
-                                "," +
-                                userDetails.lastName,
-                        },
-                    });
+                    console.log("User successfully signed up");
+                    // dispatch({
+                    //     type: ACTIONS.REGISTER,
+                    //     payload: userDetails,
+                    // });
                 }
             })
             .then(() => {
                 let { email, password } = userDetails;
-                console.log(`destructured userDetails: ${email} ${password}`);
                 // AFTER THE USER HAS BEEN CREATED LOG THE USER IN
                 loginUser({ email, password })
                     .then((logResp) => {
@@ -61,7 +52,7 @@ export default function SignUp() {
             })
 
             .catch((error) => {
-                registerError = `An error ocurred on register: ${error}.`;
+                registerError = `An error ocurred on register: Error Code: ${error.status}. Message: ${error.message}.`;
                 console.log(registerError);
             });
 
@@ -75,9 +66,11 @@ export default function SignUp() {
             ) : (
                 <>
                     <UserDataForm
-                        user={state.currentUser}
+                        user={false}
                         handleFunctionFromParent={handleRegister}
                         formTitle={"Sign Up"}
+                        withAuth={true}
+                        buttonText={"Sign Up"}
                     />
                     <Container maxWidth="sm">
                         <Copyright />
