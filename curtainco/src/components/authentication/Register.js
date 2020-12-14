@@ -71,6 +71,7 @@ export default function SignUp() {
                         formTitle={"Sign Up"}
                         withAuth={true}
                         buttonText={"Sign Up"}
+                        headerInformation={true}
                     />
                     <Container maxWidth="sm">
                         <Copyright />

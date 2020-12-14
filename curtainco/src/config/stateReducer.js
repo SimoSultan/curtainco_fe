@@ -3,6 +3,7 @@ export const ACTIONS = {
     LOGOUT: "logout-user",
     REGISTER: "register-user",
     SET_CURRENT_USER: "get-user-on-page-refresh",
+    SET_SNACKBAR: "update-snackbar",
 };
 
 export default function stateReducer(state, action) {
@@ -34,6 +35,12 @@ export default function stateReducer(state, action) {
                 users: [...state.users, action.payload],
                 currentUser: action.payload,
                 loggedIn: true,
+            };
+        }
+        case ACTIONS.SET_SNACKBAR: {
+            return {
+                ...state,
+                snackbar: action.payload,
             };
         }
         default:

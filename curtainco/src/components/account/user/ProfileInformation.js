@@ -1,38 +1,16 @@
 import React, { useState } from "react";
 
 import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import useStyles from "./UserDashboardStyles";
 
 import { useCurtainContext } from "../../../config/CurtainCoContext";
+import { ACTIONS } from "../../../config/stateReducer";
 import { splitFullName } from "../../../helpers/userHelpers";
-import { UserDataForm } from "../../export";
-
-const ShowUserInformation = ({ user }) => {
-    return (
-        <Grid container direction="column">
-            <Grid item>{user.title}</Grid>
-            <Grid item>{user.email}</Grid>
-            <Grid item>{user.address}</Grid>
-            <Grid item>{user.phone}</Grid>
-            <Grid item>{user.companyName}</Grid>
-        </Grid>
-    );
-};
-
-const EditUserInformation = ({ user, handleUpdate }) => {
-    return (
-        <UserDataForm
-            user={user}
-            formTitle={"Edit Information"}
-            handleFunctionFromParent={handleUpdate}
-            withAuth={false}
-            buttonText={"Save"}
-        />
-    );
-};
+import { updateUserInformation } from "../../../services/userServices";
+import ShowUserInformation from "./ShowUserInformation";
+import EditUserInformation from "./EditUserInformation";
 
 function ProfileInformation() {
     const classes = useStyles();
@@ -56,8 +34,39 @@ function ProfileInformation() {
         setEditUser(!editUser);
     }
 
-    function handleUpdate() {
-        alert("hello");
+    function showSnackbar(severity, message) {
+        dispatch({
+            type: ACTIONS.SET_SNACKBAR,
+            payload: {
+                open: true,
+                severity,
+                message,
+            },
+        });
+    }
+
+    function handleUpdate(userDetails) {
+        let updateError = false;
+        let userId = state.currentUser._id;
+
+        updateUserInformation(userDetails, userId)
+            .then((resp) => {
+                if (resp.status === 200) {
+                    dispatch({
+                        type: ACTIONS.SET_CURRENT_USER,
+                        payload: resp.data,
+                    });
+                }
+            })
+            .catch((error) => {
+                updateError = `An error ocurred on register: Error Code: ${error.status}. Message: ${error.message}.`;
+                console.log(updateError);
+            });
+
+        toggleEditUserForm();
+        showSnackbar("success", "User successfully updated");
+        console.log("User successfully updated");
+        return updateError;
     }
 
     return (

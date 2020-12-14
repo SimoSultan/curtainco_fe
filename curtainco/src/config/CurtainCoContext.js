@@ -1,29 +1,32 @@
-import React, { useReducer, createContext, useContext } from 'react'
-import stateReducer from './stateReducer'
+import React, { useReducer, createContext, useContext } from "react";
+import stateReducer from "./stateReducer";
 
-const Context = createContext()
+const Context = createContext();
 
 export function useCurtainContext() {
-  return useContext(Context)
+    return useContext(Context);
 }
 
-
-function CurtainContext( { children } ) {
-
+function CurtainContext({ children }) {
     // initial state for state reducer
     const initialState = {
         loggedIn: null,
         currentUser: null,
-        users: []
-    }
+        users: [],
+        snackbar: {
+            severity: "success",
+            message: "May the force be with you",
+            open: false,
+        },
+    };
 
-    const [state, dispatch] = useReducer(stateReducer, initialState)
+    const [state, dispatch] = useReducer(stateReducer, initialState);
 
     return (
-        <Context.Provider value={{state, dispatch}}>
-            { children }
+        <Context.Provider value={{ state, dispatch }}>
+            {children}
         </Context.Provider>
-    )
+    );
 }
 
-export default CurtainContext
+export default CurtainContext;

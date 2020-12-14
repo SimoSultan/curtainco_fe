@@ -46,12 +46,11 @@ export default function UserDataForm({
     formTitle,
     handleFunctionFromParent,
     withAuth,
+    headerInformation,
     buttonText,
     // buttonColor,
 }) {
     const classes = useStyles();
-
-    console.log(user);
 
     if (!user) {
         user = {};
@@ -173,13 +172,19 @@ export default function UserDataForm({
             <CssBaseline />
 
             <div className={classes.paper}>
-                <Avatar className={classes.avatar}>
-                    <LockOutlinedIcon />
-                </Avatar>
+                {headerInformation ? (
+                    <>
+                        <Avatar className={classes.avatar}>
+                            <LockOutlinedIcon />
+                        </Avatar>
 
-                <Typography component="h1" variant="h5">
-                    {formTitle}
-                </Typography>
+                        <Typography component="h1" variant="h5">
+                            {formTitle}
+                        </Typography>
+                    </>
+                ) : (
+                    ""
+                )}
 
                 <form
                     className={classes.form}
@@ -192,30 +197,15 @@ export default function UserDataForm({
                                 id="title"
                                 variant="outlined"
                                 label="Title"
-                                // value={title ? title : ""}
+                                value={title ? title : ""}
                                 select
                                 onChange={handleTitleChange}
                                 fullWidth
-                                defaultValue=""
+                                // defaultValue=""
                                 autoComplete="honorific-prefix"
                             >
                                 {titleItems}
                             </TextField>
-                            {/* <FormControl variant="outlined">
-                                <InputLabel id="demo-simple-select-outlined-label">
-                                    Title
-                                </InputLabel>
-                                <Select
-                                    labelId="demo-simple-select-outlined-label"
-                                    id="demo-simple-select-outlined"
-                                    // value={title}
-                                    variant="outlined"
-                                    onChange={handleTitleChange}
-                                    label="Title"
-                                >
-                                    {titleItems}
-                                </Select>
-                            </FormControl> */}
                         </Grid>
                         <Grid item xs={12} sm={5}>
                             <TextField
@@ -343,12 +333,12 @@ export default function UserDataForm({
                                 id="state"
                                 variant="outlined"
                                 label="State"
-                                // value={addressState ? addressState : ""}
+                                value={addressState ? addressState : ""}
                                 required
                                 select
                                 onChange={handleAddressStateChange}
                                 fullWidth
-                                defaultValue=""
+                                // defaultValue=""
                                 // helperText="Please select your state"
                                 autoComplete="address-level1"
                             >

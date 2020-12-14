@@ -20,6 +20,7 @@ import {
     Login,
     Register,
     RequestConsultation,
+    CustomSnackbar,
 } from "./components/export.js";
 
 function App() {
@@ -63,6 +64,11 @@ function App() {
                 <Route exact path="/request" component={RequestConsultation} />
             </Switch>
 
+            <CustomSnackbar
+                severity={state.snackbarSeverity}
+                open={state.snackbar}
+                message={state.snackbarMessage}
+            />
             <Footer />
         </Router>
     );

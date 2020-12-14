@@ -11,3 +11,4 @@ export { default as Register } from "./authentication/Register";
 export { default as Modal } from "./navigation/Modal";
 export { default as RequestConsultation } from "./consultations/RequestConsultation";
 export { default as UserDataForm } from "./reusable/UserDataForm";
+export { default as CustomSnackbar } from "./reusable/CustomSnackbar";
