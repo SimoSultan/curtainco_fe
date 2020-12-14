@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Typography, Grid } from "@material-ui/core";
-import ProductList from "./ProductList";
-import useStyles from "./ProductStyles";
+import ProductList from "./product/ProductList";
+import useStyles from "./product/ProductStyles";
 
 const products = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 

@@ -9,8 +9,8 @@ import Button from "@material-ui/core/Button";
 
 import useStyles from "./ProductStyles";
 
-import { useCurtainContext } from "../../config/CurtainCoContext";
-import { ACTIONS } from "../../config/stateReducer";
+import { useCurtainContext } from "../../../config/CurtainCoContext";
+import { ACTIONS } from "../../../config/stateReducer";
 
 function ProductItem({ productData }) {
     const classes = useStyles();
