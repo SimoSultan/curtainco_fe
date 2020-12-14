@@ -1,14 +1,13 @@
-import React, { useEffect } from 'react'
-// global state
-import { useCurtainContext } from './config/CurtainCoContext'
-import { ACTIONS } from './config/stateReducer'
-// styles
-import './styles/Main.css'
-// routing
+import React, { useEffect } from "react";
+
+import { useCurtainContext } from "./config/CurtainCoContext";
+import { ACTIONS } from "./config/stateReducer";
+
+import "./styles/Main.css";
+
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { getLoggedInUser } from "./services/authServices";
 
-// components
 import {
     NavBar,
     Home,
@@ -21,56 +20,51 @@ import {
     Login,
     Register,
     RequestConsultation,
-} from './components/export.js'
-
-
-
+} from "./components/export.js";
 
 function App() {
-
-    const { state, dispatch } = useCurtainContext()
+    const { state, dispatch } = useCurtainContext();
 
     useEffect(() => {
-
         if (state.currentUser === null) {
-            getLoggedInUser().then((resp) => {
-                let currentUser = resp.data.user
-                if(currentUser) {
-                    dispatch({type: ACTIONS.SET_CURRENT_USER, payload: currentUser})
-                } else {
-                    console.log("No user logged in on page reload")
-                }
-            }).catch((error) => {
-                console.log(`An error ocurred on getLoggedInUser: ${error}.`);
-            })
+            getLoggedInUser()
+                .then((resp) => {
+                    let currentUser = resp.data.user;
+                    if (currentUser) {
+                        dispatch({
+                            type: ACTIONS.SET_CURRENT_USER,
+                            payload: currentUser,
+                        });
+                    } else {
+                        console.log("No user logged in on page reload");
+                    }
+                })
+                .catch((error) => {
+                    console.log(
+                        `An error ocurred on getLoggedInUser: ${error}.`
+                    );
+                });
         }
-
-    }, [])
+    }, []);
 
     return (
+        <Router>
+            <NavBar />
 
-            
-            <Router>
+            <Switch>
+                <Route exact path="/" component={Home} />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/register" component={Register} />
+                <Route exact path="/about" component={About} />
+                <Route exact path="/collections" component={Collections} />
+                <Route exact path="/products" component={Products} />
+                <Route exact path="/cart" component={Cart} />
+                <Route exact path="/account" component={Account} />
+                <Route exact path="/request" component={RequestConsultation} />
+            </Switch>
 
-                <NavBar />
-
-                <Switch>
-                    <Route exact path="/" component={Home} />
-                    <Route exact path="/login" component={Login} />
-                    <Route exact path="/register" component={Register} />
-                    <Route exact path="/about" component={About} />
-                    <Route exact path="/collections" component={Collections} />
-                    <Route exact path="/products" component={Products} />
-                    <Route exact path="/cart" component={Cart} />
-                    <Route exact path="/account" component={Account} />
-                    <Route exact path="/request" component={RequestConsultation} />
-                </Switch>
-
-                <Footer />
-
-            </Router>
-
-
+            <Footer />
+        </Router>
     );
 }
 

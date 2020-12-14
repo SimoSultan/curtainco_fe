@@ -1,90 +1,102 @@
-import React from 'react'
+import React from "react";
 
-import { useCurtainContext } from '../../config/CurtainCoContext'
-import { ACTIONS } from '../../config/stateReducer';
+import { useCurtainContext } from "../../config/CurtainCoContext";
+import { ACTIONS } from "../../config/stateReducer";
 
-import { logoutUser } from '../../services/authServices'
+import { logoutUser } from "../../services/authServices";
 import { Link, withRouter } from "react-router-dom";
 
-import { 
-    AppBar,
-    Toolbar,
-    Typography,
-    Button,
-} from '@material-ui/core'
+import { AppBar, Toolbar, Typography, Button } from "@material-ui/core";
 
-import useStyles from './NavigationStyles'
-
-
+import useStyles from "./NavigationStyles";
 
 function NavBar() {
     const classes = useStyles();
 
-    const { state, dispatch } = useCurtainContext()
+    const { state, dispatch } = useCurtainContext();
 
     function handleLogout(e) {
-        e.preventDefault()
+        e.preventDefault();
 
-        logoutUser().then((response) => {
-            console.log("Got back response on logout", response.status)
-        }).catch ((error) => {
-            console.log("The server may be down - caught an exception on logout:", error)
-        })
+        logoutUser()
+            .then((response) => {
+                console.log("Got back response on logout", response.status);
+            })
+            .catch((error) => {
+                console.log(
+                    "The server may be down - caught an exception on logout:",
+                    error
+                );
+            });
         // Even if we catch an error, logout the user locally
-        dispatch({type: ACTIONS.LOGOUT})
-
+        dispatch({ type: ACTIONS.LOGOUT });
     }
 
     return (
         <AppBar position="static">
             <Toolbar>
-
                 <Typography variant="h6" className={classes.title}>
-                    <Link className={classes.link} to="/">The Curtain Co</Link>
+                    <Link className={classes.link} to="/">
+                        The Curtain Co
+                    </Link>
                 </Typography>
 
                 <Button color="inherit">
-                    <Link className={classes.link} to="/">Home</Link>
+                    <Link className={classes.link} to="/">
+                        Home
+                    </Link>
                 </Button>
 
                 <Button color="inherit">
-                    <Link className={classes.link} to="/collections">Collections</Link>
+                    <Link className={classes.link} to="/collections">
+                        Collections
+                    </Link>
                 </Button>
 
                 <Button color="inherit">
-                    <Link className={classes.link} to="/products">Products</Link>
+                    <Link className={classes.link} to="/products">
+                        Products
+                    </Link>
                 </Button>
 
                 <Button color="inherit">
-                    <Link className={classes.link} to="/about">About</Link>
+                    <Link className={classes.link} to="/about">
+                        About
+                    </Link>
                 </Button>
 
                 <Button color="inherit">
-                    <Link className={classes.link} to="/cart">Cart</Link>
+                    <Link className={classes.link} to="/cart">
+                        Cart
+                    </Link>
                 </Button>
 
-                {
-                    state.loggedIn
-                    ?   <Button color="inherit">
-                            <Link className={classes.link} to="/account" >Account</Link>
-                        </Button>
-                    :   ''
-                }
+                {state.loggedIn ? (
+                    <Button color="inherit">
+                        <Link className={classes.link} to="/account">
+                            Account
+                        </Link>
+                    </Button>
+                ) : (
+                    ""
+                )}
 
-                {
-                    state.loggedIn
-                    ?   <Button color="inherit" onClick={handleLogout}>
-                            <Link className={classes.link} to="/" >Logout</Link>
-                        </Button>
-                    :   <Button color="inherit">
-                            <Link className={classes.link} to="/login" >Login</Link>
-                        </Button>
-                }
-                
-
+                {state.loggedIn ? (
+                    <Button color="inherit" onClick={handleLogout}>
+                        <Link className={classes.link} to="/">
+                            Logout
+                        </Link>
+                    </Button>
+                ) : (
+                    <Button color="inherit">
+                        <Link className={classes.link} to="/login">
+                            Login
+                        </Link>
+                    </Button>
+                )}
             </Toolbar>
         </AppBar>
-    )
+    );
 }
 
 export default withRouter(NavBar);
