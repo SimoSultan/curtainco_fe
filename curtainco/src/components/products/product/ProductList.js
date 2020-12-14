@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Typography, Grid } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import ProductItem from "./ProductItem";
 
 function ProductList({ products }) {

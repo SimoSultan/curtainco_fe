@@ -7,14 +7,14 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 
-import useStyles from "./ProductStyles";
+import useStyles from "../ProductStyles";
 
 import { useCurtainContext } from "../../../config/CurtainCoContext";
 import { ACTIONS } from "../../../config/stateReducer";
 
 function ProductItem({ productData }) {
     const classes = useStyles();
-    const { state, dispatch } = useCurtainContext();
+    const { dispatch } = useCurtainContext();
 
     function handleClick(e) {
         e.preventDefault();
