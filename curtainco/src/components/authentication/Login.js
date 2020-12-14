@@ -29,14 +29,13 @@ export default function SignIn() {
     const [password, setPassword] = useState("");
     const [rememberMe, setRememberMe] = useState(false);
 
-    function handleLogin(e) {
+    async function handleLogin(e) {
         e.preventDefault();
         let loginError = false;
 
-        const userDetails = { email, password, rememberMe };
+        const user = { email, password, rememberMe };
 
-        // LOG THE USER IN
-        loginUser(userDetails)
+        loginUser(user)
             .then((resp) => {
                 let currentUser = resp.data.user;
 
@@ -56,7 +55,6 @@ export default function SignIn() {
             .catch((error) => {
                 loginError = `An error ocurred on login: Error Code: ${error.status}. Message: ${error.message}.`;
                 console.log(loginError);
-                // console.log(error);
             });
     }
 

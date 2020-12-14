@@ -28,7 +28,7 @@ import {
 } from "../../helpers/userHelpers";
 
 const states = ["QLD", "VIC", "NSW", "NT", "ACT", "WA", "SA", "TAS"];
-const titles = ["Mr", "Mrs", "Miss", "Ms", "Mx", "Sir", "Dr", "Lady", "Lord"];
+const titles = ["Mr", "Mrs", "Miss", "Ms", "Mx", "Sir", "Dr"];
 
 const menuItems = states.map((place) => (
     <MenuItem value={place} key={place}>
