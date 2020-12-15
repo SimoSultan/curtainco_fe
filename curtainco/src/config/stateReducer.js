@@ -6,6 +6,7 @@ export const ACTIONS = {
     SET_SNACKBAR: "update-snackbar",
     SET_MODAL: "update-modal",
     ADD_PRODUCTS: "add-products",
+    SET_ALL_USERS: "get-all-users",
 };
 
 export default function stateReducer(state, action) {
@@ -54,7 +55,13 @@ export default function stateReducer(state, action) {
         case ACTIONS.ADD_PRODUCTS: {
             return {
                 ...state,
-                products: [...state.users, action.payload],
+                products: [...state.products, action.payload],
+            };
+        }
+        case ACTIONS.SET_ALL_USERS: {
+            return {
+                ...state,
+                users: action.payload,
             };
         }
         default:
