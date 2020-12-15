@@ -1,15 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { TextField } from "@material-ui/core";
 
-function Search() {
-    const [searchInput, setSearchInput] = useState("");
-
-    function handleChange(e) {
-        e.preventDefault();
-        setSearchInput(e.target.value);
-    }
-
+function Search({ searchInput, handleChange }) {
     return (
         <>
             <TextField

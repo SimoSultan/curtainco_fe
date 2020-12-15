@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import FormLabel from "@material-ui/core/FormLabel";
 import FormControl from "@material-ui/core/FormControl";
@@ -16,20 +16,12 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Filter() {
+export default function Filter({ state, handleChange }) {
     const classes = useStyles();
-    const [state, setState] = React.useState({
-        fabric: false,
-        rod: false,
-        accessory: false,
-    });
 
-    const handleChange = (event) => {
-        setState({ ...state, [event.target.name]: event.target.checked });
-    };
-
-    const { fabric, rod, accessory } = state;
-    const error = [fabric, rod, accessory].filter((v) => v).length !== 2;
+    const { fabric, rod, accessory, inStock } = state;
+    // const error =
+    //     [fabric, rod, accessory, inStock].filter((v) => v).length !== 2;
 
     return (
         <div className={classes.root}>
@@ -66,8 +58,18 @@ export default function Filter() {
                         }
                         label="Accessories"
                     />
+                    <FormControlLabel
+                        control={
+                            <Checkbox
+                                checked={inStock}
+                                onChange={handleChange}
+                                name="inStock"
+                            />
+                        }
+                        label="In Stock"
+                    />
                 </FormGroup>
-                <FormHelperText>Be careful</FormHelperText>
+                <FormHelperText>Some text here?</FormHelperText>
             </FormControl>
         </div>
     );

@@ -24,6 +24,7 @@ function CurtainContext({ children }) {
             message: "This is a message",
             data: {},
         },
+        products: [],
     };
 
     const [state, dispatch] = useReducer(stateReducer, initialState);
