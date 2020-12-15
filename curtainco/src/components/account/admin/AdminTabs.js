@@ -5,15 +5,21 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
+import { Grid } from "@material-ui/core";
 
 import useStyles from "./AdminStyles";
 
 import AllProducts from "./products/AllProducts";
 import AllCollections from "./collections/AllCollections";
-import AllRequests from "./requests/AllRequests";
+import AllConsults from "./requests/AllConsults";
 import AllTestimonials from "./testimonials/AllTestimonials";
 import AllUsers from "./users/AllUsers";
 import BusinessDetails from "./business/BusinessDetails";
+import AdminProfile from "./profile/AdminProfile";
+import EditProduct from "./products/EditProduct";
+import AddProduct from "./products/AddProduct";
+import AddCollection from "./collections/AddCollection";
+import EditCollection from "./collections/EditCollection";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -65,29 +71,73 @@ export default function AdminTabs({ tabValue, handleChange }) {
                 >
                     <Tab label="products" {...a11yProps(0)} />
                     <Tab label="collections" {...a11yProps(1)} />
-                    <Tab label="users" {...a11yProps(2)} />
-                    <Tab label="consultations" {...a11yProps(3)} />
-                    <Tab label="testimonials" {...a11yProps(4)} />
+                    <Tab label="add" {...a11yProps(2)} />
+                    <Tab label="users" {...a11yProps(3)} />
+                    <Tab label="consultations" {...a11yProps(4)} />
                     <Tab label="business" {...a11yProps(5)} />
+                    <Tab label="profile" {...a11yProps(6)} />
+                    <Tab label="testimonials" {...a11yProps(7)} />
                 </Tabs>
             </AppBar>
             <TabPanel value={tabValue} index={0}>
-                <AllProducts />
+                <Grid
+                    container
+                    justify="center"
+                    alignItems="center"
+                    spacing={2}
+                >
+                    <Grid item xs>
+                        <AllProducts />
+                    </Grid>
+                    <Grid item xs>
+                        <EditProduct />
+                    </Grid>
+                </Grid>
             </TabPanel>
             <TabPanel value={tabValue} index={1}>
-                <AllCollections />
+                <Grid
+                    container
+                    justify="center"
+                    alignItems="center"
+                    spacing={2}
+                >
+                    <Grid item xs>
+                        <AllCollections />
+                    </Grid>
+                    <Grid item xs>
+                        <EditCollection />
+                    </Grid>
+                </Grid>
             </TabPanel>
             <TabPanel value={tabValue} index={2}>
-                <AllUsers />
+                <Grid
+                    container
+                    justify="center"
+                    alignItems="center"
+                    spacing={2}
+                >
+                    <Grid item xs>
+                        <AddProduct />
+                    </Grid>
+                    <Grid item xs>
+                        <AddCollection />
+                    </Grid>
+                </Grid>
             </TabPanel>
             <TabPanel value={tabValue} index={3}>
-                <AllRequests />
+                <AllUsers />
             </TabPanel>
             <TabPanel value={tabValue} index={4}>
-                <AllTestimonials />
+                <AllConsults />
             </TabPanel>
             <TabPanel value={tabValue} index={5}>
                 <BusinessDetails />
+            </TabPanel>
+            <TabPanel value={tabValue} index={6}>
+                <AdminProfile />
+            </TabPanel>
+            <TabPanel value={tabValue} index={7}>
+                <AllTestimonials />
             </TabPanel>
         </div>
     );

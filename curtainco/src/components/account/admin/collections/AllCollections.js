@@ -92,7 +92,7 @@ export default function AllProducts() {
             </Table>
             <div className={classes.seeMore}>
                 <Link color="primary" href="#" onClick={preventDefault}>
-                    See more users
+                    See more collections
                 </Link>
             </div>
         </Paper>

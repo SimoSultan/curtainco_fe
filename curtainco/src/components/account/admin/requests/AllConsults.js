@@ -10,27 +10,29 @@ import Paper from "@material-ui/core/Paper";
 import Title from "../../../reusable/Title";
 
 import useStyles from "../AdminStyles";
-import { getAllProducts } from "../../../../services/productServices";
+
+import { splitFullName } from "../../../../helpers/userHelpers";
+import { getAllConsultations } from "../../../../services/consultationServices";
 import { useCurtainContext } from "../../../../config/CurtainCoContext";
 import { ACTIONS } from "../../../../config/stateReducer";
 
 function preventDefault(event) {
     event.preventDefault();
-    alert("does nothing yet");
+    alert("does nothing");
 }
 
-export default function AllProducts() {
+export default function AllConsults() {
     const classes = useStyles();
     const { state, dispatch } = useCurtainContext();
-    let allProducts = state.products;
+    let allConsults = state.consults;
 
     useEffect(() => {
-        getAllProducts()
+        getAllConsultations()
             .then((resp) => {
                 if (resp.status === 200) {
                     console.log(resp.data);
                     dispatch({
-                        type: ACTIONS.SET_ALL_PRODUCTS,
+                        type: ACTIONS.SET_ALL_CONSULTATIONS,
                         payload: resp.data,
                     });
                 } else {
@@ -42,28 +44,36 @@ export default function AllProducts() {
             });
     }, [dispatch]);
 
-    const productItems = allProducts.map((prod) => (
-        <TableRow key={prod.name}>
-            <TableCell>{prod.name}</TableCell>
-            <TableCell>{prod.colour}</TableCell>
+    // REMOVE ADMIN ROLE FROM LIST
+
+    const userRow = allConsults.map((req) => (
+        <TableRow key={req._id}>
+            <TableCell>{`${splitFullName(req.fullName)[0]} ${
+                splitFullName(req.fullName)[1]
+            }`}</TableCell>
+            <TableCell>{req.email}</TableCell>
+            <TableCell>{req.phone}</TableCell>
+            <TableCell>{`${req.suburb}, ${req.state}`}</TableCell>
         </TableRow>
     ));
 
     return (
         <Paper className={classes.paper}>
-            <Title>Products</Title>
+            <Title>All Users</Title>
             <Table size="small">
                 <TableHead>
                     <TableRow>
                         <TableCell>Name</TableCell>
-                        <TableCell>Colour</TableCell>
+                        <TableCell>Email</TableCell>
+                        <TableCell>Phone</TableCell>
+                        <TableCell>Address</TableCell>
                     </TableRow>
                 </TableHead>
-                <TableBody>{productItems}</TableBody>
+                <TableBody>{userRow}</TableBody>
             </Table>
             <div className={classes.seeMore}>
                 <Link color="primary" href="#" onClick={preventDefault}>
-                    See more products
+                    See more consults
                 </Link>
             </div>
         </Paper>
