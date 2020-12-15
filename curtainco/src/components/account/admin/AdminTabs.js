@@ -14,6 +14,7 @@ import AllRequests from "./requests/AllRequests";
 import AllTestimonials from "./testimonials/AllTestimonials";
 import AllUsers from "./users/AllUsers";
 import BusinessDetails from "./business/BusinessDetails";
+import AdminProfile from "./profile/AdminProfile";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -69,6 +70,7 @@ export default function AdminTabs({ tabValue, handleChange }) {
                     <Tab label="consultations" {...a11yProps(3)} />
                     <Tab label="testimonials" {...a11yProps(4)} />
                     <Tab label="business" {...a11yProps(5)} />
+                    <Tab label="profile" {...a11yProps(5)} />
                 </Tabs>
             </AppBar>
             <TabPanel value={tabValue} index={0}>
@@ -88,6 +90,9 @@ export default function AdminTabs({ tabValue, handleChange }) {
             </TabPanel>
             <TabPanel value={tabValue} index={5}>
                 <BusinessDetails />
+            </TabPanel>
+            <TabPanel value={tabValue} index={6}>
+                <AdminProfile />
             </TabPanel>
         </div>
     );

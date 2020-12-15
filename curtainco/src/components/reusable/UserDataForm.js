@@ -383,13 +383,17 @@ export default function UserDataForm({
                         {buttonText}
                     </Button>
 
-                    <Grid container justify="flex-end">
-                        <Grid item>
-                            <Link className={classes.link} to="/login">
-                                {"Already have an account? Sign In"}
-                            </Link>
+                    {withAuth ? (
+                        <Grid container justify="flex-end">
+                            <Grid item>
+                                <Link className={classes.link} to="/login">
+                                    {"Already have an account? Sign In"}
+                                </Link>
+                            </Grid>
                         </Grid>
-                    </Grid>
+                    ) : (
+                        ""
+                    )}
                 </form>
             </div>
         </Container>
