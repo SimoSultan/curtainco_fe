@@ -5,12 +5,14 @@ export const ACTIONS = {
     SET_CURRENT_USER: "get-user-on-page-refresh",
     SET_SNACKBAR: "update-snackbar",
     SET_MODAL: "update-modal",
-    ADD_PRODUCTS: "add-products",
+    ADD_PRODUCT: "add-product",
     SET_ALL_USERS: "get-all-users",
+    SET_ALL_PRODUCTS: "get-all-products",
 };
 
 export default function stateReducer(state, action) {
     switch (action.type) {
+        // AUTHENTICATION
         case ACTIONS.LOGIN: {
             return {
                 ...state,
@@ -40,6 +42,8 @@ export default function stateReducer(state, action) {
                 loggedIn: true,
             };
         }
+
+        // SNACKBAR & MODAL
         case ACTIONS.SET_SNACKBAR: {
             return {
                 ...state,
@@ -52,16 +56,26 @@ export default function stateReducer(state, action) {
                 modal: action.payload,
             };
         }
-        case ACTIONS.ADD_PRODUCTS: {
-            return {
-                ...state,
-                products: [...state.products, action.payload],
-            };
-        }
+
+        // USERS
         case ACTIONS.SET_ALL_USERS: {
             return {
                 ...state,
                 users: action.payload,
+            };
+        }
+
+        // PRODUCTS
+        case ACTIONS.SET_ALL_PRODUCTS: {
+            return {
+                ...state,
+                products: action.payload,
+            };
+        }
+        case ACTIONS.ADD_PRODUCT: {
+            return {
+                ...state,
+                products: [...state.products, action.payload],
             };
         }
         default:

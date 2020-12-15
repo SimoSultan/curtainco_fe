@@ -47,7 +47,7 @@ function App() {
                     );
                 });
         }
-    }, []);
+    }, [dispatch, state.currentUser]);
 
     return (
         <Router>
@@ -61,8 +61,25 @@ function App() {
                 <Route exact path="/collections" component={Collections} />
                 <Route exact path="/products" component={Products} />
                 <Route exact path="/cart" component={Cart} />
-                <Route exact path="/account" component={Account} />
                 <Route exact path="/request" component={RequestConsultation} />
+                <Route exact path="/account" component={Account} />
+                <Route exact path="/account/products" component={Account} />
+                <Route exact path="/account/products/add" component={Account} />
+                <Route exact path="/account/collections" component={Account} />
+                <Route
+                    exact
+                    path="/account/collections/add"
+                    component={Account}
+                />
+                <Route exact path="/account/users" component={Account} />
+                <Route
+                    exact
+                    path="/account/consultations"
+                    component={Account}
+                />
+                <Route exact path="/account/testimonials" component={Account} />
+                <Route exact path="/account/business" component={Account} />
+                <Route exact path="/account/profile" component={Account} />
             </Switch>
 
             <CustomSnackbar
