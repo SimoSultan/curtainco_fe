@@ -1,7 +1,11 @@
 import React from "react";
 import { Grid } from "@material-ui/core";
 import ProductItem from "./ProductItem";
-import { filterByType, sortProducts } from "../../../helpers/productHelpers";
+import {
+    filterByType,
+    searchProducts,
+    sortProducts,
+} from "../../../helpers/productHelpers";
 
 function ProductList({
     products,
@@ -13,12 +17,8 @@ function ProductList({
 }) {
     let filteredProducts = products;
 
-    // filter by search input
-
-    // filteredProducts = filteredProducts.filter(
-    //     (element) =>
-    //         element.name.toLowerCase().indexOf(filterText.toLowerCase()) === -1
-    // );
+    // FILTER BY SEARCH TEXT
+    filteredProducts = searchProducts(filteredProducts, filterText);
 
     // FILTER BY TYPE
     filteredProducts = filterByType(filteredProducts, filterTypes);

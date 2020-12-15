@@ -69,7 +69,20 @@ function filterByType(filteredProducts, types) {
     return filteredProducts;
 }
 
+function searchProducts(filteredProducts, searchText) {
+    if (searchText !== "") {
+        filteredProducts = filteredProducts.filter(
+            (element) =>
+                element.name.toLowerCase().indexOf(searchText.toLowerCase()) !==
+                -1
+        );
+    }
+
+    return filteredProducts;
+}
+
 module.exports = {
     sortProducts,
     filterByType,
+    searchProducts,
 };

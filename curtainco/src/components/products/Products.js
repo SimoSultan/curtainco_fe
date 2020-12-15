@@ -37,6 +37,7 @@ function Products() {
     const classes = useStyles();
     const { dispatch } = useCurtainContext();
     const [sortBy, setSortBy] = useState("Name: A to Z");
+    const [searchInput, setSearchInput] = useState("");
     const [filter, setFilter] = useState({
         fabric: false,
         rod: false,
@@ -51,8 +52,11 @@ function Products() {
 
     // HANDLE THE STATE CHANGE FOR FILTERING
     const handleSortByChange = (event) => {
-        // setSortBy(event.currentTarget.getAttribute("name"));
         setSortBy(event.target.value);
+    };
+
+    const handleSearchInputChange = (event) => {
+        setSearchInput(event.target.value);
     };
 
     // const error =
@@ -79,7 +83,10 @@ function Products() {
                     spacing={1}
                 >
                     <Grid item>
-                        <Search />
+                        <Search
+                            searchInput={searchInput}
+                            handleChange={handleSearchInputChange}
+                        />
                     </Grid>
                     <Grid item>
                         <Sort
@@ -107,7 +114,7 @@ function Products() {
                     >
                         <ProductList
                             products={products}
-                            filterText={""}
+                            filterText={searchInput}
                             filterTypes={filter}
                             filterSortBy={sortBy}
                             sortFields={sortFields}
