@@ -18,7 +18,7 @@ const sortItems = sortFields.map((field) => (
 ));
 
 function Sort() {
-    const [sortBy, setSortBy] = useState("Featured");
+    const [sortBy, setSortBy] = useState("Name: A to Z");
 
     function handleChange(e) {
         setSortBy(e.target.value);

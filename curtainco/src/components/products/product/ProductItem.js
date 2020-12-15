@@ -11,6 +11,7 @@ import useStyles from "../ProductStyles";
 
 import { useCurtainContext } from "../../../config/CurtainCoContext";
 import { ACTIONS } from "../../../config/stateReducer";
+import { capitalize } from "../../../helpers/appHelplers";
 
 function ProductItem({ productData }) {
     const classes = useStyles();
@@ -37,15 +38,19 @@ function ProductItem({ productData }) {
                 image="https://source.unsplash.com/random"
                 title="Image title"
             />
+
             <CardContent className={classes.cardContent}>
-                <Typography gutterBottom variant="h5" component="h2">
-                    Heading
+                <Typography gutterBottom variant="h6" component="h2">
+                    {capitalize(productData.name)}
                 </Typography>
-                <Typography>
-                    This is a media card. You can use this section to describe
-                    the content.
-                </Typography>
+
+                <Typography variant="body2">{`Amount: $${productData.amount}`}</Typography>
+
+                <Typography variant="body2">{`Type: ${capitalize(
+                    productData.type
+                )}`}</Typography>
             </CardContent>
+
             <CardActions>
                 <Button size="small" color="primary" onClick={handleClick}>
                     View
