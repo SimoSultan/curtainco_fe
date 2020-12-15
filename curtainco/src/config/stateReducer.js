@@ -8,6 +8,7 @@ export const ACTIONS = {
     ADD_PRODUCT: "add-product",
     SET_ALL_USERS: "get-all-users",
     SET_ALL_PRODUCTS: "get-all-products",
+    SET_ALL_CONSULTATIONS: "get-all-consults",
 };
 
 export default function stateReducer(state, action) {
@@ -76,6 +77,14 @@ export default function stateReducer(state, action) {
             return {
                 ...state,
                 products: [...state.products, action.payload],
+            };
+        }
+
+        // CONSULTATIONS
+        case ACTIONS.SET_ALL_CONSULTATIONS: {
+            return {
+                ...state,
+                consults: action.payload,
             };
         }
         default:

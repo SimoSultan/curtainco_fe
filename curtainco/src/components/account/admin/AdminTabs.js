@@ -11,7 +11,7 @@ import useStyles from "./AdminStyles";
 
 import AllProducts from "./products/AllProducts";
 import AllCollections from "./collections/AllCollections";
-import AllRequests from "./requests/AllRequests";
+import AllConsults from "./requests/AllConsults";
 import AllTestimonials from "./testimonials/AllTestimonials";
 import AllUsers from "./users/AllUsers";
 import BusinessDetails from "./business/BusinessDetails";
@@ -128,7 +128,7 @@ export default function AdminTabs({ tabValue, handleChange }) {
                 <AllUsers />
             </TabPanel>
             <TabPanel value={tabValue} index={4}>
-                <AllRequests />
+                <AllConsults />
             </TabPanel>
             <TabPanel value={tabValue} index={5}>
                 <BusinessDetails />

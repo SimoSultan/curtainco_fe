@@ -25,6 +25,7 @@ function CurtainContext({ children }) {
             data: {},
         },
         products: [],
+        consults: [],
     };
 
     const [state, dispatch] = useReducer(stateReducer, initialState);
