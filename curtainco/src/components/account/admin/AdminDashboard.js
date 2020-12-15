@@ -1,24 +1,23 @@
-import React from 'react'
+import React, { useState } from "react";
 
 // ADMIN COMPONENTS
-import AdminTabs from './AdminTabs'
-
+import AdminTabs from "./AdminTabs";
 
 // MAT UI
-import {
-    Container,
-    Typography
-} from '@material-ui/core'
+import { Container, Typography } from "@material-ui/core";
 
 function AdminDashboard() {
+    const [tabValue, setTabValue] = useState(0);
+
+    const handleTabChange = (event, newValue) => {
+        setTabValue(newValue);
+    };
+
     return (
         <Container>
-            <AdminTabs  />
-            <Typography variant="h3">
-                Admin Dashboard
-            </Typography>
+            <AdminTabs tabValue={tabValue} handleChange={handleTabChange} />
         </Container>
-    )
+    );
 }
 
-export default AdminDashboard
+export default AdminDashboard;
