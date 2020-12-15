@@ -25,9 +25,18 @@ const products = [
     createData(8, "Autumn Accessory", "accessory", 109.81),
 ];
 
+const sortFields = [
+    "Price: Low to High",
+    "Price: High to Low",
+    "Name: A to Z",
+    "Name: Z to A",
+    "Featured",
+];
+
 function Products() {
     const classes = useStyles();
     const { dispatch } = useCurtainContext();
+    const [sortBy, setSortBy] = useState("Name: A to Z");
     const [filter, setFilter] = useState({
         fabric: false,
         rod: false,
@@ -38,12 +47,16 @@ function Products() {
     // HANDLE THE STATE CHANGE FOR FILTERING
     const handleFilterChange = (event) => {
         setFilter({ ...filter, [event.target.name]: event.target.checked });
-        alert("hello");
     };
 
-    const { fabric, rod, accessory, inStock } = filter;
-    const error =
-        [fabric, rod, accessory, inStock].filter((v) => v).length !== 2;
+    // HANDLE THE STATE CHANGE FOR FILTERING
+    const handleSortByChange = (event) => {
+        // setSortBy(event.currentTarget.getAttribute("name"));
+        setSortBy(event.target.value);
+    };
+
+    // const error =
+    // [fabric, rod, accessory, inStock].filter((v) => v).length !== 2;
 
     // SET THE GLOBAL STATE OF ALL THE PRODUCTS
     useEffect(() => {
@@ -69,7 +82,11 @@ function Products() {
                         <Search />
                     </Grid>
                     <Grid item>
-                        <Sort />
+                        <Sort
+                            sortFields={sortFields}
+                            sortBy={sortBy}
+                            handleChange={handleSortByChange}
+                        />
                     </Grid>
                     <Grid item>
                         <Filter
@@ -91,8 +108,9 @@ function Products() {
                         <ProductList
                             products={products}
                             filterText={""}
-                            filterTypes={[]}
-                            filterSortBy={"az"}
+                            filterTypes={filter}
+                            filterSortBy={sortBy}
+                            sortFields={sortFields}
                             inStockOnly={true}
                         />
                     </Grid>

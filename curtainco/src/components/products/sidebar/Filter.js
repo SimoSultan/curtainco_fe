@@ -18,16 +18,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Filter({ state, handleChange }) {
     const classes = useStyles();
-    // const [state, setState] = useState({
-    //     fabric: false,
-    //     rod: false,
-    //     accessory: false,
-    //     inStock: false,
-    // });
-
-    // const handleChange = (event) => {
-    //     setState({ ...state, [event.target.name]: event.target.checked });
-    // };
 
     const { fabric, rod, accessory, inStock } = state;
     // const error =
