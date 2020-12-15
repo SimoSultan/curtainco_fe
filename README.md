@@ -1,5 +1,6 @@
 # The Curtain Co
-[![Netlify Status](https://api.netlify.com/api/v1/badges/f03a4191-5b3c-4ca3-98dc-37bc6c6758a2/deploy-status)](https://app.netlify.com/sites/thecurtainco/deploys)  
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/f03a4191-5b3c-4ca3-98dc-37bc6c6758a2/deploy-status)](https://app.netlify.com/sites/thecurtainco/deploys)
 
 <br>
 
@@ -11,14 +12,9 @@ Link to App: [thecurtainco.com.au](https://thecurtainco.com.au)
 Front-End source code: [FE Repo](https://github.com/SimoSultan/curtainco_fe)  
 Back-End source code: [BE Repo](https://github.com/philrussel21/curtain_co_BE)
 
-
 ###### By Simon Curran ([GitHub: SimoSultan](https://github.com/SimoSultan)) and Phil Antiporda ([GitHub philrussel21](https://github.com/philrussel21))
 
-
-
 ---
-
-
 
 ## Index:
 
@@ -80,8 +76,10 @@ The target audience of this website are users that are willing to spend a little
 ### Future Features:
 
 > #### Admin
-  - Testimonial Adding Feature
-> #### Users
+
+- Testimonial Adding Feature
+
+  > #### Users
 
 - Booking System for appointments
 - User Dashboard containing Booking/Appointment details
@@ -115,12 +113,17 @@ The target audience of this website are users that are willing to spend a little
 - [**Passport-Local**](http://www.passportjs.org/packages/passport-local/) - for the Passport-Strategy. This module lets the app authenticate users using usernames and passwords.
 - [**Mocha**](https://mochajs.org/) - for integration testing including routes, functions, middlewares and database transactions.
 - [**Chai**](https://www.chaijs.com/) - Assertion library used for the tests.
+- [**Chai-http**](https://www.npmjs.com/package/chai-http) - for integration testing with Chai assertions.
 - [**Mongoose**](https://mongoosejs.com/) - An Object Data Modeling (ODM) library used for MongoDB and Nodejs. Manages relationships with between data and provide schema validations.
 - [**Connect-Mongo**](https://www.npmjs.com/package/connect-mongo) - for storing the session into the MongoDB database.
 - [**Express-Session**](https://www.npmjs.com/package/express-session) - for letting the app store session data to the server instead of the client.
 - [**Mongoose-Bcrypt**](https://www.npmjs.com/package/mongoose-bcrypt) - for encrypting, decrypting and verifying fields when stored in the database using bcrypt password-hashing function.
 - [**Nodemon**](https://www.npmjs.com/package/nodemon) - a developer dependency that automatically restarts the server on a file change to save time
 - [**Dotenv**](https://www.npmjs.com/package/dotenv) - for storing environment variables containing sensitive information that should remain hidden from the codebase.
+- [**Cors**](https://www.npmjs.com/package/cors) - for providing a Connect/Express middleware that can be used to enable Cross Origin Resource Sharing (CORS) with various options.
+- [**AWS-SDK**](https://www.npmjs.com/package/aws-sdk) - for browser-based development which allows developers to access AWS from JavaScript code running directly in the browser.
+- [**Multer**](https://www.npmjs.com/package/multer) - Multer is a node.js middleware for handling multipart/form-data, which is primarily used for uploading files.
+- [**Multer-s3**](https://www.npmjs.com/package/multer-s3) - This package is used as an integration piece for existing code samples from Multer's storage engine documentation with s3fs as the substitution piece for file system.
 
 > ### Front-End
 
@@ -136,17 +139,17 @@ The target audience of this website are users that are willing to spend a little
 - [**Cypress**](https://www.cypress.io/) - if time permits, end-to-end testing across the app
 
 > ### General
+
 - [**Trello**](https://trello.com/en) - for project management
 - [**Draw.io**](https://app.diagrams.net/) - for the [Sitemap](#Sitemap), [DFD](#Dataflow-Diagram) and [AAD](#Application-Architecture-Diagram)
 - [**Figma**](https://www.figma.com/) - for the [Wireframes](#Wireframes)
 - [**Stack Overflow**](https://stackoverflow.com/) for the problem solving
 
 > ### Design and Planning
+
 - [**Website Questionnaire**](docs/website_questionnaire.pdf) - 1st client meeting questionnaire to gauge idea on what the client is looking for
-- [**Website References**](docs/curtain_co_website_references.pdf) - a spreadsheet containing the feedback about websites that the client likes  
+- [**Website References**](docs/curtain_co_website_references.pdf) - a spreadsheet containing the feedback about websites that the client likes
 - [**Presentation to Client**](docs/curtain_co_presentation.pdf) - powerpoint presentation that the client will see about her final site
-
-
 
 ---
 
@@ -213,34 +216,31 @@ The target audience of this website are users that are willing to spend a little
 - As a user, I want to be able to see all my upcoming booking appointments in my profile page.
 - As a user, I want to be shown different deals during different seasons or events.
 
-
-
 ---
-
 
 ## Testing
 
 > ### Front-End
-**Jest** is the chosen framework for testing client side code, and if time permits, look into implementing end-to-end testing with Cypress.
--  Unit testing functions, methods, modules and objects
--  Component testing
--  Snapshot testing
+>
+> **Jest** is the chosen framework for testing client side code, and if time permits, look into implementing end-to-end testing with Cypress.
+
+- Unit testing functions, methods, modules and objects
+- Component testing
+- Snapshot testing
 
 > ### Back-End
-**Mocha** and **Chai** are the chosen technologies to implement automated tests for this app. Tests involve:
+>
+> **Mocha** and **Chai** are the chosen technologies to implement automated tests for this app. Tests involve:
+
 - Authorization and Authentication
 - Protected Routes
 - User Roles
 - Transactions
-- *Products* CRUD actions
-- *Collections* CRUD actions
+- _Products_ CRUD actions
+- _Collections_ CRUD actions
 - User CRUD actions
 
-
-
 ---
-
-
 
 ## Sitemap
 
@@ -250,7 +250,6 @@ The target audience of this website are users that are willing to spend a little
 
 ## Wireframes
 
-
 > ### Desktop
 
 Below are the desktop views of the site. In the essence of time, we have focused on desktop and mobile portrait views of the app and used our spare time to ensure a solid layout and design that the client was happy with. We foresee some small issues and time being spent on ensuring the rest of the tablet views and mobile landscape views, however, when designing these wireframes, a grid like layout was an underlying choice so that Material UI will handle the heavy lifting of the responsive layouts, with small adjustments of course.
@@ -258,61 +257,78 @@ Below are the desktop views of the site. In the essence of time, we have focused
 <details>
 
 #### Landing Page
+
 ![Landing Page](docs/wireframes/desktop/Landing%20V4.png)
 
 #### About Me
+
 ![About Me](docs/wireframes/desktop/About%20Me.png)
 
 #### Account Page - User
+
 ![Account Page - User](docs/wireframes/desktop/User%20Account%20Page.png)
 
 #### Admin Page - All Users
+
 ![Admin Page - All Users](docs/wireframes/desktop/Admin%20Page%20-%20All%20Users.png)
 
 #### Admin Pge - Collections
+
 ![Admin Pge - Collections](docs/wireframes/desktop/Admin%20Page%20-%20Collections.png)
+
 #### Admin Page - Company Deets
+
 ![Admin Page - Company Deets](docs/wireframes/desktop/Admin%20Page%20-%20Company%20Deets.png)
 
 #### Admin Page - Products
+
 ![Admin Page - Products](docs/wireframes/desktop/Admin%20Page%20-%20Products.png)
 
 #### Admin Page - Requests
+
 ![Admin Page - Requests](docs/wireframes/desktop/Admin%20Page%20-%20Requests.png)
 
 #### Admin Page - Testimonials
+
 ![Admin Page - Testimonials](docs/wireframes/desktop/Admin%20Page%20-%20Testimonials.png)
 
 #### All Products Page
+
 ![All Products Page](docs/wireframes/desktop/All%20Product%20Page.png)
 
 #### All Products Show Page - Modal
+
 ![All Products Show Page - Modal](docs/wireframes/desktop/All%20Products%20Show%20Page%20-%20Modal.png)
 
 #### Auth Path - Login
+
 ![Auth Path - Login](docs/wireframes/desktop/Auth%20Page%20-%20LOGIN.png)
 
 #### Auth Page - Register
+
 ![Auth Page - Register](docs/wireframes/desktop/Auth%20Page%20-%20REGISTER.png)
 
 #### Cart Page
+
 ![Cart Page](docs/wireframes/desktop/Cart%20Page.png)
 
 #### Collections Page
+
 ![Collections Page](docs/wireframes/desktop/Collection%20Page.png)
 
 #### Customise Collection Page
+
 ![Customise Collection Page](docs/wireframes/desktop/Customise%20Collection%20Page.png)
 
 #### Invalid Page - 404
+
 ![Invalid Page - 404](docs/wireframes/desktop/Invalid%20-%20404.png)
 
 #### Request Consultation Page
+
 ![Request Consultation Page](docs/wireframes/desktop/Request%20Consultation%20Page.png)
 
 </details>
-
-
 
 > ### Mobile
 
@@ -321,66 +337,79 @@ Below are all the mobile portrait views of the app. In regards to landscape view
 <details>
 
 #### Landing Page
+
 ![Landing Page](docs/wireframes/mobile/Landing%20Page.png)
 
 #### About Me
+
 ![About Me](docs/wireframes/mobile/About%20Me.png)
 
 #### Account Page - User
+
 ![Account Page - User](docs/wireframes/mobile/User%20Account%20Page.png)
 
 #### All Products Page
+
 ![All Products Page](docs/wireframes/mobile/All%20Product%20Page.png)
 
 #### All Products Show Page - Modal
+
 ![All Products Show Page - Modal](docs/wireframes/mobile/Product%20Show%20Page%20-%20Modal.png)
 
 #### Auth Path - Login
+
 ![Auth Path - Login](docs/wireframes/mobile/Auth%20Page%20-%20LOGIN.png)
 
 #### Auth Page - Register
+
 ![Auth Page - Register](docs/wireframes/mobile/Auth%20Page%20-%20REGISTER.png)
 
 #### Cart Page
+
 ![Cart Page](docs/wireframes/mobile/Cart%20Page.png)
 
 #### Collections Page
+
 ![Collections Page](docs/wireframes/mobile/Collection%20Page.png)
 
 #### Customise Collection Page
+
 ![Customise Collection Page](docs/wireframes/mobile/Collection%20Customisation%20Page.png)
 
 #### Invalid Page - 404
+
 ![Invalid Page - 404](docs/wireframes/mobile/Invalid%20Page%20-%20404.png)
 
 #### Request Consultation Page
-![Request Consultation Page](docs/wireframes/mobile/Request%20Consultation%20Page.png)
 
+![Request Consultation Page](docs/wireframes/mobile/Request%20Consultation%20Page.png)
 
 </details>
 
-
-
 > ### Tablet
 
-For tablet, we only decided to do the landing page as to see which nav bar and footer would look the best on each screen size and orientation. That was the main objective for these first few preliminary designs shown below. Tablet landscape orientation is intended to replicate the  desktop views. But tablet portrait may require some on the fly tweaking.
-
+For tablet, we only decided to do the landing page as to see which nav bar and footer would look the best on each screen size and orientation. That was the main objective for these first few preliminary designs shown below. Tablet landscape orientation is intended to replicate the desktop views. But tablet portrait may require some on the fly tweaking.
 
 <details>
 
 #### Landing Page PV1
+
 ![Landing Page PV1](docs/wireframes/tablet/Landing%20Page%20PV1.png)
 
 #### Landing Page PV2
+
 ![Landing Page PV2](docs/wireframes/tablet/Landing%20Page%20PV2.png)
 
 #### Landing Page PV3
+
 ![Landing Page PV3](docs/wireframes/tablet/Landing%20Page%20PV3.png)
 
 #### Landing Page PV4
+
 ![Landing Page PV4](docs/wireframes/tablet/Landing%20Page%20PV4.png)
 
 #### Landing Page L
+
 ![Landing Page L](docs/wireframes/tablet/Landing%20Page%20L.png)
 
 </details>
@@ -398,48 +427,50 @@ For tablet, we only decided to do the landing page as to see which nav bar and f
 <details>
 
 #### Part A: 01.
+
 ![Part A Trello Progress 01](docs/trello/part_a_progress_01.png)
+
 #### Part A: 02.
+
 ![Part A Trello Progress 02](docs/trello/part_a_progress_02.png)
 
 #### Part A: 03.
+
 ![Part A Trello Progress 03](docs/trello/part_a_progress_03.png)
 
 #### Part A: 04.
+
 ![Part A Trello Progress 04](docs/trello/part_a_progress_04.png)
 
 #### Part A: 05.
+
 ![Part A Trello Progress 05](docs/trello/part_a_progress_05.png)
 
 #### Part A: 06.
-![Part A Trello Progress 06](docs/trello/part_a_progress_06.png)
 
+![Part A Trello Progress 06](docs/trello/part_a_progress_06.png)
 
 </details>
 
-
 > ### Trello Part B Progress Screenshots
- 
+
 <details>
 
 #### Part B: 01.
+
 ![Part B Trello Progress 01](docs/trello/part_b_progress_01.png)
 
 #### Part B: 02.
+
 ![Part B Trello Progress 02](docs/trello/part_b_progress_02.png)
 
 #### Part B: 03.
+
 ![Part B Trello Progress 03](docs/trello/part_b_progress_03.png)
-
-
 
 </details>
 
-
-
 ---
-
-
 
 ## Copyright
 
@@ -455,36 +486,33 @@ The owners of copyright in the content on this website may receive compensation 
 
 We may change these terms of use from time to time. Check before re-using any content from this website.
 
-
-
 ---
-
-
 
 ## Authors
 
 > ### Owner
-Marie Gjorgioski  
-Contact: <a linkTo="mailto:simosultan2020@email.com?">marie@marieg.com.au</a>
+>
+> Marie Gjorgioski  
+> Contact: <a linkTo="mailto:simosultan2020@email.com?">marie@marieg.com.au</a>
 
 > ### Developers - Team SiPhi
 
-####  Simon Curran
-Portfolio: [simonmcurran.com](https://www.simonmcurran.com/)   
+#### Simon Curran
+
+Portfolio: [simonmcurran.com](https://www.simonmcurran.com/)  
 GitHub: [SimoSultan](https://github.com/SimoSultan)  
 ![SimoSultan's GitHub](https://img.shields.io/github/followers/SimoSultan?logo=GitHub&style=for-the-badge)  
-![@simo_sultan's Twitter](https://img.shields.io/twitter/follow/simo_sultan?color=%234183C4&logo=twitter&style=for-the-badge)  
+![@simo_sultan's Twitter](https://img.shields.io/twitter/follow/simo_sultan?color=%234183C4&logo=twitter&style=for-the-badge)
+
 <!-- ![Simons's LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white) -->
 
+#### Phil Antiporda
 
-#### Phil Antiporda  
-Portfolio: [philantiporda.netlify.com](https://philantiporda.netlify.app/index.html)    
+Portfolio: [philantiporda.netlify.com](https://philantiporda.netlify.app/index.html)  
 GitHub: [philrussel21](https://github.com/philrussel21)  
 ![phil's GitHub](https://img.shields.io/github/followers/philrussel21?logo=GitHub&style=for-the-badge)  
-![@PeelRasel's Twitter](https://img.shields.io/twitter/follow/PeelRasel?color=%234183C4&logo=twitter&style=for-the-badge)  
+![@PeelRasel's Twitter](https://img.shields.io/twitter/follow/PeelRasel?color=%234183C4&logo=twitter&style=for-the-badge)
+
 <!-- ![Phil's LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white) -->
-
-
-
 
 <div style="width:30%; margin: 0 auto"><img src="docs/{SiPhi}_logo_transparent.png" /></div>
