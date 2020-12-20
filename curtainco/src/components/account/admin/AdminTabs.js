@@ -69,9 +69,9 @@ export default function AdminTabs({ tabValue, handleChange }) {
                     scrollButtons="auto"
                     aria-label="scrollable auto tabs example"
                 >
-                    <Tab label="products" {...a11yProps(0)} />
-                    <Tab label="collections" {...a11yProps(1)} />
-                    <Tab label="add" {...a11yProps(2)} />
+                    <Tab label="add" {...a11yProps(0)} />
+                    <Tab label="products" {...a11yProps(1)} />
+                    <Tab label="collections" {...a11yProps(2)} />
                     <Tab label="users" {...a11yProps(3)} />
                     <Tab label="consultations" {...a11yProps(4)} />
                     <Tab label="business" {...a11yProps(5)} />
@@ -87,10 +87,10 @@ export default function AdminTabs({ tabValue, handleChange }) {
                     spacing={2}
                 >
                     <Grid item xs>
-                        <AllProducts />
+                        <AddProduct />
                     </Grid>
                     <Grid item xs>
-                        <EditProduct />
+                        <AddCollection />
                     </Grid>
                 </Grid>
             </TabPanel>
@@ -102,10 +102,10 @@ export default function AdminTabs({ tabValue, handleChange }) {
                     spacing={2}
                 >
                     <Grid item xs>
-                        <AllCollections />
+                        <AllProducts />
                     </Grid>
                     <Grid item xs>
-                        <EditCollection />
+                        <EditProduct />
                     </Grid>
                 </Grid>
             </TabPanel>
@@ -117,10 +117,10 @@ export default function AdminTabs({ tabValue, handleChange }) {
                     spacing={2}
                 >
                     <Grid item xs>
-                        <AddProduct />
+                        <AllCollections />
                     </Grid>
                     <Grid item xs>
-                        <AddCollection />
+                        <EditCollection />
                     </Grid>
                 </Grid>
             </TabPanel>
