@@ -1,100 +1,102 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { Typography, Grid, TextField, Button } from "@material-ui/core";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 
-function AddAccessory() {
-    const [automated, setAutomated] = useState();
-    const [accessory, setAccessory] = useState({
-        category: "Accessory",
-        name: "",
-        colour: "",
-        imgUrl: "",
-        price: "",
-        length: "",
-        automated: automated,
-        tieBack: "",
-        other: "",
-    });
-
-    const handleRadioChange = (event) => {
-        setAutomated(event.target.value === "auto" ? true : false);
-    };
-
-    const handleTextChange = (event) => {
-        setAccessory({ ...accessory, [event.target.name]: event.target.value });
-    };
-
-    const handleAccessorySubmit = () => {};
-
+function TrackForm({
+    title,
+    buttonText,
+    handleTextChange,
+    handleRadioChange,
+    handleTrackSubmit,
+    track,
+}) {
     return (
         <>
-            <Typography variant="h6">Add Accessory</Typography>
+            <Typography variant="h6">{title}</Typography>
             <Grid container direction="column" spacing={2}>
                 <Grid item>
                     <TextField
                         id="track-input"
-                        label="Accessory Name"
+                        label="Track Name"
                         variant="outlined"
                         onChange={handleTextChange}
                         name="name"
+                        value={track ? track.name : ""}
                     />
                 </Grid>
                 <Grid item>
                     <TextField
                         id="track-type-input"
-                        label="Accessory Colour"
+                        label="Track Type"
                         variant="outlined"
                         onChange={handleTextChange}
-                        name="colour"
+                        name="type"
+                        value={track ? track.type : ""}
                     />
                 </Grid>
                 <Grid item>
                     <TextField
                         id="track-color-input"
-                        label="Accessory Length"
+                        label="Track Colour"
                         variant="outlined"
                         onChange={handleTextChange}
-                        name="length"
+                        name="colour"
+                        value={track ? track.colour : ""}
                     />
                 </Grid>
                 <Grid item>
                     <RadioGroup
                         aria-label="single-double-input"
                         name="single-double-input"
+                        value={
+                            track ? (track.single ? "single" : "double") : null
+                        }
                         onChange={handleRadioChange}
                         row
                     >
                         <FormControlLabel
-                            value="auto"
+                            value="single"
                             control={<Radio />}
-                            label="Automated"
+                            label="Single"
                         />
                         <FormControlLabel
-                            value="not-auto"
+                            value="double"
                             control={<Radio />}
-                            label="Not Automated"
+                            label="Double"
                         />
                     </RadioGroup>
                 </Grid>
                 <Grid item>
                     <TextField
                         id="finial-style-input"
-                        label="Tie Back"
+                        label="Finial Style"
                         variant="outlined"
                         onChange={handleTextChange}
-                        name="tieBack"
+                        name="finialStyle"
+                        value={track ? track.finialStyle : ""}
                     />
                 </Grid>
                 <Grid item>
                     <TextField
                         id="finial-color-input"
-                        label="Accessories"
+                        label="Finial Colour"
                         variant="outlined"
                         onChange={handleTextChange}
-                        name="other"
+                        name="finialColour"
+                        value={track ? track.finialColour : ""}
+                    />
+                </Grid>
+                <Grid item>
+                    <TextField
+                        id="fix-location-input"
+                        label="Fix Location"
+                        variant="outlined"
+                        onChange={handleTextChange}
+                        name="location"
+                        value={track ? track.location : ""}
                     />
                 </Grid>
                 <Grid item>
@@ -105,15 +107,16 @@ function AddAccessory() {
                         type="number"
                         onChange={handleTextChange}
                         name="price"
+                        value={track ? track.price : ""}
                     />
                 </Grid>
                 <Grid item>
                     <Button
                         variant="contained"
                         color="primary"
-                        onClick={handleAccessorySubmit}
+                        onClick={handleTrackSubmit}
                     >
-                        Submit
+                        {buttonText}
                     </Button>
                 </Grid>
             </Grid>
@@ -121,4 +124,4 @@ function AddAccessory() {
     );
 }
 
-export default AddAccessory;
+export default TrackForm;

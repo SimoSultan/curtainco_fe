@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
@@ -16,14 +16,12 @@ import AllTestimonials from "./testimonials/AllTestimonials";
 import AllUsers from "./users/AllUsers";
 import BusinessDetails from "./business/BusinessDetails";
 import AdminProfile from "./profile/AdminProfile";
-import EditProduct from "./products/EditProduct";
+import EditTrack from "./products/EditTrack";
 import AddProduct from "./products/AddProduct";
 import AddCollection from "./collections/AddCollection";
 import EditCollection from "./collections/EditCollection";
 
-function TabPanel(props) {
-    const { children, value, index, ...other } = props;
-
+function TabPanel({ children, value, index, ...other }) {
     return (
         <div
             role="tabpanel"
@@ -56,6 +54,11 @@ function a11yProps(index) {
 
 export default function AdminTabs({ tabValue, handleChange }) {
     const classes = useStyles();
+    const [editProductId, setEditProductId] = useState("");
+
+    function fillEditProductPage(event) {
+        setEditProductId(event.currentTarget.id);
+    }
 
     return (
         <div className={classes.tabsRoot}>
@@ -98,14 +101,16 @@ export default function AdminTabs({ tabValue, handleChange }) {
                 <Grid
                     container
                     justify="center"
-                    alignItems="center"
+                    alignItems="flex-start"
                     spacing={2}
                 >
                     <Grid item xs>
-                        <AllProducts />
+                        <AllProducts
+                            fillEditProductPage={fillEditProductPage}
+                        />
                     </Grid>
                     <Grid item xs>
-                        <EditProduct />
+                        <EditTrack productId={editProductId} />
                     </Grid>
                 </Grid>
             </TabPanel>

@@ -19,7 +19,7 @@ function preventDefault(event) {
     alert("does nothing yet");
 }
 
-export default function AllProducts() {
+export default function AllProducts({ fillEditProductPage }) {
     const classes = useStyles();
     const { state, dispatch } = useCurtainContext();
     let allProducts = state.products;
@@ -43,9 +43,16 @@ export default function AllProducts() {
     }, [dispatch]);
 
     const productItems = allProducts.map((prod) => (
-        <TableRow key={prod.name}>
+        <TableRow
+            key={prod.name}
+            id={prod._id}
+            className={classes.tableRow}
+            onClick={fillEditProductPage}
+        >
+            <TableCell>{prod.category}</TableCell>
             <TableCell>{prod.name}</TableCell>
-            <TableCell>{prod.colour}</TableCell>
+            {/* <TableCell>{prod.colour}</TableCell> */}
+            <TableCell>{prod.price}</TableCell>
         </TableRow>
     ));
 
@@ -55,17 +62,14 @@ export default function AllProducts() {
             <Table size="small">
                 <TableHead>
                     <TableRow>
+                        <TableCell>Category</TableCell>
                         <TableCell>Name</TableCell>
-                        <TableCell>Colour</TableCell>
+                        {/* <TableCell>Colour</TableCell> */}
+                        <TableCell>Price</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>{productItems}</TableBody>
             </Table>
-            <div className={classes.seeMore}>
-                <Link color="primary" href="#" onClick={preventDefault}>
-                    See more products
-                </Link>
-            </div>
         </Paper>
     );
 }

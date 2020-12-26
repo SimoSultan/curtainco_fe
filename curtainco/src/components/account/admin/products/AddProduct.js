@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Container } from "@material-ui/core";
+import { Container, Paper } from "@material-ui/core";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -9,8 +9,10 @@ import FormLabel from "@material-ui/core/FormLabel";
 import AddFabric from "./AddFabric";
 import AddTrack from "./AddTrack";
 import AddAccessory from "./AddAccessory";
+import useStyles from "../AdminStyles";
 
 function AddProduct() {
+    const classes = useStyles();
     const [checkedValue, setCheckedValue] = useState("track");
 
     const handleChange = (event) => {
@@ -18,7 +20,7 @@ function AddProduct() {
     };
 
     return (
-        <div>
+        <Paper className={classes.paper}>
             <FormControl component="fieldset">
                 <FormLabel component="legend">Which Product?</FormLabel>
                 <RadioGroup
@@ -55,7 +57,7 @@ function AddProduct() {
                     <AddAccessory />
                 )}
             </Container>
-        </div>
+        </Paper>
     );
 }
 

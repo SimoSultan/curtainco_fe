@@ -65,7 +65,7 @@ function Products() {
     // SET THE GLOBAL STATE OF ALL THE PRODUCTS
     useEffect(() => {
         dispatch({
-            type: ACTIONS.ADD_PRODUCTS,
+            type: ACTIONS.SET_ALL_PRODUCTS,
             payload: products,
         });
     }, [dispatch]);

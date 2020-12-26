@@ -5,4 +5,17 @@ async function getAllProducts() {
     return response;
 }
 
-export { getAllProducts };
+async function createProduct(newProduct) {
+    const response = await api.post("/products", newProduct);
+    return response;
+}
+
+async function updateProduct(updatedProduct) {
+    const response = await api.put(
+        `/products/${updatedProduct._id}`,
+        updatedProduct
+    );
+    return response;
+}
+
+export { getAllProducts, createProduct, updateProduct };

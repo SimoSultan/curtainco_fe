@@ -81,8 +81,14 @@ function searchProducts(filteredProducts, searchText) {
     return filteredProducts;
 }
 
+function getOneProduct(allProducts, id) {
+    const product = allProducts.filter((prod) => prod._id === id)[0];
+    return product;
+}
+
 module.exports = {
     sortProducts,
     filterByType,
     searchProducts,
+    getOneProduct,
 };

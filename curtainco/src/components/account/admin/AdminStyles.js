@@ -12,6 +12,12 @@ const useStyles = makeStyles((theme) => ({
     paper: {
         padding: theme.spacing(3),
     },
+    tableRow: {
+        cursor: "pointer",
+        "&:hover": {
+            backgroundColor: "lightgrey",
+        },
+    },
 }));
 
 export default useStyles;
