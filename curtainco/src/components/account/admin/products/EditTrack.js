@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import TrackForm from "../../../reusable/TrackForm";
-import { createProduct } from "../../../../services/productServices";
+import { updateProduct } from "../../../../services/productServices";
 import { useCurtainContext } from "../../../../config/CurtainCoContext";
 import { ACTIONS } from "../../../../config/stateReducer";
 import useStyles from "../AdminStyles";
@@ -9,16 +9,16 @@ import { Paper } from "@material-ui/core";
 
 function EditTrack({ productId }) {
     const classes = useStyles();
-    const [singleTrack, setSingleTrack] = useState();
     const { state, dispatch } = useCurtainContext();
     const [track, setTrack] = useState({
         category: "Track",
+        _id: "",
         name: "",
         colour: "",
         imgUrl: "",
         price: "",
         type: "",
-        single: singleTrack,
+        single: "",
         finialStyle: "",
         finialColour: "",
         location: "",
@@ -30,6 +30,7 @@ function EditTrack({ productId }) {
             setTrack({
                 category: trackBeingUpdated.category,
                 name: trackBeingUpdated.name,
+                _id: trackBeingUpdated._id,
                 colour: trackBeingUpdated.colour,
                 imgUrl: trackBeingUpdated.imgUrl,
                 price: trackBeingUpdated.price,
@@ -43,7 +44,11 @@ function EditTrack({ productId }) {
     }, [state.products, productId]);
 
     const handleRadioChange = (event) => {
-        setSingleTrack(event.target.value === "single" ? true : false);
+        const singleTrack = event.target.value === "single" ? true : false;
+        setTrack({
+            ...track,
+            [event.target.name]: singleTrack,
+        });
     };
 
     const handleTextChange = (event) => {
@@ -52,15 +57,21 @@ function EditTrack({ productId }) {
 
     const handleUpdateProduct = () => {
         let editProdError = false;
-        createProduct(track)
+        updateProduct(track)
             .then((resp) => {
-                let prod = resp.data;
                 console.log(resp);
-
-                if (resp.status === 201) {
+                if (resp.status === 200) {
                     dispatch({
                         type: ACTIONS.UPDATE_PRODUCT,
                         payload: track,
+                    });
+                    dispatch({
+                        type: ACTIONS.SET_SNACKBAR,
+                        payload: {
+                            open: true,
+                            success: "success",
+                            message: "Track successfully updated",
+                        },
                     });
                 } else {
                     editProdError = `An error ocurred on update product: Error Code: ${resp.status}. Message: ${resp.message}.`;

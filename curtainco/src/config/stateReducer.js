@@ -81,13 +81,13 @@ export default function stateReducer(state, action) {
             };
         }
         case ACTIONS.UPDATE_PRODUCT: {
-            let updatedProduct = action.payload;
-            let productsWithUpdateRemoved = state.products.filter(
+            const updatedProduct = action.payload;
+            const productsWithUpdateRemoved = state.products.filter(
                 (prod) => prod._id !== updatedProduct._id
             );
             return {
                 ...state,
-                products: [...productsWithUpdateRemoved, action.payload],
+                products: [...productsWithUpdateRemoved, updatedProduct],
             };
         }
 

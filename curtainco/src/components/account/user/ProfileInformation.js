@@ -34,17 +34,6 @@ function ProfileInformation() {
         setEditUser(!editUser);
     }
 
-    function showSnackbar(severity, message) {
-        dispatch({
-            type: ACTIONS.SET_SNACKBAR,
-            payload: {
-                open: true,
-                severity,
-                message,
-            },
-        });
-    }
-
     function handleUpdate(userDetails) {
         let updateError = false;
         let userId = state.currentUser._id;
@@ -56,6 +45,14 @@ function ProfileInformation() {
                         type: ACTIONS.SET_CURRENT_USER,
                         payload: resp.data,
                     });
+                    dispatch({
+                        type: ACTIONS.SET_SNACKBAR,
+                        payload: {
+                            open: true,
+                            severity: "success",
+                            message: "User successfully updated",
+                        },
+                    });
                 }
             })
             .catch((error) => {
@@ -64,7 +61,6 @@ function ProfileInformation() {
             });
 
         toggleEditUserForm();
-        showSnackbar("success", "User successfully updated");
         console.log("User successfully updated");
         return updateError;
     }

@@ -6,7 +6,6 @@ import { ACTIONS } from "../../../../config/stateReducer";
 import TrackForm from "../../../reusable/TrackForm";
 
 function AddTrack() {
-    // const [singleTrack, setSingleTrack] = useState(null);
     const { dispatch } = useCurtainContext();
 
     const [track, setTrack] = useState({
@@ -36,15 +35,21 @@ function AddTrack() {
 
     const handleTrackSubmit = () => {
         let addProdError = false;
+        console.log(track);
         createProduct(track)
             .then((resp) => {
-                let prod = resp.data;
-                console.log(resp);
-
                 if (resp.status === 201) {
                     dispatch({
                         type: ACTIONS.ADD_PRODUCT,
                         payload: track,
+                    });
+                    dispatch({
+                        type: ACTIONS.SET_SNACKBAR,
+                        payload: {
+                            open: true,
+                            success: "success",
+                            message: "Track successfully added",
+                        },
                     });
                 } else {
                     addProdError = `An error ocurred on adding product: Error Code: ${resp.status}. Message: ${resp.message}.`;

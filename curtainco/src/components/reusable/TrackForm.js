@@ -13,8 +13,6 @@ function TrackForm({
     handleTrackSubmit,
     track,
 }) {
-    console.log(track);
-
     return (
         <>
             <Typography variant="h6">{title}</Typography>
@@ -26,7 +24,7 @@ function TrackForm({
                         variant="outlined"
                         onChange={handleTextChange}
                         name="name"
-                        value={track ? track.name : ""}
+                        value={track.name}
                     />
                 </Grid>
                 <Grid item>
@@ -36,7 +34,7 @@ function TrackForm({
                         variant="outlined"
                         onChange={handleTextChange}
                         name="type"
-                        value={track ? track.type : ""}
+                        value={track.type}
                     />
                 </Grid>
                 <Grid item>
@@ -46,7 +44,7 @@ function TrackForm({
                         variant="outlined"
                         onChange={handleTextChange}
                         name="colour"
-                        value={track ? track.colour : ""}
+                        value={track.colour}
                     />
                 </Grid>
                 <Grid item>
@@ -82,7 +80,7 @@ function TrackForm({
                         variant="outlined"
                         onChange={handleTextChange}
                         name="finialStyle"
-                        value={track ? track.finialStyle : ""}
+                        value={track.finialStyle}
                     />
                 </Grid>
                 <Grid item>
@@ -92,7 +90,7 @@ function TrackForm({
                         variant="outlined"
                         onChange={handleTextChange}
                         name="finialColour"
-                        value={track ? track.finialColour : ""}
+                        value={track.finialColour}
                     />
                 </Grid>
                 <Grid item>
@@ -102,7 +100,7 @@ function TrackForm({
                         variant="outlined"
                         onChange={handleTextChange}
                         name="location"
-                        value={track ? track.location : ""}
+                        value={track.location}
                     />
                 </Grid>
                 <Grid item>
@@ -113,7 +111,7 @@ function TrackForm({
                         type="number"
                         onChange={handleTextChange}
                         name="price"
-                        value={track ? track.price : ""}
+                        value={track.price}
                     />
                 </Grid>
                 <Grid item>

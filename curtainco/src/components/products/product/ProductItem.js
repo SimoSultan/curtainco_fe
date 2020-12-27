@@ -11,7 +11,7 @@ import useStyles from "../ProductStyles";
 
 import { useCurtainContext } from "../../../config/CurtainCoContext";
 import { ACTIONS } from "../../../config/stateReducer";
-import { capitalize } from "../../../helpers/appHelplers";
+import { capitalize } from "../../../helpers/appHelpers";
 
 function ProductItem({ productData }) {
     const classes = useStyles();
