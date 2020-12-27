@@ -16,7 +16,7 @@ import AllTestimonials from "./testimonials/AllTestimonials";
 import AllUsers from "./users/AllUsers";
 import BusinessDetails from "./business/BusinessDetails";
 import AdminProfile from "./profile/AdminProfile";
-import EditTrack from "./products/EditTrack";
+import EditTrack from "./products/EditDeleteTrack";
 import AddProduct from "./products/AddProduct";
 import AddCollection from "./collections/AddCollection";
 import EditCollection from "./collections/EditCollection";
@@ -110,7 +110,10 @@ export default function AdminTabs({ tabValue, handleChange }) {
                         />
                     </Grid>
                     <Grid item xs>
-                        <EditTrack productId={editProductId} />
+                        <EditTrack
+                            productId={editProductId}
+                            setEditProductId={setEditProductId}
+                        />
                     </Grid>
                 </Grid>
             </TabPanel>

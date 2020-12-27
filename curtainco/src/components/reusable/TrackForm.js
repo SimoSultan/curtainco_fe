@@ -4,6 +4,7 @@ import { Typography, Grid, TextField, Button } from "@material-ui/core";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 function TrackForm({
     title,
@@ -12,6 +13,7 @@ function TrackForm({
     handleRadioChange,
     handleTrackSubmit,
     track,
+    handleTrackRemove,
 }) {
     return (
         <>
@@ -114,14 +116,30 @@ function TrackForm({
                         value={track.price}
                     />
                 </Grid>
-                <Grid item>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={handleTrackSubmit}
-                    >
-                        {buttonText}
-                    </Button>
+                <Grid container justify="space-between" alignItems="center">
+                    <Grid item>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={handleTrackSubmit}
+                        >
+                            {buttonText}
+                        </Button>
+                    </Grid>
+                    <Grid item>
+                        {handleTrackRemove ? (
+                            <Button
+                                variant="contained"
+                                color="secondary"
+                                startIcon={<DeleteIcon />}
+                                onClick={handleTrackRemove}
+                            >
+                                Delete
+                            </Button>
+                        ) : (
+                            ""
+                        )}
+                    </Grid>
                 </Grid>
             </Grid>
         </>

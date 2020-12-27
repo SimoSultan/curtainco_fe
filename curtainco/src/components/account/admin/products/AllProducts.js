@@ -1,17 +1,16 @@
 import React, { useEffect } from "react";
 
-import Link from "@material-ui/core/Link";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import Title from "../../../reusable/Title";
 
 import useStyles from "../AdminStyles";
 import { getAllProducts } from "../../../../services/productServices";
 import { useCurtainContext } from "../../../../config/CurtainCoContext";
+import Title from "../../../reusable/Title";
 import { ACTIONS } from "../../../../config/stateReducer";
 
 function preventDefault(event) {
