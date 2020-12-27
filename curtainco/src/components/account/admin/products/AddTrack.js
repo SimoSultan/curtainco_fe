@@ -6,7 +6,7 @@ import { ACTIONS } from "../../../../config/stateReducer";
 import TrackForm from "../../../reusable/TrackForm";
 
 function AddTrack() {
-    const [singleTrack, setSingleTrack] = useState(null);
+    // const [singleTrack, setSingleTrack] = useState(null);
     const { dispatch } = useCurtainContext();
 
     const [track, setTrack] = useState({
@@ -16,16 +16,18 @@ function AddTrack() {
         imgUrl: "",
         price: "",
         type: "",
-        single: singleTrack,
+        single: "",
         finialStyle: "",
         finialColour: "",
         location: "",
     });
 
-    console.log(singleTrack);
-
     const handleRadioChange = (event) => {
-        setSingleTrack(event.target.value === "single" ? true : false);
+        const singleTrack = event.target.value === "single" ? true : false;
+        setTrack({
+            ...track,
+            [event.target.name]: singleTrack,
+        });
     };
 
     const handleTextChange = (event) => {
@@ -62,7 +64,7 @@ function AddTrack() {
             handleTextChange={handleTextChange}
             handleRadioChange={handleRadioChange}
             handleTrackSubmit={handleTrackSubmit}
-            track={false}
+            track={track}
         />
     );
 }

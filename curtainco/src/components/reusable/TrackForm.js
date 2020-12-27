@@ -13,6 +13,8 @@ function TrackForm({
     handleTrackSubmit,
     track,
 }) {
+    console.log(track);
+
     return (
         <>
             <Typography variant="h6">{title}</Typography>
@@ -50,9 +52,13 @@ function TrackForm({
                 <Grid item>
                     <RadioGroup
                         aria-label="single-double-input"
-                        name="single-double-input"
+                        name="single"
                         value={
-                            track ? (track.single ? "single" : "double") : null
+                            track.single === ""
+                                ? null
+                                : track.single
+                                ? "single"
+                                : "double"
                         }
                         onChange={handleRadioChange}
                         row
