@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-import { Paper } from "@material-ui/core";
-
 import TrackForm from "../../../reusable/TrackForm";
 import {
     updateProduct,
@@ -9,11 +7,9 @@ import {
 } from "../../../../services/productServices";
 import { useCurtainContext } from "../../../../config/CurtainCoContext";
 import { ACTIONS } from "../../../../config/stateReducer";
-import useStyles from "../AdminStyles";
-import { getOneProduct } from "../../../../helpers/productHelpers";
+import { getOneProductFromState } from "../../../../helpers/productHelpers";
 
-function EditTrack({ productId, setEditProductId }) {
-    const classes = useStyles();
+function EditDeleteTrack({ editProductId, setEditProductId }) {
     const { state, dispatch } = useCurtainContext();
     const [track, setTrack] = useState({
         category: "Track",
@@ -32,8 +28,11 @@ function EditTrack({ productId, setEditProductId }) {
     useEffect(() => {
         // IF PRODUCT ID COMES THROUGH AS A PROP, SET THE FORM
         // OTHERWISE CLEAR THE FORM
-        if (productId !== "") {
-            const trackBeingUpdated = getOneProduct(state.products, productId);
+        if (editProductId !== "") {
+            const trackBeingUpdated = getOneProductFromState(
+                state.products,
+                editProductId
+            );
             setTrack({
                 category: trackBeingUpdated.category,
                 name: trackBeingUpdated.name,
@@ -62,7 +61,7 @@ function EditTrack({ productId, setEditProductId }) {
                 location: "",
             });
         }
-    }, [state.products, productId]);
+    }, [state.products, editProductId]);
 
     const handleRadioChange = (event) => {
         const singleTrack = event.target.value === "single" ? true : false;
@@ -139,18 +138,16 @@ function EditTrack({ productId, setEditProductId }) {
     // PASS IN THE HANDLERS
     // PASS IN THE CURRENT TRACK
     return (
-        <Paper className={classes.paper}>
-            <TrackForm
-                title={"Edit Track"}
-                buttonText={"Update"}
-                handleTextChange={handleTextChange}
-                handleRadioChange={handleRadioChange}
-                handleTrackSubmit={handleUpdateProduct}
-                handleTrackRemove={handleRemoveProduct}
-                track={track}
-            />
-        </Paper>
+        <TrackForm
+            title={"Edit Track"}
+            buttonText={"Update"}
+            handleTextChange={handleTextChange}
+            handleRadioChange={handleRadioChange}
+            handleSubmit={handleUpdateProduct}
+            handleRemove={handleRemoveProduct}
+            product={track}
+        />
     );
 }
 
-export default EditTrack;
+export default EditDeleteTrack;

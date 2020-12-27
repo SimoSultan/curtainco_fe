@@ -32,7 +32,7 @@ function AddTrack() {
         setTrack({ ...track, [event.target.name]: event.target.value });
     };
 
-    const handleTrackSubmit = () => {
+    const handleSubmit = () => {
         // ADD THE PRODUCT ON THE DB
         // IF SUCCESSFUL, ADD PRODUCT IN GLOBAL STATE AND SHOW SUCCESS SNACKBAR
         let addProdError = false;
@@ -72,9 +72,9 @@ function AddTrack() {
             buttonText={"Add"}
             handleTextChange={handleTextChange}
             handleRadioChange={handleRadioChange}
-            handleTrackSubmit={handleTrackSubmit}
-            handleTrackRemove={false}
-            track={track}
+            handleSubmit={handleSubmit}
+            handleRemove={false}
+            product={track}
         />
     );
 }

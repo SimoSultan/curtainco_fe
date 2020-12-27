@@ -11,9 +11,9 @@ function TrackForm({
     buttonText,
     handleTextChange,
     handleRadioChange,
-    handleTrackSubmit,
-    track,
-    handleTrackRemove,
+    handleSubmit,
+    product,
+    handleRemove,
 }) {
     return (
         <>
@@ -26,7 +26,7 @@ function TrackForm({
                         variant="outlined"
                         onChange={handleTextChange}
                         name="name"
-                        value={track.name}
+                        value={product.name}
                     />
                 </Grid>
                 <Grid item>
@@ -36,7 +36,7 @@ function TrackForm({
                         variant="outlined"
                         onChange={handleTextChange}
                         name="type"
-                        value={track.type}
+                        value={product.type}
                     />
                 </Grid>
                 <Grid item>
@@ -46,17 +46,19 @@ function TrackForm({
                         variant="outlined"
                         onChange={handleTextChange}
                         name="colour"
-                        value={track.colour}
+                        value={product.colour}
                     />
                 </Grid>
                 <Grid item>
+                    {/* IF PRODUCT.SINGLE IS EMPTY, DONT SELECT ANYTHING */}
+                    {/* OTHERWISE CHANGE TRUE -> SINGLE AND FALSE -> DOUBLE */}
                     <RadioGroup
                         aria-label="single-double-input"
                         name="single"
                         value={
-                            track.single === ""
+                            product.single === ""
                                 ? null
-                                : track.single
+                                : product.single
                                 ? "single"
                                 : "double"
                         }
@@ -77,43 +79,43 @@ function TrackForm({
                 </Grid>
                 <Grid item>
                     <TextField
-                        id="finial-style-input"
+                        id="track-finial-style-input"
                         label="Finial Style"
                         variant="outlined"
                         onChange={handleTextChange}
                         name="finialStyle"
-                        value={track.finialStyle}
+                        value={product.finialStyle}
                     />
                 </Grid>
                 <Grid item>
                     <TextField
-                        id="finial-color-input"
+                        id="track-finial-color-input"
                         label="Finial Colour"
                         variant="outlined"
                         onChange={handleTextChange}
                         name="finialColour"
-                        value={track.finialColour}
+                        value={product.finialColour}
                     />
                 </Grid>
                 <Grid item>
                     <TextField
-                        id="fix-location-input"
+                        id="track-fix-location-input"
                         label="Fix Location"
                         variant="outlined"
                         onChange={handleTextChange}
                         name="location"
-                        value={track.location}
+                        value={product.location}
                     />
                 </Grid>
                 <Grid item>
                     <TextField
-                        id="price-input"
+                        id="track-price-input"
                         label="Price"
                         variant="outlined"
                         type="number"
                         onChange={handleTextChange}
                         name="price"
-                        value={track.price}
+                        value={product.price}
                     />
                 </Grid>
                 <Grid container justify="space-between" alignItems="center">
@@ -121,18 +123,19 @@ function TrackForm({
                         <Button
                             variant="contained"
                             color="primary"
-                            onClick={handleTrackSubmit}
+                            onClick={handleSubmit}
                         >
                             {buttonText}
                         </Button>
                     </Grid>
+                    {/* IF THE REMOVE HANDLER WAS PASSED IN, SHOW THE DELETE BUTTON */}
                     <Grid item>
-                        {handleTrackRemove ? (
+                        {handleRemove ? (
                             <Button
                                 variant="contained"
                                 color="secondary"
                                 startIcon={<DeleteIcon />}
-                                onClick={handleTrackRemove}
+                                onClick={handleRemove}
                             >
                                 Delete
                             </Button>
