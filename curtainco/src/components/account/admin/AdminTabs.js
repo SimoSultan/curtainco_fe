@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
@@ -16,10 +16,10 @@ import AllTestimonials from "./testimonials/AllTestimonials";
 import AllUsers from "./users/AllUsers";
 import BusinessDetails from "./business/BusinessDetails";
 import AdminProfile from "./profile/AdminProfile";
-import EditTrack from "./products/EditTrack";
 import AddProduct from "./products/AddProduct";
 import AddCollection from "./collections/AddCollection";
 import EditCollection from "./collections/EditCollection";
+import EditProduct from "./products/EditProduct";
 
 function TabPanel({ children, value, index, ...other }) {
     return (
@@ -55,9 +55,14 @@ function a11yProps(index) {
 export default function AdminTabs({ tabValue, handleChange }) {
     const classes = useStyles();
     const [editProductId, setEditProductId] = useState("");
+    const [editForm, setEditForm] = useState("");
 
     function fillEditProductPage(event) {
-        setEditProductId(event.currentTarget.id);
+        let categoryId = event.currentTarget.id;
+        const productCategory = categoryId.split(",")[0];
+        const productId = categoryId.split(",")[1];
+        setEditProductId(productId);
+        setEditForm(productCategory);
     }
 
     return (
@@ -107,10 +112,15 @@ export default function AdminTabs({ tabValue, handleChange }) {
                     <Grid item xs>
                         <AllProducts
                             fillEditProductPage={fillEditProductPage}
+                            editProductId={editProductId}
                         />
                     </Grid>
                     <Grid item xs>
-                        <EditTrack productId={editProductId} />
+                        <EditProduct
+                            editForm={editForm}
+                            editProductId={editProductId}
+                            setEditProductId={setEditProductId}
+                        />
                     </Grid>
                 </Grid>
             </TabPanel>

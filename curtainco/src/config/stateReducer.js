@@ -7,6 +7,7 @@ export const ACTIONS = {
     SET_MODAL: "update-modal",
     ADD_PRODUCT: "add-product",
     UPDATE_PRODUCT: "update-product",
+    DELETE_PRODUCT: "delete-product",
     SET_ALL_USERS: "get-all-users",
     SET_ALL_PRODUCTS: "get-all-products",
     SET_ALL_CONSULTATIONS: "get-all-consults",
@@ -81,13 +82,23 @@ export default function stateReducer(state, action) {
             };
         }
         case ACTIONS.UPDATE_PRODUCT: {
-            let updatedProduct = action.payload;
-            let productsWithUpdateRemoved = state.products.filter(
+            const updatedProduct = action.payload;
+            const productsWithUpdateRemoved = state.products.filter(
                 (prod) => prod._id !== updatedProduct._id
             );
             return {
                 ...state,
-                products: [...productsWithUpdateRemoved, action.payload],
+                products: [...productsWithUpdateRemoved, updatedProduct],
+            };
+        }
+        case ACTIONS.DELETE_PRODUCT: {
+            const id = action.payload;
+            const productsWithRequestedRemoved = state.products.filter(
+                (prod) => prod._id !== id
+            );
+            return {
+                ...state,
+                products: productsWithRequestedRemoved,
             };
         }
 

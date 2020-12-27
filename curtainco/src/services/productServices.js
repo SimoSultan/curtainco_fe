@@ -18,4 +18,12 @@ async function updateProduct(updatedProduct) {
     return response;
 }
 
-export { getAllProducts, createProduct, updateProduct };
+async function deleteProduct(productToDelete) {
+    const response = await api.delete(
+        `/products/${productToDelete._id}`,
+        productToDelete
+    );
+    return response;
+}
+
+export { getAllProducts, createProduct, updateProduct, deleteProduct };

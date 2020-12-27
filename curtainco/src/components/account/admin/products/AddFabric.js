@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-
-import { Typography, Grid, TextField, Button } from "@material-ui/core";
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FabricForm from "../../../reusable/FabricForm";
+import { createProduct } from "../../../../services/productServices";
+import { useCurtainContext } from "../../../../config/CurtainCoContext";
+import { ACTIONS } from "../../../../config/stateReducer";
 
 function AddFabric() {
+    const { dispatch } = useCurtainContext();
     const [fabric, setFabric] = useState({
         category: "Fabric",
         name: "",
@@ -22,88 +22,46 @@ function AddFabric() {
         setFabric({ ...fabric, [event.target.name]: event.target.value });
     };
 
-    const handleFabricSubmit = () => {};
+    const handleSubmit = () => {
+        // ADD THE PRODUCT ON THE DB
+        // IF SUCCESSFUL, ADD PRODUCT IN GLOBAL STATE AND SHOW SUCCESS SNACKBAR
+        let addProdError = false;
+        console.log(fabric);
+        createProduct(fabric)
+            .then((resp) => {
+                if (resp.status === 201) {
+                    dispatch({
+                        type: ACTIONS.ADD_PRODUCT,
+                        payload: fabric,
+                    });
+                    dispatch({
+                        type: ACTIONS.SET_SNACKBAR,
+                        payload: {
+                            open: true,
+                            success: "success",
+                            message: "Fabric successfully added",
+                        },
+                    });
+                } else {
+                    addProdError = `An error ocurred on adding product: Error Code: ${resp.status}. Message: ${resp.message}.`;
+                    console.log(addProdError);
+                }
+            })
+            .catch((error) => {
+                addProdError = `An error ocurred on adding product: Error Code: ${error.status}. Message: ${error.message}.`;
+                console.log(addProdError);
+            });
+    };
 
     return (
-        <>
-            <Typography variant="h6">Add Fabric</Typography>
-            <Grid container direction="column" spacing={2}>
-                <Grid item>
-                    <TextField
-                        id="track-input"
-                        label="Fabric Name"
-                        variant="outlined"
-                        onChange={handleTextChange}
-                        name="name"
-                    />
-                </Grid>
-                <Grid item>
-                    <TextField
-                        id="track-color-input"
-                        label="Fabric Colour"
-                        variant="outlined"
-                        onChange={handleTextChange}
-                        name="color"
-                    />
-                </Grid>
-
-                <Grid item>
-                    <TextField
-                        id="finial-style-input"
-                        label="Fabric Density"
-                        variant="outlined"
-                        onChange={handleTextChange}
-                        name="density"
-                    />
-                </Grid>
-                <Grid item>
-                    <TextField
-                        id="finial-color-input"
-                        label="Header Style"
-                        variant="outlined"
-                        onChange={handleTextChange}
-                        name="style"
-                    />
-                </Grid>
-                <Grid item>
-                    <TextField
-                        id="fix-location-input"
-                        label="Hem Size"
-                        variant="outlined"
-                        onChange={handleTextChange}
-                        name="size"
-                    />
-                </Grid>
-                <Grid item>
-                    <TextField
-                        id="fix-location-input"
-                        label="Length"
-                        variant="outlined"
-                        onChange={handleTextChange}
-                        name="length"
-                    />
-                </Grid>
-                <Grid item>
-                    <TextField
-                        id="price-input"
-                        label="Price"
-                        variant="outlined"
-                        type="number"
-                        onChange={handleTextChange}
-                        name="price"
-                    />
-                </Grid>
-                <Grid item>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={handleFabricSubmit}
-                    >
-                        Submit
-                    </Button>
-                </Grid>
-            </Grid>
-        </>
+        <FabricForm
+            title={"Add Fabric"}
+            buttonText={"Add"}
+            handleTextChange={handleTextChange}
+            handleSubmit={handleSubmit}
+            handleRemove={false}
+            product={fabric}
+        />
     );
 }
 

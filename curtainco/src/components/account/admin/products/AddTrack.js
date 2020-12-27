@@ -6,9 +6,7 @@ import { ACTIONS } from "../../../../config/stateReducer";
 import TrackForm from "../../../reusable/TrackForm";
 
 function AddTrack() {
-    const [singleTrack, setSingleTrack] = useState(null);
     const { dispatch } = useCurtainContext();
-
     const [track, setTrack] = useState({
         category: "Track",
         name: "",
@@ -16,33 +14,43 @@ function AddTrack() {
         imgUrl: "",
         price: "",
         type: "",
-        single: singleTrack,
+        single: "",
         finialStyle: "",
         finialColour: "",
         location: "",
     });
 
-    console.log(singleTrack);
-
     const handleRadioChange = (event) => {
-        setSingleTrack(event.target.value === "single" ? true : false);
+        const singleTrack = event.target.value === "single" ? true : false;
+        setTrack({
+            ...track,
+            [event.target.name]: singleTrack,
+        });
     };
 
     const handleTextChange = (event) => {
         setTrack({ ...track, [event.target.name]: event.target.value });
     };
 
-    const handleTrackSubmit = () => {
+    const handleSubmit = () => {
+        // ADD THE PRODUCT ON THE DB
+        // IF SUCCESSFUL, ADD PRODUCT IN GLOBAL STATE AND SHOW SUCCESS SNACKBAR
         let addProdError = false;
+        console.log(track);
         createProduct(track)
             .then((resp) => {
-                let prod = resp.data;
-                console.log(resp);
-
                 if (resp.status === 201) {
                     dispatch({
                         type: ACTIONS.ADD_PRODUCT,
                         payload: track,
+                    });
+                    dispatch({
+                        type: ACTIONS.SET_SNACKBAR,
+                        payload: {
+                            open: true,
+                            success: "success",
+                            message: "Track successfully added",
+                        },
                     });
                 } else {
                     addProdError = `An error ocurred on adding product: Error Code: ${resp.status}. Message: ${resp.message}.`;
@@ -55,14 +63,18 @@ function AddTrack() {
             });
     };
 
+    // PASS IN TITLE AND TEXT FOR THE BUTTON TO THE TRACK FORM
+    // PASS IN THE HANDLERS, HANDLE REMOVE IS FALSE DUE TO NOT WANTING TO DISPLAY BUTTON ON THE ADD FORM
+    // PASS IN THE CURRENT TRACK WHICH WILL BE EMPTY
     return (
         <TrackForm
             title={"Add Track"}
             buttonText={"Add"}
             handleTextChange={handleTextChange}
             handleRadioChange={handleRadioChange}
-            handleTrackSubmit={handleTrackSubmit}
-            track={false}
+            handleSubmit={handleSubmit}
+            handleRemove={false}
+            product={track}
         />
     );
 }

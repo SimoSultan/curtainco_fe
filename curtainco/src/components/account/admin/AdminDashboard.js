@@ -5,7 +5,7 @@ import AdminTabs from "./AdminTabs";
 // import AdminDrawer from "./AdminDrawer";
 
 // MAT UI
-import { Container, Typography } from "@material-ui/core";
+import { Container } from "@material-ui/core";
 
 function AdminDashboard() {
     const [tabValue, setTabValue] = useState(1);

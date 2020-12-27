@@ -4,14 +4,16 @@ import { Typography, Grid, TextField, Button } from "@material-ui/core";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 function TrackForm({
     title,
     buttonText,
     handleTextChange,
     handleRadioChange,
-    handleTrackSubmit,
-    track,
+    handleSubmit,
+    product,
+    handleRemove,
 }) {
     return (
         <>
@@ -24,7 +26,7 @@ function TrackForm({
                         variant="outlined"
                         onChange={handleTextChange}
                         name="name"
-                        value={track ? track.name : ""}
+                        value={product.name}
                     />
                 </Grid>
                 <Grid item>
@@ -34,7 +36,7 @@ function TrackForm({
                         variant="outlined"
                         onChange={handleTextChange}
                         name="type"
-                        value={track ? track.type : ""}
+                        value={product.type}
                     />
                 </Grid>
                 <Grid item>
@@ -44,18 +46,24 @@ function TrackForm({
                         variant="outlined"
                         onChange={handleTextChange}
                         name="colour"
-                        value={track ? track.colour : ""}
+                        value={product.colour}
                     />
                 </Grid>
                 <Grid item>
+                    {/* IF PRODUCT.SINGLE IS EMPTY, DONT SELECT ANYTHING */}
+                    {/* OTHERWISE CHANGE TRUE -> SINGLE AND FALSE -> DOUBLE */}
                     <RadioGroup
                         aria-label="single-double-input"
-                        name="single-double-input"
-                        value={
-                            track ? (track.single ? "single" : "double") : null
-                        }
+                        name="single"
                         onChange={handleRadioChange}
                         row
+                        value={
+                            product.single === ""
+                                ? null
+                                : product.single
+                                ? "single"
+                                : "double"
+                        }
                     >
                         <FormControlLabel
                             value="single"
@@ -71,54 +79,75 @@ function TrackForm({
                 </Grid>
                 <Grid item>
                     <TextField
-                        id="finial-style-input"
+                        id="track-finial-style-input"
                         label="Finial Style"
                         variant="outlined"
                         onChange={handleTextChange}
                         name="finialStyle"
-                        value={track ? track.finialStyle : ""}
+                        value={product.finialStyle}
                     />
                 </Grid>
                 <Grid item>
                     <TextField
-                        id="finial-color-input"
+                        id="track-finial-color-input"
                         label="Finial Colour"
                         variant="outlined"
                         onChange={handleTextChange}
                         name="finialColour"
-                        value={track ? track.finialColour : ""}
+                        value={product.finialColour}
                     />
                 </Grid>
                 <Grid item>
                     <TextField
-                        id="fix-location-input"
+                        id="track-fix-location-input"
                         label="Fix Location"
                         variant="outlined"
                         onChange={handleTextChange}
                         name="location"
-                        value={track ? track.location : ""}
+                        value={product.location}
                     />
                 </Grid>
                 <Grid item>
                     <TextField
-                        id="price-input"
+                        id="track-price-input"
                         label="Price"
                         variant="outlined"
                         type="number"
                         onChange={handleTextChange}
                         name="price"
-                        value={track ? track.price : ""}
+                        value={product.price}
                     />
                 </Grid>
-                <Grid item>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={handleTrackSubmit}
-                    >
-                        {buttonText}
-                    </Button>
-                </Grid>
+                {product ? (
+                    <Grid container justify="space-between" alignItems="center">
+                        <Grid item>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={handleSubmit}
+                            >
+                                {buttonText}
+                            </Button>
+                        </Grid>
+                        {/* IF THE REMOVE HANDLER WAS PASSED IN, SHOW THE DELETE BUTTON */}
+                        <Grid item>
+                            {handleRemove ? (
+                                <Button
+                                    variant="contained"
+                                    color="secondary"
+                                    startIcon={<DeleteIcon />}
+                                    onClick={handleRemove}
+                                >
+                                    Delete
+                                </Button>
+                            ) : (
+                                ""
+                            )}
+                        </Grid>
+                    </Grid>
+                ) : (
+                    ""
+                )}
             </Grid>
         </>
     );

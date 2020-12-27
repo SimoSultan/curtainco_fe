@@ -1,4 +1,5 @@
-function sortProducts(filteredProducts, filterSortBy, sortFields) {
+function sortProducts(filteredProducts, filterSortBy) {
+    // THIS IS HOW THE SORTFIELDS ARRAY LOOKS
     // const sortFields = [
     //     "Price: Low to High",
     //     "Price: High to Low",
@@ -44,6 +45,7 @@ function sortProducts(filteredProducts, filterSortBy, sortFields) {
 }
 
 function filterByType(filteredProducts, types) {
+    // THIS IS HOW THE TYPES OBJECT LOOKS
     // types = {
     //     fabric: false,
     //     rod: false,
@@ -81,7 +83,7 @@ function searchProducts(filteredProducts, searchText) {
     return filteredProducts;
 }
 
-function getOneProduct(allProducts, id) {
+function getOneProductFromState(allProducts, id) {
     const product = allProducts.filter((prod) => prod._id === id)[0];
     return product;
 }
@@ -90,5 +92,5 @@ module.exports = {
     sortProducts,
     filterByType,
     searchProducts,
-    getOneProduct,
+    getOneProductFromState,
 };

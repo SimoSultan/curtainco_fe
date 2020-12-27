@@ -1,25 +1,19 @@
 import React, { useEffect } from "react";
 
-import Link from "@material-ui/core/Link";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import Title from "../../../reusable/Title";
 
 import useStyles from "../AdminStyles";
 import { getAllProducts } from "../../../../services/productServices";
 import { useCurtainContext } from "../../../../config/CurtainCoContext";
+import Title from "../../../reusable/Title";
 import { ACTIONS } from "../../../../config/stateReducer";
 
-function preventDefault(event) {
-    event.preventDefault();
-    alert("does nothing yet");
-}
-
-export default function AllProducts({ fillEditProductPage }) {
+export default function AllProducts({ fillEditProductPage, editProductId }) {
     const classes = useStyles();
     const { state, dispatch } = useCurtainContext();
     let allProducts = state.products;
@@ -45,8 +39,12 @@ export default function AllProducts({ fillEditProductPage }) {
     const productItems = allProducts.map((prod) => (
         <TableRow
             key={prod.name}
-            id={prod._id}
-            className={classes.tableRow}
+            id={`${prod.category},${prod._id}`}
+            className={
+                editProductId === prod._id
+                    ? classes.tableRowSelected
+                    : classes.tableRowHover
+            }
             onClick={fillEditProductPage}
         >
             <TableCell>{prod.category}</TableCell>
