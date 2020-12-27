@@ -145,7 +145,7 @@ function EditDeleteTrack({ editProductId, setEditProductId }) {
             handleRadioChange={handleRadioChange}
             handleSubmit={handleUpdateProduct}
             handleRemove={handleRemoveProduct}
-            product={track}
+            product={editProductId === "" ? false : track}
         />
     );
 }

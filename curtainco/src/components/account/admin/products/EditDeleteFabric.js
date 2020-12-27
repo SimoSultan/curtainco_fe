@@ -133,7 +133,7 @@ function EditDeleteFabric({ editProductId, setEditProductId }) {
             handleTextChange={handleTextChange}
             handleSubmit={handleUpdateProduct}
             handleRemove={handleRemoveProduct}
-            product={fabric}
+            product={editProductId === "" ? false : fabric}
         />
     );
 }

@@ -118,32 +118,36 @@ function TrackForm({
                         value={product.price}
                     />
                 </Grid>
-                <Grid container justify="space-between" alignItems="center">
-                    <Grid item>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={handleSubmit}
-                        >
-                            {buttonText}
-                        </Button>
-                    </Grid>
-                    {/* IF THE REMOVE HANDLER WAS PASSED IN, SHOW THE DELETE BUTTON */}
-                    <Grid item>
-                        {handleRemove ? (
+                {product ? (
+                    <Grid container justify="space-between" alignItems="center">
+                        <Grid item>
                             <Button
                                 variant="contained"
-                                color="secondary"
-                                startIcon={<DeleteIcon />}
-                                onClick={handleRemove}
+                                color="primary"
+                                onClick={handleSubmit}
                             >
-                                Delete
+                                {buttonText}
                             </Button>
-                        ) : (
-                            ""
-                        )}
+                        </Grid>
+                        {/* IF THE REMOVE HANDLER WAS PASSED IN, SHOW THE DELETE BUTTON */}
+                        <Grid item>
+                            {handleRemove ? (
+                                <Button
+                                    variant="contained"
+                                    color="secondary"
+                                    startIcon={<DeleteIcon />}
+                                    onClick={handleRemove}
+                                >
+                                    Delete
+                                </Button>
+                            ) : (
+                                ""
+                            )}
+                        </Grid>
                     </Grid>
-                </Grid>
+                ) : (
+                    ""
+                )}
             </Grid>
         </>
     );

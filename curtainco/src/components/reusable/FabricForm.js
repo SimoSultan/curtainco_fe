@@ -87,6 +87,38 @@ function FabricForm({
                         value={product.price}
                     />
                 </Grid>
+
+                {product ? (
+                    <Grid container justify="space-between" alignItems="center">
+                        <Grid item>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={handleSubmit}
+                            >
+                                {buttonText}
+                            </Button>
+                        </Grid>
+                        {/* IF THE REMOVE HANDLER WAS PASSED IN, SHOW THE DELETE BUTTON */}
+                        <Grid item>
+                            {handleRemove ? (
+                                <Button
+                                    variant="contained"
+                                    color="secondary"
+                                    startIcon={<DeleteIcon />}
+                                    onClick={handleRemove}
+                                >
+                                    Delete
+                                </Button>
+                            ) : (
+                                ""
+                            )}
+                        </Grid>
+                    </Grid>
+                ) : (
+                    ""
+                )}
+                {/* 
                 <Grid container justify="space-between" alignItems="center">
                     <Grid item>
                         <Button
@@ -97,7 +129,6 @@ function FabricForm({
                             {buttonText}
                         </Button>
                     </Grid>
-                    {/* IF THE REMOVE HANDLER WAS PASSED IN, SHOW THE DELETE BUTTON */}
                     <Grid item>
                         {handleRemove ? (
                             <Button
@@ -112,7 +143,7 @@ function FabricForm({
                             ""
                         )}
                     </Grid>
-                </Grid>
+                </Grid> */}
             </Grid>
         </>
     );
