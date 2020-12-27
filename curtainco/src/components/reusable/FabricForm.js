@@ -118,32 +118,6 @@ function FabricForm({
                 ) : (
                     ""
                 )}
-                {/* 
-                <Grid container justify="space-between" alignItems="center">
-                    <Grid item>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={handleSubmit}
-                        >
-                            {buttonText}
-                        </Button>
-                    </Grid>
-                    <Grid item>
-                        {handleRemove ? (
-                            <Button
-                                variant="contained"
-                                color="secondary"
-                                startIcon={<DeleteIcon />}
-                                onClick={handleRemove}
-                            >
-                                Delete
-                            </Button>
-                        ) : (
-                            ""
-                        )}
-                    </Grid>
-                </Grid> */}
             </Grid>
         </>
     );

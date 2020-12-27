@@ -55,6 +55,8 @@ function TrackForm({
                     <RadioGroup
                         aria-label="single-double-input"
                         name="single"
+                        onChange={handleRadioChange}
+                        row
                         value={
                             product.single === ""
                                 ? null
@@ -62,8 +64,6 @@ function TrackForm({
                                 ? "single"
                                 : "double"
                         }
-                        onChange={handleRadioChange}
-                        row
                     >
                         <FormControlLabel
                             value="single"
