@@ -32,6 +32,12 @@ const useStyles = makeStyles((theme) => ({
     fullWidth: {
         width: "100%",
     },
+    optionItem: {
+        color: "black",
+    },
+    selectPlaceholder: {
+        color: "rgba(0, 0, 0, 0.57)",
+    },
 }));
 
 export default useStyles;

@@ -44,7 +44,7 @@ export default function AllCollections({
     let collectionItems = allCollections.map((coll) => (
         <TableRow
             key={coll._id}
-            id={`${coll.category},${coll._id}`}
+            id={coll._id}
             className={
                 editCollectionId === coll._id
                     ? classes.tableRowSelected

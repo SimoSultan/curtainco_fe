@@ -20,21 +20,7 @@ function AddCollection() {
         accessory: "",
     });
 
-    const handleFabricChange = (event) => {
-        setCollection({
-            ...collection,
-            [event.target.name]: event.target.value,
-        });
-    };
-    const handleTrackChange = (event) => {
-        console.log(event.target.value);
-        setCollection({
-            ...collection,
-            [event.target.name]: event.target.value,
-        });
-    };
-    const handleAccessoryChange = (event) => {
-        console.log(event.target.value);
+    const handleSelectChange = (event) => {
         setCollection({
             ...collection,
             [event.target.name]: event.target.value,
@@ -86,9 +72,7 @@ function AddCollection() {
                     title={"Add Collection"}
                     buttonText={"Add"}
                     handleTextChange={handleTextChange}
-                    handleFabricChange={handleFabricChange}
-                    handleTrackChange={handleTrackChange}
-                    handleAccessoryChange={handleAccessoryChange}
+                    handleSelectChange={handleSelectChange}
                     handleSubmit={handleSubmit}
                     handleRemove={false}
                     collection={collection}
