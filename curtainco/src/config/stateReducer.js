@@ -8,14 +8,18 @@ export const ACTIONS = {
     ADD_PRODUCT: "add-product",
     UPDATE_PRODUCT: "update-product",
     DELETE_PRODUCT: "delete-product",
+    ADD_COLLECTION: "add-collection",
+    UPDATE_COLLECTION: "update-collection",
+    DELETE_COLLECTION: "delete-collection",
     SET_ALL_USERS: "get-all-users",
     SET_ALL_PRODUCTS: "get-all-products",
+    SET_ALL_COLLECTIONS: "get-all-collections",
     SET_ALL_CONSULTATIONS: "get-all-consults",
 };
 
 export default function stateReducer(state, action) {
     switch (action.type) {
-        // AUTHENTICATION
+        //  -------- AUTHENTICATION --------
         case ACTIONS.LOGIN: {
             return {
                 ...state,
@@ -46,7 +50,7 @@ export default function stateReducer(state, action) {
             };
         }
 
-        // SNACKBAR & MODAL
+        //  -------- SNACKBAR & MODAL --------
         case ACTIONS.SET_SNACKBAR: {
             return {
                 ...state,
@@ -60,15 +64,7 @@ export default function stateReducer(state, action) {
             };
         }
 
-        // USERS
-        case ACTIONS.SET_ALL_USERS: {
-            return {
-                ...state,
-                users: action.payload,
-            };
-        }
-
-        // PRODUCTS
+        // -------- PRODUCTS --------
         case ACTIONS.SET_ALL_PRODUCTS: {
             return {
                 ...state,
@@ -102,7 +98,52 @@ export default function stateReducer(state, action) {
             };
         }
 
-        // CONSULTATIONS
+        //  -------- COLLECTIONS --------
+        case ACTIONS.SET_ALL_COLLECTIONS: {
+            return {
+                ...state,
+                collections: action.payload,
+            };
+        }
+        case ACTIONS.ADD_COLLECTION: {
+            return {
+                ...state,
+                collections: [...state.collections, action.payload],
+            };
+        }
+        case ACTIONS.UPDATE_COLLECTION: {
+            const updatedCollection = action.payload;
+            const collectionsWithUpdateRemoved = state.collections.filter(
+                (coll) => coll._id !== updatedCollection._id
+            );
+            return {
+                ...state,
+                collections: [
+                    ...collectionsWithUpdateRemoved,
+                    updatedCollection,
+                ],
+            };
+        }
+        case ACTIONS.DELETE_COLLECTION: {
+            const id = action.payload;
+            const collectionsWithRequestedRemoved = state.collections.filter(
+                (prod) => prod._id !== id
+            );
+            return {
+                ...state,
+                collections: collectionsWithRequestedRemoved,
+            };
+        }
+
+        //  -------- USERS --------
+        case ACTIONS.SET_ALL_USERS: {
+            return {
+                ...state,
+                users: action.payload,
+            };
+        }
+
+        //  -------- CONSULTATIONS --------
         case ACTIONS.SET_ALL_CONSULTATIONS: {
             return {
                 ...state,

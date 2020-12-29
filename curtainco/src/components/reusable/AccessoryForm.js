@@ -5,6 +5,7 @@ import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import DeleteIcon from "@material-ui/icons/Delete";
+import useStyles from "../../components/account/admin/AdminStyles";
 
 function AccessoryForm({
     title,
@@ -15,6 +16,7 @@ function AccessoryForm({
     product,
     handleRemove,
 }) {
+    const classes = useStyles();
     return (
         <>
             <Typography variant="h6">{title}</Typography>
@@ -24,8 +26,9 @@ function AccessoryForm({
                         id="accessory-input"
                         label="Accessory Name"
                         variant="outlined"
-                        onChange={handleTextChange}
                         name="name"
+                        className={classes.fullWidth}
+                        onChange={handleTextChange}
                         value={product.name}
                     />
                 </Grid>
@@ -34,8 +37,9 @@ function AccessoryForm({
                         id="accessory-colour-input"
                         label="Accessory Colour"
                         variant="outlined"
-                        onChange={handleTextChange}
                         name="colour"
+                        className={classes.fullWidth}
+                        onChange={handleTextChange}
                         value={product.colour}
                     />
                 </Grid>
@@ -44,8 +48,9 @@ function AccessoryForm({
                         id="accessory-length-input"
                         label="Accessory Length"
                         variant="outlined"
-                        onChange={handleTextChange}
                         name="length"
+                        className={classes.fullWidth}
+                        onChange={handleTextChange}
                         value={product.length}
                     />
                 </Grid>
@@ -53,6 +58,7 @@ function AccessoryForm({
                     <RadioGroup
                         aria-label="automated-curtain-input"
                         name="automated"
+                        className={classes.fullWidth}
                         onChange={handleRadioChange}
                         row
                         value={
@@ -80,8 +86,9 @@ function AccessoryForm({
                         id="accessory-tieBack-input"
                         label="Tie Back"
                         variant="outlined"
-                        onChange={handleTextChange}
                         name="tieBack"
+                        className={classes.fullWidth}
+                        onChange={handleTextChange}
                         value={product.tieBack}
                     />
                 </Grid>
@@ -90,8 +97,9 @@ function AccessoryForm({
                         id="accessory-other-input"
                         label="Accessories"
                         variant="outlined"
-                        onChange={handleTextChange}
                         name="other"
+                        className={classes.fullWidth}
+                        onChange={handleTextChange}
                         value={product.other}
                     />
                 </Grid>
@@ -101,8 +109,9 @@ function AccessoryForm({
                         label="Price"
                         variant="outlined"
                         type="number"
-                        onChange={handleTextChange}
                         name="price"
+                        className={classes.fullWidth}
+                        onChange={handleTextChange}
                         value={product.price}
                     />
                 </Grid>

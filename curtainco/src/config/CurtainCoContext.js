@@ -25,6 +25,7 @@ function CurtainContext({ children }) {
             data: {},
         },
         products: [],
+        collections: [],
         consults: [],
     };
 

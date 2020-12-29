@@ -2,6 +2,7 @@ import React from "react";
 
 import { Typography, Grid, TextField, Button } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
+import useStyles from "../../components/account/admin/AdminStyles";
 
 function FabricForm({
     title,
@@ -11,6 +12,7 @@ function FabricForm({
     product,
     handleRemove,
 }) {
+    const classes = useStyles();
     return (
         <>
             <Typography variant="h6">{title}</Typography>
@@ -20,8 +22,9 @@ function FabricForm({
                         id="fabric-input"
                         label="Fabric Name"
                         variant="outlined"
-                        onChange={handleTextChange}
                         name="name"
+                        className={classes.fullWidth}
+                        onChange={handleTextChange}
                         value={product.name}
                     />
                 </Grid>
@@ -30,8 +33,9 @@ function FabricForm({
                         id="fabric-color-input"
                         label="Fabric Colour"
                         variant="outlined"
-                        onChange={handleTextChange}
                         name="colour"
+                        className={classes.fullWidth}
+                        onChange={handleTextChange}
                         value={product.colour}
                     />
                 </Grid>
@@ -41,8 +45,9 @@ function FabricForm({
                         id="fabric-density-input"
                         label="Fabric Density"
                         variant="outlined"
-                        onChange={handleTextChange}
                         name="density"
+                        className={classes.fullWidth}
+                        onChange={handleTextChange}
                         value={product.density}
                     />
                 </Grid>
@@ -51,8 +56,9 @@ function FabricForm({
                         id="fabric-header-style-input"
                         label="Header Style"
                         variant="outlined"
-                        onChange={handleTextChange}
                         name="style"
+                        className={classes.fullWidth}
+                        onChange={handleTextChange}
                         value={product.style}
                     />
                 </Grid>
@@ -61,8 +67,9 @@ function FabricForm({
                         id="fabric-size-input"
                         label="Hem Size"
                         variant="outlined"
-                        onChange={handleTextChange}
                         name="size"
+                        className={classes.fullWidth}
+                        onChange={handleTextChange}
                         value={product.size}
                     />
                 </Grid>
@@ -71,8 +78,9 @@ function FabricForm({
                         id="fabric-length-input"
                         label="Length"
                         variant="outlined"
-                        onChange={handleTextChange}
                         name="length"
+                        className={classes.fullWidth}
+                        onChange={handleTextChange}
                         value={product.length}
                     />
                 </Grid>
@@ -82,8 +90,9 @@ function FabricForm({
                         label="Price"
                         variant="outlined"
                         type="number"
-                        onChange={handleTextChange}
                         name="price"
+                        className={classes.fullWidth}
+                        onChange={handleTextChange}
                         value={product.price}
                     />
                 </Grid>

@@ -36,9 +36,9 @@ export default function AllProducts({ fillEditProductPage, editProductId }) {
             });
     }, [dispatch]);
 
-    const productItems = allProducts.map((prod) => (
+    let productItems = allProducts.map((prod) => (
         <TableRow
-            key={prod.name}
+            key={prod._id}
             id={`${prod.category},${prod._id}`}
             className={
                 editProductId === prod._id
@@ -56,6 +56,7 @@ export default function AllProducts({ fillEditProductPage, editProductId }) {
 
     return (
         <Paper className={classes.paper}>
+            {/* Products */}
             <Title>Products</Title>
             <Table size="small">
                 <TableHead>

@@ -30,11 +30,7 @@ function TabPanel({ children, value, index, ...other }) {
             aria-labelledby={`scrollable-auto-tab-${index}`}
             {...other}
         >
-            {value === index && (
-                <Box p={3}>
-                    <Typography>{children}</Typography>
-                </Box>
-            )}
+            {value === index && <Box p={3}>{children}</Box>}
         </div>
     );
 }
@@ -91,7 +87,7 @@ export default function AdminTabs({ tabValue, handleChange }) {
                 <Grid
                     container
                     justify="center"
-                    alignItems="center"
+                    alignItems="flex-start"
                     spacing={2}
                 >
                     <Grid item xs>
