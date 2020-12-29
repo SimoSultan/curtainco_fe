@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -37,7 +37,7 @@ const titleItems = titles.map((title) => (
 ));
 
 export default function UserDataForm({
-    user,
+    currentUser,
     formTitle,
     handleFunctionFromParent,
     withAuth,
@@ -47,118 +47,82 @@ export default function UserDataForm({
     withConsultMessage,
 }) {
     const classes = useStyles();
-
-    if (!user) {
-        user = {};
-        user.email = "";
-        user.password = "";
-        user.title = "";
+    const [userData, setUserData] = useState({
+        email: "",
+        password: "",
+        title: "",
         // leave the comma in here as it will break the split function I have on this variable
-        user.fullName = ",";
-        user.phone = "";
-        user.companyName = "";
-        user.address1 = "";
-        user.suburb = "";
-        user.state = "";
-        user.postcode = "";
-    }
+        fullName: ",",
+        phone: "",
+        companyName: "",
+        address1: "",
+        suburb: "",
+        state: "",
+        postcode: "",
+    });
 
-    // const { state } = useCurtainContext();
-    const [email, setEmail] = useState(user.email);
-    const [password, setPassword] = useState(user.password);
-    const [firstName, setFirstName] = useState(
-        getFirstNameFromFullName(user.fullName)
-    );
-    const [lastName, setLastName] = useState(
-        getLastNameFromFullName(user.fullName)
-    );
-    const [phone, setPhone] = useState(user.phone);
-    const [companyName, setCompanyName] = useState(user.companyName);
-    const [address1, setAddress1] = useState(user.address1);
-    const [suburb, setSuburb] = useState(user.suburb);
-    const [addressState, setAddressState] = useState(user.addressState);
-    const [postCode, setPostCode] = useState(user.postcode);
-    const [title, setTitle] = useState(user.title);
+    useEffect(() => {
+        if (currentUser !== null) {
+            setUserData(currentUser);
+        }
+    }, [currentUser]);
 
-    function handleEmailChange(e) {
-        setEmail(e.target.value);
-    }
+    const handleSelectChange = (event) => {
+        setUserData({
+            ...userData,
+            [event.target.name]: event.target.value,
+        });
+    };
 
-    function handlePasswordChange(e) {
-        setPassword(e.target.value);
-    }
+    const handleNameChange = (event) => {
+        if (event.target.name === "firstName") {
+            setUserData({
+                ...userData,
+                [userData.fullName]: `${
+                    event.target.value
+                },${getLastNameFromFullName(userData.fullName)}`,
+            });
+        } else {
+            setUserData({
+                ...userData,
+                [userData.fullName]: `${getFirstNameFromFullName(
+                    userData.fullName
+                )},${event.target.value}`,
+            });
+        }
+    };
 
-    function handleFirstNameChange(e) {
-        setFirstName(e.target.value);
-    }
-
-    function handleLastNameChange(e) {
-        setLastName(e.target.value);
-    }
-
-    function handlePhoneChange(e) {
-        setPhone(e.target.value);
-    }
-
-    function handleCompanyChange(e) {
-        setCompanyName(e.target.value);
-    }
-
-    function handleAddressChange(e) {
-        setAddress1(e.target.value);
-    }
-
-    function handleSuburbChange(e) {
-        setSuburb(e.target.value);
-    }
-
-    function handleAddressStateChange(e) {
-        setAddressState(e.target.value);
-    }
-
-    function handlePostCodeChange(e) {
-        setPostCode(e.target.value);
-    }
-
-    function handleTitleChange(e) {
-        setTitle(e.target.value);
-    }
+    const handleTextChange = (event) => {
+        setUserData({
+            ...userData,
+            [event.target.name]: event.target.value,
+        });
+    };
 
     function clearFields() {
-        setEmail("");
-        setPassword("");
-        setFirstName("");
-        setLastName("");
-        setPhone("");
-        setCompanyName("");
-        setAddress1("");
-        setAddressState("");
-        setSuburb("");
-        setPostCode("");
-        setTitle("");
+        setUserData({
+            email: "",
+            password: "",
+            title: "",
+            // leave the comma in here as it will break the split function I have on this variable
+            fullName: ",",
+            phone: "",
+            companyName: "",
+            address1: "",
+            suburb: "",
+            state: "",
+            postcode: "",
+        });
     }
 
     async function handleSubmitForm(e) {
         e.preventDefault();
 
-        let userDetails = {
-            email: email,
-            password: password,
-            fullName: `${firstName},${lastName}`,
-            phone: phone,
-            companyName: companyName,
-            address1: address1,
-            suburb: suburb,
-            state: addressState,
-            postcode: postCode,
-            title: title,
-        };
-
-        if (checkIfRequiredUserDataFormFieldsAreEmpty(userDetails)) {
+        if (checkIfRequiredUserDataFormFieldsAreEmpty(userData)) {
             return alert("Please complete all required fields.");
         }
 
-        let error = await handleFunctionFromParent(userDetails);
+        let error = await handleFunctionFromParent(userData);
         // if there is not error then clear the fields
         if (!error) clearFields();
     }
@@ -188,17 +152,18 @@ export default function UserDataForm({
                     onSubmit={handleSubmitForm}
                 >
                     <Grid container spacing={2}>
-                        {user && !withConsultMessage ? (
+                        {currentUser && !withConsultMessage ? (
                             <>
                                 <Grid item xs={12} sm={2}>
                                     <TextField
                                         id="title"
                                         variant="outlined"
                                         label="Title"
-                                        value={title ? title : ""}
+                                        value={userData.title}
                                         select
-                                        onChange={handleTitleChange}
+                                        onChange={handleSelectChange}
                                         fullWidth
+                                        name="title"
                                         // defaultValue=""
                                         autoComplete="honorific-prefix"
                                     >
@@ -215,8 +180,10 @@ export default function UserDataForm({
                                         id="firstName"
                                         label="First Name"
                                         autoFocus
-                                        value={firstName}
-                                        onChange={handleFirstNameChange}
+                                        value={getFirstNameFromFullName(
+                                            userData.fullName
+                                        )}
+                                        onChange={handleNameChange}
                                     />
                                 </Grid>
                                 <Grid item xs={12} sm={5}>
@@ -228,8 +195,10 @@ export default function UserDataForm({
                                         label="Last Name"
                                         name="lastName"
                                         autoComplete="family-name"
-                                        value={lastName}
-                                        onChange={handleLastNameChange}
+                                        value={getLastNameFromFullName(
+                                            userData.fullName
+                                        )}
+                                        onChange={handleNameChange}
                                     />
                                 </Grid>
 
@@ -244,8 +213,8 @@ export default function UserDataForm({
                                                 label="Email Address"
                                                 name="email"
                                                 autoComplete="email"
-                                                value={email}
-                                                onChange={handleEmailChange}
+                                                value={userData.email}
+                                                onChange={handleTextChange}
                                             />
                                         </Grid>
 
@@ -259,8 +228,8 @@ export default function UserDataForm({
                                                 type="password"
                                                 id="password"
                                                 autoComplete="current-password"
-                                                value={password}
-                                                onChange={handlePasswordChange}
+                                                value={userData.password}
+                                                onChange={handleTextChange}
                                             />
                                         </Grid>
                                     </>
@@ -281,8 +250,8 @@ export default function UserDataForm({
                                         type="text"
                                         id="phone"
                                         autoComplete="tel"
-                                        value={phone}
-                                        onChange={handlePhoneChange}
+                                        value={userData.phone}
+                                        onChange={handleTextChange}
                                     />
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
@@ -294,8 +263,8 @@ export default function UserDataForm({
                                         type="text"
                                         id="companyName"
                                         autoComplete="organization"
-                                        value={companyName}
-                                        onChange={handleCompanyChange}
+                                        value={userData.companyName}
+                                        onChange={handleTextChange}
                                     />
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
@@ -308,8 +277,8 @@ export default function UserDataForm({
                                         type="text"
                                         id="address1"
                                         autoComplete="address-line1"
-                                        value={address1}
-                                        onChange={handleAddressChange}
+                                        value={userData.address1}
+                                        onChange={handleTextChange}
                                     />
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
@@ -322,8 +291,8 @@ export default function UserDataForm({
                                         type="text"
                                         id="suburb"
                                         autoComplete="address-level2"
-                                        value={suburb}
-                                        onChange={handleSuburbChange}
+                                        value={userData.suburb}
+                                        onChange={handleTextChange}
                                     />
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
@@ -331,13 +300,11 @@ export default function UserDataForm({
                                         id="state"
                                         variant="outlined"
                                         label="State"
-                                        value={addressState ? addressState : ""}
+                                        value={userData.state}
                                         required
                                         select
-                                        onChange={handleAddressStateChange}
+                                        onChange={handleSelectChange}
                                         fullWidth
-                                        // defaultValue=""
-                                        // helperText="Please select your state"
                                         autoComplete="address-level1"
                                     >
                                         {menuItems}
@@ -353,8 +320,8 @@ export default function UserDataForm({
                                         type="text"
                                         id="postcode"
                                         autoComplete="postal-code"
-                                        value={postCode ? postCode : ""}
-                                        onChange={handlePostCodeChange}
+                                        value={userData.postcode}
+                                        onChange={handleTextChange}
                                     />
                                 </Grid>
                             </>

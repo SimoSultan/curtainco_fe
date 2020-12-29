@@ -61,7 +61,7 @@ export default function SignUp() {
                     headerInformation={false}
                     buttonText={"Submit"}
                     withConsultMessage={{
-                        msg: message,
+                        msg: message.message,
                         handleFunction: handleMessageChange,
                     }}
                 />

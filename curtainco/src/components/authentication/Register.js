@@ -67,7 +67,7 @@ export default function SignUp() {
             ) : (
                 <>
                     <UserDataForm
-                        user={false}
+                        currentUser={state.currentUser}
                         handleFunctionFromParent={handleRegister}
                         formTitle={"Sign Up"}
                         withAuth={true}
