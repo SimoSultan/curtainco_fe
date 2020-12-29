@@ -30,6 +30,7 @@ export default function AllConsults() {
         getAllConsultations()
             .then((resp) => {
                 if (resp.status === 200) {
+                    console.log("---CONSULTATIONS---");
                     console.log(resp.data);
                     dispatch({
                         type: ACTIONS.SET_ALL_CONSULTATIONS,
@@ -59,7 +60,7 @@ export default function AllConsults() {
 
     return (
         <Paper className={classes.paper}>
-            <Title>All Users</Title>
+            <Title>All Consultations</Title>
             <Table size="small">
                 <TableHead>
                     <TableRow>
@@ -71,11 +72,6 @@ export default function AllConsults() {
                 </TableHead>
                 <TableBody>{userRow}</TableBody>
             </Table>
-            <div className={classes.seeMore}>
-                <Link color="primary" href="#" onClick={preventDefault}>
-                    See more consults
-                </Link>
-            </div>
         </Paper>
     );
 }

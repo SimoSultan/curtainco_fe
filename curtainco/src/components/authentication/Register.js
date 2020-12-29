@@ -22,6 +22,7 @@ export default function SignUp() {
             .then((regResp) => {
                 if (regResp.status === 201) {
                     console.log("User successfully signed up");
+                    // dont need below code because we only need to set login true and currentUser object with login action
                     // dispatch({
                     //     type: ACTIONS.REGISTER,
                     //     payload: userDetails,
@@ -66,12 +67,13 @@ export default function SignUp() {
             ) : (
                 <>
                     <UserDataForm
-                        user={false}
+                        currentUser={state.currentUser}
                         handleFunctionFromParent={handleRegister}
                         formTitle={"Sign Up"}
                         withAuth={true}
                         buttonText={"Sign Up"}
                         headerInformation={true}
+                        withConsultMessage={false}
                     />
                     <Container maxWidth="sm">
                         <Copyright />

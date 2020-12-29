@@ -22,6 +22,7 @@ export default function AllProducts({ fillEditProductPage, editProductId }) {
         getAllProducts()
             .then((resp) => {
                 if (resp.status === 200) {
+                    console.log("---PRODUCTS---");
                     console.log(resp.data);
                     dispatch({
                         type: ACTIONS.SET_ALL_PRODUCTS,
@@ -36,9 +37,9 @@ export default function AllProducts({ fillEditProductPage, editProductId }) {
             });
     }, [dispatch]);
 
-    const productItems = allProducts.map((prod) => (
+    let productItems = allProducts.map((prod) => (
         <TableRow
-            key={prod.name}
+            key={prod._id}
             id={`${prod.category},${prod._id}`}
             className={
                 editProductId === prod._id
@@ -47,6 +48,7 @@ export default function AllProducts({ fillEditProductPage, editProductId }) {
             }
             onClick={fillEditProductPage}
         >
+            <TableCell>{prod.imgUrl}</TableCell>
             <TableCell>{prod.category}</TableCell>
             <TableCell>{prod.name}</TableCell>
             {/* <TableCell>{prod.colour}</TableCell> */}
@@ -56,10 +58,12 @@ export default function AllProducts({ fillEditProductPage, editProductId }) {
 
     return (
         <Paper className={classes.paper}>
+            {/* Products */}
             <Title>Products</Title>
             <Table size="small">
                 <TableHead>
                     <TableRow>
+                        <TableCell> </TableCell>
                         <TableCell>Category</TableCell>
                         <TableCell>Name</TableCell>
                         {/* <TableCell>Colour</TableCell> */}

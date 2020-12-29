@@ -1,101 +1,75 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-// import { useCurtainContext } from '../../config/CurtainCoContext'
-// import { ACTIONS } from '../../config/stateReducer'
+import { useCurtainContext } from "../../config/CurtainCoContext";
+import { ACTIONS } from "../../config/stateReducer";
 // import { Link } from "react-router-dom";
 
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import useStyles from './ConsultationStyles'
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Box from "@material-ui/core/Box";
+import Typography from "@material-ui/core/Typography";
+import Container from "@material-ui/core/Container";
+import useStyles from "./ConsultationStyles";
 
-import { submitConsultationRequest } from '../../services/consultationServices'
-import Copyright from '../authentication/Copyright'
-import { Link } from 'react-router-dom/cjs/react-router-dom.min';
-
+import { submitConsultationRequest } from "../../services/consultationServices";
+import Copyright from "../authentication/Copyright";
+import UserDataForm from "../reusable/UserDataForm";
 
 export default function SignUp() {
     const classes = useStyles();
 
-    // const { state, dispatch } = useCurtainContext()
-    const [message, setMessage] = useState('')
+    const { state, dispatch } = useCurtainContext();
+    const [message, setMessage] = useState({ message: "" });
+    const [request, setRequest] = useState({});
 
-    function handleSubmitRequest(e) {
-        e.preventDefault()
+    function handleSubmitRequest(userDetails) {
+        setRequest({ ...userDetails, ...message });
 
-        alert('uncomment below code when phil has BE route set up')
-
-        // submitConsultationRequest({ message }).then((resp) => {
-        //     console.log(resp);
-        // })
+        submitConsultationRequest(request)
+            .then((resp) => {
+                if (resp.status === 201) {
+                    dispatch({
+                        type: ACTIONS.ADD_CONSULTATION,
+                        payload: request,
+                    });
+                } else {
+                }
+                console.log(resp);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }
 
     function handleMessageChange(e) {
-        setMessage(e.target.value)
+        setMessage({ message: e.target.value });
     }
 
-
     return (
-
         <Container component="main" maxWidth="xs">
-
             <CssBaseline />
 
             <div className={classes.paper}>
-
-                <Avatar className={classes.avatar}>
-                    <LockOutlinedIcon />
-                </Avatar>
-
-                <Typography component="h1" variant="h5">
+                <Typography component="h2" variant="h3">
                     Send a Request
                 </Typography>
 
-                <form className={classes.form} noValidate onSubmit={handleSubmitRequest}>
-
-                    <Grid container spacing={2}>
-
-                        <Grid item xs={12}>
-                            <TextField 
-                                id="message" 
-                                variant="outlined" 
-                                label="Message Details" 
-                                value={message} 
-                                required 
-                                onChange={handleMessageChange}
-                                fullWidth
-                                multiline
-                                rows={6}
-                            />
-                        </Grid>
-
-                    </Grid>
-
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={classes.submit}
-                        onClick={handleSubmitRequest}
-                    >
-                        Submit
-                    </Button>
-
-                </form>
-
+                <UserDataForm
+                    currentUser={state.currentUser}
+                    formTitle={""}
+                    handleFunctionFromParent={handleSubmitRequest}
+                    withAuth={false}
+                    headerInformation={false}
+                    buttonText={"Submit"}
+                    withConsultMessage={{
+                        msg: message.message,
+                        handleFunction: handleMessageChange,
+                    }}
+                />
             </div>
 
             <Box mt={5}>
                 <Copyright />
             </Box>
-
         </Container>
     );
 }

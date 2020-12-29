@@ -5,6 +5,7 @@ import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import DeleteIcon from "@material-ui/icons/Delete";
+import useStyles from "../../components/account/admin/AdminStyles";
 
 function TrackForm({
     title,
@@ -15,6 +16,7 @@ function TrackForm({
     product,
     handleRemove,
 }) {
+    const classes = useStyles();
     return (
         <>
             <Typography variant="h6">{title}</Typography>
@@ -24,8 +26,9 @@ function TrackForm({
                         id="track-input"
                         label="Track Name"
                         variant="outlined"
-                        onChange={handleTextChange}
                         name="name"
+                        className={classes.fullWidth}
+                        onChange={handleTextChange}
                         value={product.name}
                     />
                 </Grid>
@@ -34,8 +37,9 @@ function TrackForm({
                         id="track-type-input"
                         label="Track Type"
                         variant="outlined"
-                        onChange={handleTextChange}
                         name="type"
+                        className={classes.fullWidth}
+                        onChange={handleTextChange}
                         value={product.type}
                     />
                 </Grid>
@@ -44,8 +48,9 @@ function TrackForm({
                         id="track-color-input"
                         label="Track Colour"
                         variant="outlined"
-                        onChange={handleTextChange}
                         name="colour"
+                        className={classes.fullWidth}
+                        onChange={handleTextChange}
                         value={product.colour}
                     />
                 </Grid>
@@ -55,6 +60,7 @@ function TrackForm({
                     <RadioGroup
                         aria-label="single-double-input"
                         name="single"
+                        className={classes.fullWidth}
                         onChange={handleRadioChange}
                         row
                         value={
@@ -82,8 +88,9 @@ function TrackForm({
                         id="track-finial-style-input"
                         label="Finial Style"
                         variant="outlined"
-                        onChange={handleTextChange}
                         name="finialStyle"
+                        className={classes.fullWidth}
+                        onChange={handleTextChange}
                         value={product.finialStyle}
                     />
                 </Grid>
@@ -92,8 +99,9 @@ function TrackForm({
                         id="track-finial-color-input"
                         label="Finial Colour"
                         variant="outlined"
-                        onChange={handleTextChange}
                         name="finialColour"
+                        className={classes.fullWidth}
+                        onChange={handleTextChange}
                         value={product.finialColour}
                     />
                 </Grid>
@@ -102,8 +110,9 @@ function TrackForm({
                         id="track-fix-location-input"
                         label="Fix Location"
                         variant="outlined"
-                        onChange={handleTextChange}
                         name="location"
+                        className={classes.fullWidth}
+                        onChange={handleTextChange}
                         value={product.location}
                     />
                 </Grid>
@@ -113,8 +122,9 @@ function TrackForm({
                         label="Price"
                         variant="outlined"
                         type="number"
-                        onChange={handleTextChange}
                         name="price"
+                        className={classes.fullWidth}
+                        onChange={handleTextChange}
                         value={product.price}
                     />
                 </Grid>

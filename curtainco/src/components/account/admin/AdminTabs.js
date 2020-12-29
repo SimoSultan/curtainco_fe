@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import { Grid } from "@material-ui/core";
 
@@ -30,11 +29,7 @@ function TabPanel({ children, value, index, ...other }) {
             aria-labelledby={`scrollable-auto-tab-${index}`}
             {...other}
         >
-            {value === index && (
-                <Box p={3}>
-                    <Typography>{children}</Typography>
-                </Box>
-            )}
+            {value === index && <Box p={3}>{children}</Box>}
         </div>
     );
 }
@@ -55,6 +50,7 @@ function a11yProps(index) {
 export default function AdminTabs({ tabValue, handleChange }) {
     const classes = useStyles();
     const [editProductId, setEditProductId] = useState("");
+    const [editCollectionId, setEditCollectionId] = useState("");
     const [editForm, setEditForm] = useState("");
 
     function fillEditProductPage(event) {
@@ -63,6 +59,11 @@ export default function AdminTabs({ tabValue, handleChange }) {
         const productId = categoryId.split(",")[1];
         setEditProductId(productId);
         setEditForm(productCategory);
+    }
+
+    function fillEditCollectionPage(event) {
+        const collectionId = event.currentTarget.id;
+        setEditCollectionId(collectionId);
     }
 
     return (
@@ -91,7 +92,7 @@ export default function AdminTabs({ tabValue, handleChange }) {
                 <Grid
                     container
                     justify="center"
-                    alignItems="center"
+                    alignItems="flex-start"
                     spacing={2}
                 >
                     <Grid item xs>
@@ -128,14 +129,20 @@ export default function AdminTabs({ tabValue, handleChange }) {
                 <Grid
                     container
                     justify="center"
-                    alignItems="center"
+                    alignItems="flex-start"
                     spacing={2}
                 >
                     <Grid item xs>
-                        <AllCollections />
+                        <AllCollections
+                            fillEditCollectionPage={fillEditCollectionPage}
+                            editCollectionId={editCollectionId}
+                        />
                     </Grid>
                     <Grid item xs>
-                        <EditCollection />
+                        <EditCollection
+                            editCollectionId={editCollectionId}
+                            setEditCollectionId={setEditCollectionId}
+                        />
                     </Grid>
                 </Grid>
             </TabPanel>

@@ -30,6 +30,7 @@ export default function AllUsers() {
         getAllUsers()
             .then((resp) => {
                 if (resp.status === 200) {
+                    console.log("---USERS---");
                     console.log(resp.data);
                     dispatch({
                         type: ACTIONS.SET_ALL_USERS,
@@ -72,11 +73,6 @@ export default function AllUsers() {
                 </TableHead>
                 <TableBody>{userRow}</TableBody>
             </Table>
-            <div className={classes.seeMore}>
-                <Link color="primary" href="#" onClick={preventDefault}>
-                    See more users
-                </Link>
-            </div>
         </Paper>
     );
 }
