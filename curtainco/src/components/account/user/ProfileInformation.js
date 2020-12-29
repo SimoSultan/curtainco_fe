@@ -25,7 +25,6 @@ function ProfileInformation() {
 
     if (state.currentUser) {
         user = state.currentUser;
-        user.address = `${user.address1}, ${user.suburb}, ${user.state}, ${user.postcode}`;
         user.firstName = splitFullName(user.fullName)[0];
         user.lastName = splitFullName(user.fullName)[1];
     }

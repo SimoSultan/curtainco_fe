@@ -8,6 +8,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Divider from "@material-ui/core/Divider";
+import Select from "@material-ui/core/Select";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { MenuItem } from "@material-ui/core";
 
@@ -26,14 +27,14 @@ const states = ["QLD", "VIC", "NSW", "NT", "ACT", "WA", "SA", "TAS"];
 const titles = ["Mr", "Mrs", "Miss", "Ms", "Mx", "Sir", "Dr"];
 
 const menuItems = states.map((place) => (
-    <MenuItem value={place} key={place}>
+    <option value={place} key={place}>
         {place}
-    </MenuItem>
+    </option>
 ));
 const titleItems = titles.map((title) => (
-    <MenuItem value={title} key={title}>
+    <option value={title} key={title}>
         {title}
-    </MenuItem>
+    </option>
 ));
 
 export default function UserDataForm({
@@ -47,6 +48,8 @@ export default function UserDataForm({
     withConsultMessage,
 }) {
     const classes = useStyles();
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
     const [userData, setUserData] = useState({
         email: "",
         password: "",
@@ -64,6 +67,8 @@ export default function UserDataForm({
     useEffect(() => {
         if (currentUser !== null) {
             setUserData(currentUser);
+            setFirstName(getFirstNameFromFullName(currentUser.fullName));
+            setLastName(getLastNameFromFullName(currentUser.fullName));
         }
     }, [currentUser]);
 
@@ -74,20 +79,24 @@ export default function UserDataForm({
         });
     };
 
+    console.log(userData);
+
     const handleNameChange = (event) => {
         if (event.target.name === "firstName") {
+            setFirstName(event.target.value);
             setUserData({
                 ...userData,
-                [userData.fullName]: `${
-                    event.target.value
-                },${getLastNameFromFullName(userData.fullName)}`,
+                fullName: `${event.target.value},${getLastNameFromFullName(
+                    userData.fullName
+                )}`,
             });
         } else {
+            setLastName(event.target.value);
             setUserData({
                 ...userData,
-                [userData.fullName]: `${getFirstNameFromFullName(
-                    userData.fullName
-                )},${event.target.value}`,
+                fullName: `${getFirstNameFromFullName(userData.fullName)},${
+                    event.target.value
+                }`,
             });
         }
     };
@@ -152,23 +161,29 @@ export default function UserDataForm({
                     onSubmit={handleSubmitForm}
                 >
                     <Grid container spacing={2}>
-                        {currentUser && !withConsultMessage ? (
+                        {currentUser === null ||
+                        (currentUser && !withConsultMessage) ? (
                             <>
                                 <Grid item xs={12} sm={2}>
-                                    <TextField
+                                    <Select
                                         id="title"
                                         variant="outlined"
-                                        label="Title"
                                         value={userData.title}
-                                        select
                                         onChange={handleSelectChange}
                                         fullWidth
                                         name="title"
-                                        // defaultValue=""
                                         autoComplete="honorific-prefix"
+                                        native
                                     >
+                                        {
+                                            <option
+                                                aria-label="None"
+                                                disabled
+                                                label="Title"
+                                            />
+                                        }{" "}
                                         {titleItems}
-                                    </TextField>
+                                    </Select>
                                 </Grid>
                                 <Grid item xs={12} sm={5}>
                                     <TextField
@@ -180,9 +195,7 @@ export default function UserDataForm({
                                         id="firstName"
                                         label="First Name"
                                         autoFocus
-                                        value={getFirstNameFromFullName(
-                                            userData.fullName
-                                        )}
+                                        value={firstName}
                                         onChange={handleNameChange}
                                     />
                                 </Grid>
@@ -195,9 +208,7 @@ export default function UserDataForm({
                                         label="Last Name"
                                         name="lastName"
                                         autoComplete="family-name"
-                                        value={getLastNameFromFullName(
-                                            userData.fullName
-                                        )}
+                                        value={lastName}
                                         onChange={handleNameChange}
                                     />
                                 </Grid>
@@ -296,19 +307,26 @@ export default function UserDataForm({
                                     />
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
-                                    <TextField
+                                    <Select
                                         id="state"
                                         variant="outlined"
-                                        label="State"
                                         value={userData.state}
+                                        name="state"
                                         required
-                                        select
                                         onChange={handleSelectChange}
                                         fullWidth
                                         autoComplete="address-level1"
+                                        native
                                     >
+                                        {
+                                            <option
+                                                aria-label="None"
+                                                disabled
+                                                label="State"
+                                            />
+                                        }{" "}
                                         {menuItems}
-                                    </TextField>
+                                    </Select>
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
                                     <TextField

@@ -54,7 +54,7 @@ export default function SignUp() {
                 </Typography>
 
                 <UserDataForm
-                    user={state.currentUser}
+                    currentUser={state.currentUser}
                     formTitle={""}
                     handleFunctionFromParent={handleSubmitRequest}
                     withAuth={false}
