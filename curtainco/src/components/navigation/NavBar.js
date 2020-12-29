@@ -19,8 +19,12 @@ function NavBar() {
         e.preventDefault();
 
         logoutUser()
-            .then((response) => {
-                console.log("Got back response on logout", response.status);
+            .then((resp) => {
+                console.log("Got back response on logout", resp.status);
+                // logout the user locally
+                if (resp.status === 204) {
+                    dispatch({ type: ACTIONS.LOGOUT });
+                }
             })
             .catch((error) => {
                 console.log(
@@ -28,8 +32,6 @@ function NavBar() {
                     error
                 );
             });
-        // Even if we catch an error, logout the user locally
-        dispatch({ type: ACTIONS.LOGOUT });
     }
 
     return (

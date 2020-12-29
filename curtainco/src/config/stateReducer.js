@@ -15,6 +15,10 @@ export const ACTIONS = {
     SET_ALL_PRODUCTS: "get-all-products",
     SET_ALL_COLLECTIONS: "get-all-collections",
     SET_ALL_CONSULTATIONS: "get-all-consults",
+    ADD_CONSULTATION: "add-consult",
+    VIEW_CONSULTATION: "view-consult",
+    UPDATE_CONSULTATION: "update-consult",
+    DELETE_CONSULTATION: "delete-consult",
 };
 
 export default function stateReducer(state, action) {
@@ -148,6 +152,12 @@ export default function stateReducer(state, action) {
             return {
                 ...state,
                 consults: action.payload,
+            };
+        }
+        case ACTIONS.ADD_CONSULTATION: {
+            return {
+                ...state,
+                consults: [...state.consults, action.payload],
             };
         }
         default:

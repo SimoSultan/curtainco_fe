@@ -21,12 +21,13 @@ export default function AllCollections({
     const classes = useStyles();
 
     const { state, dispatch } = useCurtainContext();
-    let allCollections = state.collections;
+    const allCollections = state.collections;
 
     useEffect(() => {
         getAllCollections()
             .then((resp) => {
                 if (resp.status === 200) {
+                    console.log("---COLLECTIONS---");
                     console.log(resp.data);
                     dispatch({
                         type: ACTIONS.SET_ALL_COLLECTIONS,

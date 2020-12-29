@@ -10,6 +10,7 @@ function EditUserInformation({ user, handleUpdate }) {
             withAuth={false}
             buttonText={"Update Information"}
             headerInformation={false}
+            withConsultMessage={false}
         />
     );
 }

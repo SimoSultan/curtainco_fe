@@ -4,11 +4,6 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-// import FormControl from "@material-ui/core/FormControl";
-// import InputLabel from "@material-ui/core/InputLabel";
-// import Select from "@material-ui/core/Select";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
@@ -49,6 +44,7 @@ export default function UserDataForm({
     headerInformation,
     buttonText,
     // buttonColor,
+    withConsultMessage,
 }) {
     const classes = useStyles();
 
@@ -192,77 +188,173 @@ export default function UserDataForm({
                     onSubmit={handleSubmitForm}
                 >
                     <Grid container spacing={2}>
-                        <Grid item xs={12} sm={2}>
-                            <TextField
-                                id="title"
-                                variant="outlined"
-                                label="Title"
-                                value={title ? title : ""}
-                                select
-                                onChange={handleTitleChange}
-                                fullWidth
-                                // defaultValue=""
-                                autoComplete="honorific-prefix"
-                            >
-                                {titleItems}
-                            </TextField>
-                        </Grid>
-                        <Grid item xs={12} sm={5}>
-                            <TextField
-                                autoComplete="given-name"
-                                name="firstName"
-                                variant="outlined"
-                                required
-                                fullWidth
-                                id="firstName"
-                                label="First Name"
-                                autoFocus
-                                value={firstName}
-                                onChange={handleFirstNameChange}
-                            />
-                        </Grid>
-                        <Grid item xs={12} sm={5}>
-                            <TextField
-                                variant="outlined"
-                                required
-                                fullWidth
-                                id="lastName"
-                                label="Last Name"
-                                name="lastName"
-                                autoComplete="family-name"
-                                value={lastName}
-                                onChange={handleLastNameChange}
-                            />
-                        </Grid>
-
-                        {withAuth ? (
+                        {user && !withConsultMessage ? (
                             <>
-                                <Grid item xs={12}>
+                                <Grid item xs={12} sm={2}>
+                                    <TextField
+                                        id="title"
+                                        variant="outlined"
+                                        label="Title"
+                                        value={title ? title : ""}
+                                        select
+                                        onChange={handleTitleChange}
+                                        fullWidth
+                                        // defaultValue=""
+                                        autoComplete="honorific-prefix"
+                                    >
+                                        {titleItems}
+                                    </TextField>
+                                </Grid>
+                                <Grid item xs={12} sm={5}>
+                                    <TextField
+                                        autoComplete="given-name"
+                                        name="firstName"
+                                        variant="outlined"
+                                        required
+                                        fullWidth
+                                        id="firstName"
+                                        label="First Name"
+                                        autoFocus
+                                        value={firstName}
+                                        onChange={handleFirstNameChange}
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={5}>
                                     <TextField
                                         variant="outlined"
                                         required
                                         fullWidth
-                                        id="email"
-                                        label="Email Address"
-                                        name="email"
-                                        autoComplete="email"
-                                        value={email}
-                                        onChange={handleEmailChange}
+                                        id="lastName"
+                                        label="Last Name"
+                                        name="lastName"
+                                        autoComplete="family-name"
+                                        value={lastName}
+                                        onChange={handleLastNameChange}
                                     />
                                 </Grid>
 
+                                {withAuth ? (
+                                    <>
+                                        <Grid item xs={12}>
+                                            <TextField
+                                                variant="outlined"
+                                                required
+                                                fullWidth
+                                                id="email"
+                                                label="Email Address"
+                                                name="email"
+                                                autoComplete="email"
+                                                value={email}
+                                                onChange={handleEmailChange}
+                                            />
+                                        </Grid>
+
+                                        <Grid item xs={12}>
+                                            <TextField
+                                                variant="outlined"
+                                                required
+                                                fullWidth
+                                                name="password"
+                                                label="Password"
+                                                type="password"
+                                                id="password"
+                                                autoComplete="current-password"
+                                                value={password}
+                                                onChange={handlePasswordChange}
+                                            />
+                                        </Grid>
+                                    </>
+                                ) : (
+                                    ""
+                                )}
+
                                 <Grid item xs={12}>
+                                    <Divider variant="middle" />
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
                                     <TextField
                                         variant="outlined"
                                         required
                                         fullWidth
-                                        name="password"
-                                        label="Password"
-                                        type="password"
-                                        id="password"
-                                        autoComplete="current-password"
-                                        value={password}
-                                        onChange={handlePasswordChange}
+                                        name="phone"
+                                        label="Mobile Number"
+                                        type="text"
+                                        id="phone"
+                                        autoComplete="tel"
+                                        value={phone}
+                                        onChange={handlePhoneChange}
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                        variant="outlined"
+                                        fullWidth
+                                        name="companyName"
+                                        label="Company"
+                                        type="text"
+                                        id="companyName"
+                                        autoComplete="organization"
+                                        value={companyName}
+                                        onChange={handleCompanyChange}
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                        variant="outlined"
+                                        required
+                                        fullWidth
+                                        name="address1"
+                                        label="Street Address"
+                                        type="text"
+                                        id="address1"
+                                        autoComplete="address-line1"
+                                        value={address1}
+                                        onChange={handleAddressChange}
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                        variant="outlined"
+                                        required
+                                        fullWidth
+                                        name="suburb"
+                                        label="Suburb"
+                                        type="text"
+                                        id="suburb"
+                                        autoComplete="address-level2"
+                                        value={suburb}
+                                        onChange={handleSuburbChange}
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                        id="state"
+                                        variant="outlined"
+                                        label="State"
+                                        value={addressState ? addressState : ""}
+                                        required
+                                        select
+                                        onChange={handleAddressStateChange}
+                                        fullWidth
+                                        // defaultValue=""
+                                        // helperText="Please select your state"
+                                        autoComplete="address-level1"
+                                    >
+                                        {menuItems}
+                                    </TextField>
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                        variant="outlined"
+                                        required
+                                        fullWidth
+                                        name="postcode"
+                                        label="Post Code"
+                                        type="text"
+                                        id="postcode"
+                                        autoComplete="postal-code"
+                                        value={postCode ? postCode : ""}
+                                        onChange={handlePostCodeChange}
                                     />
                                 </Grid>
                             </>
@@ -270,107 +362,23 @@ export default function UserDataForm({
                             ""
                         )}
 
-                        <Grid item xs={12}>
-                            <Divider variant="middle" />
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                variant="outlined"
-                                required
-                                fullWidth
-                                name="phone"
-                                label="Mobile Number"
-                                type="text"
-                                id="phone"
-                                autoComplete="tel"
-                                value={phone}
-                                onChange={handlePhoneChange}
-                            />
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                variant="outlined"
-                                fullWidth
-                                name="companyName"
-                                label="Company"
-                                type="text"
-                                id="companyName"
-                                autoComplete="organization"
-                                value={companyName}
-                                onChange={handleCompanyChange}
-                            />
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                variant="outlined"
-                                required
-                                fullWidth
-                                name="address1"
-                                label="Street Address"
-                                type="text"
-                                id="address1"
-                                autoComplete="address-line1"
-                                value={address1}
-                                onChange={handleAddressChange}
-                            />
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                variant="outlined"
-                                required
-                                fullWidth
-                                name="suburb"
-                                label="Suburb"
-                                type="text"
-                                id="suburb"
-                                autoComplete="address-level2"
-                                value={suburb}
-                                onChange={handleSuburbChange}
-                            />
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                id="state"
-                                variant="outlined"
-                                label="State"
-                                value={addressState ? addressState : ""}
-                                required
-                                select
-                                onChange={handleAddressStateChange}
-                                fullWidth
-                                // defaultValue=""
-                                // helperText="Please select your state"
-                                autoComplete="address-level1"
-                            >
-                                {menuItems}
-                            </TextField>
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                variant="outlined"
-                                required
-                                fullWidth
-                                name="postcode"
-                                label="Post Code"
-                                type="text"
-                                id="postcode"
-                                autoComplete="postal-code"
-                                value={postCode ? postCode : ""}
-                                onChange={handlePostCodeChange}
-                            />
-                        </Grid>
-                        {/* 
-                        <Grid item xs={12}>
-                            <FormControlLabel
-                                control={
-                                    <Checkbox
-                                        value="allowExtraEmails"
-                                        color="primary"
-                                    />
-                                }
-                                label="I want to receive inspiration, marketing promotions and updates via email."
-                            />
-                        </Grid> */}
+                        {withConsultMessage ? (
+                            <Grid item xs={12}>
+                                <TextField
+                                    id="message"
+                                    variant="outlined"
+                                    label="Message Details"
+                                    value={withConsultMessage.msg}
+                                    required
+                                    onChange={withConsultMessage.handleFunction}
+                                    fullWidth
+                                    multiline
+                                    rows={6}
+                                />
+                            </Grid>
+                        ) : (
+                            ""
+                        )}
                     </Grid>
 
                     <Button

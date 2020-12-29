@@ -37,6 +37,8 @@ export default function SignIn() {
 
         loginUser(user)
             .then((resp) => {
+                console.log("---CURRENT USER---");
+                console.log(resp.data);
                 let currentUser = resp.data.user;
 
                 if (currentUser && resp.status === 200) {
@@ -45,7 +47,7 @@ export default function SignIn() {
                         payload: currentUser,
                     });
                 } else {
-                    loginError = `An error ocurred on login: Error Code: ${resp.status}. Message: ${resp.message}.`;
+                    loginError = `An error ocurred on login: Status Code is: ${resp.status}. Message: ${resp.message}.`;
                     console.log(loginError);
                 }
 

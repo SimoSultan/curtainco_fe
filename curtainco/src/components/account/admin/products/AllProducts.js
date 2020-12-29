@@ -22,6 +22,7 @@ export default function AllProducts({ fillEditProductPage, editProductId }) {
         getAllProducts()
             .then((resp) => {
                 if (resp.status === 200) {
+                    console.log("---PRODUCTS---");
                     console.log(resp.data);
                     dispatch({
                         type: ACTIONS.SET_ALL_PRODUCTS,
@@ -47,6 +48,7 @@ export default function AllProducts({ fillEditProductPage, editProductId }) {
             }
             onClick={fillEditProductPage}
         >
+            <TableCell>{prod.imgUrl}</TableCell>
             <TableCell>{prod.category}</TableCell>
             <TableCell>{prod.name}</TableCell>
             {/* <TableCell>{prod.colour}</TableCell> */}
@@ -61,6 +63,7 @@ export default function AllProducts({ fillEditProductPage, editProductId }) {
             <Table size="small">
                 <TableHead>
                     <TableRow>
+                        <TableCell> </TableCell>
                         <TableCell>Category</TableCell>
                         <TableCell>Name</TableCell>
                         {/* <TableCell>Colour</TableCell> */}

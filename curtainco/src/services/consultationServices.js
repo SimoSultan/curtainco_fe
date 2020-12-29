@@ -1,14 +1,15 @@
 import api from "../config/api";
 
-async function submitConsultationRequest(message) {
+async function submitConsultationRequest(userRequest) {
     // call to server to logout user
-    const response = await api.post("/consults", message);
-    console.log(response.data);
+    const response = await api.post("/consults", userRequest);
+    console.log(response);
     return response;
 }
 
 async function getAllConsultations() {
     const response = await api.get("/consults");
+    console.log(response);
     return response;
 }
 
