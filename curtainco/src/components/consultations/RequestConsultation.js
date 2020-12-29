@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { useCurtainContext } from "../../config/CurtainCoContext";
 import { ACTIONS } from "../../config/stateReducer";
@@ -13,6 +13,7 @@ import useStyles from "./ConsultationStyles";
 import { submitConsultationRequest } from "../../services/consultationServices";
 import Copyright from "../authentication/Copyright";
 import UserDataForm from "../reusable/UserDataForm";
+import { isEmpty } from "../../helpers/appHelpers";
 
 export default function SignUp() {
     const classes = useStyles();
@@ -21,24 +22,34 @@ export default function SignUp() {
     const [message, setMessage] = useState({ message: "" });
     const [request, setRequest] = useState({});
 
-    function handleSubmitRequest(userDetails) {
-        setRequest({ ...userDetails, ...message });
-
-        submitConsultationRequest(request)
-            .then((resp) => {
-                if (resp.status === 201) {
-                    dispatch({
-                        type: ACTIONS.ADD_CONSULTATION,
-                        payload: request,
-                    });
-                } else {
-                }
-                console.log(resp);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+    function getUserDetailsFromForm(userDetails) {
+        setRequest({ ...message, ...userDetails });
     }
+
+    useEffect(() => {
+        if (!isEmpty(request)) {
+            submitConsultationRequest(request)
+                .then((resp) => {
+                    console.log("---CONSULTATION---");
+                    console.log(resp.data);
+                    if (resp.status === 201) {
+                        dispatch({
+                            type: ACTIONS.ADD_CONSULTATION,
+                            payload: request,
+                        });
+                        // clear the request state so that the useEffect doesn't fire again
+                        setRequest({});
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        } else {
+            console.log(
+                "consultation request object is empty and submitting the request failed"
+            );
+        }
+    }, [dispatch, request]);
 
     function handleMessageChange(e) {
         setMessage({ message: e.target.value });
@@ -56,7 +67,7 @@ export default function SignUp() {
                 <UserDataForm
                     currentUser={state.currentUser}
                     formTitle={""}
-                    handleFunctionFromParent={handleSubmitRequest}
+                    handleFunctionFromParent={getUserDetailsFromForm}
                     withAuth={false}
                     headerInformation={false}
                     buttonText={"Submit"}

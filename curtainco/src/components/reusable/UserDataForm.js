@@ -66,6 +66,7 @@ export default function UserDataForm({
 
     useEffect(() => {
         if (currentUser !== null) {
+            console.log(currentUser);
             setUserData(currentUser);
             setFirstName(getFirstNameFromFullName(currentUser.fullName));
             setLastName(getLastNameFromFullName(currentUser.fullName));
@@ -79,24 +80,18 @@ export default function UserDataForm({
         });
     };
 
-    console.log(userData);
-
     const handleNameChange = (event) => {
         if (event.target.name === "firstName") {
             setFirstName(event.target.value);
             setUserData({
                 ...userData,
-                fullName: `${event.target.value},${getLastNameFromFullName(
-                    userData.fullName
-                )}`,
+                fullName: `${event.target.value},${firstName}`,
             });
         } else {
             setLastName(event.target.value);
             setUserData({
                 ...userData,
-                fullName: `${getFirstNameFromFullName(userData.fullName)},${
-                    event.target.value
-                }`,
+                fullName: `${event.target.value},${lastName}`,
             });
         }
     };
