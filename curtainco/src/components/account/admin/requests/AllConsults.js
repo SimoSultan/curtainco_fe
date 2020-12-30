@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-import Link from "@material-ui/core/Link";
+import Checkbox from "@material-ui/core/Checkbox";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -11,15 +11,18 @@ import Title from "../../../reusable/Title";
 
 import useStyles from "../AdminStyles";
 
-import { splitFullName } from "../../../../helpers/userHelpers";
-import { getAllConsultations } from "../../../../services/consultationServices";
+import {
+    getFirstNameFromFullName,
+    getLastNameFromFullName,
+} from "../../../../helpers/userHelpers";
+import { sortConsultations } from "../../../../helpers/consultationHelpers";
+import { displayShortDate } from "../../../../helpers/appHelpers";
+import {
+    getAllConsultations,
+    markConsultationCompleted,
+} from "../../../../services/consultationServices";
 import { useCurtainContext } from "../../../../config/CurtainCoContext";
 import { ACTIONS } from "../../../../config/stateReducer";
-
-function preventDefault(event) {
-    event.preventDefault();
-    alert("does nothing");
-}
 
 export default function AllConsults() {
     const classes = useStyles();
@@ -37,7 +40,9 @@ export default function AllConsults() {
                         payload: resp.data,
                     });
                 } else {
-                    console.log("status code wasn't correct");
+                    console.log(
+                        "status code wasn't correct when getting all consultations"
+                    );
                 }
             })
             .catch((error) => {
@@ -45,16 +50,72 @@ export default function AllConsults() {
             });
     }, [dispatch]);
 
+    function handleConsultationCheckbox(event) {
+        const checked = event.target.checked;
+        const consultId = event.currentTarget.parentNode.parentNode.id;
+        markConsultationCompleted(consultId, { isProcessed: checked })
+            .then((resp) => {
+                console.log("---UPDATED CONSULTATION---");
+                console.log(resp.data);
+                if (resp.status === 200) {
+                    dispatch({
+                        type: ACTIONS.UPDATE_CONSULTATION,
+                        payload: resp.data,
+                    });
+                    dispatch({
+                        type: ACTIONS.SET_SNACKBAR,
+                        payload: {
+                            open: true,
+                            success: "success",
+                            message: "Consult successfully updated",
+                        },
+                    });
+                } else {
+                    console.log("update consult status was not 200");
+                }
+            })
+            .catch((error) => {
+                console.log(
+                    `Something went wrong when updating the consultation: ${error}`
+                );
+            });
+    }
+
     // REMOVE ADMIN ROLE FROM LIST
 
-    const userRow = allConsults.map((req) => (
-        <TableRow key={req._id}>
-            <TableCell>{`${splitFullName(req.fullName)[0]} ${
-                splitFullName(req.fullName)[1]
-            }`}</TableCell>
-            <TableCell>{req.email}</TableCell>
-            <TableCell>{req.phone}</TableCell>
-            <TableCell>{`${req.suburb}, ${req.state}`}</TableCell>
+    const userRow = allConsults.map((cons) => (
+        <TableRow key={cons._id} id={cons._id} hover>
+            <TableCell>
+                <Checkbox
+                    color="primary"
+                    checked={cons.isProcessed}
+                    inputProps={{ "aria-label": "secondary checkbox" }}
+                    onClick={handleConsultationCheckbox}
+                />
+            </TableCell>
+            <TableCell
+                className={cons.isProcessed ? classes.checkboxSelected : ""}
+            >
+                {displayShortDate(cons.createdAt)}
+            </TableCell>
+            <TableCell
+                className={cons.isProcessed ? classes.checkboxSelected : ""}
+            >{`${getFirstNameFromFullName(
+                cons.fullName
+            )} ${getLastNameFromFullName(cons.fullName)}`}</TableCell>
+            <TableCell
+                className={cons.isProcessed ? classes.checkboxSelected : ""}
+            >
+                {cons.email}
+            </TableCell>
+            <TableCell
+                className={cons.isProcessed ? classes.checkboxSelected : ""}
+            >
+                {cons.phone}
+            </TableCell>
+            <TableCell
+                className={cons.isProcessed ? classes.checkboxSelected : ""}
+            >{`${cons.suburb}, ${cons.state}`}</TableCell>
         </TableRow>
     ));
 
@@ -64,6 +125,8 @@ export default function AllConsults() {
             <Table size="small">
                 <TableHead>
                     <TableRow>
+                        <TableCell>Done</TableCell>
+                        <TableCell>Requested On</TableCell>
                         <TableCell>Name</TableCell>
                         <TableCell>Email</TableCell>
                         <TableCell>Phone</TableCell>

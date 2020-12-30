@@ -14,13 +14,6 @@ const useStyles = makeStyles((theme) => ({
     },
     tableRowHover: {
         cursor: "pointer",
-        "&:hover": {
-            backgroundColor: "lightgrey",
-        },
-    },
-    tableRowSelected: {
-        cursor: "pointer",
-        backgroundColor: "lightgrey",
     },
     formControl: {
         minWidth: 120,
@@ -37,6 +30,9 @@ const useStyles = makeStyles((theme) => ({
     },
     selectPlaceholder: {
         color: "rgba(0, 0, 0, 0.57)",
+    },
+    checkboxSelected: {
+        color: "rgba(0, 0, 0, 0.47)",
     },
 }));
 

@@ -7,7 +7,10 @@ import useStyles from "./UserDashboardStyles";
 
 import { useCurtainContext } from "../../../config/CurtainCoContext";
 import { ACTIONS } from "../../../config/stateReducer";
-import { splitFullName } from "../../../helpers/userHelpers";
+import {
+    getFirstNameFromFullName,
+    getLastNameFromFullName,
+} from "../../../helpers/userHelpers";
 import { updateUserInformation } from "../../../services/userServices";
 import ShowUserInformation from "./ShowUserInformation";
 import EditUserInformation from "./EditUserInformation";
@@ -16,18 +19,6 @@ function ProfileInformation() {
     const classes = useStyles();
     const { state, dispatch } = useCurtainContext();
     const [editUser, setEditUser] = useState(false);
-
-    let user = {
-        firstName: "",
-        lastName: "",
-        address: "",
-    };
-
-    if (state.currentUser) {
-        user = state.currentUser;
-        user.firstName = splitFullName(user.fullName)[0];
-        user.lastName = splitFullName(user.fullName)[1];
-    }
 
     function toggleEditUserForm() {
         setEditUser(!editUser);
@@ -67,7 +58,9 @@ function ProfileInformation() {
     return (
         <Container>
             <Typography variant="h5" className={classes.heading}>
-                {`${user.firstName} ${user.lastName}`}
+                {`${getFirstNameFromFullName(
+                    state.currentUser.fullName
+                )} ${getLastNameFromFullName(state.currentUser.fullName)}`}
             </Typography>
 
             {editUser ? (
@@ -76,7 +69,7 @@ function ProfileInformation() {
                     handleUpdate={handleUpdate}
                 />
             ) : (
-                <ShowUserInformation user={user} />
+                <ShowUserInformation user={state.currentUser} />
             )}
 
             <Button

@@ -11,7 +11,10 @@ import Title from "../../../reusable/Title";
 
 import useStyles from "../AdminStyles";
 
-import { splitFullName } from "../../../../helpers/userHelpers";
+import {
+    getFirstNameFromFullName,
+    getLastNameFromFullName,
+} from "../../../../helpers/userHelpers";
 import { getAllUsers } from "../../../../services/adminServices";
 import { useCurtainContext } from "../../../../config/CurtainCoContext";
 import { ACTIONS } from "../../../../config/stateReducer";
@@ -50,9 +53,9 @@ export default function AllUsers() {
 
     const userRow = allUsers.map((user) => (
         <TableRow key={user._id}>
-            <TableCell>{`${splitFullName(user.fullName)[0]} ${
-                splitFullName(user.fullName)[1]
-            }`}</TableCell>
+            <TableCell>{`${getFirstNameFromFullName(
+                user.fullName
+            )} ${getLastNameFromFullName(user.fullName)}`}</TableCell>
             <TableCell>{user.email}</TableCell>
             <TableCell>{user.phone}</TableCell>
             <TableCell>{`${user.suburb}, ${user.state}`}</TableCell>

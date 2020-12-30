@@ -41,11 +41,9 @@ export default function AllProducts({ fillEditProductPage, editProductId }) {
         <TableRow
             key={prod._id}
             id={`${prod.category},${prod._id}`}
-            className={
-                editProductId === prod._id
-                    ? classes.tableRowSelected
-                    : classes.tableRowHover
-            }
+            className={classes.tableRowHover}
+            hover
+            selected={editProductId === prod._id}
             onClick={fillEditProductPage}
         >
             <TableCell>{prod.imgUrl}</TableCell>
