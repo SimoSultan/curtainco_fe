@@ -23,10 +23,15 @@ export default function SignUp() {
     const [request, setRequest] = useState({});
 
     function getUserDetailsFromForm(userDetails) {
+        delete userDetails.role;
+        delete userDetails.password;
+        delete userDetails.orders;
         setRequest({ ...message, ...userDetails });
     }
 
     useEffect(() => {
+        console.log(isEmpty(request));
+        console.log(request);
         if (!isEmpty(request)) {
             submitConsultationRequest(request)
                 .then((resp) => {

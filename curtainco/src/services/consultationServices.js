@@ -14,4 +14,17 @@ async function getAllConsultations() {
     return response;
 }
 
-export { submitConsultationRequest, getAllConsultations };
+async function markConsultationCompleted(id, valueToUpdate) {
+    const response = await api.patch(`/consults/${id}`, valueToUpdate);
+    console.log(response);
+    return response;
+}
+
+async function checkIfUserHasMadeAConsultationRequest(id) {}
+
+export {
+    submitConsultationRequest,
+    getAllConsultations,
+    markConsultationCompleted,
+    checkIfUserHasMadeAConsultationRequest,
+};

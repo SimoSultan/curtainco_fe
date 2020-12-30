@@ -1,3 +1,5 @@
+import { sortConsultations } from "../helpers/consultationHelpers";
+
 export const ACTIONS = {
     LOGIN: "login-user",
     LOGOUT: "logout-user",
@@ -149,15 +151,31 @@ export default function stateReducer(state, action) {
 
         //  -------- CONSULTATIONS --------
         case ACTIONS.SET_ALL_CONSULTATIONS: {
+            let sortedConsults = sortConsultations(action.payload);
             return {
                 ...state,
-                consults: action.payload,
+                consults: sortedConsults,
             };
         }
         case ACTIONS.ADD_CONSULTATION: {
+            let newConsultList = [...state.consults, action.payload];
+            newConsultList = sortConsultations(newConsultList);
+
             return {
                 ...state,
-                consults: [...state.consults, action.payload],
+                consults: newConsultList,
+            };
+        }
+        case ACTIONS.UPDATE_CONSULTATION: {
+            const updatedConsult = action.payload;
+            const consultsWithUpdateRemoved = state.consults.filter(
+                (con) => con._id !== updatedConsult._id
+            );
+            let newConsultList = [...consultsWithUpdateRemoved, updatedConsult];
+            newConsultList = sortConsultations(newConsultList);
+            return {
+                ...state,
+                consults: newConsultList,
             };
         }
         default:

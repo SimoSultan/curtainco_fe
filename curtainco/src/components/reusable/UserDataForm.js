@@ -10,7 +10,6 @@ import Container from "@material-ui/core/Container";
 import Divider from "@material-ui/core/Divider";
 import Select from "@material-ui/core/Select";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import { MenuItem } from "@material-ui/core";
 
 import { Link } from "react-router-dom";
 
@@ -55,7 +54,7 @@ export default function UserDataForm({
         password: "",
         title: "",
         // leave the comma in here as it will break the split function I have on this variable
-        fullName: ",",
+        fullName: `${firstName},${lastName}`,
         phone: "",
         companyName: "",
         address1: "",
@@ -85,13 +84,13 @@ export default function UserDataForm({
             setFirstName(event.target.value);
             setUserData({
                 ...userData,
-                fullName: `${event.target.value},${firstName}`,
+                fullName: `${event.target.value},${lastName}`,
             });
         } else {
             setLastName(event.target.value);
             setUserData({
                 ...userData,
-                fullName: `${event.target.value},${lastName}`,
+                fullName: `${firstName},${event.target.value}`,
             });
         }
     };
@@ -121,6 +120,7 @@ export default function UserDataForm({
 
     async function handleSubmitForm(e) {
         e.preventDefault();
+        console.log(userData);
 
         if (checkIfRequiredUserDataFormFieldsAreEmpty(userData)) {
             return alert("Please complete all required fields.");

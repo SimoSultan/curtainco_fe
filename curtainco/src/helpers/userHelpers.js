@@ -6,11 +6,11 @@ function getLastNameFromFullName(fullName) {
     return fullName.split(",")[1];
 }
 
-function splitFullName(fullName) {
-    let firstName = fullName.split(",")[0];
-    let lastName = fullName.split(",")[1];
-    return [firstName, lastName];
-}
+// function splitFullName(fullName) {
+//     let firstName = fullName.split(",")[0];
+//     let lastName = fullName.split(",")[1];
+//     return [firstName, lastName];
+// }
 
 function checkIfRequiredUserDataFormFieldsAreEmpty(userDetails) {
     delete userDetails.title;
@@ -23,5 +23,5 @@ module.exports = {
     getFirstNameFromFullName,
     getLastNameFromFullName,
     checkIfRequiredUserDataFormFieldsAreEmpty,
-    splitFullName,
+    // splitFullName,
 };

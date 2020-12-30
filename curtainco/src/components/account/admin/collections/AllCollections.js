@@ -46,11 +46,9 @@ export default function AllCollections({
         <TableRow
             key={coll._id}
             id={coll._id}
-            className={
-                editCollectionId === coll._id
-                    ? classes.tableRowSelected
-                    : classes.tableRowHover
-            }
+            className={classes.tableRowHover}
+            hover
+            selected={editCollectionId === coll._id}
             onClick={fillEditCollectionPage}
         >
             <TableCell>{coll.imgUrl}</TableCell>
