@@ -23,6 +23,7 @@ import {
 } from "../../../../services/consultationServices";
 import { useCurtainContext } from "../../../../config/CurtainCoContext";
 import { ACTIONS } from "../../../../config/stateReducer";
+import { Button } from "@material-ui/core";
 
 export default function AllConsults() {
     const classes = useStyles();
@@ -81,6 +82,24 @@ export default function AllConsults() {
             });
     }
 
+    function handleMessageButton(event) {
+        // event.currentTarget.value = "fullName,message"
+        const fullName = event.currentTarget.value.split("/")[0];
+        const message = event.currentTarget.value.split("/")[1];
+        // prettier-ignore
+        const title = `Message from ${getFirstNameFromFullName(fullName)} 
+                    ${getLastNameFromFullName(fullName)}.`;
+        dispatch({
+            type: ACTIONS.SET_MODAL,
+            payload: {
+                open: true,
+                title: title,
+                message: message,
+                data: {},
+            },
+        });
+    }
+
     // REMOVE ADMIN ROLE FROM LIST
 
     const userRow = allConsults.map((cons) => (
@@ -100,9 +119,10 @@ export default function AllConsults() {
             </TableCell>
             <TableCell
                 className={cons.isProcessed ? classes.checkboxSelected : ""}
-            >{`${getFirstNameFromFullName(
-                cons.fullName
-            )} ${getLastNameFromFullName(cons.fullName)}`}</TableCell>
+            >
+                {`${getFirstNameFromFullName(cons.fullName)} 
+                ${getLastNameFromFullName(cons.fullName)}`}
+            </TableCell>
             <TableCell
                 className={cons.isProcessed ? classes.checkboxSelected : ""}
             >
@@ -115,7 +135,19 @@ export default function AllConsults() {
             </TableCell>
             <TableCell
                 className={cons.isProcessed ? classes.checkboxSelected : ""}
-            >{`${cons.suburb}, ${cons.state}`}</TableCell>
+            >
+                {`${cons.suburb}, ${cons.state}`}
+            </TableCell>
+            <TableCell>
+                <Button
+                    variant="outlined"
+                    color="primary"
+                    onClick={handleMessageButton}
+                    value={`${cons.fullName}/${cons.message}`}
+                >
+                    View
+                </Button>
+            </TableCell>
         </TableRow>
     ));
 
@@ -131,6 +163,7 @@ export default function AllConsults() {
                         <TableCell>Email</TableCell>
                         <TableCell>Phone</TableCell>
                         <TableCell>Address</TableCell>
+                        <TableCell>Message</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>{userRow}</TableBody>

@@ -4,6 +4,7 @@ import { createProduct } from "../../../../services/productServices";
 import { useCurtainContext } from "../../../../config/CurtainCoContext";
 import { ACTIONS } from "../../../../config/stateReducer";
 import AccessoryForm from "../../../reusable/AccessoryForm";
+import AccessoryForm2 from "../../../reusable/AccessoryForm2";
 
 function AddAccessory() {
     const { dispatch } = useCurtainContext();
@@ -63,7 +64,7 @@ function AddAccessory() {
     };
 
     return (
-        <AccessoryForm
+        <AccessoryForm2
             title={"Add Accessory"}
             buttonText={"Add"}
             handleTextChange={handleTextChange}

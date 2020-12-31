@@ -30,8 +30,8 @@ export default function CustomModal() {
             type: ACTIONS.SET_MODAL,
             payload: {
                 open: false,
-                title: "This is a title",
-                message: "This is a message",
+                title: "",
+                message: "",
                 data: {},
             },
         });

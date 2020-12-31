@@ -23,7 +23,7 @@ export default function CustomSnackbar() {
             payload: {
                 open: false,
                 severity: "success",
-                message: "May the force be with you",
+                message: "",
             },
         });
     };
