@@ -8,6 +8,13 @@ const useStyles = makeStyles((theme) => ({
         textDecoration: "none",
         color: "inherit",
     },
+    collectionHeaderImage: {
+        width: "60%",
+    },
+    collectionHeaderCont: {
+        width: "50%",
+        margin: "0 auto",
+    },
 }));
 
 export default useStyles;

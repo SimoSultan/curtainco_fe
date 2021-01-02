@@ -12,6 +12,8 @@ function CollectionList({ collections }) {
         <Grid
             item
             container
+            justify="center"
+            alignItems="center"
             key={`collection-${index}`}
             xs
             style={{ width: "80%" }}
