@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Typography, Grid, TextField, Button } from "@material-ui/core";
 import useStyles from "../../AdminStyles";
 import FileInput from "../../../../reusable/FileInput";
@@ -15,7 +15,6 @@ function FlickStick() {
     const [flickStick, setFlickStick] = useState({
         name: "",
         price: "",
-        imgUrl: "",
     });
 
     function handleReset(resetComplete) {
@@ -43,13 +42,14 @@ function FlickStick() {
             let s3Resp = await addPhoto(photo);
             console.log(s3Resp);
             if (s3Resp.status === 201) {
-                setFlickStick({
+                let flickStickWithPhoto = {
                     ...flickStick,
                     imgUrl: s3Resp.data.image.location,
-                });
+                };
+                console.log(flickStickWithPhoto);
                 //     // SAVE TO SB
                 //     try {
-                //         let dbResp = await createAccessory(flickStick);
+                //         let dbResp = await createAccessory(flickStickWithPhoto);
                 //         if (dbResp.status === 201) {
                 //             console.log("successful creation of accessory on DB");
                 //             dispatch({
@@ -64,13 +64,12 @@ function FlickStick() {
                 //                     message: "Created accessory successfully",
                 //                 },
                 //             });
-                //             setFlickStick({name: "", price: "", imgUrl: "",})
-                //             setResetFile(true)
+                setFlickStick({ name: "", price: "" });
+                setResetFile(true);
                 //         }
                 //     } catch (error) {
                 //         console.log(`Error saving flick stick to DB: ${error}`);
                 //     }
-                console.log(flickStick);
             }
         } catch (error) {
             console.log(`Error saving flick stick photo to S3: ${error}`);
