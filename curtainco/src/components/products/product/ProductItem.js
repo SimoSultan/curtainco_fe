@@ -24,7 +24,7 @@ function ProductItem({ productData }) {
             type: ACTIONS.SET_MODAL,
             payload: {
                 open: true,
-                title: "Product Title",
+                title: `${capitalize(productData.name)}`,
                 message: "Something about a product goes here",
                 data: productData,
             },
