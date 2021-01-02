@@ -10,7 +10,7 @@ function Search({ searchInput, handleChange }) {
                 variant="outlined"
                 fullWidth
                 id="search-product"
-                label="Search Product"
+                label="Search Name"
                 value={searchInput}
                 onChange={handleChange}
             />

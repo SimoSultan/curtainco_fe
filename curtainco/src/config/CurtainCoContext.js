@@ -15,13 +15,13 @@ function CurtainContext({ children }) {
         users: [],
         snackbar: {
             severity: "success",
-            message: "May the force be with you",
+            message: "",
             open: false,
         },
         modal: {
             open: false,
-            title: "This is a title",
-            message: "This is a message",
+            title: "",
+            message: "",
             data: {},
         },
         products: [],

@@ -27,9 +27,7 @@ function ProductList({
     // filteredProducts = filteredProducts.filter(element => filterTypes.includes(element.type))
 
     // SORT THE PRODUCTS
-    // FIELDS THAT ARE BEING USED TO SORT BY, THESE ARE CURRENTLY HARD CODED INTO THE
-    // sortPRODUCTS FUNCTION, I NEED A BETTER WAY TO IMPLEMENT THEM
-    filteredProducts = sortProducts(filteredProducts, filterSortBy, sortFields);
+    filteredProducts = sortProducts(filteredProducts, filterSortBy);
 
     const list = filteredProducts.map((item, index) => (
         <Grid item key={`product-${index}`} xs={12} sm={6} md={4}>

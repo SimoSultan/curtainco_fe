@@ -1,37 +1,37 @@
-function sortProducts(filteredProducts, filterSortBy) {
-    // THIS IS HOW THE SORTFIELDS ARRAY LOOKS
-    // const sortFields = [
-    //     "Price: Low to High",
-    //     "Price: High to Low",
-    //     "Name: A to Z",
-    //     "Name: Z to A",
-    //     "Featured",
-    // ];
+const sortACTIONS = {
+    PRICE_LOW_TO_HIGH: "Price: Low to High",
+    PRICE_HIGH_TO_LOW: "Price: High to Low",
+    NAME_ALPHABETICAL: "Name: A to Z",
+    NAME_ALPHABETICAL_REVERSE: "Name: Z to A",
+    FEATURED: "Featured",
+    CATEGORY: "Category",
+};
 
+function sortProducts(filteredProducts, filterSortBy) {
     switch (filterSortBy) {
-        case "Price: Low to High":
-            // sort the list by price low -> high
-            filteredProducts.sort((a, b) => a.amount - b.amount);
+        case sortACTIONS.PRICE_LOW_TO_HIGH:
+            filteredProducts.sort((a, b) => a.price - b.price);
             break;
-        case "Price: High to Low":
-            // sort the list by price high -> low
-            filteredProducts.sort((a, b) => b.amount - a.amount);
+        case sortACTIONS.PRICE_HIGH_TO_LOW:
+            filteredProducts.sort((a, b) => b.price - a.price);
             break;
-        case "Name: A to Z":
-            // sort the list a -> z
+        case sortACTIONS.NAME_ALPHABETICAL:
             filteredProducts.sort((a, b) =>
                 a.name.toLowerCase().localeCompare(b.name.toLowerCase())
             );
             break;
-        case "Name: Z to A":
-            // sort the list z -> a
+        case sortACTIONS.NAME_ALPHABETICAL_REVERSE:
             filteredProducts.sort((a, b) =>
                 b.name.toLowerCase().localeCompare(a.name.toLowerCase())
             );
             break;
-        case "Featured":
-            // sort the list by 'featured'
+        case sortACTIONS.FEATURED:
             alert("feature not yet built");
+            break;
+        case sortACTIONS.CATEGORY:
+            filteredProducts.sort((a, b) =>
+                a.category.toLowerCase().localeCompare(b.category.toLowerCase())
+            );
             break;
         default:
             // if nothing is selected, sort the list alphabetically a -> z
@@ -48,7 +48,7 @@ function filterByType(filteredProducts, types) {
     // THIS IS HOW THE TYPES OBJECT LOOKS
     // types = {
     //     fabric: false,
-    //     rod: false,
+    //     track: false,
     //     accessory: false,
     //     inStock: false,
     // }
@@ -64,7 +64,7 @@ function filterByType(filteredProducts, types) {
 
     if (arr.length > 0) {
         filteredProducts = filteredProducts.filter((element) =>
-            arr.includes(element.type)
+            arr.includes(element.category.toLowerCase())
         );
     }
 
@@ -93,4 +93,5 @@ module.exports = {
     filterByType,
     searchProducts,
     getOneProductFromState,
+    sortACTIONS,
 };

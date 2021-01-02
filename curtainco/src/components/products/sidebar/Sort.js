@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { TextField, MenuItem } from "@material-ui/core";
 
@@ -18,7 +18,6 @@ function Sort({ sortFields, sortBy, handleChange }) {
                 value={sortBy}
                 select
                 onChange={handleChange}
-                fullWidth
             >
                 {sortItems}
             </TextField>

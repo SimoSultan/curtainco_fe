@@ -6,6 +6,7 @@ import Fade from "@material-ui/core/Fade";
 
 import { useCurtainContext } from "../../config/CurtainCoContext";
 import { ACTIONS } from "../../config/stateReducer";
+import { Grid, Typography, Button, CardMedia } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
     modal: {
@@ -18,6 +19,9 @@ const useStyles = makeStyles((theme) => ({
         // border: "2px solid #000",
         boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),
+        width: "50%",
+        maxWidth: "700px",
+        minWidth: "500px",
     },
 }));
 
@@ -30,12 +34,17 @@ export default function CustomModal() {
             type: ACTIONS.SET_MODAL,
             payload: {
                 open: false,
-                title: "This is a title",
-                message: "This is a message",
+                title: "",
+                message: "",
                 data: {},
             },
         });
     };
+
+    function handleCartClick(event) {
+        event.preventDefault();
+        alert("add to cart functionality to do");
+    }
 
     return (
         <Modal
@@ -52,11 +61,69 @@ export default function CustomModal() {
         >
             <Fade in={state.modal.open}>
                 <div className={classes.paper}>
-                    <h2 id="transition-modal-title">{state.modal.title}</h2>
-                    <p id="transition-modal-description">
-                        {state.modal.message}
-                    </p>
-                    <div>{`Data: ${state.modal.data}`}</div>
+                    <Grid container>
+                        <Grid
+                            item
+                            container
+                            xs={5}
+                            justify="center"
+                            alignItems="center"
+                        >
+                            <div role="img">
+                                <img
+                                    src={
+                                        state.modal.data.imgUrl === ""
+                                            ? "https://source.unsplash.com/random"
+                                            : state.modal.data.imgUrl
+                                    }
+                                    alt={state.modal.data.name}
+                                    style={{ width: "70%" }}
+                                />
+                            </div>
+                        </Grid>
+                        <Grid
+                            item
+                            container
+                            direction="column"
+                            justify="flex-start"
+                            alignItems="flex-start"
+                            xs={7}
+                            spacing={1}
+                        >
+                            <Grid item>
+                                <Typography variant="h3" component="h3">
+                                    {state.modal.title}
+                                </Typography>
+                            </Grid>
+                            <Grid item>
+                                <Typography>{state.modal.message}</Typography>
+                            </Grid>
+                            <Grid item>
+                                <Typography>
+                                    Category: {state.modal.data.category}
+                                </Typography>
+                            </Grid>
+                            <Grid item>
+                                <Typography>
+                                    Price: ${state.modal.data.price}
+                                </Typography>
+                            </Grid>
+                            <Grid
+                                item
+                                container
+                                justify="flex-end"
+                                alignItems="center"
+                            >
+                                <Button
+                                    variant="contained"
+                                    color="secondary"
+                                    onClick={handleCartClick}
+                                >
+                                    Add To Cart
+                                </Button>
+                            </Grid>
+                        </Grid>
+                    </Grid>
                 </div>
             </Fade>
         </Modal>

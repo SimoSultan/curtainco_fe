@@ -7,42 +7,20 @@ import Sort from "./sidebar/Sort";
 import useStyles from "./ProductStyles";
 import { useCurtainContext } from "../../config/CurtainCoContext";
 import { ACTIONS } from "../../config/stateReducer";
+import { sortACTIONS, sortProducts } from "../../helpers/productHelpers";
+import { getAllProducts } from "../../services/productServices";
 
-// Generate Order Data
-function createData(id, name, type, amount) {
-    return { id, name, type, amount };
-}
-
-const products = [
-    createData(0, "Summer Fabric", "fabric", 312.44),
-    createData(1, "Summer Rod", "rod", 866.99),
-    createData(2, "Summer Accessory", "accessory", 100.81),
-    createData(3, "Winter Fabric", "fabric", 99.44),
-    createData(4, "Winter Rod", "rod", 453.99),
-    createData(5, "Winter Accessory", "accessory", 90.81),
-    createData(6, "Autumn Fabric", "fabric", 101.44),
-    createData(7, "Autumn Rod", "rod", 632.99),
-    createData(8, "Autumn Accessory", "accessory", 109.81),
-];
-
-const sortFields = [
-    "Price: Low to High",
-    "Price: High to Low",
-    "Name: A to Z",
-    "Name: Z to A",
-    "Featured",
-];
+const sortFields = Object.values(sortACTIONS);
 
 function Products() {
     const classes = useStyles();
-    const { dispatch } = useCurtainContext();
-    const [sortBy, setSortBy] = useState("Name: A to Z");
+    const { state, dispatch } = useCurtainContext();
+    const [sortBy, setSortBy] = useState(sortACTIONS.NAME_ALPHABETICAL);
     const [searchInput, setSearchInput] = useState("");
     const [filter, setFilter] = useState({
         fabric: false,
-        rod: false,
+        track: false,
         accessory: false,
-        inStock: false,
     });
 
     // HANDLE THE STATE CHANGE FOR FILTERING
@@ -59,15 +37,25 @@ function Products() {
         setSearchInput(event.target.value);
     };
 
-    // const error =
-    // [fabric, rod, accessory, inStock].filter((v) => v).length !== 2;
-
-    // SET THE GLOBAL STATE OF ALL THE PRODUCTS
     useEffect(() => {
-        dispatch({
-            type: ACTIONS.SET_ALL_PRODUCTS,
-            payload: products,
-        });
+        getAllProducts()
+            .then((resp) => {
+                if (resp.status === 200) {
+                    console.log("---PRODUCTS---");
+                    console.log(resp.data);
+                    let sortedProducts = sortProducts(
+                        resp.data,
+                        sortACTIONS.NAME_ALPHABETICAL
+                    );
+                    dispatch({
+                        type: ACTIONS.SET_ALL_PRODUCTS,
+                        payload: sortedProducts,
+                    });
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }, [dispatch]);
 
     return (
@@ -113,7 +101,7 @@ function Products() {
                         alignItems="center"
                     >
                         <ProductList
-                            products={products}
+                            products={state.products}
                             filterText={searchInput}
                             filterTypes={filter}
                             filterSortBy={sortBy}

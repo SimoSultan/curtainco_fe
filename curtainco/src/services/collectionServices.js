@@ -5,6 +5,11 @@ async function getAllCollections() {
     return response;
 }
 
+async function getOneCollection(id) {
+    const response = await api.get(`/collections/${id}`);
+    return response;
+}
+
 async function createCollection(newCollection) {
     const response = await api.post("/collections", newCollection);
     return response;
@@ -28,6 +33,7 @@ async function deleteCollection(collectionToDelete) {
 
 export {
     getAllCollections,
+    getOneCollection,
     createCollection,
     updateCollection,
     deleteCollection,

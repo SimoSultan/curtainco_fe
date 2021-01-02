@@ -18,10 +18,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Filter({ state, handleChange }) {
     const classes = useStyles();
-
-    const { fabric, rod, accessory, inStock } = state;
-    // const error =
-    //     [fabric, rod, accessory, inStock].filter((v) => v).length !== 2;
+    const { fabric, track, accessory } = state;
 
     return (
         <div className={classes.root}>
@@ -41,12 +38,12 @@ export default function Filter({ state, handleChange }) {
                     <FormControlLabel
                         control={
                             <Checkbox
-                                checked={rod}
+                                checked={track}
                                 onChange={handleChange}
-                                name="rod"
+                                name="track"
                             />
                         }
-                        label="Rods"
+                        label="Tracks"
                     />
                     <FormControlLabel
                         control={
@@ -58,7 +55,7 @@ export default function Filter({ state, handleChange }) {
                         }
                         label="Accessories"
                     />
-                    <FormControlLabel
+                    {/* <FormControlLabel
                         control={
                             <Checkbox
                                 checked={inStock}
@@ -67,9 +64,9 @@ export default function Filter({ state, handleChange }) {
                             />
                         }
                         label="In Stock"
-                    />
+                    /> */}
                 </FormGroup>
-                <FormHelperText>Some text here?</FormHelperText>
+                {/* <FormHelperText>Some text here?</FormHelperText> */}
             </FormControl>
         </div>
     );
