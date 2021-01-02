@@ -10,7 +10,7 @@ import UserDashboard from "./user/UserDashboard";
 import { Redirect } from "react-router-dom";
 
 function Account() {
-    const { state, dispatch } = useCurtainContext();
+    const { state } = useCurtainContext();
 
     return (
         <Container>

@@ -35,8 +35,12 @@ function ProductItem({ productData }) {
         <Card className={classes.card}>
             <CardMedia
                 className={classes.cardMedia}
-                image="https://source.unsplash.com/random"
-                title="Image title"
+                image={
+                    productData.imgUrl === ""
+                        ? "https://source.unsplash.com/random"
+                        : productData.imgUrl
+                }
+                title={`${capitalize(productData.name)} Image`}
             />
 
             <CardContent className={classes.cardContent}>
@@ -44,11 +48,9 @@ function ProductItem({ productData }) {
                     {capitalize(productData.name)}
                 </Typography>
 
-                <Typography variant="body2">{`Amount: $${productData.amount}`}</Typography>
+                <Typography variant="body2">{`Amount: $${productData.price}`}</Typography>
 
-                <Typography variant="body2">{`Type: ${capitalize(
-                    productData.type
-                )}`}</Typography>
+                <Typography variant="body2">{`Type: ${productData.category}`}</Typography>
             </CardContent>
 
             <CardActions>

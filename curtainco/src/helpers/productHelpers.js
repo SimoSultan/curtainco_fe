@@ -10,10 +10,10 @@ const sortACTIONS = {
 function sortProducts(filteredProducts, filterSortBy) {
     switch (filterSortBy) {
         case sortACTIONS.PRICE_LOW_TO_HIGH:
-            filteredProducts.sort((a, b) => a.amount - b.amount);
+            filteredProducts.sort((a, b) => a.price - b.price);
             break;
         case sortACTIONS.PRICE_HIGH_TO_LOW:
-            filteredProducts.sort((a, b) => b.amount - a.amount);
+            filteredProducts.sort((a, b) => b.price - a.price);
             break;
         case sortACTIONS.NAME_ALPHABETICAL:
             filteredProducts.sort((a, b) =>
@@ -48,7 +48,7 @@ function filterByType(filteredProducts, types) {
     // THIS IS HOW THE TYPES OBJECT LOOKS
     // types = {
     //     fabric: false,
-    //     rod: false,
+    //     track: false,
     //     accessory: false,
     //     inStock: false,
     // }
@@ -64,7 +64,7 @@ function filterByType(filteredProducts, types) {
 
     if (arr.length > 0) {
         filteredProducts = filteredProducts.filter((element) =>
-            arr.includes(element.type)
+            arr.includes(element.category.toLowerCase())
         );
     }
 

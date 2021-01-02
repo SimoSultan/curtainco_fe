@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 
+import TableContainer from "@material-ui/core/TableContainer";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -54,42 +55,26 @@ export default function AllProducts({ fillEditProductPage, editProductId }) {
             <TableCell>{prod.imgUrl}</TableCell>
             <TableCell>{prod.category}</TableCell>
             <TableCell>{prod.name}</TableCell>
-            {/* <TableCell>{prod.colour}</TableCell> */}
             <TableCell>${prod.price}</TableCell>
         </TableRow>
     ));
 
-    let productItemsLengthTest = [
-        ...productItems,
-        ...productItems,
-        ...productItems,
-        ...productItems,
-        ...productItems,
-        ...productItems,
-        ...productItems,
-        ...productItems,
-    ];
-
     return (
         <Paper className={classes.paper}>
-            {/* Products */}
             <Title>Products</Title>
-            <div className={classes.tableHeight}>
-                <Table size="small" stickyHeader>
+            <TableContainer className={classes.tableContainer}>
+                <Table stickyHeader aria-label="sticky table">
                     <TableHead>
                         <TableRow>
                             <TableCell> </TableCell>
                             <TableCell>Category</TableCell>
                             <TableCell>Name</TableCell>
-                            {/* <TableCell>Colour</TableCell> */}
                             <TableCell>Price</TableCell>
                         </TableRow>
                     </TableHead>
-                    <TableBody className={classes.tableOverflow}>
-                        {productItemsLengthTest}
-                    </TableBody>
+                    <TableBody>{productItems}</TableBody>
                 </Table>
-            </div>
+            </TableContainer>
         </Paper>
     );
 }
