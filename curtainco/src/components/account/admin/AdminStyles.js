@@ -34,6 +34,13 @@ const useStyles = makeStyles((theme) => ({
     checkboxSelected: {
         color: "rgba(0, 0, 0, 0.47)",
     },
+    accessorySubHeading: {
+        fontWeight: "bold",
+        marginBottom: "2%",
+    },
+    accessoryCont: {
+        margin: "4% 0",
+    },
 }));
 
 export default useStyles;

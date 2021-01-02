@@ -43,7 +43,7 @@ function AddProduct() {
                     <FormControlLabel
                         value="accessory"
                         control={<Radio />}
-                        label="Accessory"
+                        label="Accessories"
                     />
                 </RadioGroup>
             </FormControl>

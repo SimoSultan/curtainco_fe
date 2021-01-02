@@ -26,4 +26,15 @@ async function deleteProduct(productToDelete) {
     return response;
 }
 
-export { getAllProducts, createProduct, updateProduct, deleteProduct };
+async function createAccessory(newAccessory) {
+    const response = await api.post("/accessory", newAccessory);
+    return response;
+}
+
+export {
+    getAllProducts,
+    createProduct,
+    updateProduct,
+    deleteProduct,
+    createAccessory,
+};

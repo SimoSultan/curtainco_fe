@@ -7,6 +7,7 @@ import Sort from "./sidebar/Sort";
 import useStyles from "./ProductStyles";
 import { useCurtainContext } from "../../config/CurtainCoContext";
 import { ACTIONS } from "../../config/stateReducer";
+import { sortACTIONS } from "../../helpers/productHelpers";
 
 // Generate Order Data
 function createData(id, name, type, amount) {
@@ -25,13 +26,7 @@ const products = [
     createData(8, "Autumn Accessory", "accessory", 109.81),
 ];
 
-const sortFields = [
-    "Price: Low to High",
-    "Price: High to Low",
-    "Name: A to Z",
-    "Name: Z to A",
-    "Featured",
-];
+const sortFields = Object.values(sortACTIONS);
 
 function Products() {
     const classes = useStyles();

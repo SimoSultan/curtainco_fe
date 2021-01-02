@@ -50,7 +50,7 @@ export default function AllProducts({ fillEditProductPage, editProductId }) {
             <TableCell>{prod.category}</TableCell>
             <TableCell>{prod.name}</TableCell>
             {/* <TableCell>{prod.colour}</TableCell> */}
-            <TableCell>{prod.price}</TableCell>
+            <TableCell>${prod.price}</TableCell>
         </TableRow>
     ));
 

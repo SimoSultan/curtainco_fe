@@ -65,7 +65,7 @@ function AddAccessory() {
 
     return (
         <AccessoryForm2
-            title={"Add Accessory"}
+            title={"Add Accessories"}
             buttonText={"Add"}
             handleTextChange={handleTextChange}
             handleSubmit={handleSubmit}
