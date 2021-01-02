@@ -42,35 +42,36 @@ function FlickStick() {
         try {
             let s3Resp = await addPhoto(photo);
             console.log(s3Resp);
-            // if (s3Resp.status === 201) {
-            //     setFlickStick({
-            //         ...flickStick,
-            //         imgUrl: s3Resp.data.image.url,
-            //     });
-            //     // SAVE TO SB
-            //     try {
-            //         let dbResp = await createAccessory(flickStick);
-            //         if (dbResp.status === 201) {
-            //             console.log("successful creation of accessory on DB");
-            //             dispatch({
-            //                 type: ACTIONS.ADD_PRODUCT,
-            //                 payload: dbResp.data,
-            //             });
-            //             dispatch({
-            //                 type: ACTIONS.SET_SNACKBAR,
-            //                 payload: {
-            //                     open: true,
-            //                     severity: "success",
-            //                     message: "Created accessory successfully",
-            //                 },
-            //             });
-            //             setFlickStick({name: "", price: "", imgUrl: "",})
-            //             setResetFile(true)
-            //         }
-            //     } catch (error) {
-            //         console.log(`Error saving flick stick to DB: ${error}`);
-            //     }
-            // }
+            if (s3Resp.status === 201) {
+                setFlickStick({
+                    ...flickStick,
+                    imgUrl: s3Resp.data.image.location,
+                });
+                //     // SAVE TO SB
+                //     try {
+                //         let dbResp = await createAccessory(flickStick);
+                //         if (dbResp.status === 201) {
+                //             console.log("successful creation of accessory on DB");
+                //             dispatch({
+                //                 type: ACTIONS.ADD_PRODUCT,
+                //                 payload: dbResp.data,
+                //             });
+                //             dispatch({
+                //                 type: ACTIONS.SET_SNACKBAR,
+                //                 payload: {
+                //                     open: true,
+                //                     severity: "success",
+                //                     message: "Created accessory successfully",
+                //                 },
+                //             });
+                //             setFlickStick({name: "", price: "", imgUrl: "",})
+                //             setResetFile(true)
+                //         }
+                //     } catch (error) {
+                //         console.log(`Error saving flick stick to DB: ${error}`);
+                //     }
+                console.log(flickStick);
+            }
         } catch (error) {
             console.log(`Error saving flick stick photo to S3: ${error}`);
         }

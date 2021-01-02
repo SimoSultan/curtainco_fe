@@ -41,6 +41,13 @@ const useStyles = makeStyles((theme) => ({
     accessoryCont: {
         margin: "4% 0",
     },
+    tableOverflow: {
+        overflowY: "scroll",
+    },
+    tableHeight: {
+        // height: "calc(100vh - 10%)",
+        height: "30% !important",
+    },
 }));
 
 export default useStyles;

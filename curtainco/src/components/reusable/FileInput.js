@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Fab, Grid, Typography } from "@material-ui/core";
-import AddIcon from "@material-ui/icons/Add";
+// import AddIcon from "@material-ui/icons/Add";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -44,7 +44,8 @@ function FileInput({ handleFileChange, resetFile, cb }) {
                         aria-label="add"
                         variant="extended"
                     >
-                        <AddIcon /> Choose photo
+                        Choose photo
+                        {/* <AddIcon /> Choose photo */}
                     </Fab>
                 </label>
             </Grid>

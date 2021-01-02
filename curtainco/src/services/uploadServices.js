@@ -1,7 +1,16 @@
 import api from "../config/api";
 
 async function addPhoto(file) {
-    const response = await api.post("/upload", file);
+    // const response = await api.post("/upload", file);
+    // return response;
+
+    let bodyFormData = new FormData();
+    bodyFormData.append("image", file);
+    const response = await api.post("/upload", bodyFormData, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+        },
+    });
     return response;
 }
 

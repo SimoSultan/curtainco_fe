@@ -31,7 +31,7 @@ const sortFields = Object.values(sortACTIONS);
 function Products() {
     const classes = useStyles();
     const { dispatch } = useCurtainContext();
-    const [sortBy, setSortBy] = useState("Name: A to Z");
+    const [sortBy, setSortBy] = useState(sortACTIONS.NAME_ALPHABETICAL);
     const [searchInput, setSearchInput] = useState("");
     const [filter, setFilter] = useState({
         fabric: false,

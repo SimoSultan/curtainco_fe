@@ -12,6 +12,7 @@ import { getAllProducts } from "../../../../services/productServices";
 import { useCurtainContext } from "../../../../config/CurtainCoContext";
 import Title from "../../../reusable/Title";
 import { ACTIONS } from "../../../../config/stateReducer";
+import { sortACTIONS, sortProducts } from "../../../../helpers/productHelpers";
 
 export default function AllProducts({ fillEditProductPage, editProductId }) {
     const classes = useStyles();
@@ -24,9 +25,13 @@ export default function AllProducts({ fillEditProductPage, editProductId }) {
                 if (resp.status === 200) {
                     console.log("---PRODUCTS---");
                     console.log(resp.data);
+                    let sortedProducts = sortProducts(
+                        resp.data,
+                        sortACTIONS.CATEGORY
+                    );
                     dispatch({
                         type: ACTIONS.SET_ALL_PRODUCTS,
-                        payload: resp.data,
+                        payload: sortedProducts,
                     });
                 } else {
                     console.log("status code wasn't correct");
@@ -54,22 +59,37 @@ export default function AllProducts({ fillEditProductPage, editProductId }) {
         </TableRow>
     ));
 
+    let productItemsLengthTest = [
+        ...productItems,
+        ...productItems,
+        ...productItems,
+        ...productItems,
+        ...productItems,
+        ...productItems,
+        ...productItems,
+        ...productItems,
+    ];
+
     return (
         <Paper className={classes.paper}>
             {/* Products */}
             <Title>Products</Title>
-            <Table size="small">
-                <TableHead>
-                    <TableRow>
-                        <TableCell> </TableCell>
-                        <TableCell>Category</TableCell>
-                        <TableCell>Name</TableCell>
-                        {/* <TableCell>Colour</TableCell> */}
-                        <TableCell>Price</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>{productItems}</TableBody>
-            </Table>
+            <div className={classes.tableHeight}>
+                <Table size="small" stickyHeader>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell> </TableCell>
+                            <TableCell>Category</TableCell>
+                            <TableCell>Name</TableCell>
+                            {/* <TableCell>Colour</TableCell> */}
+                            <TableCell>Price</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody className={classes.tableOverflow}>
+                        {productItemsLengthTest}
+                    </TableBody>
+                </Table>
+            </div>
         </Paper>
     );
 }
