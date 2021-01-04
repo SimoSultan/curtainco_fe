@@ -16,110 +16,109 @@ function FabricForm({
     return (
         <>
             <Typography variant="h6">{title}</Typography>
-            <Grid container direction="column" spacing={2}>
-                <Grid item>
+            <Grid container spacing={2} justify="center" alignItems="center">
+                <Grid item xs={12}>
                     <TextField
                         id="fabric-input"
                         label="Fabric Name"
                         variant="outlined"
                         name="name"
-                        className={classes.fullWidth}
+                        fullWidth
                         onChange={handleTextChange}
                         value={product.name}
                     />
                 </Grid>
-                <Grid item>
-                    <TextField
-                        id="fabric-color-input"
-                        label="Fabric Colour"
-                        variant="outlined"
-                        name="colour"
-                        className={classes.fullWidth}
-                        onChange={handleTextChange}
-                        value={product.colour}
-                    />
-                </Grid>
-
-                <Grid item>
-                    <TextField
-                        id="fabric-density-input"
-                        label="Fabric Density"
-                        variant="outlined"
-                        name="density"
-                        className={classes.fullWidth}
-                        onChange={handleTextChange}
-                        value={product.density}
-                    />
-                </Grid>
-                <Grid item>
-                    <TextField
-                        id="fabric-header-style-input"
-                        label="Header Style"
-                        variant="outlined"
-                        name="style"
-                        className={classes.fullWidth}
-                        onChange={handleTextChange}
-                        value={product.style}
-                    />
-                </Grid>
-                <Grid item>
-                    <TextField
-                        id="fabric-size-input"
-                        label="Hem Size"
-                        variant="outlined"
-                        name="size"
-                        className={classes.fullWidth}
-                        onChange={handleTextChange}
-                        value={product.size}
-                    />
-                </Grid>
-                <Grid item>
-                    <TextField
-                        id="fabric-length-input"
-                        label="Length"
-                        variant="outlined"
-                        name="length"
-                        className={classes.fullWidth}
-                        onChange={handleTextChange}
-                        value={product.length}
-                    />
-                </Grid>
-                <Grid item>
+                <Grid item xs={12}>
                     <TextField
                         id="fabric-description-input"
                         label="Description"
                         variant="outlined"
                         name="description"
                         multiline
-                        className={classes.fullWidth}
+                        fullWidth
                         onChange={handleTextChange}
                         value={product.description}
                     />
                 </Grid>
-                <Grid item>
+                <Grid item xs={12} sm={6}>
+                    <TextField
+                        id="fabric-color-input"
+                        label="Fabric Colour"
+                        variant="outlined"
+                        name="colour"
+                        fullWidth
+                        className={classes.fullWidth}
+                        onChange={handleTextChange}
+                        value={product.colour}
+                    />
+                </Grid>
+
+                <Grid item xs={12} sm={6}>
+                    <TextField
+                        id="fabric-density-input"
+                        label="Fabric Density"
+                        variant="outlined"
+                        name="density"
+                        fullWidth
+                        className={classes.fullWidth}
+                        onChange={handleTextChange}
+                        value={product.density}
+                    />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <TextField
+                        id="fabric-header-style-input"
+                        label="Header Style"
+                        variant="outlined"
+                        name="style"
+                        fullWidth
+                        onChange={handleTextChange}
+                        value={product.style}
+                    />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <TextField
+                        id="fabric-size-input"
+                        label="Hem Size"
+                        variant="outlined"
+                        name="size"
+                        fullWidth
+                        onChange={handleTextChange}
+                        value={product.size}
+                    />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <TextField
+                        id="fabric-length-input"
+                        label="Length"
+                        variant="outlined"
+                        name="length"
+                        fullWidth
+                        onChange={handleTextChange}
+                        value={product.length}
+                    />
+                </Grid>
+                <Grid item xs={12} sm={6}>
                     <TextField
                         id="fabric-price-input"
                         label="Price"
                         variant="outlined"
                         type="number"
                         name="price"
-                        className={classes.fullWidth}
+                        fullWidth
                         onChange={handleTextChange}
                         value={product.price}
                     />
                 </Grid>
 
                 {product ? (
-                    <Grid container justify="space-between" alignItems="center">
-                        <Grid item>
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                onClick={handleSubmit}
-                            >
-                                {buttonText}
-                            </Button>
-                        </Grid>
+                    <Grid
+                        item
+                        container
+                        justify="space-between"
+                        alignItems="center"
+                        xs={12}
+                    >
                         {/* IF THE REMOVE HANDLER WAS PASSED IN, SHOW THE DELETE BUTTON */}
                         <Grid item>
                             {handleRemove ? (
@@ -134,6 +133,15 @@ function FabricForm({
                             ) : (
                                 ""
                             )}
+                        </Grid>
+                        <Grid item>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={handleSubmit}
+                            >
+                                {buttonText}
+                            </Button>
                         </Grid>
                     </Grid>
                 ) : (
