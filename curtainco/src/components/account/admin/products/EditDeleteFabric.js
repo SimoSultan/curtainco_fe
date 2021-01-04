@@ -79,19 +79,7 @@ function EditDeleteFabric({ editProductId, setEditProductId }) {
                 description: fabricBeingUpdated.description,
             });
         } else {
-            setFabric({
-                category: "Fabric",
-                _id: "",
-                name: "",
-                colour: "",
-                imgUrl: "",
-                price: "",
-                density: "",
-                style: "",
-                size: "",
-                description: "",
-                length: "",
-            });
+            resetProductForm();
         }
     }, [state.products, editProductId, previousProduct]);
 

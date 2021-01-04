@@ -25,7 +25,7 @@ function ProductItem({ productData }) {
             payload: {
                 open: true,
                 title: `${capitalize(productData.name)}`,
-                message: "Something about a product goes here",
+                message: `${capitalize(productData.description)}`,
                 data: productData,
             },
         });

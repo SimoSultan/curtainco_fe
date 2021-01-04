@@ -82,20 +82,7 @@ function EditDeleteTrack({ editProductId, setEditProductId }) {
                 description: trackBeingUpdated.description,
             });
         } else {
-            setTrack({
-                category: "Track",
-                _id: "",
-                name: "",
-                colour: "",
-                imgUrl: "",
-                price: "",
-                type: "",
-                single: "",
-                finialStyle: "",
-                finialColour: "",
-                description: "",
-                location: "",
-            });
+            resetProductForm();
         }
     }, [state.products, editProductId, previousProduct]);
 

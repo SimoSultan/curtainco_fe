@@ -64,12 +64,6 @@ async function submitProductToDbAndUpdateState(
         }
     }
 
-    console.log({ updateOrAdd });
-    console.log({ product });
-    console.log({ tempProduct });
-    console.log({ photo });
-    console.log({ userIsUpdatingPhoto });
-
     // BLOCK THE UPDATE TO DATABASE IF THE IMAGE UPLOAD FAILED
     // editProdError WILL STILL BE FALSE IF THEY HAVEN'T UPLOADED A PHOTO
     // OR THERE WAS NO ERROR WHEN UPLOADING IT

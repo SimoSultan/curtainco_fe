@@ -15,18 +15,53 @@ import useStyles from "../AdminStyles";
 function EditDeleteCollection({ editCollectionId, setEditCollectionId }) {
     const classes = useStyles();
     const { state, dispatch } = useCurtainContext();
+    const [resetFile, setResetFile] = useState(false);
+    const [photo, setPhoto] = useState({});
+    const [previousCollection, setPreviousCollection] = useState(
+        editCollectionId
+    );
     const [collection, setCollection] = useState({
         _id: "",
         name: "",
         description: "",
         imgUrl: "",
         price: "",
-        track: "",
-        fabric: "",
-        accessory: "",
+        track: [],
+        fabric: [],
+        accessory: [],
+        trackTip: "",
+        accessoryTip: "",
+        fabricTip: "",
     });
 
+    function resetCollectionForm() {
+        setCollection({
+            _id: "",
+            name: "",
+            description: "",
+            imgUrl: "",
+            price: "",
+            track: [],
+            fabric: [],
+            accessory: [],
+            trackTip: "",
+            accessoryTip: "",
+            fabricTip: "",
+        });
+    }
+
+    function handleFileChange(file) {
+        console.log(file);
+        setPhoto(file);
+    }
+
     useEffect(() => {
+        // this resets the file in the FileInput component on
+        // a product change / update to form
+        if (editCollectionId !== previousCollection) {
+            setPreviousCollection(editCollectionId);
+            setResetFile(true);
+        }
         // IF PRODUCT ID COMES THROUGH AS A PROP, SET THE FORM
         // OTHERWISE CLEAR THE FORM
         if (editCollectionId !== "") {
@@ -43,20 +78,14 @@ function EditDeleteCollection({ editCollectionId, setEditCollectionId }) {
                 track: collectionBeingUpdated.track,
                 fabric: collectionBeingUpdated.fabric,
                 accessory: collectionBeingUpdated.accessory,
+                trackTip: collectionBeingUpdated.trackTip,
+                accessoryTip: collectionBeingUpdated.accessoryTip,
+                fabricTip: collectionBeingUpdated.fabricTip,
             });
         } else {
-            setCollection({
-                _id: "",
-                name: "",
-                description: "",
-                imgUrl: "",
-                price: "",
-                track: "",
-                fabric: "",
-                accessory: "",
-            });
+            resetCollectionForm();
         }
-    }, [state.collections, editCollectionId]);
+    }, [state.collections, editCollectionId, previousCollection]);
 
     const handleSelectChange = (event) => {
         setCollection({
@@ -72,7 +101,7 @@ function EditDeleteCollection({ editCollectionId, setEditCollectionId }) {
         });
     };
 
-    const handleUpdateProduct = () => {
+    async function handleUpdateCollection() {
         // UPDATE THE PRODUCT ON THE DB
         // IF SUCCESSFUL, UPDATE PRODUCT IN GLOBAL STATE AND SHOW SUCCESS SNACKBAR
         let editCollError = false;
@@ -101,9 +130,9 @@ function EditDeleteCollection({ editCollectionId, setEditCollectionId }) {
                 editCollError = `An error ocurred on update product: Error Code: ${error.status}. Message: ${error.message}.`;
                 console.log(editCollError);
             });
-    };
+    }
 
-    function handleRemoveProduct() {
+    function handleRemoveCollection() {
         // DELETE THE PRODUCT ON THE DB
         // IF SUCCESSFUL, DELETE PRODUCT IN GLOBAL STATE AND SHOW SUCCESS SNACKBAR
         // THEN SET THE EDIT PRODUCT ID THAT THIS COMPONENT TAKES AS A PROP TO = "" TO RESET THE FORM
@@ -138,12 +167,15 @@ function EditDeleteCollection({ editCollectionId, setEditCollectionId }) {
         <Paper className={classes.paper}>
             <CollectionForm
                 title={"Edit Collection"}
-                buttonText={"Update"}
+                buttonText={"Update Collection"}
                 handleTextChange={handleTextChange}
                 handleSelectChange={handleSelectChange}
-                handleSubmit={handleUpdateProduct}
-                handleRemove={handleRemoveProduct}
-                collection={editCollectionId === "" ? false : collection}
+                handleSubmit={handleUpdateCollection}
+                handleRemove={handleRemoveCollection}
+                collection={collection}
+                handleFileChange={handleFileChange}
+                setResetFile={setResetFile}
+                resetFile={resetFile}
             />
         </Paper>
     );
