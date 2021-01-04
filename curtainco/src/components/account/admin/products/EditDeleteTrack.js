@@ -36,6 +36,23 @@ function EditDeleteTrack({ editProductId, setEditProductId }) {
         setPhoto(file);
     }
 
+    function resetProductForm() {
+        setTrack({
+            category: "Track",
+            _id: "",
+            name: "",
+            colour: "",
+            imgUrl: "",
+            price: "",
+            type: "",
+            single: "",
+            finialStyle: "",
+            finialColour: "",
+            location: "",
+            description: "",
+        });
+    }
+
     useEffect(() => {
         // this resets the file in the FileInput component on
         // a product change / update to form
@@ -135,6 +152,10 @@ function EditDeleteTrack({ editProductId, setEditProductId }) {
                 console.log(error);
             });
         setEditProductId("");
+        setPreviousProduct("");
+        setResetFile(true);
+        setPhoto({});
+        resetProductForm();
     }
 
     // PASS IN TITLE AND TEXT FOR THE BUTTON TO THE TRACK FORM
@@ -148,7 +169,7 @@ function EditDeleteTrack({ editProductId, setEditProductId }) {
             handleRadioChange={handleRadioChange}
             handleSubmit={handleUpdateProduct}
             handleRemove={handleRemoveProduct}
-            product={editProductId === "" ? false : track}
+            product={track}
             handleFileChange={handleFileChange}
             setResetFile={setResetFile}
             resetFile={resetFile}

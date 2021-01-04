@@ -28,6 +28,18 @@ function EditDeleteAccessory({ editProductId, setEditProductId }) {
         type: "",
     });
 
+    function resetProductForm() {
+        setAccessory({
+            category: "Accessory",
+            name: "",
+            colour: "",
+            imgUrl: "",
+            price: "",
+            description: "",
+            type: "",
+        });
+    }
+
     function handleFileChange(file) {
         console.log(file);
         setPhoto(file);
@@ -116,6 +128,10 @@ function EditDeleteAccessory({ editProductId, setEditProductId }) {
                 console.log(error);
             });
         setEditProductId("");
+        setPreviousProduct("");
+        setResetFile(true);
+        setPhoto({});
+        resetProductForm();
     }
 
     // PASS IN TITLE AND TEXT FOR THE BUTTON TO THE Accessory FORM
@@ -127,7 +143,7 @@ function EditDeleteAccessory({ editProductId, setEditProductId }) {
             handleTextChange={handleTextChange}
             handleSubmit={handleUpdateProduct}
             handleRemove={handleRemoveProduct}
-            product={editProductId === "" ? false : accessory}
+            product={accessory}
             handleFileChange={handleFileChange}
             setResetFile={setResetFile}
             resetFile={resetFile}

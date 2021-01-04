@@ -100,7 +100,7 @@ export default function AdminTabs({ tabValue, handleChange }) {
                         <AddProduct />
                     </Grid>
                     <Grid item xs>
-                        <AddCollection />
+                        {/* <AddCollection /> */}
                     </Grid>
                 </Grid>
             </TabPanel>

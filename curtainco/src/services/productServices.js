@@ -60,17 +60,22 @@ async function submitProductToDbAndUpdateState(
                 setPhoto({});
             }
         } catch (error) {
-            editProdError = `Error ocurred when retrieving photo on update fabric: Error: ${error}.`;
-            console.log(editProdError);
+            editProdError = `Error ocurred when retrieving photo on ${updateOrAdd} ${tempProduct.category}. ${error}.`;
         }
     }
+
+    console.log({ updateOrAdd });
+    console.log({ product });
+    console.log({ tempProduct });
+    console.log({ photo });
+    console.log({ userIsUpdatingPhoto });
 
     // BLOCK THE UPDATE TO DATABASE IF THE IMAGE UPLOAD FAILED
     // editProdError WILL STILL BE FALSE IF THEY HAVEN'T UPLOADED A PHOTO
     // OR THERE WAS NO ERROR WHEN UPLOADING IT
     if (editProdError)
         return alert(
-            "Something went wrong when uploading photo to storage on fabric"
+            `Something went wrong when ${updateOrAdd} photo to storage on ${tempProduct.category}`
         );
 
     try {
@@ -113,7 +118,7 @@ async function submitProductToDbAndUpdateState(
             console.log(editProdError);
         }
     } catch (error) {
-        editProdError = `An error ocurred on ${updateOrAdd} ${tempProduct.category}: Error Code: ${error.status}. Message: ${error.message}.`;
+        editProdError = `An error ocurred on ${updateOrAdd} ${tempProduct.category}. ${error}.`;
     }
     return editProdError;
 }
