@@ -11,26 +11,33 @@ function AddCollection() {
     const classes = useStyles();
     const { dispatch } = useCurtainContext();
     const [resetFile, setResetFile] = useState(false);
-    const [photoColl, setPhotoColl] = useState({});
+    const [photo, setPhoto] = useState({});
     const [collection, setCollection] = useState({
+        _id: "",
         name: "",
         description: "",
         imgUrl: "",
         price: "",
-        track: "",
-        fabric: "",
-        accessory: "",
+        track: [],
+        fabric: [],
+        accessory: [],
+        trackTip: "",
+        accessoryTip: "",
+        fabricTip: "",
     });
 
     function handleFileChange(file) {
         console.log(file);
-        setPhotoColl(file);
+        setPhoto(file);
     }
 
     const handleSelectChange = (event) => {
         setCollection({
             ...collection,
-            [event.target.name]: event.target.value,
+            [event.target.name]: [
+                ...collection[event.target.name],
+                event.target.value,
+            ],
         });
     };
 
@@ -41,7 +48,7 @@ function AddCollection() {
         });
     };
 
-    const handleSubmit = () => {
+    async function handleSubmit() {
         // ADD THE PRODUCT ON THE DB
         // IF SUCCESSFUL, ADD PRODUCT IN GLOBAL STATE AND SHOW SUCCESS SNACKBAR
         let addCollError = false;
@@ -70,7 +77,7 @@ function AddCollection() {
                 addCollError = `An error ocurred on adding product: Error Code: ${error.status}. Message: ${error.message}.`;
                 console.log(addCollError);
             });
-    };
+    }
 
     return (
         <Paper className={classes.paper}>

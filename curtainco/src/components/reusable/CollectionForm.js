@@ -49,22 +49,56 @@ function CollectionForm({
 
     return (
         <>
-            <Box p={1}>
-                <Grid container justify="space-evenly" alignItems="center">
-                    <Grid item xs={4}>
-                        <Typography variant="h6">{title}</Typography>
+            <Box pb={1}>
+                <Grid container justify="center" alignItems="center">
+                    <Grid item xs={3}>
+                        {collection.imgUrl !== "" ? (
+                            <img
+                                src={
+                                    collection.imgUrl !== ""
+                                        ? collection.imgUrl
+                                        : ""
+                                }
+                                alt={
+                                    collection.imgUrl === ""
+                                        ? ""
+                                        : `${collection.name}`
+                                }
+                                className={classes.editFormImage}
+                            />
+                        ) : (
+                            ""
+                        )}
                     </Grid>
-                    <Grid item xs={8}>
-                        <FileInput
-                            handleFileChange={handleFileChange}
-                            resetFile={resetFile}
-                            setResetFile={setResetFile}
-                        />
+                    <Grid
+                        item
+                        container
+                        justify="center"
+                        alignItems="center"
+                        xs={9}
+                        spacing={2}
+                    >
+                        <Grid item xs={12}>
+                            <Typography
+                                variant="h6"
+                                style={{ textAlign: "center" }}
+                            >
+                                {title}
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <FileInput
+                                handleFileChange={handleFileChange}
+                                resetFile={resetFile}
+                                setResetFile={setResetFile}
+                            />
+                        </Grid>
                     </Grid>
                 </Grid>
             </Box>
-            <Grid container spacing={2} justify="center" alignItems="center">
-                <Grid item xs={12}>
+
+            <Grid container spacing={1} justify="center" alignItems="center">
+                <Grid item xs={12} sm={5}>
                     <TextField
                         id="collection-input"
                         label="Collection Name"
@@ -75,9 +109,8 @@ function CollectionForm({
                         value={collection.name}
                     />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={5}>
                     <TextField
-                        id="collection-description-input"
                         label="Collection Description"
                         variant="outlined"
                         name="description"
@@ -87,110 +120,7 @@ function CollectionForm({
                         value={collection.description}
                     />
                 </Grid>
-                <Grid item>
-                    <FormControl
-                        variant="outlined"
-                        className={classes.formControl}
-                    >
-                        <Select
-                            labelId="collection-fabric-input-label"
-                            id="collection-fabric-input"
-                            value={collection.fabric}
-                            onChange={handleSelectChange}
-                            name="fabric"
-                            defaultValue=""
-                            native
-                        >
-                            {
-                                <option
-                                    aria-label="None"
-                                    disabled
-                                    label="Fabric"
-                                    value=""
-                                />
-                            }{" "}
-                            {fabricItems}
-                        </Select>
-                    </FormControl>
-                </Grid>
-                <Grid item>
-                    <FormControl
-                        variant="outlined"
-                        className={classes.formControl}
-                    >
-                        <Select
-                            labelId="collection-fabric-input-label"
-                            id="collection-fabric-input"
-                            value={collection.track}
-                            onChange={handleSelectChange}
-                            name="track"
-                            defaultValue=""
-                            native
-                        >
-                            {
-                                <option
-                                    aria-label="None"
-                                    disabled
-                                    label="Track"
-                                />
-                            }{" "}
-                            {trackItems}
-                        </Select>
-                    </FormControl>
-                </Grid>
-                <Grid item>
-                    <FormControl
-                        variant="outlined"
-                        className={classes.formControl}
-                    >
-                        <Select
-                            labelId="collection-fabric-input-label"
-                            id="collection-fabric-input"
-                            value={collection.accessory}
-                            onChange={handleSelectChange}
-                            name="accessory"
-                            defaultValue=""
-                            native
-                        >
-                            {
-                                <option
-                                    aria-label="None"
-                                    disabled
-                                    label="Accessory"
-                                />
-                            }
-                            {accessoryItems}
-                        </Select>
-                    </FormControl>
-                </Grid>
-                {/* <Grid item>
-                    <RadioGroup
-                        aria-label="single-double-input"
-                        name="single"
-                        onChange={handleRadioChange}
-                        row
-                        value={
-                            collection.single === ""
-                                ? null
-                                : collection.single
-                                ? "single"
-                                : "double"
-                        }
-                    >
-                        <FormControlLabel
-                            value="single"
-                            control={<Radio />}
-                            label="Single"
-                        />
-                        <FormControlLabel
-                            value="double"
-                            control={<Radio />}
-                            label="Double"
-                        />
-                    </RadioGroup>
-                </Grid> */}
-
-                <Grid item>
+                <Grid item xs={12} sm={2}>
                     <TextField
                         id="collection-price-input"
                         label="Price"
@@ -202,6 +132,122 @@ function CollectionForm({
                         value={collection.price}
                     />
                 </Grid>
+                <Grid item xs={12} sm={4}>
+                    <TextField
+                        label="Fabric Tip"
+                        variant="outlined"
+                        name="fabricTip"
+                        fullWidth
+                        onChange={handleTextChange}
+                        value={collection.fabricTip}
+                    />
+                </Grid>
+                <Grid item xs={12} sm={4}>
+                    <TextField
+                        label="Track Tip"
+                        variant="outlined"
+                        name="trackTip"
+                        multiline
+                        fullWidth
+                        onChange={handleTextChange}
+                        value={collection.trackTip}
+                    />
+                </Grid>
+                <Grid item xs={12} sm={4}>
+                    <TextField
+                        label="Accessory Tip"
+                        variant="outlined"
+                        name="accessoryTip"
+                        multiline
+                        fullWidth
+                        onChange={handleTextChange}
+                        value={collection.accessoryTip}
+                    />
+                </Grid>
+                <Grid item container xs={12} sm={4}>
+                    <Grid item xs={12}>
+                        <FormControl
+                            variant="outlined"
+                            className={classes.formControl}
+                        >
+                            <Select
+                                labelId="collection-fabric-input-label"
+                                id="collection-fabric-input"
+                                value={collection.fabric}
+                                onChange={handleSelectChange}
+                                name="fabric"
+                                defaultValue=""
+                                native
+                            >
+                                {
+                                    <option
+                                        aria-label="None"
+                                        disabled
+                                        label="Fabric"
+                                        value=""
+                                    />
+                                }{" "}
+                                {fabricItems}
+                            </Select>
+                        </FormControl>
+                    </Grid>
+                </Grid>
+
+                <Grid item container xs={12} sm={4}>
+                    <Grid item xs={12}>
+                        <FormControl
+                            variant="outlined"
+                            className={classes.formControl}
+                        >
+                            <Select
+                                labelId="collection-track-input-label"
+                                id="collection-track-input"
+                                value={collection.track}
+                                onChange={handleSelectChange}
+                                name="track"
+                                defaultValue=""
+                                native
+                            >
+                                {
+                                    <option
+                                        aria-label="None"
+                                        disabled
+                                        label="Track"
+                                    />
+                                }{" "}
+                                {trackItems}
+                            </Select>
+                        </FormControl>
+                    </Grid>
+                </Grid>
+                <Grid item container xs={12} sm={4}>
+                    <Grid item xs={12}>
+                        <FormControl
+                            variant="outlined"
+                            className={classes.formControl}
+                        >
+                            <Select
+                                labelId="collection-accessory-input-label"
+                                id="collection-accessory-input"
+                                value={collection.accessory}
+                                onChange={handleSelectChange}
+                                name="accessory"
+                                defaultValue=""
+                                // native
+                            >
+                                {
+                                    <option
+                                        aria-label="None"
+                                        disabled
+                                        label="Accessory"
+                                    />
+                                }
+                                {accessoryItems}
+                            </Select>
+                        </FormControl>
+                    </Grid>
+                </Grid>
+
                 {collection ? (
                     <Grid
                         item
@@ -210,6 +256,7 @@ function CollectionForm({
                         alignItems="center"
                         fullWidth
                         xs={12}
+                        style={{ marginTop: "5%" }}
                     >
                         {/* IF THE REMOVE HANDLER WAS PASSED IN, SHOW THE DELETE BUTTON */}
                         <Grid item>

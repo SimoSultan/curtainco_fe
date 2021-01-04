@@ -70,16 +70,7 @@ function EditDeleteAccessory({ editProductId, setEditProductId }) {
                 type: accessoryBeingUpdated.type,
             });
         } else {
-            setAccessory({
-                category: "Accessory",
-                _id: "",
-                name: "",
-                colour: "",
-                imgUrl: "",
-                price: "",
-                description: "",
-                type: "",
-            });
+            resetProductForm();
         }
     }, [state.products, editProductId, previousProduct]);
 

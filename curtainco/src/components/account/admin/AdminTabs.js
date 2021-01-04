@@ -17,7 +17,7 @@ import BusinessDetails from "./business/BusinessDetails";
 import AdminProfile from "./profile/AdminProfile";
 import AddProduct from "./products/AddProduct";
 import AddCollection from "./collections/AddCollection";
-import EditCollection from "./collections/EditCollection";
+import EditDeleteCollection from "./collections/EditDeleteCollection";
 import EditProduct from "./products/EditProduct";
 
 function TabPanel({ children, value, index, ...other }) {
@@ -79,7 +79,8 @@ export default function AdminTabs({ tabValue, handleChange }) {
                     scrollButtons="auto"
                     aria-label="scrollable auto tabs example"
                 >
-                    <Tab label="add" {...a11yProps(0)} />
+                    <Tab label="add product" {...a11yProps(0)} />
+                    <Tab label="add collection" {...a11yProps(1)} />
                     <Tab label="products" {...a11yProps(1)} />
                     <Tab label="collections" {...a11yProps(2)} />
                     <Tab label="users" {...a11yProps(3)} />
@@ -90,21 +91,25 @@ export default function AdminTabs({ tabValue, handleChange }) {
                 </Tabs>
             </AppBar>
             <TabPanel value={tabValue} index={0}>
+                <Grid container justify="center" alignItems="flex-start">
+                    <Grid item xs={6}>
+                        <AddProduct />
+                    </Grid>
+                </Grid>
+            </TabPanel>
+            <TabPanel value={tabValue} index={1}>
                 <Grid
                     container
                     justify="center"
                     alignItems="flex-start"
                     spacing={2}
                 >
-                    <Grid item xs>
-                        <AddProduct />
-                    </Grid>
-                    <Grid item xs>
-                        {/* <AddCollection /> */}
+                    <Grid item xs={12}>
+                        <AddCollection />
                     </Grid>
                 </Grid>
             </TabPanel>
-            <TabPanel value={tabValue} index={1}>
+            <TabPanel value={tabValue} index={2}>
                 <Grid
                     container
                     justify="center"
@@ -126,7 +131,7 @@ export default function AdminTabs({ tabValue, handleChange }) {
                     </Grid>
                 </Grid>
             </TabPanel>
-            <TabPanel value={tabValue} index={2}>
+            <TabPanel value={tabValue} index={3}>
                 <Grid
                     container
                     justify="center"
@@ -140,26 +145,26 @@ export default function AdminTabs({ tabValue, handleChange }) {
                         />
                     </Grid>
                     <Grid item xs>
-                        <EditCollection
+                        <EditDeleteCollection
                             editCollectionId={editCollectionId}
                             setEditCollectionId={setEditCollectionId}
                         />
                     </Grid>
                 </Grid>
             </TabPanel>
-            <TabPanel value={tabValue} index={3}>
+            <TabPanel value={tabValue} index={4}>
                 <AllUsers />
             </TabPanel>
-            <TabPanel value={tabValue} index={4}>
+            <TabPanel value={tabValue} index={5}>
                 <AllConsults />
             </TabPanel>
-            <TabPanel value={tabValue} index={5}>
+            <TabPanel value={tabValue} index={6}>
                 <BusinessDetails />
             </TabPanel>
-            <TabPanel value={tabValue} index={6}>
+            <TabPanel value={tabValue} index={7}>
                 <AdminProfile />
             </TabPanel>
-            <TabPanel value={tabValue} index={7}>
+            <TabPanel value={tabValue} index={8}>
                 <AllTestimonials />
             </TabPanel>
         </div>
