@@ -30,6 +30,22 @@ function EditDeleteFabric({ editProductId, setEditProductId }) {
         description: "",
     });
 
+    function resetProductForm() {
+        setFabric({
+            category: "Fabric",
+            _id: "",
+            name: "",
+            colour: "",
+            imgUrl: "",
+            price: "",
+            density: "",
+            style: "",
+            size: "",
+            length: "",
+            description: "",
+        });
+    }
+
     function handleFileChange(file) {
         console.log(file);
         setPhoto(file);
@@ -124,6 +140,10 @@ function EditDeleteFabric({ editProductId, setEditProductId }) {
                 console.log(error);
             });
         setEditProductId("");
+        setPreviousProduct("");
+        setResetFile(true);
+        setPhoto({});
+        resetProductForm();
     }
 
     // PASS IN TITLE AND TEXT FOR THE BUTTON TO THE Fabric FORM
@@ -136,7 +156,7 @@ function EditDeleteFabric({ editProductId, setEditProductId }) {
             handleTextChange={handleTextChange}
             handleSubmit={handleUpdateProduct}
             handleRemove={handleRemoveProduct}
-            product={editProductId === "" ? false : fabric}
+            product={fabric}
             handleFileChange={handleFileChange}
             setResetFile={setResetFile}
             resetFile={resetFile}

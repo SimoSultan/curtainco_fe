@@ -28,7 +28,7 @@ function AddAccessory() {
         imgUrl: "",
         price: "",
         description: "",
-        type: "",
+        type: "Flick Stick",
     });
 
     function resetProductForm() {
