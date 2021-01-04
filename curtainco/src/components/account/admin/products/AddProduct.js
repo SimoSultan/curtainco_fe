@@ -47,6 +47,7 @@ function AddProduct() {
                     />
                 </RadioGroup>
             </FormControl>
+
             <Divider />
 
             <Container>

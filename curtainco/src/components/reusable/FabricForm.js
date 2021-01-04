@@ -29,15 +29,21 @@ function FabricForm({
             <Box pb={1}>
                 <Grid container justify="center" alignItems="center">
                     <Grid item xs={3}>
-                        <img
-                            src={product.imgUrl !== "" ? product.imgUrl : ""}
-                            alt={
-                                product.imgUrl === ""
-                                    ? ""
-                                    : `${product.colour} ${product.name}`
-                            }
-                            className={classes.editFormImage}
-                        />
+                        {product.imgUrl !== "" ? (
+                            <img
+                                src={
+                                    product.imgUrl !== "" ? product.imgUrl : ""
+                                }
+                                alt={
+                                    product.imgUrl === ""
+                                        ? ""
+                                        : `${product.colour} ${product.name}`
+                                }
+                                className={classes.editFormImage}
+                            />
+                        ) : (
+                            ""
+                        )}
                     </Grid>
                     <Grid
                         item

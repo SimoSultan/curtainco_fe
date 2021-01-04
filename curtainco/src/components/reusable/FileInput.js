@@ -30,7 +30,7 @@ function FileInput({ handleFileChange, resetFile, setResetFile }) {
 
     return (
         <Grid container>
-            <Grid item xs={7}>
+            <Grid item xs={6}>
                 <label htmlFor="upload-photo">
                     <input
                         hidden
@@ -49,7 +49,7 @@ function FileInput({ handleFileChange, resetFile, setResetFile }) {
                     </Button>
                 </label>
             </Grid>
-            <Grid item xs={5}>
+            <Grid item xs={6}>
                 <Typography
                     variant="subtitle1"
                     className={classes.fileName}

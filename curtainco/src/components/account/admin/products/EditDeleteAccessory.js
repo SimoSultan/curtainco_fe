@@ -4,13 +4,19 @@ import AccessoryForm from "../../../reusable/AccessoryForm";
 import {
     updateProduct,
     deleteProduct,
+    submitProductToDbAndUpdateState,
 } from "../../../../services/productServices";
 import { useCurtainContext } from "../../../../config/CurtainCoContext";
 import { ACTIONS } from "../../../../config/stateReducer";
 import { getOneProductFromState } from "../../../../helpers/productHelpers";
+import { isPhotoPresent } from "../../../../helpers/appHelpers";
+import { uploadPhotoToS3 } from "../../../../services/uploadServices";
 
 function EditDeleteAccessory({ editProductId, setEditProductId }) {
     const { state, dispatch } = useCurtainContext();
+    const [resetFile, setResetFile] = useState(false);
+    const [previousProduct, setPreviousProduct] = useState(editProductId);
+    const [photo, setPhoto] = useState({});
     const [accessory, setAccessory] = useState({
         category: "Accessory",
         _id: "",
@@ -18,13 +24,22 @@ function EditDeleteAccessory({ editProductId, setEditProductId }) {
         colour: "",
         imgUrl: "",
         price: "",
-        length: "",
-        automated: "",
-        tieBack: "",
-        other: "",
+        description: "",
+        type: "",
     });
 
+    function handleFileChange(file) {
+        console.log(file);
+        setPhoto(file);
+    }
+
     useEffect(() => {
+        // this resets the file in the FileInput component on
+        // a product change / update to form
+        if (editProductId !== previousProduct) {
+            setPreviousProduct(editProductId);
+            setResetFile(true);
+        }
         // IF PRODUCT ID COMES THROUGH AS A PROP, SET THE FORM
         // OTHERWISE CLEAR THE FORM
         if (editProductId !== "") {
@@ -39,10 +54,8 @@ function EditDeleteAccessory({ editProductId, setEditProductId }) {
                 colour: accessoryBeingUpdated.colour,
                 imgUrl: accessoryBeingUpdated.imgUrl,
                 price: accessoryBeingUpdated.price,
-                length: accessoryBeingUpdated.length,
-                automated: accessoryBeingUpdated.automated,
-                tieBack: accessoryBeingUpdated.tieBack,
-                other: accessoryBeingUpdated.other,
+                description: accessoryBeingUpdated.description,
+                type: accessoryBeingUpdated.type,
             });
         } else {
             setAccessory({
@@ -52,56 +65,30 @@ function EditDeleteAccessory({ editProductId, setEditProductId }) {
                 colour: "",
                 imgUrl: "",
                 price: "",
-                length: "",
-                automated: "",
-                tieBack: "",
-                other: "",
+                description: "",
+                type: "",
             });
         }
-    }, [state.products, editProductId]);
-
-    const handleRadioChange = (event) => {
-        const automated = event.target.value === "auto" ? true : false;
-        setAccessory({
-            ...accessory,
-            [event.target.name]: automated,
-        });
-    };
+    }, [state.products, editProductId, previousProduct]);
 
     const handleTextChange = (event) => {
         setAccessory({ ...accessory, [event.target.name]: event.target.value });
     };
 
-    const handleUpdateProduct = () => {
-        // UPDATE THE PRODUCT ON THE DB
-        // IF SUCCESSFUL, UPDATE PRODUCT IN GLOBAL STATE AND SHOW SUCCESS SNACKBAR
-        let editProdError = false;
-        updateProduct(accessory)
-            .then((resp) => {
-                console.log(resp);
-                if (resp.status === 200) {
-                    dispatch({
-                        type: ACTIONS.UPDATE_PRODUCT,
-                        payload: accessory,
-                    });
-                    dispatch({
-                        type: ACTIONS.SET_SNACKBAR,
-                        payload: {
-                            open: true,
-                            success: "success",
-                            message: "Accessory successfully updated",
-                        },
-                    });
-                } else {
-                    editProdError = `An error ocurred on update product: Error Code: ${resp.status}. Message: ${resp.message}.`;
-                    console.log(editProdError);
-                }
-            })
-            .catch((error) => {
-                editProdError = `An error ocurred on update product: Error Code: ${error.status}. Message: ${error.message}.`;
-                console.log(editProdError);
-            });
-    };
+    async function handleUpdateProduct() {
+        // UPDATE DB AND STATE
+        let respOrError = await submitProductToDbAndUpdateState(
+            "update",
+            accessory,
+            dispatch,
+            ACTIONS,
+            setResetFile,
+            setPhoto,
+            photo,
+            false
+        );
+        console.log(respOrError);
+    }
 
     function handleRemoveProduct() {
         // DELETE THE PRODUCT ON THE DB
@@ -137,12 +124,13 @@ function EditDeleteAccessory({ editProductId, setEditProductId }) {
     return (
         <AccessoryForm
             title={"Edit Accessory"}
-            buttonText={"Update"}
             handleTextChange={handleTextChange}
-            handleRadioChange={handleRadioChange}
             handleSubmit={handleUpdateProduct}
             handleRemove={handleRemoveProduct}
             product={editProductId === "" ? false : accessory}
+            handleFileChange={handleFileChange}
+            setResetFile={setResetFile}
+            resetFile={resetFile}
         />
     );
 }

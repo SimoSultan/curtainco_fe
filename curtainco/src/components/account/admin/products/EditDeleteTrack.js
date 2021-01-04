@@ -95,44 +95,16 @@ function EditDeleteTrack({ editProductId, setEditProductId }) {
     };
 
     async function handleUpdateProduct() {
-        // UPDATE THE PRODUCT ON THE DB
-        // IF SUCCESSFUL, UPDATE PRODUCT IN GLOBAL STATE AND SHOW SUCCESS SNACKBAR
-        let editProdError = false;
-        let tempProduct = { ...track };
-        let userIsUpdatingPhoto = isPhotoPresent(photo);
-
-        // UPLOAD THE PHOTO TO S3
-        if (userIsUpdatingPhoto) {
-            try {
-                let s3Resp = await uploadPhotoToS3(photo);
-                console.log(s3Resp);
-                if (s3Resp.status === 201) {
-                    tempProduct.imgUrl = s3Resp.data.image.location;
-                    setResetFile(true);
-                    setPhoto({});
-                }
-            } catch (error) {
-                editProdError = `Error ocurred when retrieving photo on update track: Error: ${error}.`;
-                console.log(editProdError);
-            }
-        }
-
-        // BLOCK THE UPDATE TO DATABASE IF THE IMAGE UPLOAD FAILED
-        // editProdError WILL STILL BE FALSE IF THEY HAVEN'T UPLOADED A PHOTO
-        // OR THERE WAS NO ERROR WHEN UPLOADING IT
-        if (editProdError)
-            return alert(
-                "Something went wrong when uploading photo to storage on tracks"
-            );
-
-        // UPDATE THE DB
+        // UPDATE DB AND STATE
         let respOrError = await submitProductToDbAndUpdateState(
-            tempProduct,
-            "track",
+            "update",
+            track,
             dispatch,
             ACTIONS,
             setResetFile,
-            setPhoto
+            setPhoto,
+            photo,
+            false
         );
         console.log(respOrError);
     }

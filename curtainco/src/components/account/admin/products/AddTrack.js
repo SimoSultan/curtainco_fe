@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 
-import { createProduct } from "../../../../services/productServices";
+import {
+    createProduct,
+    submitProductToDbAndUpdateState,
+} from "../../../../services/productServices";
 import { useCurtainContext } from "../../../../config/CurtainCoContext";
 import { ACTIONS } from "../../../../config/stateReducer";
 import TrackForm from "../../../reusable/TrackForm";
@@ -23,6 +26,22 @@ function AddTrack() {
         description: "",
     });
 
+    function resetProductForm() {
+        setTrack({
+            category: "Track",
+            name: "",
+            colour: "",
+            imgUrl: "",
+            price: "",
+            type: "",
+            single: "",
+            finialStyle: "",
+            finialColour: "",
+            location: "",
+            description: "",
+        });
+    }
+
     function handleFileChange(file) {
         console.log(file);
         setPhoto(file);
@@ -40,59 +59,18 @@ function AddTrack() {
         setTrack({ ...track, [event.target.name]: event.target.value });
     }
 
-    function handleSubmit() {
-        // ADD THE PRODUCT ON THE DB
-        // IF SUCCESSFUL, ADD PRODUCT IN GLOBAL STATE AND SHOW SUCCESS SNACKBAR
-        let addProdError = false;
-        console.log(track);
-
-        try {
-            let resp = createProduct(track);
-            if (resp.status === 201) {
-                dispatch({
-                    type: ACTIONS.ADD_PRODUCT,
-                    payload: track,
-                });
-                dispatch({
-                    type: ACTIONS.SET_SNACKBAR,
-                    payload: {
-                        open: true,
-                        success: "success",
-                        message: "Track successfully added",
-                    },
-                });
-            } else {
-                addProdError = `An status code error ocurred on adding product: Error Code: ${resp.status}. Message: ${resp.message}.`;
-                console.log(addProdError);
-            }
-        } catch (error) {
-            addProdError = `An error ocurred on adding product: Error Code: ${error.status}. Message: ${error.message}.`;
-            console.log(addProdError);
-        }
-        // createProduct(track)
-        // .then((resp) => {
-        //     if (resp.status === 201) {
-        //         dispatch({
-        //             type: ACTIONS.ADD_PRODUCT,
-        //             payload: track,
-        //         });
-        //         dispatch({
-        //             type: ACTIONS.SET_SNACKBAR,
-        //             payload: {
-        //                 open: true,
-        //                 success: "success",
-        //                 message: "Track successfully added",
-        //             },
-        //         });
-        //     } else {
-        //         addProdError = `An status code error ocurred on adding product: Error Code: ${resp.status}. Message: ${resp.message}.`;
-        //         console.log(addProdError);
-        //     }
-        // })
-        // .catch((error) => {
-        //     addProdError = `An error ocurred on adding product: Error Code: ${error.status}. Message: ${error.message}.`;
-        //     console.log(addProdError);
-        // });
+    async function handleSubmit() {
+        let respOrError = await submitProductToDbAndUpdateState(
+            "add",
+            track,
+            dispatch,
+            ACTIONS,
+            setResetFile,
+            setPhoto,
+            photo,
+            resetProductForm
+        );
+        console.log(respOrError);
     }
 
     // PASS IN TITLE AND TEXT FOR THE BUTTON TO THE TRACK FORM
