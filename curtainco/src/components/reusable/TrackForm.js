@@ -37,18 +37,18 @@ function TrackForm({
                     {title}
                 </Typography>
                 <Grid container justify="center" alignItems="center">
-                    <Grid item xs={4}>
+                    <Grid item xs={3}>
                         <img
-                            src={
-                                product.imgUrl !== ""
-                                    ? product.imgUrl
-                                    : "./no-image-default.png"
+                            src={product.imgUrl !== "" ? product.imgUrl : ""}
+                            alt={
+                                product.imgUrl === ""
+                                    ? ""
+                                    : `${product.colour} ${product.name}`
                             }
-                            alt={`${product.colour} ${product.name}`}
                             className={classes.editFormImage}
                         />
                     </Grid>
-                    <Grid item xs={8}>
+                    <Grid item xs={9}>
                         <FileInput
                             handleFileChange={handleFileChange}
                             resetFile={resetFile}
@@ -189,6 +189,7 @@ function TrackForm({
                         justify="space-between"
                         alignItems="center"
                         xs={12}
+                        style={{ paddingTop: "5%" }}
                     >
                         {/* IF THE REMOVE HANDLER WAS PASSED IN, SHOW THE DELETE BUTTON */}
                         <Grid item>

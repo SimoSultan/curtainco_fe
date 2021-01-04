@@ -1,18 +1,9 @@
-import React from 'react'
+import React from "react";
 
-import {
-    Container,
-    Typography
-} from '@material-ui/core'
+import { Typography } from "@material-ui/core";
 
 function About() {
-    return (
-        <Container>
-            <Typography variant="h3">
-                About Page
-            </Typography>
-        </Container>
-    )
+    return <Typography variant="h3">About Page</Typography>;
 }
 
-export default About
+export default About;

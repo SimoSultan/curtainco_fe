@@ -2,12 +2,10 @@ import React, { useState, useEffect } from "react";
 
 import { useCurtainContext } from "../../config/CurtainCoContext";
 import { ACTIONS } from "../../config/stateReducer";
-// import { Link } from "react-router-dom";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
-import Container from "@material-ui/core/Container";
 import useStyles from "./ConsultationStyles";
 
 import { submitConsultationRequest } from "../../services/consultationServices";
@@ -61,7 +59,7 @@ export default function SignUp() {
     }
 
     return (
-        <Container component="main" maxWidth="xs">
+        <>
             <CssBaseline />
 
             <div className={classes.paper}>
@@ -86,6 +84,6 @@ export default function SignUp() {
             <Box mt={5}>
                 <Copyright />
             </Box>
-        </Container>
+        </>
     );
 }

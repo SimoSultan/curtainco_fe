@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Fab, Grid, Typography } from "@material-ui/core";
+import { Fab, Button, Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -39,15 +39,14 @@ function FileInput({ handleFileChange, resetFile, setResetFile }) {
                         type="file"
                         onChange={handleChange}
                     />
-                    <Fab
-                        color="secondary"
-                        size="small"
+                    <Button
+                        color="primary"
+                        variant="outlined"
                         component="span"
                         aria-label="add-photo"
-                        variant="extended"
                     >
                         Choose photo
-                    </Fab>
+                    </Button>
                 </label>
             </Grid>
             <Grid item xs={5}>

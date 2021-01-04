@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-import { Container, Typography, Grid } from "@material-ui/core";
+import { Typography, Grid } from "@material-ui/core";
 
 import useStyles from "./CollectionStyles";
 import { useCurtainContext } from "../../config/CurtainCoContext";
@@ -34,7 +34,7 @@ function Collections() {
     }, [dispatch]);
 
     return (
-        <Container>
+        <>
             <Typography variant="h3">Collections Page</Typography>
             <Grid
                 container
@@ -45,7 +45,7 @@ function Collections() {
             >
                 <CollectionList collections={state.collections} />
             </Grid>
-        </Container>
+        </>
     );
 }
 
