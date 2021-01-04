@@ -6,6 +6,8 @@ import { ACTIONS } from "../../../../config/stateReducer";
 
 function AddFabric() {
     const { dispatch } = useCurtainContext();
+    const [resetFile, setResetFile] = useState(false);
+    const [photo, setPhoto] = useState({});
     const [fabric, setFabric] = useState({
         category: "Fabric",
         name: "",
@@ -17,6 +19,11 @@ function AddFabric() {
         size: "",
         length: "",
     });
+
+    function handleFileChange(file) {
+        console.log(file);
+        setPhoto(file);
+    }
 
     const handleTextChange = (event) => {
         setFabric({ ...fabric, [event.target.name]: event.target.value });
@@ -56,11 +63,14 @@ function AddFabric() {
     return (
         <FabricForm
             title={"Add Fabric"}
-            buttonText={"Add"}
+            buttonText={"Submit Fabric"}
             handleTextChange={handleTextChange}
             handleSubmit={handleSubmit}
             handleRemove={false}
             product={fabric}
+            handleFileChange={handleFileChange}
+            setResetFile={setResetFile}
+            resetFile={resetFile}
         />
     );
 }

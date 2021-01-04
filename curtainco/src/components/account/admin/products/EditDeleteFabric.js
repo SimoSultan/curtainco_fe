@@ -11,6 +11,9 @@ import { getOneProductFromState } from "../../../../helpers/productHelpers";
 
 function EditDeleteFabric({ editProductId, setEditProductId }) {
     const { state, dispatch } = useCurtainContext();
+    const [resetFile, setResetFile] = useState(false);
+    const [previousProduct, setPreviousProduct] = useState(editProductId);
+    const [photo, setPhoto] = useState({});
     const [fabric, setFabric] = useState({
         category: "Fabric",
         _id: "",
@@ -22,9 +25,21 @@ function EditDeleteFabric({ editProductId, setEditProductId }) {
         style: "",
         size: "",
         length: "",
+        description: "",
     });
 
+    function handleFileChange(file) {
+        console.log(file);
+        setPhoto(file);
+    }
+
     useEffect(() => {
+        // this resets the file in the FileInput component on
+        // a product change / update to form
+        if (editProductId !== previousProduct) {
+            setPreviousProduct(editProductId);
+            setResetFile(true);
+        }
         // IF PRODUCT ID COMES THROUGH AS A PROP, SET THE FORM
         // OTHERWISE CLEAR THE FORM
         if (editProductId !== "") {
@@ -43,6 +58,7 @@ function EditDeleteFabric({ editProductId, setEditProductId }) {
                 style: fabricBeingUpdated.style,
                 size: fabricBeingUpdated.size,
                 length: fabricBeingUpdated.length,
+                description: fabricBeingUpdated.description,
             });
         } else {
             setFabric({
@@ -55,10 +71,11 @@ function EditDeleteFabric({ editProductId, setEditProductId }) {
                 density: "",
                 style: "",
                 size: "",
+                description: "",
                 length: "",
             });
         }
-    }, [state.products, editProductId]);
+    }, [state.products, editProductId, previousProduct]);
 
     const handleTextChange = (event) => {
         setFabric({ ...fabric, [event.target.name]: event.target.value });
@@ -134,6 +151,9 @@ function EditDeleteFabric({ editProductId, setEditProductId }) {
             handleSubmit={handleUpdateProduct}
             handleRemove={handleRemoveProduct}
             product={editProductId === "" ? false : fabric}
+            handleFileChange={handleFileChange}
+            setResetFile={setResetFile}
+            resetFile={resetFile}
         />
     );
 }

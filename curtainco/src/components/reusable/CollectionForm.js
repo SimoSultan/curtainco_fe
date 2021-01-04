@@ -1,11 +1,12 @@
 import React from "react";
 
-import { Typography, Grid, TextField, Button } from "@material-ui/core";
+import { Typography, Grid, TextField, Button, Box } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import useStyles from "../../components/account/admin/AdminStyles";
 import { useCurtainContext } from "../../config/CurtainCoContext";
+import FileInput from "./FileInput";
 
 function CollectionForm({
     title,
@@ -15,6 +16,9 @@ function CollectionForm({
     handleSubmit,
     collection,
     handleRemove,
+    handleFileChange,
+    setResetFile,
+    resetFile,
 }) {
     const classes = useStyles();
     const { state } = useCurtainContext();
@@ -45,7 +49,20 @@ function CollectionForm({
 
     return (
         <>
-            <Typography variant="h6">{title}</Typography>
+            <Box p={1}>
+                <Grid container justify="space-evenly" alignItems="center">
+                    <Grid item xs={4}>
+                        <Typography variant="h6">{title}</Typography>
+                    </Grid>
+                    <Grid item xs={8}>
+                        <FileInput
+                            handleFileChange={handleFileChange}
+                            resetFile={resetFile}
+                            setResetFile={setResetFile}
+                        />
+                    </Grid>
+                </Grid>
+            </Box>
             <Grid container spacing={2} justify="center" alignItems="center">
                 <Grid item xs={12}>
                     <TextField

@@ -41,6 +41,9 @@ const useStyles = makeStyles((theme) => ({
     tableContainer: {
         height: window.innerHeight > 1080 ? 800 : 400,
     },
+    editFormImage: {
+        width: "70px",
+    },
 }));
 
 export default useStyles;

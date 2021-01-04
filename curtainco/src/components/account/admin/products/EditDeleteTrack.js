@@ -11,6 +11,9 @@ import { getOneProductFromState } from "../../../../helpers/productHelpers";
 
 function EditDeleteTrack({ editProductId, setEditProductId }) {
     const { state, dispatch } = useCurtainContext();
+    const [resetFile, setResetFile] = useState(false);
+    const [previousProduct, setPreviousProduct] = useState(editProductId);
+    const [photo, setPhoto] = useState({});
     const [track, setTrack] = useState({
         category: "Track",
         _id: "",
@@ -23,9 +26,22 @@ function EditDeleteTrack({ editProductId, setEditProductId }) {
         finialStyle: "",
         finialColour: "",
         location: "",
+        description: "",
     });
 
+    function handleFileChange(file) {
+        console.log("here 2");
+        console.log(file);
+        setPhoto(file);
+    }
+
     useEffect(() => {
+        // this resets the file in the FileInput component on
+        // a product change / update to form
+        if (editProductId !== previousProduct) {
+            setPreviousProduct(editProductId);
+            setResetFile(true);
+        }
         // IF PRODUCT ID COMES THROUGH AS A PROP, SET THE FORM
         // OTHERWISE CLEAR THE FORM
         if (editProductId !== "") {
@@ -45,6 +61,7 @@ function EditDeleteTrack({ editProductId, setEditProductId }) {
                 finialStyle: trackBeingUpdated.finialStyle,
                 finialColour: trackBeingUpdated.finialColour,
                 location: trackBeingUpdated.location,
+                description: trackBeingUpdated.description,
             });
         } else {
             setTrack({
@@ -58,10 +75,11 @@ function EditDeleteTrack({ editProductId, setEditProductId }) {
                 single: "",
                 finialStyle: "",
                 finialColour: "",
+                description: "",
                 location: "",
             });
         }
-    }, [state.products, editProductId]);
+    }, [state.products, editProductId, previousProduct]);
 
     const handleRadioChange = (event) => {
         const singleTrack = event.target.value === "single" ? true : false;
@@ -146,6 +164,9 @@ function EditDeleteTrack({ editProductId, setEditProductId }) {
             handleSubmit={handleUpdateProduct}
             handleRemove={handleRemoveProduct}
             product={editProductId === "" ? false : track}
+            handleFileChange={handleFileChange}
+            setResetFile={setResetFile}
+            resetFile={resetFile}
         />
     );
 }

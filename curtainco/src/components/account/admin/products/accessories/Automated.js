@@ -20,10 +20,6 @@ function Automated() {
         description: "",
     });
 
-    function handleReset(resetComplete) {
-        if (resetComplete) setResetFile(false);
-    }
-
     function handleChange(event) {
         setAutomated({
             ...automated,
@@ -135,7 +131,7 @@ function Automated() {
                         <FileInput
                             handleFileChange={handleFileChange}
                             resetFile={resetFile}
-                            cb={handleReset}
+                            setResetFile={setResetFile}
                         />
                     </Grid>
                     <Grid item xs={4} container justify="flex-end">

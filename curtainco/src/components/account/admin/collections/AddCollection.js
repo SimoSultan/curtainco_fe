@@ -10,6 +10,8 @@ import useStyles from "../AdminStyles";
 function AddCollection() {
     const classes = useStyles();
     const { dispatch } = useCurtainContext();
+    const [resetFile, setResetFile] = useState(false);
+    const [photoColl, setPhotoColl] = useState({});
     const [collection, setCollection] = useState({
         name: "",
         description: "",
@@ -19,6 +21,11 @@ function AddCollection() {
         fabric: "",
         accessory: "",
     });
+
+    function handleFileChange(file) {
+        console.log(file);
+        setPhotoColl(file);
+    }
 
     const handleSelectChange = (event) => {
         setCollection({
@@ -70,12 +77,15 @@ function AddCollection() {
             <Container>
                 <CollectionForm
                     title={"Add Collection"}
-                    buttonText={"Add"}
+                    buttonText={"Submit Collection"}
                     handleTextChange={handleTextChange}
                     handleSelectChange={handleSelectChange}
                     handleSubmit={handleSubmit}
                     handleRemove={false}
                     collection={collection}
+                    handleFileChange={handleFileChange}
+                    setResetFile={setResetFile}
+                    resetFile={resetFile}
                 />
             </Container>
         </Paper>

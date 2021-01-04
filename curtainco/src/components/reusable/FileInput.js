@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Fab, Grid, Typography } from "@material-ui/core";
-// import AddIcon from "@material-ui/icons/Add";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -10,16 +9,19 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function FileInput({ handleFileChange, resetFile, cb }) {
+function FileInput({ handleFileChange, resetFile, setResetFile }) {
     const classes = useStyles();
     const [file, setFile] = useState({});
 
     useEffect(() => {
         if (resetFile) {
+            // resetFile is true when we update the form
+            // and need to update the value back to false
+            // to stop an infinite loop
             setFile({});
-            cb(false);
+            setResetFile(false);
         }
-    }, [resetFile, cb]);
+    }, [file, resetFile, setResetFile]);
 
     function handleChange(event) {
         setFile(event.target.files[0]);
@@ -41,11 +43,10 @@ function FileInput({ handleFileChange, resetFile, cb }) {
                         color="secondary"
                         size="small"
                         component="span"
-                        aria-label="add"
+                        aria-label="add-photo"
                         variant="extended"
                     >
                         Choose photo
-                        {/* <AddIcon /> Choose photo */}
                     </Fab>
                 </label>
             </Grid>

@@ -1,4 +1,11 @@
 import { sortConsultations } from "../helpers/consultationHelpers";
+import { sortACTIONS, sortProducts } from "../helpers/productHelpers";
+
+function sortProductsForState(products) {
+    let sortedProducts = sortProducts(products, sortACTIONS.NAME_ALPHABETICAL);
+    sortedProducts = sortProducts(sortedProducts, sortACTIONS.CATEGORY);
+    return sortedProducts;
+}
 
 export const ACTIONS = {
     LOGIN: "login-user",
@@ -72,15 +79,19 @@ export default function stateReducer(state, action) {
 
         // -------- PRODUCTS --------
         case ACTIONS.SET_ALL_PRODUCTS: {
+            let sortedProducts = action.payload;
+            sortedProducts = sortProductsForState(sortedProducts);
             return {
                 ...state,
-                products: action.payload,
+                products: sortedProducts,
             };
         }
         case ACTIONS.ADD_PRODUCT: {
+            let sortedProducts = [...state.products, action.payload];
+            sortedProducts = sortProductsForState(sortedProducts);
             return {
                 ...state,
-                products: [...state.products, action.payload],
+                products: sortedProducts,
             };
         }
         case ACTIONS.UPDATE_PRODUCT: {
@@ -88,9 +99,12 @@ export default function stateReducer(state, action) {
             const productsWithUpdateRemoved = state.products.filter(
                 (prod) => prod._id !== updatedProduct._id
             );
+            let sortedProducts = [...productsWithUpdateRemoved, updatedProduct];
+            sortedProducts = sortProductsForState(sortedProducts);
+
             return {
                 ...state,
-                products: [...productsWithUpdateRemoved, updatedProduct],
+                products: sortedProducts,
             };
         }
         case ACTIONS.DELETE_PRODUCT: {
@@ -98,9 +112,12 @@ export default function stateReducer(state, action) {
             const productsWithRequestedRemoved = state.products.filter(
                 (prod) => prod._id !== id
             );
+            let sortedProducts = sortProductsForState(
+                productsWithRequestedRemoved
+            );
             return {
                 ...state,
-                products: productsWithRequestedRemoved,
+                products: sortedProducts,
             };
         }
 

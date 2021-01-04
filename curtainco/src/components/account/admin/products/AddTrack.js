@@ -7,6 +7,8 @@ import TrackForm from "../../../reusable/TrackForm";
 
 function AddTrack() {
     const { dispatch } = useCurtainContext();
+    const [resetFile, setResetFile] = useState(false);
+    const [photo, setPhoto] = useState({});
     const [track, setTrack] = useState({
         category: "Track",
         name: "",
@@ -20,6 +22,11 @@ function AddTrack() {
         location: "",
         description: "",
     });
+
+    function handleFileChange(file) {
+        console.log(file);
+        setPhoto(file);
+    }
 
     const handleRadioChange = (event) => {
         const singleTrack = event.target.value === "single" ? true : false;
@@ -70,12 +77,15 @@ function AddTrack() {
     return (
         <TrackForm
             title={"Add Track"}
-            buttonText={"Add"}
+            buttonText={"Submit Track"}
             handleTextChange={handleTextChange}
             handleRadioChange={handleRadioChange}
             handleSubmit={handleSubmit}
             handleRemove={false}
             product={track}
+            handleFileChange={handleFileChange}
+            setResetFile={setResetFile}
+            resetFile={resetFile}
         />
     );
 }
