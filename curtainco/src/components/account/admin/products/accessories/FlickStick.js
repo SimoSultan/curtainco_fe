@@ -15,6 +15,9 @@ function FlickStick() {
     const [flickStick, setFlickStick] = useState({
         name: "",
         price: "",
+        imgUrl: "",
+        colour: "",
+        description: "",
     });
 
     function handleReset(resetComplete) {
@@ -82,15 +85,39 @@ function FlickStick() {
                 Flick Stick
             </Typography>
             <Grid container spacing={2} justify="center">
-                <Grid item xs={8}>
+                <Grid item xs={12}>
                     <TextField
                         id="accessory-flick-stick-name-input"
-                        label="Name"
+                        label="Flick Stick Name"
                         variant="outlined"
                         name="name"
                         onChange={handleChange}
                         value={flickStick.name}
                         fullWidth
+                    />
+                </Grid>
+                <Grid item xs={12}>
+                    <TextField
+                        id="accessory-flick-stick-description-input"
+                        label="Flick Stick Description"
+                        variant="outlined"
+                        name="description"
+                        fullWidth
+                        multiline
+                        onChange={handleChange}
+                        value={flickStick.description}
+                    />
+                </Grid>
+                <Grid item xs={8}>
+                    <TextField
+                        id="accessory-flick-stick-colour-input"
+                        label="Flick Stick Colour"
+                        variant="outlined"
+                        name="colour"
+                        multiline
+                        fullWidth
+                        onChange={handleChange}
+                        value={flickStick.colour}
                     />
                 </Grid>
                 <Grid item xs={4}>
@@ -99,6 +126,7 @@ function FlickStick() {
                         label="Price"
                         variant="outlined"
                         name="price"
+                        fullWidth
                         onChange={handleChange}
                         value={flickStick.price}
                     />

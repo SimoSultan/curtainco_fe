@@ -46,26 +46,26 @@ function CollectionForm({
     return (
         <>
             <Typography variant="h6">{title}</Typography>
-            <Grid container direction="column" spacing={2}>
-                <Grid item>
+            <Grid container spacing={2} justify="center" alignItems="center">
+                <Grid item xs={12}>
                     <TextField
                         id="collection-input"
                         label="Collection Name"
                         variant="outlined"
                         name="name"
-                        className={classes.fullWidth}
+                        fullWidth
                         onChange={handleTextChange}
                         value={collection.name}
                     />
                 </Grid>
-                <Grid item>
+                <Grid item xs={12}>
                     <TextField
                         id="collection-description-input"
                         label="Collection Description"
                         variant="outlined"
                         name="description"
                         multiline
-                        className={classes.fullWidth}
+                        fullWidth
                         onChange={handleTextChange}
                         value={collection.description}
                     />
@@ -186,16 +186,14 @@ function CollectionForm({
                     />
                 </Grid>
                 {collection ? (
-                    <Grid container justify="space-between" alignItems="center">
-                        <Grid item>
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                onClick={handleSubmit}
-                            >
-                                {buttonText}
-                            </Button>
-                        </Grid>
+                    <Grid
+                        item
+                        container
+                        justify="space-between"
+                        alignItems="center"
+                        fullWidth
+                        xs={12}
+                    >
                         {/* IF THE REMOVE HANDLER WAS PASSED IN, SHOW THE DELETE BUTTON */}
                         <Grid item>
                             {handleRemove ? (
@@ -210,6 +208,15 @@ function CollectionForm({
                             ) : (
                                 ""
                             )}
+                        </Grid>
+                        <Grid item>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={handleSubmit}
+                            >
+                                {buttonText}
+                            </Button>
                         </Grid>
                     </Grid>
                 ) : (

@@ -28,6 +28,10 @@ export default function AllProducts({ fillEditProductPage, editProductId }) {
                     console.log(resp.data);
                     let sortedProducts = sortProducts(
                         resp.data,
+                        sortACTIONS.NAME_ALPHABETICAL
+                    );
+                    sortedProducts = sortProducts(
+                        resp.data,
                         sortACTIONS.CATEGORY
                     );
                     dispatch({

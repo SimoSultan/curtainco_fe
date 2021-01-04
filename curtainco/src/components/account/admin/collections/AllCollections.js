@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 
 import Table from "@material-ui/core/Table";
+import TableContainer from "@material-ui/core/TableContainer";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
@@ -11,6 +12,7 @@ import { getAllCollections } from "../../../../services/collectionServices";
 import { useCurtainContext } from "../../../../config/CurtainCoContext";
 import Title from "../../../reusable/Title";
 import { ACTIONS } from "../../../../config/stateReducer";
+import { sortACTIONS, sortProducts } from "../../../../helpers/productHelpers";
 
 import useStyles from "../AdminStyles";
 
@@ -29,9 +31,15 @@ export default function AllCollections({
                 if (resp.status === 200) {
                     console.log("---COLLECTIONS---");
                     console.log(resp.data);
+                    // sortProducts can be used here as it is just looking
+                    // at the object.name attribute
+                    let sortedCollections = sortProducts(
+                        resp.data,
+                        sortACTIONS.NAME_ALPHABETICAL
+                    );
                     dispatch({
                         type: ACTIONS.SET_ALL_COLLECTIONS,
-                        payload: resp.data,
+                        payload: sortedCollections,
                     });
                 } else {
                     console.log("status code wasn't correct");
@@ -53,23 +61,25 @@ export default function AllCollections({
         >
             <TableCell>{coll.imgUrl}</TableCell>
             <TableCell>{coll.name}</TableCell>
-            <TableCell align="right">{coll.price}</TableCell>
+            <TableCell>${coll.price}</TableCell>
         </TableRow>
     ));
 
     return (
         <Paper className={classes.paper}>
             <Title>Collections</Title>
-            <Table size="small">
-                <TableHead>
-                    <TableRow>
-                        <TableCell> </TableCell>
-                        <TableCell>Name</TableCell>
-                        <TableCell align="right">Price</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>{collectionItems}</TableBody>
-            </Table>
+            <TableContainer className={classes.tableContainer}>
+                <Table stickyHeader aria-label="sticky table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell> </TableCell>
+                            <TableCell>Name</TableCell>
+                            <TableCell>Price</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>{collectionItems}</TableBody>
+                </Table>
+            </TableContainer>
         </Paper>
     );
 }

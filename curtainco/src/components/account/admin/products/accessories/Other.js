@@ -16,6 +16,8 @@ function Other() {
         name: "",
         price: "",
         imgUrl: "",
+        colour: "",
+        description: "",
     });
 
     function handleReset(resetComplete) {
@@ -64,7 +66,7 @@ function Other() {
             //                     message: "Created accessory successfully",
             //                 },
             //             });
-            //             setOther({name: "", price: "", imgUrl: "",})
+            //             setOther(name: "", price: "", imgUrl: "", colour: "", description: ""})
             //             setResetFile(true)
             //         }
             //     } catch (error) {
@@ -82,15 +84,39 @@ function Other() {
                 Other
             </Typography>
             <Grid container spacing={2} justify="center">
-                <Grid item xs={8}>
+                <Grid item xs={12}>
                     <TextField
                         id="accessory-other-name-input"
-                        label="Name"
+                        label="Other Name"
                         variant="outlined"
                         name="name"
                         onChange={handleChange}
                         value={other.name}
                         fullWidth
+                    />
+                </Grid>
+                <Grid item xs={12}>
+                    <TextField
+                        id="accessory-other-description-input"
+                        label="Other Description"
+                        variant="outlined"
+                        name="description"
+                        fullWidth
+                        multiline
+                        onChange={handleChange}
+                        value={other.description}
+                    />
+                </Grid>
+                <Grid item xs={8}>
+                    <TextField
+                        id="accessory-other-colour-input"
+                        label="Other Colour"
+                        variant="outlined"
+                        name="colour"
+                        multiline
+                        fullWidth
+                        onChange={handleChange}
+                        value={other.colour}
                     />
                 </Grid>
                 <Grid item xs={4}>
@@ -99,6 +125,7 @@ function Other() {
                         label="Price"
                         variant="outlined"
                         name="price"
+                        fullWidth
                         onChange={handleChange}
                         value={other.price}
                     />
