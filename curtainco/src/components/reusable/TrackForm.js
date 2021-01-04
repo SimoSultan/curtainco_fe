@@ -118,6 +118,18 @@ function TrackForm({
                 </Grid>
                 <Grid item>
                     <TextField
+                        id="track-description-input"
+                        label="Description"
+                        variant="outlined"
+                        name="description"
+                        multiline
+                        className={classes.fullWidth}
+                        onChange={handleTextChange}
+                        value={product.description}
+                    />
+                </Grid>
+                <Grid item>
+                    <TextField
                         id="track-price-input"
                         label="Price"
                         variant="outlined"

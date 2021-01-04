@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Container, Paper } from "@material-ui/core";
+import { Container, Divider, Paper } from "@material-ui/core";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -47,6 +47,7 @@ function AddProduct() {
                     />
                 </RadioGroup>
             </FormControl>
+            <Divider />
 
             <Container>
                 {checkedValue === "track" ? (

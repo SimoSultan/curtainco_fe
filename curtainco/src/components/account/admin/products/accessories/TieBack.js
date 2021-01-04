@@ -16,6 +16,8 @@ function TieBack() {
         name: "",
         price: "",
         imgUrl: "",
+        colour: "",
+        description: "",
     });
 
     function handleReset(resetComplete) {
@@ -64,7 +66,7 @@ function TieBack() {
             //                     message: "Created accessory successfully",
             //                 },
             //             });
-            //             setTieBack({name: "", price: "", imgUrl: "",})
+            //             setTieBack({name: "", price: "", imgUrl: "", colour: "", description: ""})
             //             setResetFile(true)
             //         }
             //     } catch (error) {
@@ -82,15 +84,39 @@ function TieBack() {
                 Tie Back
             </Typography>
             <Grid container spacing={2} justify="center">
-                <Grid item xs={8}>
+                <Grid item xs={12}>
                     <TextField
                         id="accessory-tie-back-name-input"
-                        label="Name"
+                        label="Tie Back Name"
                         variant="outlined"
                         name="name"
                         onChange={handleChange}
                         value={tieBack.name}
                         fullWidth
+                    />
+                </Grid>
+                <Grid item xs={12}>
+                    <TextField
+                        id="accessory-tie-back-description-input"
+                        label="Tie Back Description"
+                        variant="outlined"
+                        name="description"
+                        fullWidth
+                        multiline
+                        onChange={handleChange}
+                        value={tieBack.description}
+                    />
+                </Grid>
+                <Grid item xs={8}>
+                    <TextField
+                        id="accessory-tie-back-colour-input"
+                        label="Tie Back Colour"
+                        variant="outlined"
+                        name="colour"
+                        multiline
+                        fullWidth
+                        onChange={handleChange}
+                        value={tieBack.colour}
                     />
                 </Grid>
                 <Grid item xs={4}>
@@ -99,6 +125,7 @@ function TieBack() {
                         label="Price"
                         variant="outlined"
                         name="price"
+                        fullWidth
                         onChange={handleChange}
                         value={tieBack.price}
                     />

@@ -16,6 +16,8 @@ function Automated() {
         name: "",
         price: "",
         imgUrl: "",
+        colour: "",
+        description: "",
     });
 
     function handleReset(resetComplete) {
@@ -64,7 +66,7 @@ function Automated() {
             //                     message: "Created accessory successfully",
             //                 },
             //             });
-            //             setAutomated({name: "", price: "", imgUrl: "",})
+            //             setAutomated(name: "", price: "", imgUrl: "", colour: "", description: ""})
             //             setResetFile(true)
             //         }
             //     } catch (error) {
@@ -81,16 +83,40 @@ function Automated() {
             <Typography variant="body1" className={classes.accessorySubHeading}>
                 Automated
             </Typography>
-            <Grid container spacing={2} justify="center">
-                <Grid item xs={8}>
+            <Grid container spacing={2} justify="center" alignItems="center">
+                <Grid item xs={12}>
                     <TextField
                         id="accessory-automated-name-input"
-                        label="Name"
+                        label="Automated Name"
                         variant="outlined"
                         name="name"
                         onChange={handleChange}
                         value={automated.name}
                         fullWidth
+                    />
+                </Grid>
+                <Grid item xs={12}>
+                    <TextField
+                        id="accessory-automated-description-input"
+                        label="Automated Description"
+                        variant="outlined"
+                        name="description"
+                        fullWidth
+                        multiline
+                        onChange={handleChange}
+                        value={automated.description}
+                    />
+                </Grid>
+                <Grid item xs={8}>
+                    <TextField
+                        id="accessory-automated-colour-input"
+                        label="Automated Colour"
+                        variant="outlined"
+                        name="colour"
+                        multiline
+                        fullWidth
+                        onChange={handleChange}
+                        value={automated.colour}
                     />
                 </Grid>
                 <Grid item xs={4}>
@@ -99,6 +125,7 @@ function Automated() {
                         label="Price"
                         variant="outlined"
                         name="price"
+                        fullWidth
                         onChange={handleChange}
                         value={automated.price}
                     />

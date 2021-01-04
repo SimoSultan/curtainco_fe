@@ -18,6 +18,7 @@ function AddTrack() {
         finialStyle: "",
         finialColour: "",
         location: "",
+        description: "",
     });
 
     const handleRadioChange = (event) => {

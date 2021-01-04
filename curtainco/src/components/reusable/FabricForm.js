@@ -86,6 +86,18 @@ function FabricForm({
                 </Grid>
                 <Grid item>
                     <TextField
+                        id="fabric-description-input"
+                        label="Description"
+                        variant="outlined"
+                        name="description"
+                        multiline
+                        className={classes.fullWidth}
+                        onChange={handleTextChange}
+                        value={product.description}
+                    />
+                </Grid>
+                <Grid item>
+                    <TextField
                         id="fabric-price-input"
                         label="Price"
                         variant="outlined"
