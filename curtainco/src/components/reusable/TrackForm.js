@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { Typography, Grid, TextField, Button } from "@material-ui/core";
+import { Typography, Grid, TextField, Button, Box } from "@material-ui/core";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import DeleteIcon from "@material-ui/icons/Delete";
-import useStyles from "../../components/account/admin/AdminStyles";
+import FileInput from "./FileInput";
+import useStyles from "../account/admin/AdminStyles";
 
 function TrackForm({
     title,
@@ -15,12 +16,68 @@ function TrackForm({
     handleSubmit,
     product,
     handleRemove,
+    handleFileChange,
+    setResetFile,
+    resetFile,
 }) {
     const classes = useStyles();
+
+    // this loop just changes an undefined value of the product to
+    // empty string for the form to display cleaner
+    for (const key in product) {
+        if (Object.hasOwnProperty.call(product, key)) {
+            if (product[key] === undefined) product[key] = "";
+        }
+    }
+
     return (
         <>
-            <Typography variant="h6">{title}</Typography>
-            <Grid container spacing={2} justify="center" alignItems="center">
+            <Box pb={1}>
+                <Grid container justify="center" alignItems="center">
+                    <Grid item xs={3}>
+                        {product.imgUrl !== "" ? (
+                            <img
+                                src={
+                                    product.imgUrl !== "" ? product.imgUrl : ""
+                                }
+                                alt={
+                                    product.imgUrl === ""
+                                        ? ""
+                                        : `${product.colour} ${product.name}`
+                                }
+                                className={classes.editFormImage}
+                            />
+                        ) : (
+                            ""
+                        )}
+                    </Grid>
+                    <Grid
+                        item
+                        container
+                        justify="center"
+                        alignItems="center"
+                        xs={9}
+                        spacing={2}
+                    >
+                        <Grid item xs={12}>
+                            <Typography
+                                variant="h6"
+                                style={{ textAlign: "center" }}
+                            >
+                                {title}
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <FileInput
+                                handleFileChange={handleFileChange}
+                                resetFile={resetFile}
+                                setResetFile={setResetFile}
+                            />
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Box>
+            <Grid container spacing={1} justify="center" alignItems="center">
                 <Grid item xs={12}>
                     <TextField
                         id="track-input"
@@ -79,7 +136,6 @@ function TrackForm({
                         aria-label="single-double-input"
                         name="single"
                         onChange={handleRadioChange}
-                        fullWidth
                         row
                         value={
                             product.single === ""
@@ -153,6 +209,7 @@ function TrackForm({
                         justify="space-between"
                         alignItems="center"
                         xs={12}
+                        style={{ paddingTop: "5%" }}
                     >
                         {/* IF THE REMOVE HANDLER WAS PASSED IN, SHOW THE DELETE BUTTON */}
                         <Grid item>

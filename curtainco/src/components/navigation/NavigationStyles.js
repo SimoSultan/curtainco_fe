@@ -11,6 +11,8 @@ const useStyles = makeStyles((theme) => ({
 
     footerRoot: {
         position: "absolute",
+        // bottom: -150,
+        // height: "92px",
         bottom: 0,
         height: "fit-content",
         width: "100%",

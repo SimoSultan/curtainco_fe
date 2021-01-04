@@ -18,7 +18,6 @@ import { sortACTIONS, sortProducts } from "../../../../helpers/productHelpers";
 export default function AllProducts({ fillEditProductPage, editProductId }) {
     const classes = useStyles();
     const { state, dispatch } = useCurtainContext();
-    let allProducts = state.products;
 
     useEffect(() => {
         getAllProducts()
@@ -47,7 +46,7 @@ export default function AllProducts({ fillEditProductPage, editProductId }) {
             });
     }, [dispatch]);
 
-    let productItems = allProducts.map((prod) => (
+    let productItems = state.products.map((prod) => (
         <TableRow
             key={prod._id}
             id={`${prod.category},${prod._id}`}
@@ -56,7 +55,6 @@ export default function AllProducts({ fillEditProductPage, editProductId }) {
             selected={editProductId === prod._id}
             onClick={fillEditProductPage}
         >
-            <TableCell>{prod.imgUrl}</TableCell>
             <TableCell>{prod.category}</TableCell>
             <TableCell>{prod.name}</TableCell>
             <TableCell>${prod.price}</TableCell>
@@ -70,7 +68,6 @@ export default function AllProducts({ fillEditProductPage, editProductId }) {
                 <Table stickyHeader aria-label="sticky table">
                     <TableHead>
                         <TableRow>
-                            <TableCell> </TableCell>
                             <TableCell>Category</TableCell>
                             <TableCell>Name</TableCell>
                             <TableCell>Price</TableCell>

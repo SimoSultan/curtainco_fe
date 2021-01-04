@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Fab, Grid, Typography } from "@material-ui/core";
-// import AddIcon from "@material-ui/icons/Add";
+import { Fab, Button, Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -10,16 +9,19 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function FileInput({ handleFileChange, resetFile, cb }) {
+function FileInput({ handleFileChange, resetFile, setResetFile }) {
     const classes = useStyles();
     const [file, setFile] = useState({});
 
     useEffect(() => {
         if (resetFile) {
+            // resetFile is true when we update the form
+            // and need to update the value back to false
+            // to stop an infinite loop
             setFile({});
-            cb(false);
+            setResetFile(false);
         }
-    }, [resetFile, cb]);
+    }, [file, resetFile, setResetFile]);
 
     function handleChange(event) {
         setFile(event.target.files[0]);
@@ -28,7 +30,7 @@ function FileInput({ handleFileChange, resetFile, cb }) {
 
     return (
         <Grid container>
-            <Grid item xs={7}>
+            <Grid item xs={6}>
                 <label htmlFor="upload-photo">
                     <input
                         hidden
@@ -37,19 +39,17 @@ function FileInput({ handleFileChange, resetFile, cb }) {
                         type="file"
                         onChange={handleChange}
                     />
-                    <Fab
-                        color="secondary"
-                        size="small"
+                    <Button
+                        color="primary"
+                        variant="outlined"
                         component="span"
-                        aria-label="add"
-                        variant="extended"
+                        aria-label="add-photo"
                     >
                         Choose photo
-                        {/* <AddIcon /> Choose photo */}
-                    </Fab>
+                    </Button>
                 </label>
             </Grid>
-            <Grid item xs={5}>
+            <Grid item xs={6}>
                 <Typography
                     variant="subtitle1"
                     className={classes.fileName}

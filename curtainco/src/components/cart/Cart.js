@@ -1,14 +1,11 @@
-import React from 'react';
-import api from '../../config/api';
-import Paypal from './Paypal';
+import React from "react";
+import api from "../../config/api";
+import Paypal from "./Paypal";
 
-import {
-    Container,
-    Typography
-} from '@material-ui/core';
+import { Typography } from "@material-ui/core";
 
 function Cart() {
-    // snippet below assumes the use of localStorage as storage 
+    // snippet below assumes the use of localStorage as storage
     //of cart items
 
     // const [cart, setCart] = useState(null)
@@ -16,7 +13,6 @@ function Cart() {
     // const [paymentSuccess, setPaymentSuccess] = useState(false)
     // const [paymentFailed, setPaymentFailed] = useState(false)
     // const [paymentCancelled, setPaymentCancelled] = useState(false)
-
 
     // useEffect(() => {
     // const cartItemStr = window.localStorage.getItem('cartItems')
@@ -28,17 +24,19 @@ function Cart() {
     // }
     // },[cart, totalPrice])
 
-    const testProduct = [{
-        "name": "Series 51 White Track",
-        "colour": "White",
-        "category": "Track",
-        "type": "Powder Coated",
-        "single": true,
-        "finialStyle": "Colonial",
-        "finialColour": "White",
-        "location": "Ceiling",
-        "price": 999
-    }];
+    const testProduct = [
+        {
+            name: "Series 51 White Track",
+            colour: "White",
+            category: "Track",
+            type: "Powder Coated",
+            single: true,
+            finialStyle: "Colonial",
+            finialColour: "White",
+            location: "Ceiling",
+            price: 999,
+        },
+    ];
 
     async function handleSuccess(data) {
         // data contains the response from paypal which is to be stored in server
@@ -59,33 +57,30 @@ function Cart() {
         // data contains the response from paypal which is to be stored in server
         // setPaymentFailed(true) // modal ??
         console.log(data);
-        console.log('There was an error when using Paypal');
+        console.log("There was an error when using Paypal");
     }
 
     function handleCancel(data) {
         // data contains the response from paypal which is to be stored in server
         // setPaymentCancelled(true) // modal ??
         console.log(data);
-        console.log('Transaction cancelled');
+        console.log("Transaction cancelled");
     }
-
 
     // would be a state setTotalPrice which was
     // extracted from every item added to cart
     // totalPrice is then passed to Paypal component
     const totalPrice = 10;
     return (
-        <Container>
-            <Typography variant="h3">
-                Cart Page
-            </Typography>
+        <>
+            <Typography variant="h3">Cart Page</Typography>
             <Paypal
                 handleSuccess={handleSuccess}
                 handleError={handleError}
                 handleCancel={handleCancel}
                 totalPrice={totalPrice}
             />
-        </Container >
+        </>
     );
 }
 

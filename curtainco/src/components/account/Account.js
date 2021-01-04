@@ -2,7 +2,6 @@ import React from "react";
 
 import { useCurtainContext } from "../../config/CurtainCoContext";
 
-import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 
 import AdminDashboard from "./admin/AdminDashboard";
@@ -13,7 +12,7 @@ function Account() {
     const { state } = useCurtainContext();
 
     return (
-        <Container>
+        <>
             <Typography variant="h3">Account Page</Typography>
 
             {state.currentUser !== null ? (
@@ -25,7 +24,7 @@ function Account() {
             ) : (
                 <Redirect to="/" />
             )}
-        </Container>
+        </>
     );
 }
 

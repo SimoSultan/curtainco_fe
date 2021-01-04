@@ -77,7 +77,7 @@ export default function SignIn() {
             {state.loggedIn ? (
                 <Redirect to="/" />
             ) : (
-                <Container component="main" maxWidth="xs">
+                <Container maxWidth="xs">
                     <CssBaseline />
 
                     <div className={classes.paper}>

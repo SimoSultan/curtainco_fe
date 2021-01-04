@@ -54,6 +54,7 @@ export default function AdminTabs({ tabValue, handleChange }) {
     const [editForm, setEditForm] = useState("");
 
     function fillEditProductPage(event) {
+        event.preventDefault();
         let categoryId = event.currentTarget.id;
         const productCategory = categoryId.split(",")[0];
         const productId = categoryId.split(",")[1];

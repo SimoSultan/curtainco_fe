@@ -1,6 +1,11 @@
 body {
     background-color: antiquewhite;
-    height: 100vh;
+    min-height: 100vh;
+}
+
+.app-container {
+    // height: 100%;
+    overflow-y: auto;
 }
 
 .link {

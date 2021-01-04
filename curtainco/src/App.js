@@ -24,6 +24,7 @@ import {
     CustomSnackbar,
     CustomModal,
 } from "./components/export.js";
+import { Container } from "@material-ui/core";
 
 function App() {
     const { state, dispatch } = useCurtainContext();
@@ -54,22 +55,28 @@ function App() {
         <Router>
             <NavBar />
 
-            <Switch>
-                <Route exact path="/" component={Home} />
-                <Route exact path="/login" component={Login} />
-                <Route exact path="/register" component={Register} />
-                <Route exact path="/about" component={About} />
-                <Route exact path="/collections" component={Collections} />
-                <Route
-                    exact
-                    path="/collections/customise/:id"
-                    component={CollectionCustomise}
-                />
-                <Route exact path="/products" component={Products} />
-                <Route exact path="/cart" component={Cart} />
-                <Route exact path="/request" component={RequestConsultation} />
-                <Route exact path="/account" component={Account} />
-            </Switch>
+            <Container className="app-container" component="main">
+                <Switch>
+                    <Route exact path="/" component={Home} />
+                    <Route exact path="/login" component={Login} />
+                    <Route exact path="/register" component={Register} />
+                    <Route exact path="/about" component={About} />
+                    <Route exact path="/collections" component={Collections} />
+                    <Route
+                        exact
+                        path="/collections/customise/:id"
+                        component={CollectionCustomise}
+                    />
+                    <Route exact path="/products" component={Products} />
+                    <Route exact path="/cart" component={Cart} />
+                    <Route
+                        exact
+                        path="/request"
+                        component={RequestConsultation}
+                    />
+                    <Route exact path="/account" component={Account} />
+                </Switch>
+            </Container>
 
             <CustomSnackbar
                 severity={state.snackbar.severity}

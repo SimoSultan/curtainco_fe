@@ -59,8 +59,8 @@ function Products() {
     }, [dispatch]);
 
     return (
-        <Container className={classes.cardGrid}>
-            <Grid container>
+        <>
+            <Grid container className={classes.cardGrid}>
                 <Grid
                     item
                     container
@@ -111,7 +111,7 @@ function Products() {
                     </Grid>
                 </Container>
             </Grid>
-        </Container>
+        </>
     );
 }
 

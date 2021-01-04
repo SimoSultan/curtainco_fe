@@ -18,6 +18,8 @@ function AccessoryForm({
 }) {
     const classes = useStyles();
 
+    console.log(product);
+
     return (
         <>
             <Typography
@@ -148,9 +150,7 @@ function AccessoryForm({
                                 color="primary"
                                 onClick={handleSubmit}
                             >
-                                {title.includes("Add")
-                                    ? `Submit ${product.type}`
-                                    : `Update ${product.type}`}
+                                {`Update ${product.type}`}
                             </Button>
                         </Grid>
                     </Grid>
