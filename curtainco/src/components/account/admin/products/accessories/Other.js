@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Typography, Grid, TextField, Button } from "@material-ui/core";
 import useStyles from "../../AdminStyles";
 import FileInput from "../../../../reusable/FileInput";
-import { addPhoto } from "../../../../../services/uploadServices";
+import { uploadPhotoToS3 } from "../../../../../services/uploadServices";
 import { createAccessory } from "../../../../../services/productServices";
 import { ACTIONS } from "../../../../../config/stateReducer";
 import { useCurtainContext } from "../../../../../config/CurtainCoContext";
@@ -37,7 +37,7 @@ function Other() {
         console.log(other);
 
         try {
-            let s3Resp = await addPhoto(photo);
+            let s3Resp = await uploadPhotoToS3(photo);
             console.log(s3Resp);
             // if (s3Resp.status === 201) {
             //     setOther({

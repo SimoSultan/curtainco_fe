@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 
 import FabricForm from "../../../reusable/FabricForm";
 import {
-    updateProduct,
+    submitProductToDbAndUpdateState,
     deleteProduct,
 } from "../../../../services/productServices";
 import { useCurtainContext } from "../../../../config/CurtainCoContext";
 import { ACTIONS } from "../../../../config/stateReducer";
 import { getOneProductFromState } from "../../../../helpers/productHelpers";
+import { isPhotoPresent } from "../../../../helpers/appHelpers";
+import { uploadPhotoToS3 } from "../../../../services/uploadServices";
 
 function EditDeleteFabric({ editProductId, setEditProductId }) {
     const { state, dispatch } = useCurtainContext();
@@ -77,40 +79,52 @@ function EditDeleteFabric({ editProductId, setEditProductId }) {
         }
     }, [state.products, editProductId, previousProduct]);
 
-    const handleTextChange = (event) => {
+    function handleTextChange(event) {
         setFabric({ ...fabric, [event.target.name]: event.target.value });
-    };
+    }
 
-    const handleUpdateProduct = () => {
+    async function handleUpdateProduct() {
         // UPDATE THE PRODUCT ON THE DB
         // IF SUCCESSFUL, UPDATE PRODUCT IN GLOBAL STATE AND SHOW SUCCESS SNACKBAR
         let editProdError = false;
-        updateProduct(fabric)
-            .then((resp) => {
-                console.log(resp);
-                if (resp.status === 200) {
-                    dispatch({
-                        type: ACTIONS.UPDATE_PRODUCT,
-                        payload: fabric,
-                    });
-                    dispatch({
-                        type: ACTIONS.SET_SNACKBAR,
-                        payload: {
-                            open: true,
-                            success: "success",
-                            message: "Fabric successfully updated",
-                        },
-                    });
-                } else {
-                    editProdError = `An error ocurred on update product: Error Code: ${resp.status}. Message: ${resp.message}.`;
-                    console.log(editProdError);
+        let tempProduct = { ...fabric };
+        let userIsUpdatingPhoto = isPhotoPresent(photo);
+
+        // UPLOAD THE PHOTO TO S3
+        if (userIsUpdatingPhoto) {
+            try {
+                let s3Resp = await uploadPhotoToS3(photo);
+                console.log(s3Resp);
+                if (s3Resp.status === 201) {
+                    tempProduct.imgUrl = s3Resp.data.image.location;
+                    setResetFile(true);
+                    setPhoto({});
                 }
-            })
-            .catch((error) => {
-                editProdError = `An error ocurred on update product: Error Code: ${error.status}. Message: ${error.message}.`;
+            } catch (error) {
+                editProdError = `Error ocurred when retrieving photo on update fabric: Error: ${error}.`;
                 console.log(editProdError);
-            });
-    };
+            }
+        }
+
+        // BLOCK THE UPDATE TO DATABASE IF THE IMAGE UPLOAD FAILED
+        // editProdError WILL STILL BE FALSE IF THEY HAVEN'T UPLOADED A PHOTO
+        // OR THERE WAS NO ERROR WHEN UPLOADING IT
+        if (editProdError)
+            return alert(
+                "Something went wrong when uploading photo to storage on fabric"
+            );
+
+        // UPDATE THE DB
+        let respOrError = await submitProductToDbAndUpdateState(
+            tempProduct,
+            "fabric",
+            dispatch,
+            ACTIONS,
+            setResetFile,
+            setPhoto
+        );
+        console.log(respOrError);
+    }
 
     function handleRemoveProduct() {
         // DELETE THE PRODUCT ON THE DB

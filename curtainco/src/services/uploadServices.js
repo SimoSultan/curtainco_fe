@@ -1,6 +1,6 @@
 import api from "../config/api";
 
-async function addPhoto(file) {
+async function uploadPhotoToS3(file) {
     let bodyFormData = new FormData();
     bodyFormData.append("image", file);
     const response = await api.post("/upload", bodyFormData, {
@@ -28,7 +28,7 @@ async function addPhoto(file) {
 // }
 
 export {
-    addPhoto,
+    uploadPhotoToS3,
     // updateCollection,
     // deleteCollection,
 };

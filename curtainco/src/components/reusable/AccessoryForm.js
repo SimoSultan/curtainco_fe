@@ -1,151 +1,81 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { Typography, Grid, TextField, Button } from "@material-ui/core";
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import DeleteIcon from "@material-ui/icons/Delete";
-import useStyles from "../../components/account/admin/AdminStyles";
+import {
+    Typography,
+    Divider,
+    FormControl,
+    FormControlLabel,
+    FormLabel,
+    RadioGroup,
+    Radio,
+    Container,
+} from "@material-ui/core";
+import FlickStick from "../account/admin/products/accessories/FlickStick";
+import Automated from "../account/admin/products/accessories/Automated";
+import TieBack from "../account/admin/products/accessories/TieBack";
+import Other from "../account/admin/products/accessories/Other";
 
-function AccessoryForm({
-    title,
-    buttonText,
-    handleTextChange,
-    handleRadioChange,
-    handleSubmit,
-    product,
-    handleRemove,
-}) {
-    const classes = useStyles();
+function AccessoryForm({ title }) {
+    const [checkedValue, setCheckedValue] = useState("flickStick");
+
+    function handleChange(event) {
+        event.preventDefault();
+        setCheckedValue(event.target.value);
+    }
+
     return (
         <>
-            <Typography variant="h6">{title}</Typography>
-            <Grid container direction="column" spacing={2}>
-                <Grid item>
-                    <TextField
-                        id="accessory-input"
-                        label="Accessory Name"
-                        variant="outlined"
-                        name="name"
-                        className={classes.fullWidth}
-                        onChange={handleTextChange}
-                        value={product.name}
+            <Typography
+                variant="h6"
+                component="h6"
+                style={{ textAlign: "center" }}
+            >
+                {title}
+            </Typography>
+
+            <FormControl component="fieldset">
+                <FormLabel component="legend">Which Accessory?</FormLabel>
+                <RadioGroup
+                    aria-label="add-accessory"
+                    name="add-product"
+                    value={checkedValue}
+                    onChange={handleChange}
+                    row
+                >
+                    <FormControlLabel
+                        value="flickStick"
+                        control={<Radio />}
+                        label="Flick Stick"
                     />
-                </Grid>
-                <Grid item>
-                    <TextField
-                        id="accessory-colour-input"
-                        label="Accessory Colour"
-                        variant="outlined"
-                        name="colour"
-                        className={classes.fullWidth}
-                        onChange={handleTextChange}
-                        value={product.colour}
-                    />
-                </Grid>
-                <Grid item>
-                    <TextField
-                        id="accessory-length-input"
-                        label="Accessory Length"
-                        variant="outlined"
-                        name="length"
-                        className={classes.fullWidth}
-                        onChange={handleTextChange}
-                        value={product.length}
-                    />
-                </Grid>
-                <Grid item>
-                    <RadioGroup
-                        aria-label="automated-curtain-input"
-                        name="automated"
-                        className={classes.fullWidth}
-                        onChange={handleRadioChange}
-                        row
-                        value={
-                            product.automated === ""
-                                ? null
-                                : product.automated
-                                ? "auto"
-                                : "notAuto"
-                        }
-                    >
-                        <FormControlLabel
-                            value="auto"
-                            control={<Radio />}
-                            label="Automated"
-                        />
-                        <FormControlLabel
-                            value="notAuto"
-                            control={<Radio />}
-                            label="Not Automated"
-                        />
-                    </RadioGroup>
-                </Grid>
-                <Grid item>
-                    <TextField
-                        id="accessory-tieBack-input"
+                    <FormControlLabel
+                        value="tieBack"
+                        control={<Radio />}
                         label="Tie Back"
-                        variant="outlined"
-                        name="tieBack"
-                        className={classes.fullWidth}
-                        onChange={handleTextChange}
-                        value={product.tieBack}
                     />
-                </Grid>
-                <Grid item>
-                    <TextField
-                        id="accessory-other-input"
-                        label="Accessories"
-                        variant="outlined"
-                        name="other"
-                        className={classes.fullWidth}
-                        onChange={handleTextChange}
-                        value={product.other}
+                    <FormControlLabel
+                        value="automated"
+                        control={<Radio />}
+                        label="Automated"
                     />
-                </Grid>
-                <Grid item>
-                    <TextField
-                        id="accessory-price-input"
-                        label="Price"
-                        variant="outlined"
-                        type="number"
-                        name="price"
-                        className={classes.fullWidth}
-                        onChange={handleTextChange}
-                        value={product.price}
+                    <FormControlLabel
+                        value="other"
+                        control={<Radio />}
+                        label="Other"
                     />
-                </Grid>
-                {product ? (
-                    <Grid container justify="space-between" alignItems="center">
-                        <Grid item>
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                onClick={handleSubmit}
-                            >
-                                {buttonText}
-                            </Button>
-                        </Grid>
-                        {/* IF THE REMOVE HANDLER WAS PASSED IN, SHOW THE DELETE BUTTON */}
-                        <Grid item>
-                            {handleRemove ? (
-                                <Button
-                                    variant="contained"
-                                    color="secondary"
-                                    startIcon={<DeleteIcon />}
-                                    onClick={handleRemove}
-                                >
-                                    Delete
-                                </Button>
-                            ) : (
-                                ""
-                            )}
-                        </Grid>
-                    </Grid>
+                </RadioGroup>
+            </FormControl>
+
+            <Container>
+                {checkedValue === "flickStick" ? (
+                    <FlickStick />
+                ) : checkedValue === "tieBack" ? (
+                    <TieBack />
+                ) : checkedValue === "automated" ? (
+                    <Automated />
                 ) : (
-                    ""
+                    <Other />
                 )}
-            </Grid>
+            </Container>
         </>
     );
 }

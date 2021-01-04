@@ -3,12 +3,11 @@ function capitalize(string) {
 }
 
 function isEmpty(object) {
-    for (const prop in object) {
-        if (object.hasOwnProperty(prop)) {
-            return false;
-        }
-    }
-    return true;
+    return Object.keys(object).length === 0;
+}
+
+function isPhotoPresent(photo) {
+    return photo.size !== undefined;
 }
 
 function displayShortDate(createdAt) {
@@ -25,5 +24,6 @@ function displayShortDate(createdAt) {
 module.exports = {
     capitalize,
     isEmpty,
+    isPhotoPresent,
     displayShortDate,
 };

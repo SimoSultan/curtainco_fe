@@ -28,48 +28,72 @@ function AddTrack() {
         setPhoto(file);
     }
 
-    const handleRadioChange = (event) => {
+    function handleRadioChange(event) {
         const singleTrack = event.target.value === "single" ? true : false;
         setTrack({
             ...track,
             [event.target.name]: singleTrack,
         });
-    };
+    }
 
-    const handleTextChange = (event) => {
+    function handleTextChange(event) {
         setTrack({ ...track, [event.target.name]: event.target.value });
-    };
+    }
 
-    const handleSubmit = () => {
+    function handleSubmit() {
         // ADD THE PRODUCT ON THE DB
         // IF SUCCESSFUL, ADD PRODUCT IN GLOBAL STATE AND SHOW SUCCESS SNACKBAR
         let addProdError = false;
         console.log(track);
-        createProduct(track)
-            .then((resp) => {
-                if (resp.status === 201) {
-                    dispatch({
-                        type: ACTIONS.ADD_PRODUCT,
-                        payload: track,
-                    });
-                    dispatch({
-                        type: ACTIONS.SET_SNACKBAR,
-                        payload: {
-                            open: true,
-                            success: "success",
-                            message: "Track successfully added",
-                        },
-                    });
-                } else {
-                    addProdError = `An error ocurred on adding product: Error Code: ${resp.status}. Message: ${resp.message}.`;
-                    console.log(addProdError);
-                }
-            })
-            .catch((error) => {
-                addProdError = `An error ocurred on adding product: Error Code: ${error.status}. Message: ${error.message}.`;
+
+        try {
+            let resp = createProduct(track);
+            if (resp.status === 201) {
+                dispatch({
+                    type: ACTIONS.ADD_PRODUCT,
+                    payload: track,
+                });
+                dispatch({
+                    type: ACTIONS.SET_SNACKBAR,
+                    payload: {
+                        open: true,
+                        success: "success",
+                        message: "Track successfully added",
+                    },
+                });
+            } else {
+                addProdError = `An status code error ocurred on adding product: Error Code: ${resp.status}. Message: ${resp.message}.`;
                 console.log(addProdError);
-            });
-    };
+            }
+        } catch (error) {
+            addProdError = `An error ocurred on adding product: Error Code: ${error.status}. Message: ${error.message}.`;
+            console.log(addProdError);
+        }
+        // createProduct(track)
+        // .then((resp) => {
+        //     if (resp.status === 201) {
+        //         dispatch({
+        //             type: ACTIONS.ADD_PRODUCT,
+        //             payload: track,
+        //         });
+        //         dispatch({
+        //             type: ACTIONS.SET_SNACKBAR,
+        //             payload: {
+        //                 open: true,
+        //                 success: "success",
+        //                 message: "Track successfully added",
+        //             },
+        //         });
+        //     } else {
+        //         addProdError = `An status code error ocurred on adding product: Error Code: ${resp.status}. Message: ${resp.message}.`;
+        //         console.log(addProdError);
+        //     }
+        // })
+        // .catch((error) => {
+        //     addProdError = `An error ocurred on adding product: Error Code: ${error.status}. Message: ${error.message}.`;
+        //     console.log(addProdError);
+        // });
+    }
 
     // PASS IN TITLE AND TEXT FOR THE BUTTON TO THE TRACK FORM
     // PASS IN THE HANDLERS, HANDLE REMOVE IS FALSE DUE TO NOT WANTING TO DISPLAY BUTTON ON THE ADD FORM

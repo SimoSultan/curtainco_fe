@@ -42,7 +42,9 @@ const useStyles = makeStyles((theme) => ({
         height: window.innerHeight > 1080 ? 800 : 400,
     },
     editFormImage: {
-        width: "70px",
+        height: "100px",
+        width: "100px",
+        objectFit: "contain",
     },
 }));
 

@@ -33,9 +33,6 @@ function TrackForm({
     return (
         <>
             <Box pb={1}>
-                <Typography variant="h6" style={{ textAlign: "center" }}>
-                    {title}
-                </Typography>
                 <Grid container justify="center" alignItems="center">
                     <Grid item xs={3}>
                         <img
@@ -48,12 +45,29 @@ function TrackForm({
                             className={classes.editFormImage}
                         />
                     </Grid>
-                    <Grid item xs={9}>
-                        <FileInput
-                            handleFileChange={handleFileChange}
-                            resetFile={resetFile}
-                            setResetFile={setResetFile}
-                        />
+                    <Grid
+                        item
+                        container
+                        justify="center"
+                        alignItems="center"
+                        xs={9}
+                        spacing={2}
+                    >
+                        <Grid item xs={12}>
+                            <Typography
+                                variant="h6"
+                                style={{ textAlign: "center" }}
+                            >
+                                {title}
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <FileInput
+                                handleFileChange={handleFileChange}
+                                resetFile={resetFile}
+                                setResetFile={setResetFile}
+                            />
+                        </Grid>
                     </Grid>
                 </Grid>
             </Box>
