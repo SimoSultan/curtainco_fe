@@ -6,29 +6,7 @@ import AccordionDetails from "@material-ui/core/AccordionDetails";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { Grid } from "@material-ui/core";
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-        width: "100%",
-    },
-    heading: {
-        fontSize: theme.typography.pxToRem(15),
-        fontWeight: theme.typography.fontWeightRegular,
-    },
-    accordionDetails: {
-        width: "80%",
-        margin: "0 auto",
-    },
-    dataItemSelected: {
-        border: "1px solid black",
-        padding: "8px 0 4px 0",
-        cursor: "pointer",
-    },
-    dataItem: {
-        padding: "8px 0 4px 0",
-        cursor: "pointer",
-    },
-}));
+import useStyles from "../collections/CollectionStyles";
 
 export default function CustomAccordion({ summary, data, tip }) {
     const classes = useStyles();
@@ -41,7 +19,11 @@ export default function CustomAccordion({ summary, data, tip }) {
             direction="column"
             xs={6}
             sm={3}
-            className={selected ? classes.dataItemSelected : classes.dataItem}
+            className={
+                selected
+                    ? classes.accordionDataItemSelected
+                    : classes.accordionDataItem
+            }
             spacing={1}
         >
             <Grid item container justify="center">
@@ -61,14 +43,14 @@ export default function CustomAccordion({ summary, data, tip }) {
     return (
         <Grid item container justify="space-around" alignItems="center">
             <Grid item xs={8}>
-                <div className={classes.root}>
+                <div className={classes.accordionRoot}>
                     <Accordion>
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel1a-content"
                             id="panel1a-header"
                         >
-                            <Typography className={classes.heading}>
+                            <Typography className={classes.accordionHeading}>
                                 {summary}
                             </Typography>
                         </AccordionSummary>

@@ -32,7 +32,7 @@ function Collections() {
     }, [dispatch]);
 
     return (
-        <div style={{ height: "100%" }}>
+        <>
             <Typography variant="h3">Collections Page</Typography>
             <Grid
                 container
@@ -43,7 +43,7 @@ function Collections() {
             >
                 <CollectionList collections={state.collections} />
             </Grid>
-        </div>
+        </>
     );
 }
 

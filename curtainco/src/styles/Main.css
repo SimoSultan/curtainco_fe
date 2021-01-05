@@ -4,7 +4,10 @@ body {
 }
 
 .app-container {
+  height: calc(100vh - 155px);
+  z-index: 1;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .link {

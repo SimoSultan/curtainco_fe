@@ -20,6 +20,7 @@ function CollectionCustomise() {
             console.log("getting the collection from db");
             getOneCollection(collectionId)
                 .then((resp) => {
+                    console.log(resp);
                     setCollection(resp.data);
                 })
                 .catch((error) => {
@@ -32,68 +33,71 @@ function CollectionCustomise() {
                 collectionId
             );
             setCollection(resp);
+            console.log(resp);
         }
     }, [state.collections, collectionId]);
 
-    const dummyCollectionData = {
-        fabric: [
-            {
-                imgUrl: "https://source.unsplash.com/random/900x600",
-                name: "Fabric 1",
-            },
-            {
-                imgUrl: "https://source.unsplash.com/random/900x600",
-                name: "Fabric 2",
-            },
-            {
-                imgUrl: "https://source.unsplash.com/random/900x600",
-                name: "Fabric 3",
-            },
-            {
-                imgUrl: "https://source.unsplash.com/random/900x600",
-                name: "Fabric 4",
-            },
-        ],
-        track: [
-            {
-                imgUrl: "https://source.unsplash.com/random/900x600",
-                name: "Track 1",
-            },
-            {
-                imgUrl: "https://source.unsplash.com/random/900x600",
-                name: "Track 2",
-            },
-            {
-                imgUrl: "https://source.unsplash.com/random/900x600",
-                name: "Track 3",
-            },
-            {
-                imgUrl: "https://source.unsplash.com/random/900x600",
-                name: "Track 4",
-            },
-        ],
-        accessory: [
-            {
-                imgUrl: "https://source.unsplash.com/random/900x600",
-                name: "Accessory 1",
-            },
-            {
-                imgUrl: "https://source.unsplash.com/random/900x600",
-                name: "Accessory 2",
-            },
-            {
-                imgUrl: "https://source.unsplash.com/random/900x600",
-                name: "Accessory 3",
-            },
-            {
-                imgUrl: "https://source.unsplash.com/random/900x600",
-                name: "Accessory 4",
-            },
-        ],
-    };
+    console.log(collection);
+
+    // const dummyCollectionData = {
+    //     fabric: [
+    //         {
+    //             imgUrl: "https://source.unsplash.com/random/900x600",
+    //             name: "Fabric 1",
+    //         },
+    //         {
+    //             imgUrl: "https://source.unsplash.com/random/900x600",
+    //             name: "Fabric 2",
+    //         },
+    //         {
+    //             imgUrl: "https://source.unsplash.com/random/900x600",
+    //             name: "Fabric 3",
+    //         },
+    //         {
+    //             imgUrl: "https://source.unsplash.com/random/900x600",
+    //             name: "Fabric 4",
+    //         },
+    //     ],
+    //     track: [
+    //         {
+    //             imgUrl: "https://source.unsplash.com/random/900x600",
+    //             name: "Track 1",
+    //         },
+    //         {
+    //             imgUrl: "https://source.unsplash.com/random/900x600",
+    //             name: "Track 2",
+    //         },
+    //         {
+    //             imgUrl: "https://source.unsplash.com/random/900x600",
+    //             name: "Track 3",
+    //         },
+    //         {
+    //             imgUrl: "https://source.unsplash.com/random/900x600",
+    //             name: "Track 4",
+    //         },
+    //     ],
+    //     accessory: [
+    //         {
+    //             imgUrl: "https://source.unsplash.com/random/900x600",
+    //             name: "Accessory 1",
+    //         },
+    //         {
+    //             imgUrl: "https://source.unsplash.com/random/900x600",
+    //             name: "Accessory 2",
+    //         },
+    //         {
+    //             imgUrl: "https://source.unsplash.com/random/900x600",
+    //             name: "Accessory 3",
+    //         },
+    //         {
+    //             imgUrl: "https://source.unsplash.com/random/900x600",
+    //             name: "Accessory 4",
+    //         },
+    //     ],
+    // };
 
     return (
-        <Container maxWidth>
+        <Container>
             {/* <Grid
                 container
                 justify="center"
@@ -138,25 +142,25 @@ function CollectionCustomise() {
                 >
                     <CustomAccordion
                         summary="Step 1: Fabrics"
-                        data={dummyCollectionData.fabric}
+                        data={collection.fabric}
                         tip="This is a fabric tip"
                     />
                     <CustomAccordion
                         summary="Step 2: Tracks"
-                        data={dummyCollectionData.track}
+                        data={collection.track}
                         tip="This is a track tip"
                     />
                     <CustomAccordion
                         summary="Step 3: Accessories"
-                        data={dummyCollectionData.accessory}
+                        data={collection.accessory}
                         tip="This is an accessory tip"
                     />
                 </Grid>
                 <Grid item xs={3}>
                     <CollectionIncludes
-                        fabrics={dummyCollectionData.fabric}
-                        tracks={dummyCollectionData.track}
-                        accessories={dummyCollectionData.accessory}
+                        fabrics={collection.fabric}
+                        tracks={collection.track}
+                        accessories={collection.accessory}
                         price={100}
                     />
                 </Grid>
