@@ -1,28 +1,32 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react"
 
-import Paper from "@material-ui/core/Paper";
+import Paper from "@material-ui/core/Paper"
 
-import CollectionForm from "../../../reusable/CollectionForm";
+import CollectionForm from "../../../reusable/CollectionForm"
 import {
     deleteCollection,
     submitCollectionToDbAndUpdateState,
-} from "../../../../services/collectionServices";
-import { useCurtainContext } from "../../../../config/CurtainCoContext";
-import { ACTIONS } from "../../../../config/stateReducer";
-import { getOneCollectionFromState } from "../../../../helpers/collectionHelpers";
-import useStyles from "../AdminStyles";
+} from "../../../../services/collectionServices"
+import { useCurtainContext } from "../../../../config/CurtainCoContext"
+import { ACTIONS } from "../../../../config/stateReducer"
+import {
+    filterProductsInCollection,
+    getOneCollectionFromState,
+    checkIfUserIsRemovingAProduct,
+} from "../../../../helpers/collectionHelpers"
+import useStyles from "../AdminStyles"
 
 function EditDeleteCollection({ editCollectionId, setEditCollectionId }) {
-    const classes = useStyles();
-    const { state, dispatch } = useCurtainContext();
-    const [resetFile, setResetFile] = useState(false);
-    const [photo, setPhoto] = useState({});
-    const [tracksArray, setTracksArray] = useState(["", "", "", ""]);
-    const [fabricsArray, setFabricsArray] = useState(["", "", "", ""]);
-    const [accessoryArray, setAccessoryArray] = useState(["", "", "", ""]);
+    const classes = useStyles()
+    const { state, dispatch } = useCurtainContext()
+    const [resetFile, setResetFile] = useState(false)
+    const [photo, setPhoto] = useState({})
+    const [tracksArray, setTracksArray] = useState(["", "", "", ""])
+    const [fabricsArray, setFabricsArray] = useState(["", "", "", ""])
+    const [accessoryArray, setAccessoryArray] = useState(["", "", "", ""])
     const [previousCollection, setPreviousCollection] = useState(
         editCollectionId
-    );
+    )
     const [collection, setCollection] = useState({
         _id: "",
         name: "",
@@ -35,7 +39,7 @@ function EditDeleteCollection({ editCollectionId, setEditCollectionId }) {
         trackTip: "",
         accessoryTip: "",
         fabricTip: "",
-    });
+    })
 
     function resetCollectionForm() {
         setCollection({
@@ -50,20 +54,20 @@ function EditDeleteCollection({ editCollectionId, setEditCollectionId }) {
             trackTip: "",
             accessoryTip: "",
             fabricTip: "",
-        });
+        })
     }
 
     function handleFileChange(file) {
-        console.log(file);
-        setPhoto(file);
+        console.log(file)
+        setPhoto(file)
     }
 
     useEffect(() => {
         // this resets the file in the FileInput component on
         // a product change / update to form
         if (editCollectionId !== previousCollection) {
-            setPreviousCollection(editCollectionId);
-            setResetFile(true);
+            setPreviousCollection(editCollectionId)
+            setResetFile(true)
         }
         // IF PRODUCT ID COMES THROUGH AS A PROP, SET THE FORM
         // OTHERWISE CLEAR THE FORM
@@ -71,16 +75,16 @@ function EditDeleteCollection({ editCollectionId, setEditCollectionId }) {
             const collectionBeingUpdated = getOneCollectionFromState(
                 state.collections,
                 editCollectionId
-            );
+            )
             // BECAUSE TRACKS/FABRICS/ACCESSORIES ARE RETURNED AS AN ARRAY OF OBJECTS
             // NEED TO ITERATE OVER AND EXTRACT THE IDS FOR THE SELECT COMPONENTS AGAIN
-            let tempTracks = collectionBeingUpdated.track.map((obj) => obj._id);
+            let tempTracks = collectionBeingUpdated.track.map((obj) => obj._id)
             let tempFabrics = collectionBeingUpdated.fabric.map(
                 (obj) => obj._id
-            );
+            )
             let tempAccessories = collectionBeingUpdated.accessory.map(
                 (obj) => obj._id
-            );
+            )
             setCollection({
                 _id: collectionBeingUpdated._id,
                 name: collectionBeingUpdated.name,
@@ -93,39 +97,39 @@ function EditDeleteCollection({ editCollectionId, setEditCollectionId }) {
                 trackTip: collectionBeingUpdated.trackTip,
                 accessoryTip: collectionBeingUpdated.accessoryTip,
                 fabricTip: collectionBeingUpdated.fabricTip,
-            });
-            setTracksArray(tempTracks);
-            setFabricsArray(tempFabrics);
-            setAccessoryArray(tempAccessories);
+            })
+            setTracksArray(tempTracks)
+            setFabricsArray(tempFabrics)
+            setAccessoryArray(tempAccessories)
         } else {
-            resetCollectionForm();
+            resetCollectionForm()
         }
-    }, [state.collections, editCollectionId, previousCollection]);
+    }, [state.collections, editCollectionId, previousCollection])
 
     function handleSelectChange(event) {
-        let selectName = event.target.name.split("-")[0];
-        let selectIndex = event.target.name.split("-")[1];
+        let selectName = event.target.name.split("-")[0]
+        let selectIndex = event.target.name.split("-")[1]
         switch (selectName) {
             case "track":
-                let tempTracks = [...tracksArray];
-                tempTracks[selectIndex] = event.target.value;
-                setTracksArray(tempTracks);
-                setCollection({ ...collection, track: tempTracks });
-                break;
+                let tempTracks = [...tracksArray]
+                tempTracks[selectIndex] = event.target.value
+                setTracksArray(tempTracks)
+                setCollection({ ...collection, track: tempTracks })
+                break
             case "fabric":
-                let tempFabrics = [...fabricsArray];
-                tempFabrics[selectIndex] = event.target.value;
-                setFabricsArray(tempFabrics);
-                setCollection({ ...collection, fabric: tempFabrics });
-                break;
+                let tempFabrics = [...fabricsArray]
+                tempFabrics[selectIndex] = event.target.value
+                setFabricsArray(tempFabrics)
+                setCollection({ ...collection, fabric: tempFabrics })
+                break
             case "accessory":
-                let tempAccessories = [...accessoryArray];
-                tempAccessories[selectIndex] = event.target.value;
-                setAccessoryArray(tempAccessories);
-                setCollection({ ...collection, accessory: tempAccessories });
-                break;
+                let tempAccessories = [...accessoryArray]
+                tempAccessories[selectIndex] = event.target.value
+                setAccessoryArray(tempAccessories)
+                setCollection({ ...collection, accessory: tempAccessories })
+                break
             default:
-                break;
+                break
         }
     }
 
@@ -133,21 +137,37 @@ function EditDeleteCollection({ editCollectionId, setEditCollectionId }) {
         setCollection({
             ...collection,
             [event.target.name]: event.target.value,
-        });
+        })
     }
 
     async function handleUpdateCollection() {
+        // WARN USER THEY CANNOT REMOVE A PRODUCT FROM A COLLECTION
+        // WITH THE 'No Product' MENU ITEM
+        let noProductResult = checkIfUserIsRemovingAProduct(collection)
+        if (noProductResult) {
+            return window.alert(
+                "Currently cannot remove a product with the 'No Product' dropdown menu item. Please delete the collection and start again if you wish to remove products from a collection."
+            )
+        }
+        let result = filterProductsInCollection(collection)
+        let tempCollection = result.collection
+        let error = result.error
+        // WARN USER IF THERE ARE DUPLICATES AND ALLOW THEM TO PROCEED
+        // IF THEY WANT TO
+        if (error && !window.confirm(error)) {
+            return
+        }
         let respOrError = await submitCollectionToDbAndUpdateState(
             "update",
-            collection,
+            tempCollection,
             dispatch,
             ACTIONS,
             setResetFile,
             setPhoto,
             photo,
             resetCollectionForm
-        );
-        console.log(respOrError);
+        )
+        console.log(respOrError)
     }
 
     function handleRemoveCollection() {
@@ -156,12 +176,12 @@ function EditDeleteCollection({ editCollectionId, setEditCollectionId }) {
         // THEN SET THE EDIT PRODUCT ID THAT THIS COMPONENT TAKES AS A PROP TO = "" TO RESET THE FORM
         deleteCollection(collection)
             .then((resp) => {
-                console.log(resp);
+                console.log(resp)
                 if (resp.status === 202) {
                     dispatch({
                         type: ACTIONS.DELETE_COLLECTION,
                         payload: collection._id,
-                    });
+                    })
                     dispatch({
                         type: ACTIONS.SET_SNACKBAR,
                         payload: {
@@ -169,13 +189,13 @@ function EditDeleteCollection({ editCollectionId, setEditCollectionId }) {
                             success: "success",
                             message: "Collection successfully deleted",
                         },
-                    });
+                    })
                 }
             })
             .catch((error) => {
-                console.log(error);
-            });
-        setEditCollectionId("");
+                console.log(error)
+            })
+        setEditCollectionId("")
     }
 
     // PASS IN TITLE AND TEXT FOR THE BUTTON TO THE TRACK FORM
@@ -196,7 +216,7 @@ function EditDeleteCollection({ editCollectionId, setEditCollectionId }) {
                 resetFile={resetFile}
             />
         </Paper>
-    );
+    )
 }
 
-export default EditDeleteCollection;
+export default EditDeleteCollection
