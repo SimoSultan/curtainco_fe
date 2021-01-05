@@ -1,4 +1,4 @@
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles"
 const useStyles = makeStyles((theme) => ({
     paper: {
         padding: theme.spacing(3),
@@ -26,18 +26,24 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: theme.typography.fontWeightRegular,
     },
     accordionDetails: {
-        width: "80%",
+        width: "90%",
         margin: "0 auto",
     },
     accordionDataItemSelected: {
-        border: "1px solid black",
-        padding: "8px 0 4px 0",
+        border: "2px solid royalBlue",
+        padding: "4px",
         cursor: "pointer",
+        height: "100px",
+        width: "100px",
+        objectFit: "cover",
     },
     accordionDataItem: {
-        padding: "8px 0 4px 0",
+        padding: "6px",
         cursor: "pointer",
+        height: "100px",
+        width: "100px",
+        objectFit: "cover",
     },
-}));
+}))
 
-export default useStyles;
+export default useStyles

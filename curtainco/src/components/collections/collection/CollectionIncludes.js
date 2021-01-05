@@ -1,13 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react"
 import {
     List,
     ListItem,
     ListItemText,
     Typography,
     Grid,
-} from "@material-ui/core";
+} from "@material-ui/core"
 
 function CollectionIncludes({ fabrics, tracks, accessories, price }) {
+    const [lengths, setLengths] = useState({
+        fabricLength: 0,
+        trackLength: 0,
+        accessoryLength: 0,
+    })
+
+    useEffect(() => {
+        let f = fabrics.filter((fab) => fab !== false).length
+        let t = tracks.filter((tra) => tra !== false).length
+        let a = accessories.filter((acc) => acc !== false).length
+        setLengths({ fabricLength: f, trackLength: t, accessoryLength: a })
+    }, [fabrics, tracks, accessories])
+
     return (
         <Grid container direction="column" justify="center" alignItems="center">
             <Grid item>
@@ -19,22 +32,24 @@ function CollectionIncludes({ fabrics, tracks, accessories, price }) {
                 <List style={{ width: "100%" }}>
                     <ListItem key={`fabric-length-${fabrics.length}`}>
                         <ListItemText
-                            primary={`- ${fabrics.length}x ${
-                                fabrics.length < 2 ? "Fabric" : "Fabrics"
+                            primary={`- ${lengths.fabricLength} ${
+                                lengths.fabricLength === 1
+                                    ? "Fabric"
+                                    : "Fabrics"
                             }`}
                         />
                     </ListItem>
                     <ListItem key={`track-length-${tracks.length}`}>
                         <ListItemText
-                            primary={`- ${tracks.length}x ${
-                                tracks.length < 2 ? "Track" : "Tracks"
+                            primary={`- ${lengths.trackLength} ${
+                                lengths.trackLength === 1 ? "Track" : "Tracks"
                             }`}
                         />
                     </ListItem>
                     <ListItem key={`accessories-length-${accessories.length}`}>
                         <ListItemText
-                            primary={`- ${accessories.length}x ${
-                                accessories.length < 2
+                            primary={`- ${lengths.accessoryLength} ${
+                                lengths.accessoryLength === 1
                                     ? "Accessory"
                                     : "Accessories"
                             }`}
@@ -48,7 +63,7 @@ function CollectionIncludes({ fabrics, tracks, accessories, price }) {
                 </Typography>
             </Grid>
         </Grid>
-    );
+    )
 }
 
-export default CollectionIncludes;
+export default CollectionIncludes
