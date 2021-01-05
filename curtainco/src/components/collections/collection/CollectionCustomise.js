@@ -97,18 +97,21 @@ function CollectionCustomise() {
                         data={collection.fabric}
                         tip={collection.fabricTip}
                         handleCustomization={handleUserCustomizingCollection}
+                        open={true}
                     />
                     <CustomAccordion
                         summary="Step 2: Tracks"
                         data={collection.track}
                         tip={collection.trackTip}
                         handleCustomization={handleUserCustomizingCollection}
+                        open={false}
                     />
                     <CustomAccordion
                         summary="Step 3: Accessories"
                         data={collection.accessory}
                         tip={collection.accessoryTip}
                         handleCustomization={handleUserCustomizingCollection}
+                        open={false}
                     />
                 </Grid>
                 <Grid item xs={3}>

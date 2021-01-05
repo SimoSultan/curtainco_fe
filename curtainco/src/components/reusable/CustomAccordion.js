@@ -14,6 +14,7 @@ export default function CustomAccordion({
     data,
     tip,
     handleCustomization,
+    open,
 }) {
     const classes = useStyles()
 
@@ -21,7 +22,7 @@ export default function CustomAccordion({
         <Grid item container justify="space-around" alignItems="center">
             <Grid item xs={8}>
                 <div className={classes.accordionRoot}>
-                    <Accordion>
+                    <Accordion defaultExpanded={open}>
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel1a-content"

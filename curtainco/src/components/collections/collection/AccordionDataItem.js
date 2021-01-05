@@ -36,14 +36,17 @@ function AccordionDataItem({ data, handleCustomization }) {
     //     handleCustomization(productSelection, category)
     // }, [productSelection, category, handleCustomization])
 
+    // THIS LINE:
+    // sm={data.length === 4 ? 3 : 4}
+    // DEALS WITH THE GRID FOR 3 OR LESS PRODUCTS
     const dataItem = data.map((product, index) => (
         <Grid
             item
             container
             direction="column"
-            justify="space-between"
+            justify="space-around"
             xs={6}
-            sm={3}
+            sm={data.length === 4 ? 3 : 4}
             key={`${product._id},${index}`}
         >
             <Grid

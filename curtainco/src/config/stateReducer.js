@@ -159,18 +159,6 @@ export default function stateReducer(state, action) {
             }
         }
 
-        // case ACTIONS.SET_CUSTOMIZED_COLLECTION: {
-        //     let category = action.payload.category
-        //     let selection = action.payload.selection
-        //     return {
-        //         ...state,
-        //         customizedCollection: {
-        //             ...state.customizedCollection,
-        //             [category]: selection,
-        //         },
-        //     }
-        // }
-
         //  -------- USERS --------
         case ACTIONS.SET_ALL_USERS: {
             return {
