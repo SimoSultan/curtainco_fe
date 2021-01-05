@@ -59,7 +59,6 @@ export default function AllCollections({
             selected={editCollectionId === coll._id}
             onClick={fillEditCollectionPage}
         >
-            <TableCell>{coll.imgUrl}</TableCell>
             <TableCell>{coll.name}</TableCell>
             <TableCell>${coll.price}</TableCell>
         </TableRow>
@@ -72,7 +71,6 @@ export default function AllCollections({
                 <Table stickyHeader aria-label="sticky table">
                     <TableHead>
                         <TableRow>
-                            <TableCell> </TableCell>
                             <TableCell>Name</TableCell>
                             <TableCell>Price</TableCell>
                         </TableRow>

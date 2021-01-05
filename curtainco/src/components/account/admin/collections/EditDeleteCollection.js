@@ -72,22 +72,31 @@ function EditDeleteCollection({ editCollectionId, setEditCollectionId }) {
                 state.collections,
                 editCollectionId
             );
+            // BECAUSE TRACKS/FABRICS/ACCESSORIES ARE RETURNED AS AN ARRAY OF OBJECTS
+            // NEED TO ITERATE OVER AND EXTRACT THE IDS FOR THE SELECT COMPONENTS AGAIN
+            let tempTracks = collectionBeingUpdated.track.map((obj) => obj._id);
+            let tempFabrics = collectionBeingUpdated.fabric.map(
+                (obj) => obj._id
+            );
+            let tempAccessories = collectionBeingUpdated.accessory.map(
+                (obj) => obj._id
+            );
             setCollection({
                 _id: collectionBeingUpdated._id,
                 name: collectionBeingUpdated.name,
                 description: collectionBeingUpdated.description,
                 imgUrl: collectionBeingUpdated.imgUrl,
                 price: collectionBeingUpdated.price,
-                track: collectionBeingUpdated.track,
-                fabric: collectionBeingUpdated.fabric,
-                accessory: collectionBeingUpdated.accessory,
+                track: tempTracks,
+                fabric: tempFabrics,
+                accessory: tempAccessories,
                 trackTip: collectionBeingUpdated.trackTip,
                 accessoryTip: collectionBeingUpdated.accessoryTip,
                 fabricTip: collectionBeingUpdated.fabricTip,
             });
-            setTracksArray(collectionBeingUpdated.track);
-            setFabricsArray(collectionBeingUpdated.fabric);
-            setAccessoryArray(collectionBeingUpdated.accessory);
+            setTracksArray(tempTracks);
+            setFabricsArray(tempFabrics);
+            setAccessoryArray(tempAccessories);
         } else {
             resetCollectionForm();
         }
