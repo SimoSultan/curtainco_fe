@@ -9,7 +9,7 @@ function CollectionItem({ data }) {
     const classes = useStyles();
     return (
         <Paper className={classes.paper}>
-            <Grid item container>
+            <Grid item container spacing={2}>
                 <Grid item xs={4}>
                     <div role="img">
                         <img
@@ -23,19 +23,25 @@ function CollectionItem({ data }) {
                         />
                     </div>
                 </Grid>
-                <Grid item xs={8}>
-                    <Typography variant="h4" component="h4">
-                        {capitalize(data.name)}
-                    </Typography>
-                    <Typography>{capitalize(data.description)}</Typography>
-                    <Button variant="contained" color="primary">
-                        <Link
-                            className={classes.link}
-                            to={`/collections/customise/${data._id}`}
-                        >
-                            Customise
-                        </Link>
-                    </Button>
+                <Grid item container direction="column" xs={8} spacing={2}>
+                    <Grid item>
+                        <Typography variant="h4" component="h4">
+                            {capitalize(data.name)}
+                        </Typography>
+                    </Grid>
+                    <Grid item>
+                        <Typography>{capitalize(data.description)}</Typography>
+                    </Grid>
+                    <Grid item container justify="flex-end" alignItems="center">
+                        <Button variant="contained" color="primary">
+                            <Link
+                                className={classes.link}
+                                to={`/collections/customise/${data._id}`}
+                            >
+                                Customise
+                            </Link>
+                        </Button>
+                    </Grid>
                 </Grid>
             </Grid>
         </Paper>
