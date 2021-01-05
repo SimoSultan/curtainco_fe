@@ -8,7 +8,7 @@ import AdminTabs from "./AdminTabs";
 import { Container } from "@material-ui/core";
 
 function AdminDashboard() {
-    const [tabValue, setTabValue] = useState(1);
+    const [tabValue, setTabValue] = useState(2);
 
     const handleTabChange = (event, newValue) => {
         setTabValue(newValue);

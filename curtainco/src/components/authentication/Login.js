@@ -35,29 +35,26 @@ export default function SignIn() {
 
         const user = { email, password, rememberMe };
 
-        loginUser(user)
-            .then((resp) => {
-                console.log("---CURRENT USER---");
-                console.log(resp.data);
-                let currentUser = resp.data.user;
-
-                if (currentUser && resp.status === 200) {
-                    dispatch({
-                        type: ACTIONS.LOGIN,
-                        payload: currentUser,
-                    });
-                } else {
-                    loginError = `An error ocurred on login: Status Code is: ${resp.status}. Message: ${resp.message}.`;
-                    console.log(loginError);
-                }
-
+        try {
+            let resp = await loginUser(user);
+            console.log("---CURRENT USER---");
+            console.log(resp.data);
+            let currentUser = resp.data.user;
+            if (currentUser && resp.status === 200) {
+                dispatch({
+                    type: ACTIONS.LOGIN,
+                    payload: currentUser,
+                });
                 setEmail("");
                 setPassword("");
-            })
-            .catch((error) => {
-                loginError = `An error ocurred on login: Error Code: ${error.status}. Message: ${error.message}.`;
+            } else {
+                loginError = `An error ocurred on login: Status Code is: ${resp.status}. Message: ${resp.message}.`;
                 console.log(loginError);
-            });
+            }
+        } catch (error) {
+            loginError = `An error ocurred on login. ${error}.`;
+            console.log(loginError);
+        }
     }
 
     function handleEmailChange(e) {
