@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 
 import {
     Typography,
@@ -7,13 +7,13 @@ import {
     Button,
     Box,
     MenuItem,
-} from "@material-ui/core";
-import DeleteIcon from "@material-ui/icons/Delete";
-import useStyles from "../../components/account/admin/AdminStyles";
-import { useCurtainContext } from "../../config/CurtainCoContext";
-import FileInput from "./FileInput";
-import CollectionSelect from "./CollectionSelect";
-import { capitalize } from "../../helpers/appHelpers";
+} from "@material-ui/core"
+import DeleteIcon from "@material-ui/icons/Delete"
+import useStyles from "../../components/account/admin/AdminStyles"
+import { useCurtainContext } from "../../config/CurtainCoContext"
+import FileInput from "./FileInput"
+import CollectionSelect from "./CollectionSelect"
+import { capitalize } from "../../helpers/appHelpers"
 
 function CollectionForm({
     title,
@@ -27,19 +27,45 @@ function CollectionForm({
     setResetFile,
     resetFile,
 }) {
-    const classes = useStyles();
-    const { state } = useCurtainContext();
+    const classes = useStyles()
+    const { state } = useCurtainContext()
 
     function buildSelectOptions(products, category) {
-        let productArray = products.filter(
-            (prod) => prod.category === category
-        );
-        let menuItems = productArray.map((prod) => (
-            <MenuItem key={prod._id} value={prod._id}>
-                {prod.name}
-            </MenuItem>
-        ));
-        return menuItems;
+        let productArray = products.filter((prod) => prod.category === category)
+        let menuItems = []
+        for (let i = 0; i < productArray.length; i++) {
+            const prod = productArray[i]
+            // // ADD A FINISHED MENU ITEM AT THE BEGINNING OF THE DROPDOWN
+            // if (i === productArray.length -1 ) {
+            //     menuItems.push(
+            //         <MenuItem
+            //             key={`${category}-finished-${productArray.length}`}
+            //             value="finished"
+            //         >
+            //             Finished Adding
+            //         </MenuItem>
+            //     )
+            // }
+            // ADD A MENU ITEM FOR EACH PRODUCT ON DB
+            menuItems.push(
+                <MenuItem key={prod._id} value={prod._id}>
+                    {prod.name}
+                </MenuItem>
+            )
+            // ADD A FINISHED MENU ITEM AT THE END OF THE DROPDOWN
+            if (i === productArray.length - 1) {
+                menuItems.push(
+                    <MenuItem
+                        key={`${category}-noProduct-${productArray.length}`}
+                        value="noProduct"
+                    >
+                        No Product
+                    </MenuItem>
+                )
+            }
+        }
+
+        return menuItems
     }
 
     function buildSelectElements(
@@ -49,12 +75,12 @@ function CollectionForm({
         category,
         numberOfInputs
     ) {
-        let selectArray = [];
+        let selectArray = []
         for (let i = 0; i < numberOfInputs; i++) {
             // WHEN INDEX IS 0 FOR A TRACK, LABEL NAME = TRACK 1
             // THIS IS TO DISPLAY 1 - 4 FOR THE USER
             // INSTEAD OF 0 - 3
-            let labelName = `${capitalize(category)} ${i + 1}`;
+            let labelName = `${capitalize(category)} ${i + 1}`
 
             selectArray.push(
                 <CollectionSelect
@@ -66,14 +92,14 @@ function CollectionForm({
                     index={i}
                     key={labelName}
                 />
-            );
+            )
         }
-        return selectArray;
+        return selectArray
     }
 
-    let fabricItems = buildSelectOptions(state.products, "Fabric");
-    let trackItems = buildSelectOptions(state.products, "Track");
-    let accessoryItems = buildSelectOptions(state.products, "Accessory");
+    let fabricItems = buildSelectOptions(state.products, "Fabric")
+    let trackItems = buildSelectOptions(state.products, "Track")
+    let accessoryItems = buildSelectOptions(state.products, "Accessory")
 
     let fabricSelects = buildSelectElements(
         fabricItems,
@@ -81,21 +107,21 @@ function CollectionForm({
         collection,
         "fabric",
         4
-    );
+    )
     let trackSelects = buildSelectElements(
         trackItems,
         handleSelectChange,
         collection,
         "track",
         4
-    );
+    )
     let accessorySelects = buildSelectElements(
         accessoryItems,
         handleSelectChange,
         collection,
         "accessory",
         4
-    );
+    )
 
     return (
         <>
@@ -285,7 +311,7 @@ function CollectionForm({
                 )}
             </Grid>
         </>
-    );
+    )
 }
 
-export default CollectionForm;
+export default CollectionForm

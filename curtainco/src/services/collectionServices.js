@@ -1,36 +1,36 @@
-import api from "../config/api";
-import { isPhotoPresent } from "../helpers/appHelpers";
-import { uploadPhotoToS3 } from "./uploadServices";
+import api from "../config/api"
+import { isPhotoPresent } from "../helpers/appHelpers"
+import { uploadPhotoToS3 } from "./uploadServices"
 
 async function getAllCollections() {
-    const response = await api.get("/collections");
-    return response;
+    const response = await api.get("/collections")
+    return response
 }
 
 async function getOneCollection(id) {
-    const response = await api.get(`/collections/${id}`);
-    return response;
+    const response = await api.get(`/collections/${id}`)
+    return response
 }
 
 async function createCollection(newCollection) {
-    const response = await api.post("/collections", newCollection);
-    return response;
+    const response = await api.post("/collections", newCollection)
+    return response
 }
 
 async function updateCollection(updatedCollection) {
     const response = await api.put(
         `/collections/${updatedCollection._id}`,
         updatedCollection
-    );
-    return response;
+    )
+    return response
 }
 
 async function deleteCollection(collectionToDelete) {
     const response = await api.delete(
         `/collections/${collectionToDelete._id}`,
         collectionToDelete
-    );
-    return response;
+    )
+    return response
 }
 
 async function submitCollectionToDbAndUpdateState(
@@ -43,27 +43,26 @@ async function submitCollectionToDbAndUpdateState(
     photo,
     resetCollectionForm
 ) {
-    console.log(collection);
     // UPDATE THE COLLECTION ON THE DB
     // IF SUCCESSFUL, UPDATE COLLECTION IN GLOBAL STATE AND SHOW SUCCESS SNACKBAR
-    let editCollectionError = false;
-    let tempCollection = { ...collection };
-    let userIsUpdatingPhoto = isPhotoPresent(photo);
+    let editCollectionError = false
+    let tempCollection = { ...collection }
+    let userIsUpdatingPhoto = isPhotoPresent(photo)
 
-    console.log({ userIsUpdatingPhoto });
+    console.log({ userIsUpdatingPhoto })
 
     // UPLOAD THE PHOTO TO S3
     if (userIsUpdatingPhoto) {
         try {
-            let s3Resp = await uploadPhotoToS3(photo);
-            console.log(s3Resp);
+            let s3Resp = await uploadPhotoToS3(photo)
+            console.log(s3Resp)
             if (s3Resp.status === 201) {
-                tempCollection.imgUrl = s3Resp.data.image.location;
-                setResetFile(true);
-                setPhoto({});
+                tempCollection.imgUrl = s3Resp.data.image.location
+                setResetFile(true)
+                setPhoto({})
             }
         } catch (error) {
-            editCollectionError = `Error ocurred when retrieving photo on ${updateOrAdd} ${tempCollection.category}. ${error}.`;
+            editCollectionError = `Error ocurred when retrieving photo on ${updateOrAdd} ${tempCollection.category}. ${error}.`
         }
     }
 
@@ -73,16 +72,16 @@ async function submitCollectionToDbAndUpdateState(
     if (editCollectionError)
         return alert(
             `Something went wrong when ${updateOrAdd} photo to storage on ${tempCollection.category}`
-        );
+        )
 
     try {
-        let resp;
+        let resp
         if (updateOrAdd === "add") {
-            resp = await createCollection(tempCollection);
+            resp = await createCollection(tempCollection)
         } else {
-            resp = await updateCollection(tempCollection);
+            resp = await updateCollection(tempCollection)
         }
-        console.log(resp);
+        console.log(resp)
         if (
             (updateOrAdd === "add" && resp.status === 201) ||
             (updateOrAdd === "update" && resp.status === 200)
@@ -93,7 +92,7 @@ async function submitCollectionToDbAndUpdateState(
                         ? ACTIONS.ADD_COLLECTION
                         : ACTIONS.UPDATE_COLLECTION,
                 payload: tempCollection,
-            });
+            })
             dispatch({
                 type: ACTIONS.SET_SNACKBAR,
                 payload: {
@@ -103,19 +102,19 @@ async function submitCollectionToDbAndUpdateState(
                         updateOrAdd === "add" ? "added" : "updated"
                     }`,
                 },
-            });
-            setResetFile(true);
-            setPhoto({});
-            if (updateOrAdd === "add") resetCollectionForm();
-            return resp;
+            })
+            setResetFile(true)
+            setPhoto({})
+            if (updateOrAdd === "add") resetCollectionForm()
+            return resp
         } else {
-            editCollectionError = `An status error ocurred on ${updateOrAdd} collection: Error Code: ${resp.status}. Message: ${resp.message}.`;
-            console.log(editCollectionError);
+            editCollectionError = `An status error ocurred on ${updateOrAdd} collection: Error Code: ${resp.status}. Message: ${resp.message}.`
+            console.log(editCollectionError)
         }
     } catch (error) {
-        editCollectionError = `An error ocurred on ${updateOrAdd} collection. ${error}.`;
+        editCollectionError = `An error ocurred on ${updateOrAdd} collection. ${error}.`
     }
-    return editCollectionError;
+    return editCollectionError
 }
 
 export {
@@ -125,4 +124,4 @@ export {
     updateCollection,
     deleteCollection,
     submitCollectionToDbAndUpdateState,
-};
+}
