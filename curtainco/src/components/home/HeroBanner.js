@@ -6,7 +6,7 @@ function HeroBanner() {
         <div>
             <Link to={`/collections`}>
                 <img
-                    src="https://source.unsplash.com/random"
+                    src="https://source.unsplash.com/random/600x300"
                     alt="Hero Banner Image"
                 />
             </Link>
