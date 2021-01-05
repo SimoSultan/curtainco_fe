@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
         bottom: 0,
         height: "fit-content",
         width: "100%",
+        zIndex: "100",
     },
     main: {
         marginTop: theme.spacing(8),
