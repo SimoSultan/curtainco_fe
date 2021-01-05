@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import CollectionForm from "../../../reusable/CollectionForm";
 import { Container, Paper } from "@material-ui/core";
 
-import { createCollection } from "../../../../services/collectionServices";
+import { submitCollectionToDbAndUpdateState } from "../../../../services/collectionServices";
 import { useCurtainContext } from "../../../../config/CurtainCoContext";
 import { ACTIONS } from "../../../../config/stateReducer";
 import useStyles from "../AdminStyles";
@@ -12,8 +12,10 @@ function AddCollection() {
     const { dispatch } = useCurtainContext();
     const [resetFile, setResetFile] = useState(false);
     const [photo, setPhoto] = useState({});
+    const [tracksArray, setTracksArray] = useState(["", "", "", ""]);
+    const [fabricsArray, setFabricsArray] = useState(["", "", "", ""]);
+    const [accessoryArray, setAccessoryArray] = useState(["", "", "", ""]);
     const [collection, setCollection] = useState({
-        _id: "",
         name: "",
         description: "",
         imgUrl: "",
@@ -31,52 +33,67 @@ function AddCollection() {
         setPhoto(file);
     }
 
-    const handleSelectChange = (event) => {
+    function resetCollectionForm() {
         setCollection({
-            ...collection,
-            [event.target.name]: [
-                ...collection[event.target.name],
-                event.target.value,
-            ],
+            name: "",
+            description: "",
+            imgUrl: "",
+            price: "",
+            track: [],
+            fabric: [],
+            accessory: [],
+            trackTip: "",
+            accessoryTip: "",
+            fabricTip: "",
         });
-    };
+    }
 
-    const handleTextChange = (event) => {
+    function handleSelectChange(event) {
+        let selectName = event.target.name.split("-")[0];
+        let selectIndex = event.target.name.split("-")[1];
+        switch (selectName) {
+            case "track":
+                let tempTracks = [...tracksArray];
+                tempTracks[selectIndex] = event.target.value;
+                setTracksArray(tempTracks);
+                setCollection({ ...collection, track: tempTracks });
+                break;
+            case "fabric":
+                let tempFabrics = [...fabricsArray];
+                tempFabrics[selectIndex] = event.target.value;
+                setFabricsArray(tempFabrics);
+                setCollection({ ...collection, fabric: tempFabrics });
+                break;
+            case "accessory":
+                let tempAccessories = [...accessoryArray];
+                tempAccessories[selectIndex] = event.target.value;
+                setAccessoryArray(tempAccessories);
+                setCollection({ ...collection, accessory: tempAccessories });
+                break;
+            default:
+                break;
+        }
+    }
+
+    function handleTextChange(event) {
         setCollection({
             ...collection,
             [event.target.name]: event.target.value,
         });
-    };
+    }
 
     async function handleSubmit() {
-        // ADD THE PRODUCT ON THE DB
-        // IF SUCCESSFUL, ADD PRODUCT IN GLOBAL STATE AND SHOW SUCCESS SNACKBAR
-        let addCollError = false;
-        console.log(collection);
-        createCollection(collection)
-            .then((resp) => {
-                if (resp.status === 201) {
-                    dispatch({
-                        type: ACTIONS.ADD_COLLECTION,
-                        payload: collection,
-                    });
-                    dispatch({
-                        type: ACTIONS.SET_SNACKBAR,
-                        payload: {
-                            open: true,
-                            success: "success",
-                            message: "Collection successfully added",
-                        },
-                    });
-                } else {
-                    addCollError = `An error ocurred on adding product: Error Code: ${resp.status}. Message: ${resp.message}.`;
-                    console.log(addCollError);
-                }
-            })
-            .catch((error) => {
-                addCollError = `An error ocurred on adding product: Error Code: ${error.status}. Message: ${error.message}.`;
-                console.log(addCollError);
-            });
+        let respOrError = await submitCollectionToDbAndUpdateState(
+            "add",
+            collection,
+            dispatch,
+            ACTIONS,
+            setResetFile,
+            setPhoto,
+            photo,
+            resetCollectionForm
+        );
+        console.log(respOrError);
     }
 
     return (

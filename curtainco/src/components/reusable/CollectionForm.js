@@ -1,12 +1,19 @@
 import React from "react";
 
-import { Typography, Grid, TextField, Button, Box } from "@material-ui/core";
+import {
+    Typography,
+    Grid,
+    TextField,
+    Button,
+    Box,
+    MenuItem,
+} from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
 import useStyles from "../../components/account/admin/AdminStyles";
 import { useCurtainContext } from "../../config/CurtainCoContext";
 import FileInput from "./FileInput";
+import CollectionSelect from "./CollectionSelect";
+import { capitalize } from "../../helpers/appHelpers";
 
 function CollectionForm({
     title,
@@ -23,29 +30,72 @@ function CollectionForm({
     const classes = useStyles();
     const { state } = useCurtainContext();
 
-    let allFabrics = state.products.filter(
-        (prod) => prod.category === "Fabric"
-    );
-    let allTracks = state.products.filter((prod) => prod.category === "Track");
-    let allAccessories = state.products.filter(
-        (prod) => prod.category === "Accessory"
-    );
+    function buildSelectOptions(products, category) {
+        let productArray = products.filter(
+            (prod) => prod.category === category
+        );
+        let menuItems = productArray.map((prod) => (
+            <MenuItem key={prod._id} value={prod._id}>
+                {prod.name}
+            </MenuItem>
+        ));
+        return menuItems;
+    }
 
-    let fabricItems = allFabrics.map((fabric) => (
-        <option key={fabric._id} value={fabric._id}>
-            {fabric.name}
-        </option>
-    ));
-    let trackItems = allTracks.map((track) => (
-        <option key={track._id} value={track._id}>
-            {track.name}
-        </option>
-    ));
-    let accessoryItems = allAccessories.map((accessory) => (
-        <option key={accessory._id} value={accessory._id}>
-            {accessory.name}
-        </option>
-    ));
+    function buildSelectElements(
+        menuItems,
+        handleSelectChange,
+        collection,
+        category,
+        numberOfInputs
+    ) {
+        let selectArray = [];
+        for (let i = 0; i < numberOfInputs; i++) {
+            // WHEN INDEX IS 0 FOR A TRACK, LABEL NAME = TRACK 1
+            // THIS IS TO DISPLAY 1 - 4 FOR THE USER
+            // INSTEAD OF 0 - 3
+            let labelName = `${capitalize(category)} ${i + 1}`;
+
+            selectArray.push(
+                <CollectionSelect
+                    menuItems={menuItems}
+                    handleSelectChange={handleSelectChange}
+                    collection={collection}
+                    labelName={labelName}
+                    category={category}
+                    index={i}
+                    key={labelName}
+                />
+            );
+        }
+        return selectArray;
+    }
+
+    let fabricItems = buildSelectOptions(state.products, "Fabric");
+    let trackItems = buildSelectOptions(state.products, "Track");
+    let accessoryItems = buildSelectOptions(state.products, "Accessory");
+
+    let fabricSelects = buildSelectElements(
+        fabricItems,
+        handleSelectChange,
+        collection,
+        "fabric",
+        4
+    );
+    let trackSelects = buildSelectElements(
+        trackItems,
+        handleSelectChange,
+        collection,
+        "track",
+        4
+    );
+    let accessorySelects = buildSelectElements(
+        accessoryItems,
+        handleSelectChange,
+        collection,
+        "accessory",
+        4
+    );
 
     return (
         <>
@@ -127,7 +177,7 @@ function CollectionForm({
                         variant="outlined"
                         type="number"
                         name="price"
-                        className={classes.fullWidth}
+                        fullWidth
                         onChange={handleTextChange}
                         value={collection.price}
                     />
@@ -164,88 +214,36 @@ function CollectionForm({
                         value={collection.accessoryTip}
                     />
                 </Grid>
-                <Grid item container xs={12} sm={4}>
-                    <Grid item xs={12}>
-                        <FormControl
-                            variant="outlined"
-                            className={classes.formControl}
-                        >
-                            <Select
-                                labelId="collection-fabric-input-label"
-                                id="collection-fabric-input"
-                                value={collection.fabric}
-                                onChange={handleSelectChange}
-                                name="fabric"
-                                defaultValue=""
-                                native
-                            >
-                                {
-                                    <option
-                                        aria-label="None"
-                                        disabled
-                                        label="Fabric"
-                                        value=""
-                                    />
-                                }{" "}
-                                {fabricItems}
-                            </Select>
-                        </FormControl>
-                    </Grid>
+                <Grid
+                    item
+                    container
+                    direction="column"
+                    xs={12}
+                    sm={4}
+                    spacing={1}
+                >
+                    {fabricSelects}
                 </Grid>
 
-                <Grid item container xs={12} sm={4}>
-                    <Grid item xs={12}>
-                        <FormControl
-                            variant="outlined"
-                            className={classes.formControl}
-                        >
-                            <Select
-                                labelId="collection-track-input-label"
-                                id="collection-track-input"
-                                value={collection.track}
-                                onChange={handleSelectChange}
-                                name="track"
-                                defaultValue=""
-                                native
-                            >
-                                {
-                                    <option
-                                        aria-label="None"
-                                        disabled
-                                        label="Track"
-                                    />
-                                }{" "}
-                                {trackItems}
-                            </Select>
-                        </FormControl>
-                    </Grid>
+                <Grid
+                    item
+                    container
+                    direction="column"
+                    xs={12}
+                    sm={4}
+                    spacing={1}
+                >
+                    {trackSelects}
                 </Grid>
-                <Grid item container xs={12} sm={4}>
-                    <Grid item xs={12}>
-                        <FormControl
-                            variant="outlined"
-                            className={classes.formControl}
-                        >
-                            <Select
-                                labelId="collection-accessory-input-label"
-                                id="collection-accessory-input"
-                                value={collection.accessory}
-                                onChange={handleSelectChange}
-                                name="accessory"
-                                defaultValue=""
-                                // native
-                            >
-                                {
-                                    <option
-                                        aria-label="None"
-                                        disabled
-                                        label="Accessory"
-                                    />
-                                }
-                                {accessoryItems}
-                            </Select>
-                        </FormControl>
-                    </Grid>
+                <Grid
+                    item
+                    container
+                    direction="column"
+                    xs={12}
+                    sm={4}
+                    spacing={1}
+                >
+                    {accessorySelects}
                 </Grid>
 
                 {collection ? (
@@ -254,7 +252,6 @@ function CollectionForm({
                         container
                         justify="space-between"
                         alignItems="center"
-                        fullWidth
                         xs={12}
                         style={{ marginTop: "5%" }}
                     >

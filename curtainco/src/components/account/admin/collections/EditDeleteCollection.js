@@ -4,8 +4,8 @@ import Paper from "@material-ui/core/Paper";
 
 import CollectionForm from "../../../reusable/CollectionForm";
 import {
-    updateCollection,
     deleteCollection,
+    submitCollectionToDbAndUpdateState,
 } from "../../../../services/collectionServices";
 import { useCurtainContext } from "../../../../config/CurtainCoContext";
 import { ACTIONS } from "../../../../config/stateReducer";
@@ -17,6 +17,9 @@ function EditDeleteCollection({ editCollectionId, setEditCollectionId }) {
     const { state, dispatch } = useCurtainContext();
     const [resetFile, setResetFile] = useState(false);
     const [photo, setPhoto] = useState({});
+    const [tracksArray, setTracksArray] = useState(["", "", "", ""]);
+    const [fabricsArray, setFabricsArray] = useState(["", "", "", ""]);
+    const [accessoryArray, setAccessoryArray] = useState(["", "", "", ""]);
     const [previousCollection, setPreviousCollection] = useState(
         editCollectionId
     );
@@ -69,67 +72,82 @@ function EditDeleteCollection({ editCollectionId, setEditCollectionId }) {
                 state.collections,
                 editCollectionId
             );
+            // BECAUSE TRACKS/FABRICS/ACCESSORIES ARE RETURNED AS AN ARRAY OF OBJECTS
+            // NEED TO ITERATE OVER AND EXTRACT THE IDS FOR THE SELECT COMPONENTS AGAIN
+            let tempTracks = collectionBeingUpdated.track.map((obj) => obj._id);
+            let tempFabrics = collectionBeingUpdated.fabric.map(
+                (obj) => obj._id
+            );
+            let tempAccessories = collectionBeingUpdated.accessory.map(
+                (obj) => obj._id
+            );
             setCollection({
                 _id: collectionBeingUpdated._id,
                 name: collectionBeingUpdated.name,
                 description: collectionBeingUpdated.description,
                 imgUrl: collectionBeingUpdated.imgUrl,
                 price: collectionBeingUpdated.price,
-                track: collectionBeingUpdated.track,
-                fabric: collectionBeingUpdated.fabric,
-                accessory: collectionBeingUpdated.accessory,
+                track: tempTracks,
+                fabric: tempFabrics,
+                accessory: tempAccessories,
                 trackTip: collectionBeingUpdated.trackTip,
                 accessoryTip: collectionBeingUpdated.accessoryTip,
                 fabricTip: collectionBeingUpdated.fabricTip,
             });
+            setTracksArray(tempTracks);
+            setFabricsArray(tempFabrics);
+            setAccessoryArray(tempAccessories);
         } else {
             resetCollectionForm();
         }
     }, [state.collections, editCollectionId, previousCollection]);
 
-    const handleSelectChange = (event) => {
-        setCollection({
-            ...collection,
-            [event.target.name]: event.target.value,
-        });
-    };
+    function handleSelectChange(event) {
+        let selectName = event.target.name.split("-")[0];
+        let selectIndex = event.target.name.split("-")[1];
+        switch (selectName) {
+            case "track":
+                let tempTracks = [...tracksArray];
+                tempTracks[selectIndex] = event.target.value;
+                setTracksArray(tempTracks);
+                setCollection({ ...collection, track: tempTracks });
+                break;
+            case "fabric":
+                let tempFabrics = [...fabricsArray];
+                tempFabrics[selectIndex] = event.target.value;
+                setFabricsArray(tempFabrics);
+                setCollection({ ...collection, fabric: tempFabrics });
+                break;
+            case "accessory":
+                let tempAccessories = [...accessoryArray];
+                tempAccessories[selectIndex] = event.target.value;
+                setAccessoryArray(tempAccessories);
+                setCollection({ ...collection, accessory: tempAccessories });
+                break;
+            default:
+                break;
+        }
+    }
 
-    const handleTextChange = (event) => {
+    function handleTextChange(event) {
         setCollection({
             ...collection,
             [event.target.name]: event.target.value,
         });
-    };
+    }
 
     async function handleUpdateCollection() {
-        // UPDATE THE PRODUCT ON THE DB
-        // IF SUCCESSFUL, UPDATE PRODUCT IN GLOBAL STATE AND SHOW SUCCESS SNACKBAR
-        let editCollError = false;
-        updateCollection(collection)
-            .then((resp) => {
-                console.log(resp);
-                if (resp.status === 200) {
-                    dispatch({
-                        type: ACTIONS.UPDATE_COLLECTION,
-                        payload: collection,
-                    });
-                    dispatch({
-                        type: ACTIONS.SET_SNACKBAR,
-                        payload: {
-                            open: true,
-                            success: "success",
-                            message: "Collection successfully updated",
-                        },
-                    });
-                } else {
-                    editCollError = `An error ocurred on update product: Error Code: ${resp.status}. Message: ${resp.message}.`;
-                    console.log(editCollError);
-                }
-            })
-            .catch((error) => {
-                editCollError = `An error ocurred on update product: Error Code: ${error.status}. Message: ${error.message}.`;
-                console.log(editCollError);
-            });
+        let respOrError = await submitCollectionToDbAndUpdateState(
+            "update",
+            collection,
+            dispatch,
+            ACTIONS,
+            setResetFile,
+            setPhoto,
+            photo,
+            resetCollectionForm
+        );
+        console.log(respOrError);
     }
 
     function handleRemoveCollection() {
