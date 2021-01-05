@@ -6,7 +6,10 @@ import { submitCollectionToDbAndUpdateState } from "../../../../services/collect
 import { useCurtainContext } from "../../../../config/CurtainCoContext"
 import { ACTIONS } from "../../../../config/stateReducer"
 import useStyles from "../AdminStyles"
-import { filterProductsInCollection } from "../../../../helpers/collectionHelpers"
+import {
+    filterProductsInCollection,
+    checkIfProductsExistInCollection,
+} from "../../../../helpers/collectionHelpers"
 
 function AddCollection() {
     const classes = useStyles()
@@ -85,6 +88,28 @@ function AddCollection() {
     }
 
     async function handleSubmit() {
+        // INFORM THE USER THEY ARE SUBMITTING A COLLECTION WITH NO
+        // PRODUCTS IN A CATEGORY
+        let emptyFabric = checkIfProductsExistInCollection(
+            collection.fabric,
+            "fabric"
+        )
+        let emptyTrack = checkIfProductsExistInCollection(
+            collection.track,
+            "track"
+        )
+        let emptyAccessories = checkIfProductsExistInCollection(
+            collection.accessory,
+            "accessory"
+        )
+        if (
+            (emptyFabric && !window.confirm(emptyFabric)) ||
+            (emptyTrack && !window.confirm(emptyTrack)) ||
+            (emptyAccessories && !window.confirm(emptyAccessories))
+        ) {
+            return
+        }
+
         let result = filterProductsInCollection(collection)
         let tempCollection = result.collection
         let error = result.error

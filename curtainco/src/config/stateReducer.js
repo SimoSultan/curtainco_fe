@@ -1,9 +1,11 @@
 import { sortConsultations } from "../helpers/consultationHelpers"
 import { sortACTIONS, sortProducts } from "../helpers/productHelpers"
 
-function sortProductsForState(products) {
+function sortProductsAndCollectionsForState(products, type) {
     let sortedProducts = sortProducts(products, sortACTIONS.NAME_ALPHABETICAL)
-    sortedProducts = sortProducts(sortedProducts, sortACTIONS.CATEGORY)
+    if (type === "products") {
+        sortedProducts = sortProducts(sortedProducts, sortACTIONS.CATEGORY)
+    }
     return sortedProducts
 }
 
@@ -81,7 +83,10 @@ export default function stateReducer(state, action) {
         // -------- PRODUCTS --------
         case ACTIONS.SET_ALL_PRODUCTS: {
             let sortedProducts = action.payload
-            sortedProducts = sortProductsForState(sortedProducts)
+            sortedProducts = sortProductsAndCollectionsForState(
+                sortedProducts,
+                "products"
+            )
             return {
                 ...state,
                 products: sortedProducts,
@@ -89,7 +94,10 @@ export default function stateReducer(state, action) {
         }
         case ACTIONS.ADD_PRODUCT: {
             let sortedProducts = [...state.products, action.payload]
-            sortedProducts = sortProductsForState(sortedProducts)
+            sortedProducts = sortProductsAndCollectionsForState(
+                sortedProducts,
+                "products"
+            )
             return {
                 ...state,
                 products: sortedProducts,
@@ -101,7 +109,10 @@ export default function stateReducer(state, action) {
                 (prod) => prod._id !== updatedProduct._id
             )
             let sortedProducts = [...productsWithUpdateRemoved, updatedProduct]
-            sortedProducts = sortProductsForState(sortedProducts)
+            sortedProducts = sortProductsAndCollectionsForState(
+                sortedProducts,
+                "products"
+            )
 
             return {
                 ...state,
@@ -113,8 +124,9 @@ export default function stateReducer(state, action) {
             const productsWithRequestedRemoved = state.products.filter(
                 (prod) => prod._id !== id
             )
-            let sortedProducts = sortProductsForState(
-                productsWithRequestedRemoved
+            let sortedProducts = sortProductsAndCollectionsForState(
+                productsWithRequestedRemoved,
+                "products"
             )
             return {
                 ...state,
@@ -124,15 +136,25 @@ export default function stateReducer(state, action) {
 
         //  -------- COLLECTIONS --------
         case ACTIONS.SET_ALL_COLLECTIONS: {
+            let sortedCollections = action.payload
+            sortedCollections = sortProductsAndCollectionsForState(
+                sortedCollections,
+                "collections"
+            )
             return {
                 ...state,
-                collections: action.payload,
+                collections: sortedCollections,
             }
         }
         case ACTIONS.ADD_COLLECTION: {
+            let sortedCollections = [...state.collections, action.payload]
+            sortedCollections = sortProductsAndCollectionsForState(
+                sortedCollections,
+                "collections"
+            )
             return {
                 ...state,
-                collections: [...state.collections, action.payload],
+                collections: sortedCollections,
             }
         }
         case ACTIONS.UPDATE_COLLECTION: {
@@ -140,12 +162,18 @@ export default function stateReducer(state, action) {
             const collectionsWithUpdateRemoved = state.collections.filter(
                 (coll) => coll._id !== updatedCollection._id
             )
+            let sortedCollections = [
+                ...collectionsWithUpdateRemoved,
+                updatedCollection,
+            ]
+            sortedCollections = sortProductsAndCollectionsForState(
+                sortedCollections,
+                "collections"
+            )
+
             return {
                 ...state,
-                collections: [
-                    ...collectionsWithUpdateRemoved,
-                    updatedCollection,
-                ],
+                collections: sortedCollections,
             }
         }
         case ACTIONS.DELETE_COLLECTION: {
@@ -153,9 +181,14 @@ export default function stateReducer(state, action) {
             const collectionsWithRequestedRemoved = state.collections.filter(
                 (prod) => prod._id !== id
             )
+            let sortedCollections = [...collectionsWithRequestedRemoved]
+            sortedCollections = sortProductsAndCollectionsForState(
+                sortedCollections,
+                "collections"
+            )
             return {
                 ...state,
-                collections: collectionsWithRequestedRemoved,
+                collections: sortedCollections,
             }
         }
 

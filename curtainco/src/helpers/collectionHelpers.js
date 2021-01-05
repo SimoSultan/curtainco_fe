@@ -34,8 +34,16 @@ function checkIfUserIsRemovingAProduct(collection) {
     return false
 }
 
+function checkIfProductsExistInCollection(productArray, category) {
+    if (productArray.length === 0) {
+        return `You have no ${category} products, are you sure you want to continue?`
+    }
+    return false
+}
+
 module.exports = {
     getOneCollectionFromState,
     filterProductsInCollection,
     checkIfUserIsRemovingAProduct,
+    checkIfProductsExistInCollection,
 }
