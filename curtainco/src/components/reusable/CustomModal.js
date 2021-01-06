@@ -3,11 +3,13 @@ import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
+import CloseIcon from "@material-ui/icons/Close";
 
 import { useCurtainContext } from "../../config/CurtainCoContext";
 import { ACTIONS } from "../../config/stateReducer";
-import { Grid, Typography, Button, CardMedia } from "@material-ui/core";
+import { Grid, Typography, Button, IconButton } from "@material-ui/core";
 import PaymentSummary from "./PaymentSummary";
+import { addItemToCart } from "../../services/cartServices";
 
 const useStyles = makeStyles((theme) => ({
     modal: {
@@ -23,6 +25,14 @@ const useStyles = makeStyles((theme) => ({
         width: "50%",
         maxWidth: "700px",
         minWidth: "500px",
+    },
+    closeButton: {
+        position: "absolute",
+        top: "-7%",
+        right: "-7%",
+    },
+    closeButtonCont: {
+        position: "relative",
     },
 }));
 
@@ -45,7 +55,7 @@ export default function CustomModal() {
 
     function handleCartClick(event) {
         event.preventDefault();
-        alert("add to cart functionality to do");
+        addItemToCart(state.modal.data, dispatch);
     }
 
     return (

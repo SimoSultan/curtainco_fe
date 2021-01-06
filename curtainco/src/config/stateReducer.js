@@ -34,12 +34,16 @@ export const ACTIONS = {
     DELETE_CONSULTATION: "delete-consult",
     SET_ALL_ORDERS: "get-all-orders",
     ADD_ORDER: "add-order",
-    UPDATE_ORDER: "update-order"
+    UPDATE_ORDER: "update-order",
+    ADD_TO_CART: "add-to-cart",
+    UPDATE_CART: "update-cart",
+    REMOVE_FROM_CART: "remove-from-cart",
 };
 
 export default function stateReducer(state, action) {
     switch (action.type) {
         //  -------- AUTHENTICATION --------
+
         case ACTIONS.LOGIN: {
             return {
                 ...state,
@@ -71,6 +75,7 @@ export default function stateReducer(state, action) {
         }
 
         //  -------- SNACKBAR & MODAL --------
+
         case ACTIONS.SET_SNACKBAR: {
             return {
                 ...state,
@@ -85,6 +90,7 @@ export default function stateReducer(state, action) {
         }
 
         // -------- PRODUCTS --------
+
         case ACTIONS.SET_ALL_PRODUCTS: {
             let sortedProducts = action.payload;
             sortedProducts = sortProductsAndCollectionsForState(
@@ -139,6 +145,7 @@ export default function stateReducer(state, action) {
         }
 
         //  -------- COLLECTIONS --------
+
         case ACTIONS.SET_ALL_COLLECTIONS: {
             let sortedCollections = action.payload;
             sortedCollections = sortProductsAndCollectionsForState(
@@ -197,6 +204,7 @@ export default function stateReducer(state, action) {
         }
 
         //  -------- USERS --------
+
         case ACTIONS.SET_ALL_USERS: {
             return {
                 ...state,
@@ -205,6 +213,7 @@ export default function stateReducer(state, action) {
         }
 
         //  -------- CONSULTATIONS --------
+
         case ACTIONS.SET_ALL_CONSULTATIONS: {
             let sortedConsults = sortConsultations(action.payload);
             return {
@@ -254,6 +263,44 @@ export default function stateReducer(state, action) {
                 orders: newOrderList
             };
         }
+
+        //  ---------- CART -----------
+
+        case ACTIONS.ADD_TO_CART: {
+            let newCart = [...state.cart, action.payload];
+            // newConsultList = sortCart(newConsultList)
+
+            return {
+                ...state,
+                cart: newCart,
+            };
+        }
+        // case ACTIONS.UPDATE_QTY_CART: {
+        //     const updatedConsult = action.payload
+        //     const consultsWithUpdateRemoved = state.consults.filter(
+        //         (con) => con._id !== updatedConsult._id
+        //     )
+        //     let newConsultList = [...consultsWithUpdateRemoved, updatedConsult]
+        //     newConsultList = sortCart(newConsultList)
+        //     return {
+        //         ...state,
+        //         cart: updatedItem,
+        //     }
+        // }
+
+        // case ACTIONS.REMOVE_FROM_CART: {
+        //     const updatedConsult = action.payload
+        //     const consultsWithUpdateRemoved = state.consults.filter(
+        //         (con) => con._id !== updatedConsult._id
+        //     )
+        //     let newConsultList = [...consultsWithUpdateRemoved, updatedConsult]
+        //     newConsultList = sortCart(newConsultList)
+        //     return {
+        //         ...state,
+        //         cart: reducedCart,
+        //     }
+        // }
+
         default:
             return state;
     }

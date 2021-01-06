@@ -29,7 +29,8 @@ function CurtainContext({ children }) {
         collections: [],
         customizedCollection: { track: [], fabric: [], accessory: [] },
         consults: [],
-        orders: []
+        orders: [],
+        cart: [],
     };
 
     const [state, dispatch] = useReducer(stateReducer, initialState);

@@ -1,9 +1,19 @@
-import React from "react";
+import React from "react"
 
-import { Typography } from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core"
+import Story from "./Story"
+import Success from "./Success"
+import Testimonial from "./Testimonial"
 
 function About() {
-    return <Typography variant="h3">About Page</Typography>;
+    return (
+        <Grid container direction="column" alignItems="center" spacing={5}>
+            <Typography variant="h3">About Page</Typography>
+            <Story />
+            <Success />
+            <Testimonial />
+        </Grid>
+    )
 }
 
-export default About;
+export default About
