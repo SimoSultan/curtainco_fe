@@ -1,14 +1,15 @@
-import React from "react"
-import { makeStyles } from "@material-ui/core/styles"
-import Modal from "@material-ui/core/Modal"
-import Backdrop from "@material-ui/core/Backdrop"
-import Fade from "@material-ui/core/Fade"
-import CloseIcon from "@material-ui/icons/Close"
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Modal from "@material-ui/core/Modal";
+import Backdrop from "@material-ui/core/Backdrop";
+import Fade from "@material-ui/core/Fade";
+import CloseIcon from "@material-ui/icons/Close";
 
-import { useCurtainContext } from "../../config/CurtainCoContext"
-import { ACTIONS } from "../../config/stateReducer"
-import { Grid, Typography, Button, IconButton } from "@material-ui/core"
-import { addItemToCart } from "../../services/cartServices"
+import { useCurtainContext } from "../../config/CurtainCoContext";
+import { ACTIONS } from "../../config/stateReducer";
+import { Grid, Typography, Button, IconButton } from "@material-ui/core";
+import PaymentSummary from "./PaymentSummary";
+import { addItemToCart } from "../../services/cartServices";
 
 const useStyles = makeStyles((theme) => ({
     modal: {
@@ -33,11 +34,11 @@ const useStyles = makeStyles((theme) => ({
     closeButtonCont: {
         position: "relative",
     },
-}))
+}));
 
 export default function CustomModal() {
-    const classes = useStyles()
-    const { state, dispatch } = useCurtainContext()
+    const classes = useStyles();
+    const { state, dispatch } = useCurtainContext();
 
     const handleClose = () => {
         dispatch({
@@ -47,13 +48,14 @@ export default function CustomModal() {
                 title: "",
                 message: "",
                 data: {},
+                paymentSummary: false
             },
-        })
-    }
+        });
+    };
 
     function handleCartClick(event) {
-        event.preventDefault()
-        addItemToCart(state.modal.data, dispatch)
+        event.preventDefault();
+        addItemToCart(state.modal.data, dispatch);
     }
 
     return (
@@ -71,84 +73,76 @@ export default function CustomModal() {
         >
             <Fade in={state.modal.open}>
                 <div className={classes.paper}>
-                    <Grid container>
-                        <Grid
-                            item
-                            container
-                            xs={5}
-                            justify="center"
-                            alignItems="center"
-                        >
-                            <div role="img">
-                                <img
-                                    src={
-                                        state.modal.data.imgUrl === ""
-                                            ? "https://source.unsplash.com/random"
-                                            : state.modal.data.imgUrl
-                                    }
-                                    alt={state.modal.data.name}
-                                    style={{ width: "70%" }}
-                                />
-                            </div>
-                        </Grid>
-                        <Grid
-                            item
-                            container
-                            direction="column"
-                            justify="flex-start"
-                            alignItems="flex-start"
-                            xs={7}
-                            spacing={1}
-                        >
+                    {state.modal.paymentSummary
+                        ?
+                        <PaymentSummary data={state.modal.data} />
+                        :
+                        <Grid container>
                             <Grid
                                 item
                                 container
-                                justify="space-between"
+                                xs={5}
+                                justify="center"
                                 alignItems="center"
-                                className={classes.closeButtonCont}
+                            >
+                                <div role="img">
+                                    <img
+                                        src={
+                                            state.modal.data.imgUrl === ""
+                                                ? "https://source.unsplash.com/random"
+                                                : state.modal.data.imgUrl
+                                        }
+                                        alt={state.modal.data.name}
+                                        style={{ width: "70%" }}
+                                    />
+                                </div>
+                            </Grid>
+                            <Grid
+                                item
+                                container
+                                direction="column"
+                                justify="flex-start"
+                                alignItems="flex-start"
+                                xs={7}
+                                spacing={1}
                             >
                                 <Grid item>
                                     <Typography variant="h3" component="h3">
                                         {state.modal.title}
                                     </Typography>
                                 </Grid>
-                                <Grid item className={classes.closeButton}>
-                                    <IconButton onClick={handleClose}>
-                                        <CloseIcon color="error" />
-                                    </IconButton>
+                                <Grid item>
+                                    <Typography>{state.modal.message}</Typography>
+                                </Grid>
+                                <Grid item>
+                                    <Typography>
+                                        Category: {state.modal.data.category}
+                                    </Typography>
+                                </Grid>
+                                <Grid item>
+                                    <Typography>
+                                        Price: ${state.modal.data.price}
+                                    </Typography>
+                                </Grid>
+                                <Grid
+                                    item
+                                    container
+                                    justify="flex-end"
+                                    alignItems="center"
+                                >
+                                    <Button
+                                        variant="contained"
+                                        color="secondary"
+                                        onClick={handleCartClick}
+                                    >
+                                        Add To Cart
+                                </Button>
                                 </Grid>
                             </Grid>
-                            <Grid item>
-                                <Typography>{state.modal.message}</Typography>
-                            </Grid>
-                            <Grid item>
-                                <Typography>
-                                    Category: {state.modal.data.category}
-                                </Typography>
-                            </Grid>
-                            <Grid item>
-                                <Typography>
-                                    Price: ${state.modal.data.price}
-                                </Typography>
-                            </Grid>
-                            <Grid
-                                item
-                                container
-                                justify="flex-end"
-                                alignItems="center"
-                            >
-                                <Button
-                                    variant="contained"
-                                    color="secondary"
-                                    onClick={handleCartClick}
-                                >
-                                    Add To Cart
-                                </Button>
-                            </Grid>
                         </Grid>
-                    </Grid>
+                    }
                 </div>
             </Fade>
         </Modal>
-    )
+    );
 }
