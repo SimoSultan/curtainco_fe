@@ -7,7 +7,9 @@ import {
     getCartItemsFromLocalStorage,
     changeQtyOfItemInLocalStorage,
     updateLocalStorageWithNewArray,
+    removeFromCart,
 } from "../../services/cartServices"
+
 import CartList from "./CartList"
 import CartTotal from "./CartTotal"
 
@@ -65,6 +67,12 @@ function Cart() {
             )
         }
         updateLocalStorageWithNewArray(errorOrArray)
+        updateCartInStateFromLocalStorage()
+    }
+
+    function handleRemove(event) {
+        event.preventDefault()
+        removeFromCart(event.currentTarget.value)
         updateCartInStateFromLocalStorage()
     }
 
@@ -126,9 +134,7 @@ function Cart() {
             /> */}
             <CartList
                 cart={cart}
-                updateCartInStateFromLocalStorage={
-                    updateCartInStateFromLocalStorage
-                }
+                handleRemove={handleRemove}
                 handleIncreaseQty={handleIncreaseQty}
                 handleDecreaseQty={handleDecreaseQty}
             />

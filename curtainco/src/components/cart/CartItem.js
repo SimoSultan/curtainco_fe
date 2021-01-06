@@ -17,6 +17,8 @@ function CartItem({
 
     let productItem = itemInCart.item
 
+    console.log(itemInCart.id)
+
     return (
         <Grid item xs container justify="center">
             <Paper className={classes.paper}>
@@ -26,7 +28,7 @@ function CartItem({
                     container
                     justify="space-between"
                     alignItems="center"
-                    key={`${itemInCart.id}`}
+                    key={`cart-item-${itemInCart.id}`}
                 >
                     <Grid item xs={2} container justify="center">
                         <img
@@ -93,7 +95,7 @@ function CartItem({
                     </Grid>
 
                     <Grid item xs={3} container justify="center">
-                        <Typography>
+                        <Typography className={classes.cartItemPrice}>
                             ${productItem.price * itemInCart.qty}
                         </Typography>
                     </Grid>

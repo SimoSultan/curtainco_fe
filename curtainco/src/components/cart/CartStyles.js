@@ -21,7 +21,8 @@ const useStyles = makeStyles((theme) => ({
         objectFit: "cover",
     },
     cartItemPrice: {
-        // fontWeight: "bold",
+        fontWeight: "500",
+        fontStyle: "italic",
     },
 }))
 

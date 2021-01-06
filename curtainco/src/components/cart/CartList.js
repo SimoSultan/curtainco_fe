@@ -1,38 +1,40 @@
 import React from "react"
-import { Grid } from "@material-ui/core"
-import { removeFromCart } from "../../services/cartServices"
+import { Grid, Typography } from "@material-ui/core"
 import CartItem from "./CartItem"
 
 function CartList({
     cart,
-    updateCartInStateFromLocalStorage,
+    handleRemove,
     handleIncreaseQty,
     handleDecreaseQty,
 }) {
-    function handleRemove(event) {
-        event.preventDefault()
-        removeFromCart(event.currentTarget.value)
-        updateCartInStateFromLocalStorage()
-    }
-
     return (
-        <Grid
-            container
-            direction="column"
-            // justify="center"
-            // alignItems="center"
-            spacing={3}
-        >
-            {cart.length !== 0
-                ? cart.map((item) => (
-                      <CartItem
-                          itemInCart={item}
-                          handleRemove={handleRemove}
-                          handleIncreaseQty={handleIncreaseQty}
-                          handleDecreaseQty={handleDecreaseQty}
-                      />
-                  ))
-                : "no items"}
+        <Grid container direction="column" spacing={3}>
+            {cart.length !== 0 ? (
+                cart.map((item, index) => (
+                    <CartItem
+                        itemInCart={item}
+                        handleRemove={handleRemove}
+                        handleIncreaseQty={handleIncreaseQty}
+                        handleDecreaseQty={handleDecreaseQty}
+                        key={`cart-item-${item.id}`}
+                    />
+                ))
+            ) : (
+                <Grid
+                    item
+                    container
+                    justify="center"
+                    alignItems="center"
+                    spacing={6}
+                >
+                    <Grid item>
+                        <Typography variant="h6" component="h6">
+                            No items in cart
+                        </Typography>
+                    </Grid>
+                </Grid>
+            )}
         </Grid>
     )
 }
