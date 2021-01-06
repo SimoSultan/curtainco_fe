@@ -43,6 +43,37 @@ function AllOrders() {
             })
     }, [dispatch])
 
+    function handleOrderCheckbox(event) {
+        const checked = event.target.checked
+        const orderId = event.currentTarget.parentNode.parentNode.id
+        markOrderProcessed(orderId, { isProcessed: checked })
+            .then((resp) => {
+                console.log("---UPDATED ORDER---")
+                console.log(resp.data)
+                if (resp.status === 200) {
+                    dispatch({
+                        type: ACTIONS.UPDATE_ORDER,
+                        payload: resp.data,
+                    })
+                    dispatch({
+                        type: ACTIONS.SET_SNACKBAR,
+                        payload: {
+                            open: true,
+                            success: "success",
+                            message: "Order successfully updated",
+                        },
+                    })
+                } else {
+                    console.log("OrderID provided does not exist")
+                }
+            })
+            .catch((error) => {
+                console.log(
+                    `Something went wrong when updating the order: ${error}`
+                )
+            })
+    }
+
     const orderRow = allOrders.map((ord) => (
         <TableRow key={ord._id} id={ord._id} hover>
             <TableCell>
@@ -50,7 +81,7 @@ function AllOrders() {
                     color="primary"
                     checked={ord.isProcessed}
                     inputProps={{ "aria-label": "secondary checkbox" }}
-                    // onClick={handleConsultationCheckbox}
+                    onClick={handleOrderCheckbox}
                 />
             </TableCell>
             <TableCell
@@ -61,8 +92,9 @@ function AllOrders() {
             <TableCell
                 className={ord.isProcessed ? classes.checkboxSelected : ""}
             >
-                {`${getFirstNameFromFullName(ord.customer.fullName)} 
-                ${getLastNameFromFullName(ord.customer.fullName)}`}
+                {/* {`${getFirstNameFromFullName(ord.customer.fullName)} 
+                ${getLastNameFromFullName(ord.customer.fullName)}`} */}
+                {ord.customer.fullName}
             </TableCell>
             <TableCell
                 className={ord.isProcessed ? classes.checkboxSelected : ""}
