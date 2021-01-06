@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react"
-import api from "../../config/api"
-import Paypal from "./Paypal"
+import PayPal from "./PayPal"
 import CartList from "./CartList"
 import CartTotal from "./CartTotal"
 
@@ -10,9 +9,10 @@ import {
     changeQtyOfItemInLocalStorage,
     updateLocalStorageWithNewArray,
     removeFromCart,
+    generateTotalPriceOfCart,
 } from "../../services/cartServices"
+import { sendRequestToPayPal } from "../../services/orderServices"
 import useStyles from "./CartStyles"
-import { createOrderFromCart } from "../../services/orderServices"
 
 function Cart() {
     const classes = useStyles()
@@ -36,12 +36,7 @@ function Cart() {
 
     // WHEN CART IN LOCAL STATE IS LOADED, CALCULATE THE TOTAL PRICE
     useEffect(() => {
-        let tempTotal = 0
-        for (let i = 0; i < cart.length; i++) {
-            const element = cart[i]
-            tempTotal += element.qty * element.item.price
-        }
-
+        let tempTotal = generateTotalPriceOfCart(cart)
         setTotalPrice(tempTotal)
     }, [cart])
 
@@ -83,7 +78,13 @@ function Cart() {
     function handleCheckout(event) {
         event.preventDefault()
         console.log(cart)
-        let order = createOrderFromCart()
+        let customer = {}
+        const order = {
+            customer: customer,
+            items: cart,
+            totalPrice: totalPrice,
+            paymentData: {},
+        }
         console.log(order)
     }
 
@@ -109,11 +110,16 @@ function Cart() {
         payload.items = testProduct
         payload._id = data.paymentID
         payload.paymentData = data
-        const response = await api.post("/orders", payload)
-        // setPaymentSuccess(true) // modal confirmation?
-        // clears the cart afterwards then redirects somewhere?
-        console.log(response)
-        return response
+
+        try {
+            let response = await sendRequestToPayPal(payload)
+            console.log(response)
+            // setPaymentSuccess(true) // modal confirmation?
+            // clears the cart afterwards then redirects somewhere?
+            return response
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     function handleError(data) {
@@ -130,19 +136,9 @@ function Cart() {
         console.log("Transaction cancelled")
     }
 
-    // would be a state setTotalPrice which was
-    // extracted from every item added to cart
-    // totalPrice is then passed to Paypal component
-    // const totalPrice = 10
     return (
         <>
             <Typography variant="h3">Cart Page</Typography>
-            {/* <Paypal
-                handleSuccess={handleSuccess}
-                handleError={handleError}
-                handleCancel={handleCancel}
-                totalPrice={totalPrice}
-            /> */}
             <CartList
                 cart={cart}
                 handleRemove={handleRemove}
@@ -162,6 +158,12 @@ function Cart() {
                         />
                     </Grid>
                 </Grid>
+                <PayPal
+                    handleSuccess={handleSuccess}
+                    handleError={handleError}
+                    handleCancel={handleCancel}
+                    totalPrice={totalPrice}
+                />
             </Box>
         </>
     )

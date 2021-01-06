@@ -1,10 +1,9 @@
-const { __esModule } = require("react-router-dom/cjs/react-router-dom.min")
+import api from "../config/api"
 
-function createOrderFromCart(cart) {
-    let order = {}
-    return order
+async function sendRequestToPayPal(payload) {
+    const response = await api.post("/orders", payload)
+    console.log(response)
+    return response
 }
 
-module.exports = {
-    createOrderFromCart,
-}
+export { sendRequestToPayPal }
