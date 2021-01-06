@@ -14,10 +14,7 @@ function CartItem({
     handleDecreaseQty,
 }) {
     const classes = useStyles()
-
     let productItem = itemInCart.item
-
-    console.log(itemInCart.id)
 
     return (
         <Grid item xs container justify="center">
