@@ -1,12 +1,12 @@
-import { sortConsultations } from "../helpers/consultationHelpers"
-import { sortACTIONS, sortProducts } from "../helpers/productHelpers"
+import { sortConsultations } from "../helpers/consultationHelpers";
+import { sortACTIONS, sortProducts } from "../helpers/productHelpers";
 
 function sortProductsAndCollectionsForState(products, type) {
-    let sortedProducts = sortProducts(products, sortACTIONS.NAME_ALPHABETICAL)
+    let sortedProducts = sortProducts(products, sortACTIONS.NAME_ALPHABETICAL);
     if (type === "products") {
-        sortedProducts = sortProducts(sortedProducts, sortACTIONS.CATEGORY)
+        sortedProducts = sortProducts(sortedProducts, sortACTIONS.CATEGORY);
     }
-    return sortedProducts
+    return sortedProducts;
 }
 
 export const ACTIONS = {
@@ -31,7 +31,10 @@ export const ACTIONS = {
     VIEW_CONSULTATION: "view-consult",
     UPDATE_CONSULTATION: "update-consult",
     DELETE_CONSULTATION: "delete-consult",
-}
+    SET_ALL_ORDERS: "get-all-orders",
+    ADD_ORDER: "add-order",
+    UPDATE_ORDER: "update-order"
+};
 
 export default function stateReducer(state, action) {
     switch (action.type) {
@@ -41,21 +44,21 @@ export default function stateReducer(state, action) {
                 ...state,
                 currentUser: action.payload,
                 loggedIn: true,
-            }
+            };
         }
         case ACTIONS.LOGOUT: {
             return {
                 ...state,
                 currentUser: null,
                 loggedIn: false,
-            }
+            };
         }
         case ACTIONS.SET_CURRENT_USER: {
             return {
                 ...state,
                 currentUser: action.payload,
                 loggedIn: true,
-            }
+            };
         }
         case ACTIONS.REGISTER: {
             return {
@@ -63,7 +66,7 @@ export default function stateReducer(state, action) {
                 users: [...state.users, action.payload],
                 currentUser: action.payload,
                 loggedIn: true,
-            }
+            };
         }
 
         //  -------- SNACKBAR & MODAL --------
@@ -71,125 +74,125 @@ export default function stateReducer(state, action) {
             return {
                 ...state,
                 snackbar: action.payload,
-            }
+            };
         }
         case ACTIONS.SET_MODAL: {
             return {
                 ...state,
                 modal: action.payload,
-            }
+            };
         }
 
         // -------- PRODUCTS --------
         case ACTIONS.SET_ALL_PRODUCTS: {
-            let sortedProducts = action.payload
+            let sortedProducts = action.payload;
             sortedProducts = sortProductsAndCollectionsForState(
                 sortedProducts,
                 "products"
-            )
+            );
             return {
                 ...state,
                 products: sortedProducts,
-            }
+            };
         }
         case ACTIONS.ADD_PRODUCT: {
-            let sortedProducts = [...state.products, action.payload]
+            let sortedProducts = [...state.products, action.payload];
             sortedProducts = sortProductsAndCollectionsForState(
                 sortedProducts,
                 "products"
-            )
+            );
             return {
                 ...state,
                 products: sortedProducts,
-            }
+            };
         }
         case ACTIONS.UPDATE_PRODUCT: {
-            const updatedProduct = action.payload
+            const updatedProduct = action.payload;
             const productsWithUpdateRemoved = state.products.filter(
                 (prod) => prod._id !== updatedProduct._id
-            )
-            let sortedProducts = [...productsWithUpdateRemoved, updatedProduct]
+            );
+            let sortedProducts = [...productsWithUpdateRemoved, updatedProduct];
             sortedProducts = sortProductsAndCollectionsForState(
                 sortedProducts,
                 "products"
-            )
+            );
 
             return {
                 ...state,
                 products: sortedProducts,
-            }
+            };
         }
         case ACTIONS.DELETE_PRODUCT: {
-            const id = action.payload
+            const id = action.payload;
             const productsWithRequestedRemoved = state.products.filter(
                 (prod) => prod._id !== id
-            )
+            );
             let sortedProducts = sortProductsAndCollectionsForState(
                 productsWithRequestedRemoved,
                 "products"
-            )
+            );
             return {
                 ...state,
                 products: sortedProducts,
-            }
+            };
         }
 
         //  -------- COLLECTIONS --------
         case ACTIONS.SET_ALL_COLLECTIONS: {
-            let sortedCollections = action.payload
+            let sortedCollections = action.payload;
             sortedCollections = sortProductsAndCollectionsForState(
                 sortedCollections,
                 "collections"
-            )
+            );
             return {
                 ...state,
                 collections: sortedCollections,
-            }
+            };
         }
         case ACTIONS.ADD_COLLECTION: {
-            let sortedCollections = [...state.collections, action.payload]
+            let sortedCollections = [...state.collections, action.payload];
             sortedCollections = sortProductsAndCollectionsForState(
                 sortedCollections,
                 "collections"
-            )
+            );
             return {
                 ...state,
                 collections: sortedCollections,
-            }
+            };
         }
         case ACTIONS.UPDATE_COLLECTION: {
-            const updatedCollection = action.payload
+            const updatedCollection = action.payload;
             const collectionsWithUpdateRemoved = state.collections.filter(
                 (coll) => coll._id !== updatedCollection._id
-            )
+            );
             let sortedCollections = [
                 ...collectionsWithUpdateRemoved,
                 updatedCollection,
-            ]
+            ];
             sortedCollections = sortProductsAndCollectionsForState(
                 sortedCollections,
                 "collections"
-            )
+            );
 
             return {
                 ...state,
                 collections: sortedCollections,
-            }
+            };
         }
         case ACTIONS.DELETE_COLLECTION: {
-            const id = action.payload
+            const id = action.payload;
             const collectionsWithRequestedRemoved = state.collections.filter(
                 (prod) => prod._id !== id
-            )
-            let sortedCollections = [...collectionsWithRequestedRemoved]
+            );
+            let sortedCollections = [...collectionsWithRequestedRemoved];
             sortedCollections = sortProductsAndCollectionsForState(
                 sortedCollections,
                 "collections"
-            )
+            );
             return {
                 ...state,
                 collections: sortedCollections,
-            }
+            };
         }
 
         //  -------- USERS --------
@@ -197,39 +200,47 @@ export default function stateReducer(state, action) {
             return {
                 ...state,
                 users: action.payload,
-            }
+            };
         }
 
         //  -------- CONSULTATIONS --------
         case ACTIONS.SET_ALL_CONSULTATIONS: {
-            let sortedConsults = sortConsultations(action.payload)
+            let sortedConsults = sortConsultations(action.payload);
             return {
                 ...state,
                 consults: sortedConsults,
-            }
+            };
         }
         case ACTIONS.ADD_CONSULTATION: {
-            let newConsultList = [...state.consults, action.payload]
-            newConsultList = sortConsultations(newConsultList)
+            let newConsultList = [...state.consults, action.payload];
+            newConsultList = sortConsultations(newConsultList);
 
             return {
                 ...state,
                 consults: newConsultList,
-            }
+            };
         }
         case ACTIONS.UPDATE_CONSULTATION: {
-            const updatedConsult = action.payload
+            const updatedConsult = action.payload;
             const consultsWithUpdateRemoved = state.consults.filter(
                 (con) => con._id !== updatedConsult._id
-            )
-            let newConsultList = [...consultsWithUpdateRemoved, updatedConsult]
-            newConsultList = sortConsultations(newConsultList)
+            );
+            let newConsultList = [...consultsWithUpdateRemoved, updatedConsult];
+            newConsultList = sortConsultations(newConsultList);
             return {
                 ...state,
                 consults: newConsultList,
-            }
+            };
+        }
+
+        //  -------- ORDERS --------
+        case ACTIONS.SET_ALL_ORDERS: {
+            return {
+                ...state,
+                orders: action.payload
+            };
         }
         default:
-            return state
+            return state;
     }
 }
