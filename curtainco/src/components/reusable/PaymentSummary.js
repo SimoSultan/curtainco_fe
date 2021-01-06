@@ -3,27 +3,15 @@ import { Grid, Typography } from '@material-ui/core';
 
 function PaymentSummary({ data }) {
   const { customer } = data;
+
+  const orders = data.items.map((order, i) => (
+    // items does not have ids so created a CurtainCo00 id
+    <Typography key={`CC00${i}`}>
+      {`${order.qty} x ${order.name}`}
+    </Typography>
+  ));
   return (
     <Grid container>
-      {/* <Grid
-        item
-        container
-        xs={5}
-        justify="center"
-        alignItems="center"
-      >
-        <div role="img">
-          <img
-            src={
-              state.modal.data.imgUrl === ""
-                ? "https://source.unsplash.com/random"
-                : state.modal.data.imgUrl
-            }
-            alt={state.modal.data.name}
-            style={{ width: "70%" }}
-          />
-        </div>
-      </Grid> */}
       <Grid
         item
         container
@@ -54,7 +42,16 @@ function PaymentSummary({ data }) {
             {`Shipped: ${data.isProcessed ? "Yes" : "No"}`}
           </Typography>
         </Grid>
-        {/* ORDER ITEMS HERE */}
+        <Grid item container justify="space-between">
+          <Grid item>
+            <Typography>
+              Customer Orders:
+            </Typography>
+          </Grid>
+          <Grid item>
+            {orders}
+          </Grid>
+        </Grid>
         <Grid item>
           <Typography>
             {`Total Cost: $${data.totalPrice}`}
