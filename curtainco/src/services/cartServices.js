@@ -82,10 +82,20 @@ function removeItemFromLocalStorage(itemId) {
     updateLocalStorageWithNewArray(reducedCartItems)
 }
 
+function generateTotalPriceOfCart(cart) {
+    let tempTotal = 0
+    for (let i = 0; i < cart.length; i++) {
+        const element = cart[i]
+        tempTotal += element.qty * element.item.price
+    }
+    return tempTotal
+}
+
 module.exports = {
     addItemToCart,
     removeFromCart,
     getCartItemsFromLocalStorage,
     changeQtyOfItemInLocalStorage,
     updateLocalStorageWithNewArray,
+    generateTotalPriceOfCart,
 }
