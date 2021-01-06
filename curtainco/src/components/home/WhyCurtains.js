@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Grid, Typography } from '@material-ui/core';
 
+
 function WhyCurtains() {
     return (
         <Grid item sm={6}>
@@ -15,10 +16,13 @@ function WhyCurtains() {
                 autem odit voluptas soluta asperiores deleniti perspiciatis!
             </Typography>
             <Button variant="contained" color="secondary">
-                <Link to={`/collections`}>Collections</Link>
+                <Link to={`/collections`} className="link">
+                    Collections
+                </Link>
             </Button>
+
         </Grid>
     );
 }
 
-export default WhyCurtains;
+export default WhyCurtains

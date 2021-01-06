@@ -14,7 +14,6 @@ function CartItem({
     handleDecreaseQty,
 }) {
     const classes = useStyles()
-
     let productItem = itemInCart.item
 
     return (
@@ -26,7 +25,7 @@ function CartItem({
                     container
                     justify="space-between"
                     alignItems="center"
-                    key={`${itemInCart.id}`}
+                    key={`cart-item-${itemInCart.id}`}
                 >
                     <Grid item xs={2} container justify="center">
                         <img
@@ -93,7 +92,7 @@ function CartItem({
                     </Grid>
 
                     <Grid item xs={3} container justify="center">
-                        <Typography>
+                        <Typography className={classes.cartItemPrice}>
                             ${productItem.price * itemInCart.qty}
                         </Typography>
                     </Grid>

@@ -1,12 +1,10 @@
-import React, { useEffect } from "react";
-
-import { useCurtainContext } from "./config/CurtainCoContext";
-import { ACTIONS } from "./config/stateReducer";
-
-import "./styles/Main.css";
-
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { getLoggedInUser } from "./services/authServices";
+import React, { useEffect } from "react"
+import { useCurtainContext } from "./config/CurtainCoContext"
+import { ACTIONS } from "./config/stateReducer"
+import { Container } from "@material-ui/core"
+import "./styles/Main.css"
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
+import { getLoggedInUser } from "./services/authServices"
 
 import {
     NavBar,
@@ -23,33 +21,33 @@ import {
     RequestConsultation,
     CustomSnackbar,
     CustomModal,
-} from "./components/export.js";
-import { Container } from "@material-ui/core";
+    PageNotFound,
+} from "./components/export.js"
 
 function App() {
-    const { state, dispatch } = useCurtainContext();
+    const { state, dispatch } = useCurtainContext()
 
     useEffect(() => {
         if (state.currentUser === null) {
             getLoggedInUser()
                 .then((resp) => {
-                    let currentUser = resp.data.user;
+                    let currentUser = resp.data.user
                     if (currentUser) {
                         dispatch({
                             type: ACTIONS.SET_CURRENT_USER,
                             payload: currentUser,
-                        });
+                        })
                     } else {
-                        console.log("No user logged in on page reload");
+                        console.log("No user logged in on page reload")
                     }
                 })
                 .catch((error) => {
                     console.log(
                         `An error ocurred on getLoggedInUser: ${error}.`
-                    );
-                });
+                    )
+                })
         }
-    }, [dispatch, state.currentUser]);
+    }, [dispatch, state.currentUser])
 
     return (
         <Router>
@@ -75,6 +73,7 @@ function App() {
                         component={RequestConsultation}
                     />
                     <Route exact path="/account" component={Account} />
+                    <Route component={PageNotFound} />
                 </Switch>
             </Container>
 
@@ -91,7 +90,7 @@ function App() {
             />
             <Footer />
         </Router>
-    );
+    )
 }
 
-export default App;
+export default App
