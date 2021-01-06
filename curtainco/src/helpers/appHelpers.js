@@ -21,9 +21,34 @@ function displayShortDate(createdAt) {
     return dateStr;
 }
 
+function ascSort(data) {
+    // sort by date, olders first
+    // then sort by processed, showing unprocessed first
+    let sorted = data.sort((a, b) => {
+        // Turn your strings into dates, and then subtract them
+        // to get a value that is either negative, positive, or zero.
+        return new Date(a.createdAt) - new Date(b.createdAt);
+    });
+
+    let completedList = [];
+    let incompleteList = [];
+
+    for (let i = 0; i < sorted.length; i++) {
+        const element = sorted[i];
+        if (element.isProcessed) {
+            completedList.push(element);
+        } else {
+            incompleteList.push(element);
+        }
+    }
+
+    return [...incompleteList, ...completedList];
+}
+
 module.exports = {
     capitalize,
     isEmpty,
     isPhotoPresent,
     displayShortDate,
+    ascSort
 };
