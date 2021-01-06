@@ -2,7 +2,7 @@ import React from "react"
 import { Grid, Button, Typography } from "@material-ui/core"
 import { Link } from "react-router-dom"
 
-function CartTotal({ total, handleCheckout }) {
+function CartTotal({ total, children }) {
     return (
         <Grid container direction="column" spacing={2}>
             <Grid item container justify="center" alignItems="center">
@@ -26,15 +26,16 @@ function CartTotal({ total, handleCheckout }) {
                     </Link>
                 </Grid>
 
-                <Grid item xs container justify="center">
-                    <Button
+                <Grid item xs container justify="center" alignItems="center">
+                    {children}
+                    {/* <Button
                         variant="contained"
                         color="primary"
                         onClick={handleCheckout}
                         size="large"
                     >
                         Checkout
-                    </Button>
+                    </Button> */}
                 </Grid>
             </Grid>
         </Grid>

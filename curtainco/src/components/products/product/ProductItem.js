@@ -8,7 +8,7 @@ import CardMedia from "@material-ui/core/CardMedia"
 import Typography from "@material-ui/core/Typography"
 import Button from "@material-ui/core/Button"
 import AddIcon from "@material-ui/icons/Add"
-
+import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart"
 import useStyles from "../ProductStyles"
 
 import { useCurtainContext } from "../../../config/CurtainCoContext"
@@ -79,7 +79,7 @@ function ProductItem({ productData }) {
                             variant="outlined"
                             onClick={handleViewClick}
                         >
-                            View
+                            More
                         </Button>
                     </Grid>
                     <Grid item>
@@ -89,7 +89,8 @@ function ProductItem({ productData }) {
                             variant="contained"
                             onClick={handleCartClick}
                         >
-                            <AddIcon /> Add
+                            <AddIcon /> Cart
+                            {/* <AddShoppingCartIcon /> */}
                         </Button>
                     </Grid>
                 </Grid>

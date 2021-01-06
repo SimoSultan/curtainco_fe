@@ -11,7 +11,7 @@ import {
     removeFromCart,
     generateTotalPriceOfCart,
 } from "../../services/cartServices"
-import { sendRequestToPayPal } from "../../services/orderServices"
+import { createOrder } from "../../services/orderServices"
 import useStyles from "./CartStyles"
 
 function Cart() {
@@ -75,44 +75,18 @@ function Cart() {
         updateCartInStateFromLocalStorage()
     }
 
-    function handleCheckout(event) {
-        event.preventDefault()
-        console.log(cart)
-        let customer = {}
-        const order = {
-            customer: customer,
-            items: cart,
-            totalPrice: totalPrice,
-            paymentData: {},
-        }
-        console.log(order)
-    }
-
-    const testProduct = [
-        {
-            name: "Series 51 White Track",
-            colour: "White",
-            category: "Track",
-            type: "Powder Coated",
-            single: true,
-            finialStyle: "Colonial",
-            finialColour: "White",
-            location: "Ceiling",
-            price: 999,
-        },
-    ]
-
     async function handleSuccess(data) {
         // data contains the response from paypal which is to be stored in server
-        const payload = {}
-        payload.totalPrice = totalPrice
-        // payload.items = cart
-        payload.items = testProduct
-        payload._id = data.paymentID
-        payload.paymentData = data
+        const payload = {
+            _id: data.paymentID,
+            customer: {},
+            totalPrice: totalPrice,
+            items: cart,
+            paymentData: data,
+        }
 
         try {
-            let response = await sendRequestToPayPal(payload)
+            let response = await createOrder(payload)
             console.log(response)
             // setPaymentSuccess(true) // modal confirmation?
             // clears the cart afterwards then redirects somewhere?
@@ -152,18 +126,16 @@ function Cart() {
                     className={classes.cartTotalCont}
                 >
                     <Grid item xs={6}>
-                        <CartTotal
-                            total={totalPrice}
-                            handleCheckout={handleCheckout}
-                        />
+                        <CartTotal total={totalPrice}>
+                            <PayPal
+                                handleSuccess={handleSuccess}
+                                handleError={handleError}
+                                handleCancel={handleCancel}
+                                totalPrice={totalPrice}
+                            />
+                        </CartTotal>
                     </Grid>
                 </Grid>
-                <PayPal
-                    handleSuccess={handleSuccess}
-                    handleError={handleError}
-                    handleCancel={handleCancel}
-                    totalPrice={totalPrice}
-                />
             </Box>
         </>
     )
