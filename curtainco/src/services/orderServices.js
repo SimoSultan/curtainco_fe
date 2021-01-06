@@ -17,7 +17,7 @@ async function createOrder(newOrder) {
 
 // PUT updated order
 async function markOrderProcessed(id, updatedOrder) {
-  const response = await api.patch(`/consults/${id}`, updatedOrder);
+  const response = await api.patch(`/orders/${id}`, updatedOrder);
   return response;
 }
 

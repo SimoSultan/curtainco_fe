@@ -1,5 +1,6 @@
 import { sortConsultations } from "../helpers/consultationHelpers";
 import { sortACTIONS, sortProducts } from "../helpers/productHelpers";
+import { ascSort } from "../helpers/appHelpers";
 
 function sortProductsAndCollectionsForState(products, type) {
     let sortedProducts = sortProducts(products, sortACTIONS.NAME_ALPHABETICAL);
@@ -235,9 +236,22 @@ export default function stateReducer(state, action) {
 
         //  -------- ORDERS --------
         case ACTIONS.SET_ALL_ORDERS: {
+            const sortedOrders = ascSort(action.payload);
             return {
                 ...state,
-                orders: action.payload
+                orders: sortedOrders
+            };
+        }
+        case ACTIONS.UPDATE_ORDER: {
+            const updatedOrder = action.payload;
+            const ordersWithUpdateRemoved = state.orders.filter(
+                ord => ord._id !== updatedOrder._id
+            );
+            let newOrderList = [...ordersWithUpdateRemoved, updatedOrder];
+            newOrderList = ascSort(newOrderList);
+            return {
+                ...state,
+                orders: newOrderList
             };
         }
         default:
