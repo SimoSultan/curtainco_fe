@@ -1,35 +1,35 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from "react"
 
-import { Typography, Grid } from "@material-ui/core";
+import { Typography, Grid } from "@material-ui/core"
 
-import useStyles from "./CollectionStyles";
-import { useCurtainContext } from "../../config/CurtainCoContext";
-import { ACTIONS } from "../../config/stateReducer";
-import { getAllCollections } from "../../services/collectionServices";
-import CollectionList from "./collection/CollectionList";
+import useStyles from "./CollectionStyles"
+import { useCurtainContext } from "../../config/CurtainCoContext"
+import { ACTIONS } from "../../config/stateReducer"
+import { getAllCollections } from "../../services/collectionServices"
+import CollectionList from "./collection/CollectionList"
 
 function Collections() {
-    const classes = useStyles();
-    const { state, dispatch } = useCurtainContext();
+    const classes = useStyles()
+    const { state, dispatch } = useCurtainContext()
 
     useEffect(() => {
         getAllCollections()
             .then((resp) => {
                 if (resp.status === 200) {
-                    console.log("---COLLECTIONS---");
-                    console.log(resp.data);
+                    console.log("---COLLECTIONS---")
+                    console.log(resp.data)
                     dispatch({
                         type: ACTIONS.SET_ALL_COLLECTIONS,
                         payload: resp.data,
-                    });
+                    })
                 } else {
-                    console.log("status code wasn't correct");
+                    console.log("status code wasn't correct")
                 }
             })
             .catch((error) => {
-                console.log(error);
-            });
-    }, [dispatch]);
+                console.log(error)
+            })
+    }, [dispatch])
 
     return (
         <>
@@ -44,7 +44,7 @@ function Collections() {
                 <CollectionList collections={state.collections} />
             </Grid>
         </>
-    );
+    )
 }
 
-export default Collections;
+export default Collections

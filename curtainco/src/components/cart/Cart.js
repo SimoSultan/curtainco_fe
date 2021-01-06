@@ -13,11 +13,14 @@ import {
 } from "../../services/cartServices"
 import { createOrder } from "../../services/orderServices"
 import useStyles from "./CartStyles"
+import { useCurtainContext } from "../../config/CurtainCoContext"
+import { ACTIONS } from "../../config/stateReducer"
 
 function Cart() {
     const classes = useStyles()
     const [cart, setCart] = useState([])
     const [totalPrice, setTotalPrice] = useState(0)
+    const { dispatch } = useCurtainContext()
     const [paymentSuccess, setPaymentSuccess] = useState(false)
     const [paymentFailed, setPaymentFailed] = useState(false)
     const [paymentCancelled, setPaymentCancelled] = useState(false)
@@ -73,6 +76,14 @@ function Cart() {
         event.preventDefault()
         removeFromCart(event.currentTarget.value)
         updateCartInStateFromLocalStorage()
+        dispatch({
+            type: ACTIONS.SET_SNACKBAR,
+            payload: {
+                open: true,
+                success: "success",
+                message: "Removed item from cart",
+            },
+        })
     }
 
     async function handleSuccess(data) {

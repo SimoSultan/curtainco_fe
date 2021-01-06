@@ -40,23 +40,44 @@ function CartItem({
                         direction="column"
                         justify="center"
                         alignItems="flex-start"
-                        xs={3}
+                        xs={5}
                     >
                         <Grid item>
                             <Typography variant="h5" component="h5">
                                 {capitalize(productItem.name)}
                             </Typography>
                         </Grid>
-                        <Grid item>
-                            <Typography>
-                                Colour: {capitalize(productItem.colour)}
-                            </Typography>
-                        </Grid>
-                        <Grid item>
-                            <Typography>
-                                Category: {productItem.category}
-                            </Typography>
-                        </Grid>
+                        {productItem.colour ? (
+                            <>
+                                <Grid item>
+                                    <Typography>
+                                        Colour: {capitalize(productItem.colour)}
+                                    </Typography>
+                                </Grid>
+                                <Grid item>
+                                    <Typography>
+                                        Category: {productItem.category}
+                                    </Typography>
+                                </Grid>
+                            </>
+                        ) : (
+                            <>
+                                <Grid item>
+                                    <Typography>
+                                        Collection Contains:
+                                    </Typography>
+                                </Grid>
+                                <Grid item>
+                                    <Typography>{`${productItem.track.length}x Track`}</Typography>
+                                </Grid>
+                                <Grid item>
+                                    <Typography>{`${productItem.fabric.length}x Fabric`}</Typography>
+                                </Grid>
+                                <Grid item>
+                                    <Typography>{`${productItem.accessory.length}x Accessory`}</Typography>
+                                </Grid>
+                            </>
+                        )}
                     </Grid>
 
                     <Grid
@@ -91,7 +112,7 @@ function CartItem({
                         </Grid>
                     </Grid>
 
-                    <Grid item xs={3} container justify="center">
+                    <Grid item xs={1} container justify="center">
                         <Typography className={classes.cartItemPrice}>
                             ${productItem.price * itemInCart.qty}
                         </Typography>

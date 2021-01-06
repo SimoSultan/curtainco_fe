@@ -1,15 +1,16 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Modal from "@material-ui/core/Modal";
-import Backdrop from "@material-ui/core/Backdrop";
-import Fade from "@material-ui/core/Fade";
-import CloseIcon from "@material-ui/icons/Close";
+import React from "react"
+import { makeStyles } from "@material-ui/core/styles"
+import Modal from "@material-ui/core/Modal"
+import Backdrop from "@material-ui/core/Backdrop"
+import Fade from "@material-ui/core/Fade"
+import CloseIcon from "@material-ui/icons/Close"
 
-import { useCurtainContext } from "../../config/CurtainCoContext";
-import { ACTIONS } from "../../config/stateReducer";
-import { Grid, Typography, Button, IconButton } from "@material-ui/core";
-import PaymentSummary from "./PaymentSummary";
-import { addItemToCart } from "../../services/cartServices";
+import { useCurtainContext } from "../../config/CurtainCoContext"
+import { ACTIONS } from "../../config/stateReducer"
+import { Grid, Typography, IconButton } from "@material-ui/core"
+import PaymentSummary from "./PaymentSummary"
+import { addItemToCart } from "../../services/cartServices"
+import AddToCartButton from "./AddToCartButton"
 
 const useStyles = makeStyles((theme) => ({
     modal: {
@@ -30,15 +31,16 @@ const useStyles = makeStyles((theme) => ({
         position: "absolute",
         top: "-7%",
         right: "-7%",
+        // border: "1px solid red",
     },
     closeButtonCont: {
         position: "relative",
     },
-}));
+}))
 
 export default function CustomModal() {
-    const classes = useStyles();
-    const { state, dispatch } = useCurtainContext();
+    const classes = useStyles()
+    const { state, dispatch } = useCurtainContext()
 
     const handleClose = () => {
         dispatch({
@@ -48,14 +50,14 @@ export default function CustomModal() {
                 title: "",
                 message: "",
                 data: {},
-                paymentSummary: false
+                paymentSummary: false,
             },
-        });
-    };
+        })
+    }
 
     function handleCartClick(event) {
-        event.preventDefault();
-        addItemToCart(state.modal.data, dispatch);
+        event.preventDefault()
+        addItemToCart(state.modal.data)
     }
 
     return (
@@ -73,10 +75,9 @@ export default function CustomModal() {
         >
             <Fade in={state.modal.open}>
                 <div className={classes.paper}>
-                    {state.modal.paymentSummary
-                        ?
+                    {state.modal.paymentSummary ? (
                         <PaymentSummary data={state.modal.data} />
-                        :
+                    ) : (
                         <Grid container>
                             <Grid
                                 item
@@ -106,13 +107,30 @@ export default function CustomModal() {
                                 xs={7}
                                 spacing={1}
                             >
-                                <Grid item>
-                                    <Typography variant="h3" component="h3">
-                                        {state.modal.title}
-                                    </Typography>
+                                <Grid
+                                    item
+                                    container
+                                    justify="space-between"
+                                    className={classes.closeButtonCont}
+                                >
+                                    <Grid item xs={9}>
+                                        <Typography variant="h3" component="h3">
+                                            {state.modal.title}
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item xs={3}>
+                                        <IconButton
+                                            onClick={handleClose}
+                                            className={classes.closeButton}
+                                        >
+                                            <CloseIcon color="error" />
+                                        </IconButton>
+                                    </Grid>
                                 </Grid>
                                 <Grid item>
-                                    <Typography>{state.modal.message}</Typography>
+                                    <Typography>
+                                        {state.modal.message}
+                                    </Typography>
                                 </Grid>
                                 <Grid item>
                                     <Typography>
@@ -130,19 +148,17 @@ export default function CustomModal() {
                                     justify="flex-end"
                                     alignItems="center"
                                 >
-                                    <Button
-                                        variant="contained"
-                                        color="secondary"
-                                        onClick={handleCartClick}
-                                    >
-                                        Add To Cart
-                                </Button>
+                                    <AddToCartButton
+                                        icon={false}
+                                        text={"Add To Cart"}
+                                        handleClick={handleCartClick}
+                                    />
                                 </Grid>
                             </Grid>
                         </Grid>
-                    }
+                    )}
                 </div>
             </Fade>
         </Modal>
-    );
+    )
 }
