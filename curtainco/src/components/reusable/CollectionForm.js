@@ -35,17 +35,6 @@ function CollectionForm({
         let menuItems = []
         for (let i = 0; i < productArray.length; i++) {
             const prod = productArray[i]
-            // // ADD A FINISHED MENU ITEM AT THE BEGINNING OF THE DROPDOWN
-            // if (i === productArray.length -1 ) {
-            //     menuItems.push(
-            //         <MenuItem
-            //             key={`${category}-finished-${productArray.length}`}
-            //             value="finished"
-            //         >
-            //             Finished Adding
-            //         </MenuItem>
-            //     )
-            // }
             // ADD A MENU ITEM FOR EACH PRODUCT ON DB
             menuItems.push(
                 <MenuItem key={prod._id} value={prod._id}>
