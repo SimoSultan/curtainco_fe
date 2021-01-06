@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import PayPal from "./PayPal"
+import PayPal from "./Paypal"
 import CartList from "./CartList"
 import CartTotal from "./CartTotal"
 
