@@ -7,6 +7,7 @@ import Fade from "@material-ui/core/Fade";
 import { useCurtainContext } from "../../config/CurtainCoContext";
 import { ACTIONS } from "../../config/stateReducer";
 import { Grid, Typography, Button, CardMedia } from "@material-ui/core";
+import PaymentSummary from "./PaymentSummary";
 
 const useStyles = makeStyles((theme) => ({
     modal: {
@@ -37,6 +38,7 @@ export default function CustomModal() {
                 title: "",
                 message: "",
                 data: {},
+                paymentSummary: false
             },
         });
     };
@@ -61,69 +63,74 @@ export default function CustomModal() {
         >
             <Fade in={state.modal.open}>
                 <div className={classes.paper}>
-                    <Grid container>
-                        <Grid
-                            item
-                            container
-                            xs={5}
-                            justify="center"
-                            alignItems="center"
-                        >
-                            <div role="img">
-                                <img
-                                    src={
-                                        state.modal.data.imgUrl === ""
-                                            ? "https://source.unsplash.com/random"
-                                            : state.modal.data.imgUrl
-                                    }
-                                    alt={state.modal.data.name}
-                                    style={{ width: "70%" }}
-                                />
-                            </div>
-                        </Grid>
-                        <Grid
-                            item
-                            container
-                            direction="column"
-                            justify="flex-start"
-                            alignItems="flex-start"
-                            xs={7}
-                            spacing={1}
-                        >
-                            <Grid item>
-                                <Typography variant="h3" component="h3">
-                                    {state.modal.title}
-                                </Typography>
-                            </Grid>
-                            <Grid item>
-                                <Typography>{state.modal.message}</Typography>
-                            </Grid>
-                            <Grid item>
-                                <Typography>
-                                    Category: {state.modal.data.category}
-                                </Typography>
-                            </Grid>
-                            <Grid item>
-                                <Typography>
-                                    Price: ${state.modal.data.price}
-                                </Typography>
+                    {state.modal.paymentSummary
+                        ?
+                        <PaymentSummary data={state.modal.data} />
+                        :
+                        <Grid container>
+                            <Grid
+                                item
+                                container
+                                xs={5}
+                                justify="center"
+                                alignItems="center"
+                            >
+                                <div role="img">
+                                    <img
+                                        src={
+                                            state.modal.data.imgUrl === ""
+                                                ? "https://source.unsplash.com/random"
+                                                : state.modal.data.imgUrl
+                                        }
+                                        alt={state.modal.data.name}
+                                        style={{ width: "70%" }}
+                                    />
+                                </div>
                             </Grid>
                             <Grid
                                 item
                                 container
-                                justify="flex-end"
-                                alignItems="center"
+                                direction="column"
+                                justify="flex-start"
+                                alignItems="flex-start"
+                                xs={7}
+                                spacing={1}
                             >
-                                <Button
-                                    variant="contained"
-                                    color="secondary"
-                                    onClick={handleCartClick}
+                                <Grid item>
+                                    <Typography variant="h3" component="h3">
+                                        {state.modal.title}
+                                    </Typography>
+                                </Grid>
+                                <Grid item>
+                                    <Typography>{state.modal.message}</Typography>
+                                </Grid>
+                                <Grid item>
+                                    <Typography>
+                                        Category: {state.modal.data.category}
+                                    </Typography>
+                                </Grid>
+                                <Grid item>
+                                    <Typography>
+                                        Price: ${state.modal.data.price}
+                                    </Typography>
+                                </Grid>
+                                <Grid
+                                    item
+                                    container
+                                    justify="flex-end"
+                                    alignItems="center"
                                 >
-                                    Add To Cart
+                                    <Button
+                                        variant="contained"
+                                        color="secondary"
+                                        onClick={handleCartClick}
+                                    >
+                                        Add To Cart
                                 </Button>
+                                </Grid>
                             </Grid>
                         </Grid>
-                    </Grid>
+                    }
                 </div>
             </Fade>
         </Modal>
