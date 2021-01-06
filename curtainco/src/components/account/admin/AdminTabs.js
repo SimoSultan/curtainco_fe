@@ -1,24 +1,25 @@
-import React, { useState } from "react"
-import PropTypes from "prop-types"
-import AppBar from "@material-ui/core/AppBar"
-import Tabs from "@material-ui/core/Tabs"
-import Tab from "@material-ui/core/Tab"
-import Box from "@material-ui/core/Box"
-import { Grid } from "@material-ui/core"
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import AppBar from "@material-ui/core/AppBar";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import Box from "@material-ui/core/Box";
+import { Grid } from "@material-ui/core";
 
-import useStyles from "./AdminStyles"
+import useStyles from "./AdminStyles";
 
-import AllProducts from "./products/AllProducts"
-import AllCollections from "./collections/AllCollections"
-import AllConsults from "./requests/AllConsults"
-import AllTestimonials from "./testimonials/AllTestimonials"
-import AllUsers from "./users/AllUsers"
-import BusinessDetails from "./business/BusinessDetails"
-import AdminProfile from "./profile/AdminProfile"
-import AddProduct from "./products/AddProduct"
-import AddCollection from "./collections/AddCollection"
-import EditDeleteCollection from "./collections/EditDeleteCollection"
-import EditProduct from "./products/EditProduct"
+import AllProducts from "./products/AllProducts";
+import AllCollections from "./collections/AllCollections";
+import AllConsults from "./requests/AllConsults";
+import AllTestimonials from "./testimonials/AllTestimonials";
+import AllUsers from "./users/AllUsers";
+import AllOrders from "./orders/AllOrders";
+import BusinessDetails from "./business/BusinessDetails";
+import AdminProfile from "./profile/AdminProfile";
+import AddProduct from "./products/AddProduct";
+import AddCollection from "./collections/AddCollection";
+import EditDeleteCollection from "./collections/EditDeleteCollection";
+import EditProduct from "./products/EditProduct";
 
 function TabPanel({ children, value, index, ...other }) {
     return (
@@ -31,40 +32,40 @@ function TabPanel({ children, value, index, ...other }) {
         >
             {value === index && <Box p={3}>{children}</Box>}
         </div>
-    )
+    );
 }
 
 TabPanel.propTypes = {
     children: PropTypes.node,
     index: PropTypes.any.isRequired,
     value: PropTypes.any.isRequired,
-}
+};
 
 function a11yProps(index) {
     return {
         id: `scrollable-auto-tab-${index}`,
         "aria-controls": `scrollable-auto-tabpanel-${index}`,
-    }
+    };
 }
 
 export default function AdminTabs({ tabValue, handleChange }) {
-    const classes = useStyles()
-    const [editProductId, setEditProductId] = useState("")
-    const [editCollectionId, setEditCollectionId] = useState("")
-    const [editForm, setEditForm] = useState("")
+    const classes = useStyles();
+    const [editProductId, setEditProductId] = useState("");
+    const [editCollectionId, setEditCollectionId] = useState("");
+    const [editForm, setEditForm] = useState("");
 
     function fillEditProductPage(event) {
-        event.preventDefault()
-        let categoryId = event.currentTarget.id
-        const productCategory = categoryId.split(",")[0]
-        const productId = categoryId.split(",")[1]
-        setEditProductId(productId)
-        setEditForm(productCategory)
+        event.preventDefault();
+        let categoryId = event.currentTarget.id;
+        const productCategory = categoryId.split(",")[0];
+        const productId = categoryId.split(",")[1];
+        setEditProductId(productId);
+        setEditForm(productCategory);
     }
 
     function fillEditCollectionPage(event) {
-        const collectionId = event.currentTarget.id
-        setEditCollectionId(collectionId)
+        const collectionId = event.currentTarget.id;
+        setEditCollectionId(collectionId);
     }
 
     return (
@@ -88,6 +89,7 @@ export default function AdminTabs({ tabValue, handleChange }) {
                     <Tab label="business" {...a11yProps(5)} />
                     <Tab label="profile" {...a11yProps(6)} />
                     <Tab label="testimonials" {...a11yProps(7)} />
+                    <Tab label="orders" {...a11yProps(8)} />
                 </Tabs>
             </AppBar>
             <TabPanel value={tabValue} index={0}>
@@ -167,6 +169,9 @@ export default function AdminTabs({ tabValue, handleChange }) {
             <TabPanel value={tabValue} index={8}>
                 <AllTestimonials />
             </TabPanel>
+            <TabPanel value={tabValue} index={9}>
+                <AllOrders />
+            </TabPanel>
         </div>
-    )
+    );
 }
