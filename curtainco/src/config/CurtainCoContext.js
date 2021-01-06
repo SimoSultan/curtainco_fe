@@ -23,6 +23,7 @@ function CurtainContext({ children }) {
             title: "",
             message: "",
             data: {},
+            paymentSummary: false
         },
         products: [],
         collections: [],
