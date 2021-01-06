@@ -24,6 +24,9 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: "500",
         fontStyle: "italic",
     },
+    cartTotalCont: {
+        width: "90%",
+    },
 }))
 
 export default useStyles

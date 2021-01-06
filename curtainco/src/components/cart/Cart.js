@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from "react"
 import api from "../../config/api"
 import Paypal from "./Paypal"
+import CartList from "./CartList"
+import CartTotal from "./CartTotal"
 
-import { Typography } from "@material-ui/core"
+import { Typography, Grid, Box } from "@material-ui/core"
 import {
     getCartItemsFromLocalStorage,
     changeQtyOfItemInLocalStorage,
     updateLocalStorageWithNewArray,
     removeFromCart,
 } from "../../services/cartServices"
-
-import CartList from "./CartList"
-import CartTotal from "./CartTotal"
+import useStyles from "./CartStyles"
+import { createOrderFromCart } from "../../services/orderServices"
 
 function Cart() {
+    const classes = useStyles()
     const [cart, setCart] = useState([])
     const [totalPrice, setTotalPrice] = useState(0)
     const [paymentSuccess, setPaymentSuccess] = useState(false)
@@ -23,7 +25,7 @@ function Cart() {
     // GET THE ITEMS FROM LOCAL STORAGE
     function updateCartInStateFromLocalStorage() {
         const cartItems = getCartItemsFromLocalStorage()
-        console.log(cartItems)
+        // console.log(cartItems)
         setCart(cartItems)
     }
 
@@ -35,9 +37,11 @@ function Cart() {
     // WHEN CART IN LOCAL STATE IS LOADED, CALCULATE THE TOTAL PRICE
     useEffect(() => {
         let tempTotal = 0
-        for (let item in cart) {
-            tempTotal += item.price
+        for (let i = 0; i < cart.length; i++) {
+            const element = cart[i]
+            tempTotal += element.qty * element.item.price
         }
+
         setTotalPrice(tempTotal)
     }, [cart])
 
@@ -74,6 +78,13 @@ function Cart() {
         event.preventDefault()
         removeFromCart(event.currentTarget.value)
         updateCartInStateFromLocalStorage()
+    }
+
+    function handleCheckout(event) {
+        event.preventDefault()
+        console.log(cart)
+        let order = createOrderFromCart()
+        console.log(order)
     }
 
     const testProduct = [
@@ -138,7 +149,20 @@ function Cart() {
                 handleIncreaseQty={handleIncreaseQty}
                 handleDecreaseQty={handleDecreaseQty}
             />
-            <CartTotal />
+            <Box p={4}>
+                <Grid
+                    container
+                    justify="flex-end"
+                    className={classes.cartTotalCont}
+                >
+                    <Grid item xs={6}>
+                        <CartTotal
+                            total={totalPrice}
+                            handleCheckout={handleCheckout}
+                        />
+                    </Grid>
+                </Grid>
+            </Box>
         </>
     )
 }

@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Button, Typography } from '@material-ui/core';
+import React from "react"
+import { Link } from "react-router-dom"
+import { Button, Typography } from "@material-ui/core"
 
 function WhyCurtains() {
     return (
@@ -15,10 +15,12 @@ function WhyCurtains() {
                 autem odit voluptas soluta asperiores deleniti perspiciatis!
             </p>
             <Button variant="contained" color="secondary">
-                <Link to={`/collections`}>Collections</Link>
+                <Link to={`/collections`} className="link">
+                    Collections
+                </Link>
             </Button>
         </div>
-    );
+    )
 }
 
-export default WhyCurtains;
+export default WhyCurtains
