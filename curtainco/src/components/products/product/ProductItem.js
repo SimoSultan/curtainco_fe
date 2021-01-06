@@ -15,6 +15,7 @@ import { useCurtainContext } from "../../../config/CurtainCoContext"
 import { ACTIONS } from "../../../config/stateReducer"
 import { capitalize } from "../../../helpers/appHelpers"
 import { addItemToCart } from "../../../services/cartServices"
+import AddToCartButton from "../../reusable/AddToCartButton"
 
 function ProductItem({ productData }) {
     const classes = useStyles()
@@ -79,19 +80,16 @@ function ProductItem({ productData }) {
                             variant="outlined"
                             onClick={handleViewClick}
                         >
-                            More
+                            See More
                         </Button>
                     </Grid>
                     <Grid item>
-                        <Button
+                        <AddToCartButton
+                            icon={true}
+                            text="Cart"
                             size="small"
-                            color="secondary"
-                            variant="contained"
-                            onClick={handleCartClick}
-                        >
-                            <AddIcon /> Cart
-                            {/* <AddShoppingCartIcon /> */}
-                        </Button>
+                            handleClick={handleCartClick}
+                        />
                     </Grid>
                 </Grid>
             </CardActions>

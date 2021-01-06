@@ -4,15 +4,18 @@ import { getOneCollectionFromState } from "../../../helpers/collectionHelpers"
 import { getOneCollection } from "../../../services/collectionServices"
 import useStyles from "../CollectionStyles"
 
-import { Container, Grid, Typography } from "@material-ui/core"
+import { Box, Container, Grid, Typography } from "@material-ui/core"
 import CustomAccordion from "../../reusable/CustomAccordion"
 import CollectionIncludes from "./CollectionIncludes"
 import { capitalize } from "../../../helpers/appHelpers"
+import AddToCartButton from "../../reusable/AddToCartButton"
+import { addItemToCart } from "../../../services/cartServices"
+import { ACTIONS } from "../../../config/stateReducer"
 
 function CollectionCustomise() {
     const classes = useStyles()
     let collectionId = window.location.pathname.split("/customise/")[1]
-    const { state } = useCurtainContext()
+    const { state, dispatch } = useCurtainContext()
     const [collection, setCollection] = useState({
         _id: "",
         name: "",
@@ -36,6 +39,35 @@ function CollectionCustomise() {
         setCustomizedCollection({
             ...customizedCollection,
             [category]: productArray,
+        })
+    }
+
+    function handleCartClick(event) {
+        event.preventDefault()
+        let tempTrack = customizedCollection.track.filter(
+            (element) => element !== false
+        )
+        let tempFabric = customizedCollection.fabric.filter(
+            (element) => element !== false
+        )
+        let tempAccessory = customizedCollection.accessory.filter(
+            (element) => element !== false
+        )
+        let tempCollection = {
+            ...collection,
+            track: tempTrack,
+            fabric: tempFabric,
+            accessory: tempAccessory,
+        }
+        console.log(tempCollection)
+        addItemToCart(tempCollection)
+        dispatch({
+            type: ACTIONS.SET_SNACKBAR,
+            payload: {
+                open: true,
+                success: "success",
+                message: "Added customised collection to cart",
+            },
         })
     }
 
@@ -123,6 +155,16 @@ function CollectionCustomise() {
                     />
                 </Grid>
             </Grid>
+            <Box p={3} mt={5} mr={10}>
+                <Grid container xs={12} justify="flex-end">
+                    <AddToCartButton
+                        icon={false}
+                        text={"Add To Cart"}
+                        size="large"
+                        handleClick={handleCartClick}
+                    />
+                </Grid>
+            </Box>
         </Container>
     )
 }
