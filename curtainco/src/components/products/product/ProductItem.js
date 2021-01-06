@@ -14,7 +14,7 @@ import useStyles from "../ProductStyles"
 import { useCurtainContext } from "../../../config/CurtainCoContext"
 import { ACTIONS } from "../../../config/stateReducer"
 import { capitalize } from "../../../helpers/appHelpers"
-import { addToCart } from "../../../services/cartServices"
+import { addItemToCart } from "../../../services/cartServices"
 
 function ProductItem({ productData }) {
     const classes = useStyles()
@@ -36,7 +36,16 @@ function ProductItem({ productData }) {
 
     function handleCartClick(event) {
         event.preventDefault()
-        addToCart(productData, dispatch)
+        addItemToCart(productData, dispatch)
+        // SHOW SNACKBAR
+        dispatch({
+            type: ACTIONS.SET_SNACKBAR,
+            payload: {
+                open: true,
+                success: "success",
+                message: "Added item to cart",
+            },
+        })
     }
 
     return (

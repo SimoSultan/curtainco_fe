@@ -8,7 +8,7 @@ import CloseIcon from "@material-ui/icons/Close"
 import { useCurtainContext } from "../../config/CurtainCoContext"
 import { ACTIONS } from "../../config/stateReducer"
 import { Grid, Typography, Button, IconButton } from "@material-ui/core"
-import { addToCart } from "../../services/cartServices"
+import { addItemToCart } from "../../services/cartServices"
 
 const useStyles = makeStyles((theme) => ({
     modal: {
@@ -53,10 +53,8 @@ export default function CustomModal() {
 
     function handleCartClick(event) {
         event.preventDefault()
-        addToCart(state.modal.data, dispatch)
+        addItemToCart(state.modal.data, dispatch)
     }
-
-    console.log(state.cart)
 
     return (
         <Modal
