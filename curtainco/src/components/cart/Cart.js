@@ -3,8 +3,13 @@ import api from "../../config/api"
 import Paypal from "./Paypal"
 
 import { Typography } from "@material-ui/core"
-import { getCartItemsFromLocalStorage } from "../../services/cartServices"
+import {
+    getCartItemsFromLocalStorage,
+    changeQtyOfItemInLocalStorage,
+    updateLocalStorageWithNewArray,
+} from "../../services/cartServices"
 import CartList from "./CartList"
+import CartTotal from "./CartTotal"
 
 function Cart() {
     const [cart, setCart] = useState([])
@@ -14,17 +19,18 @@ function Cart() {
     const [paymentCancelled, setPaymentCancelled] = useState(false)
 
     // GET THE ITEMS FROM LOCAL STORAGE
-
-    function updateCartFromLocalStorage() {
+    function updateCartInStateFromLocalStorage() {
         const cartItems = getCartItemsFromLocalStorage()
         console.log(cartItems)
         setCart(cartItems)
     }
+
+    // GET THE ITEMS FROM LOCAL STORAGE ON FIRST LOAD
     useEffect(() => {
-        updateCartFromLocalStorage()
+        updateCartInStateFromLocalStorage()
     }, [])
 
-    // WHEN CART STATE IS LOADED, CALCULATE THE TOTAL PRICE
+    // WHEN CART IN LOCAL STATE IS LOADED, CALCULATE THE TOTAL PRICE
     useEffect(() => {
         let tempTotal = 0
         for (let item in cart) {
@@ -32,6 +38,35 @@ function Cart() {
         }
         setTotalPrice(tempTotal)
     }, [cart])
+
+    function handleIncreaseQty(event) {
+        event.preventDefault()
+        let productId = event.currentTarget.value
+        let cartArrayWithUpdatedQty = changeQtyOfItemInLocalStorage(
+            cart,
+            productId,
+            "increase"
+        )
+        updateLocalStorageWithNewArray(cartArrayWithUpdatedQty)
+        updateCartInStateFromLocalStorage()
+    }
+
+    function handleDecreaseQty(event) {
+        event.preventDefault()
+        let productId = event.currentTarget.value
+        let errorOrArray = changeQtyOfItemInLocalStorage(
+            cart,
+            productId,
+            "decrease"
+        )
+        if (!errorOrArray) {
+            return alert(
+                "Cannot decrease quantity below 1. Please remove the item if you don't want it anymore."
+            )
+        }
+        updateLocalStorageWithNewArray(errorOrArray)
+        updateCartInStateFromLocalStorage()
+    }
 
     const testProduct = [
         {
@@ -89,7 +124,15 @@ function Cart() {
                 handleCancel={handleCancel}
                 totalPrice={totalPrice}
             /> */}
-            <CartList cart={cart} updateCart={updateCartFromLocalStorage} />
+            <CartList
+                cart={cart}
+                updateCartInStateFromLocalStorage={
+                    updateCartInStateFromLocalStorage
+                }
+                handleIncreaseQty={handleIncreaseQty}
+                handleDecreaseQty={handleDecreaseQty}
+            />
+            <CartTotal />
         </>
     )
 }
