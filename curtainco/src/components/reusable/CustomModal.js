@@ -1,12 +1,14 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Modal from "@material-ui/core/Modal";
-import Backdrop from "@material-ui/core/Backdrop";
-import Fade from "@material-ui/core/Fade";
+import React from "react"
+import { makeStyles } from "@material-ui/core/styles"
+import Modal from "@material-ui/core/Modal"
+import Backdrop from "@material-ui/core/Backdrop"
+import Fade from "@material-ui/core/Fade"
+import CloseIcon from "@material-ui/icons/Close"
 
-import { useCurtainContext } from "../../config/CurtainCoContext";
-import { ACTIONS } from "../../config/stateReducer";
-import { Grid, Typography, Button, CardMedia } from "@material-ui/core";
+import { useCurtainContext } from "../../config/CurtainCoContext"
+import { ACTIONS } from "../../config/stateReducer"
+import { Grid, Typography, Button, IconButton } from "@material-ui/core"
+import { addItemToCart } from "../../services/cartServices"
 
 const useStyles = makeStyles((theme) => ({
     modal: {
@@ -23,11 +25,19 @@ const useStyles = makeStyles((theme) => ({
         maxWidth: "700px",
         minWidth: "500px",
     },
-}));
+    closeButton: {
+        position: "absolute",
+        top: "-7%",
+        right: "-7%",
+    },
+    closeButtonCont: {
+        position: "relative",
+    },
+}))
 
 export default function CustomModal() {
-    const classes = useStyles();
-    const { state, dispatch } = useCurtainContext();
+    const classes = useStyles()
+    const { state, dispatch } = useCurtainContext()
 
     const handleClose = () => {
         dispatch({
@@ -38,12 +48,12 @@ export default function CustomModal() {
                 message: "",
                 data: {},
             },
-        });
-    };
+        })
+    }
 
     function handleCartClick(event) {
-        event.preventDefault();
-        alert("add to cart functionality to do");
+        event.preventDefault()
+        addItemToCart(state.modal.data, dispatch)
     }
 
     return (
@@ -90,10 +100,23 @@ export default function CustomModal() {
                             xs={7}
                             spacing={1}
                         >
-                            <Grid item>
-                                <Typography variant="h3" component="h3">
-                                    {state.modal.title}
-                                </Typography>
+                            <Grid
+                                item
+                                container
+                                justify="space-between"
+                                alignItems="center"
+                                className={classes.closeButtonCont}
+                            >
+                                <Grid item>
+                                    <Typography variant="h3" component="h3">
+                                        {state.modal.title}
+                                    </Typography>
+                                </Grid>
+                                <Grid item className={classes.closeButton}>
+                                    <IconButton onClick={handleClose}>
+                                        <CloseIcon color="error" />
+                                    </IconButton>
+                                </Grid>
                             </Grid>
                             <Grid item>
                                 <Typography>{state.modal.message}</Typography>
@@ -127,5 +150,5 @@ export default function CustomModal() {
                 </div>
             </Fade>
         </Modal>
-    );
+    )
 }

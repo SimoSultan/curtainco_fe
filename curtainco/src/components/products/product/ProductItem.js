@@ -1,24 +1,27 @@
-import React from "react";
+import React from "react"
 
-import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
+import Grid from "@material-ui/core/Grid"
+import Card from "@material-ui/core/Card"
+import CardActions from "@material-ui/core/CardActions"
+import CardContent from "@material-ui/core/CardContent"
+import CardMedia from "@material-ui/core/CardMedia"
+import Typography from "@material-ui/core/Typography"
+import Button from "@material-ui/core/Button"
+import AddIcon from "@material-ui/icons/Add"
 
-import useStyles from "../ProductStyles";
+import useStyles from "../ProductStyles"
 
-import { useCurtainContext } from "../../../config/CurtainCoContext";
-import { ACTIONS } from "../../../config/stateReducer";
-import { capitalize } from "../../../helpers/appHelpers";
+import { useCurtainContext } from "../../../config/CurtainCoContext"
+import { ACTIONS } from "../../../config/stateReducer"
+import { capitalize } from "../../../helpers/appHelpers"
+import { addItemToCart } from "../../../services/cartServices"
 
 function ProductItem({ productData }) {
-    const classes = useStyles();
-    const { dispatch } = useCurtainContext();
+    const classes = useStyles()
+    const { dispatch } = useCurtainContext()
 
-    function handleClick(e) {
-        e.preventDefault();
+    function handleViewClick(event) {
+        event.preventDefault()
 
         dispatch({
             type: ACTIONS.SET_MODAL,
@@ -28,7 +31,21 @@ function ProductItem({ productData }) {
                 message: `${capitalize(productData.description)}`,
                 data: productData,
             },
-        });
+        })
+    }
+
+    function handleCartClick(event) {
+        event.preventDefault()
+        addItemToCart(productData, dispatch)
+        // SHOW SNACKBAR
+        dispatch({
+            type: ACTIONS.SET_SNACKBAR,
+            payload: {
+                open: true,
+                success: "success",
+                message: "Added item to cart",
+            },
+        })
     }
 
     return (
@@ -54,12 +71,31 @@ function ProductItem({ productData }) {
             </CardContent>
 
             <CardActions>
-                <Button size="small" color="primary" onClick={handleClick}>
-                    View
-                </Button>
+                <Grid container justify="space-between" alignItems="center">
+                    <Grid item>
+                        <Button
+                            size="small"
+                            color="primary"
+                            variant="outlined"
+                            onClick={handleViewClick}
+                        >
+                            View
+                        </Button>
+                    </Grid>
+                    <Grid item>
+                        <Button
+                            size="small"
+                            color="secondary"
+                            variant="contained"
+                            onClick={handleCartClick}
+                        >
+                            <AddIcon /> Add
+                        </Button>
+                    </Grid>
+                </Grid>
             </CardActions>
         </Card>
-    );
+    )
 }
 
-export default ProductItem;
+export default ProductItem
