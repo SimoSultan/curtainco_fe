@@ -6,10 +6,8 @@ import useStyles from "./ModalStyles"
 
 function OrderSummaryModal({ data, handleClose }) {
     let order = { ...data }
-
     const classes = useStyles()
 
-    console.log(order)
     const items = order.items.map((orderItem) => (
         <PurchasedItems
             key={`productId-${orderItem.id}`}

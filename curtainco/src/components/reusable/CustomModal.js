@@ -1,17 +1,14 @@
 import React from "react"
-import { makeStyles } from "@material-ui/core/styles"
 import Modal from "@material-ui/core/Modal"
 import Backdrop from "@material-ui/core/Backdrop"
 import Fade from "@material-ui/core/Fade"
-import CloseIcon from "@material-ui/icons/Close"
 
 import { useCurtainContext } from "../../config/CurtainCoContext"
 import { ACTIONS } from "../../config/stateReducer"
-import { Grid, Typography, IconButton } from "@material-ui/core"
 import PaymentSummaryModal from "./PaymentSummaryModal"
 import OrderSummaryModal from "./OrderSummaryModal"
+import ProductSummaryModal from "./ProductSummaryModal"
 import { addItemToCart } from "../../services/cartServices"
-import AddToCartButton from "./AddToCartButton"
 import useStyles from "./ModalStyles"
 
 export default function CustomModal() {
@@ -60,84 +57,12 @@ export default function CustomModal() {
                             handleClose={handleClose}
                         />
                     ) : (
-                        <Grid container>
-                            <Grid
-                                item
-                                container
-                                xs={5}
-                                justify="center"
-                                alignItems="center"
-                            >
-                                <div role="img">
-                                    <img
-                                        src={
-                                            state.modal.data.imgUrl === ""
-                                                ? "https://source.unsplash.com/random"
-                                                : state.modal.data.imgUrl
-                                        }
-                                        alt={state.modal.data.name}
-                                        style={{ width: "70%" }}
-                                    />
-                                </div>
-                            </Grid>
-                            <Grid
-                                item
-                                container
-                                direction="column"
-                                justify="flex-start"
-                                alignItems="flex-start"
-                                xs={7}
-                                spacing={1}
-                            >
-                                <Grid
-                                    item
-                                    container
-                                    justify="space-between"
-                                    className={classes.closeButtonCont}
-                                >
-                                    <Grid item xs={9}>
-                                        <Typography variant="h3" component="h3">
-                                            {state.modal.title}
-                                        </Typography>
-                                    </Grid>
-                                    <Grid item xs={3}>
-                                        <IconButton
-                                            onClick={handleClose}
-                                            className={classes.closeButton}
-                                        >
-                                            <CloseIcon color="error" />
-                                        </IconButton>
-                                    </Grid>
-                                </Grid>
-                                <Grid item>
-                                    <Typography>
-                                        {state.modal.message}
-                                    </Typography>
-                                </Grid>
-                                <Grid item>
-                                    <Typography>
-                                        Category: {state.modal.data.category}
-                                    </Typography>
-                                </Grid>
-                                <Grid item>
-                                    <Typography>
-                                        Price: ${state.modal.data.price}
-                                    </Typography>
-                                </Grid>
-                                <Grid
-                                    item
-                                    container
-                                    justify="flex-end"
-                                    alignItems="center"
-                                >
-                                    <AddToCartButton
-                                        icon={false}
-                                        text={"Add To Cart"}
-                                        handleClick={handleCartClick}
-                                    />
-                                </Grid>
-                            </Grid>
-                        </Grid>
+                        <ProductSummaryModal
+                            data={state.modal.data}
+                            title={state.modal.title}
+                            handleClose={handleClose}
+                            handleCartClick={handleCartClick}
+                        />
                     )}
                 </div>
             </Fade>
