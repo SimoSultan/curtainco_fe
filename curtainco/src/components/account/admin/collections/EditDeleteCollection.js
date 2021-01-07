@@ -86,17 +86,10 @@ function EditDeleteCollection({ editCollectionId, setEditCollectionId }) {
                 (obj) => obj._id
             )
             setCollection({
-                _id: collectionBeingUpdated._id,
-                name: collectionBeingUpdated.name,
-                description: collectionBeingUpdated.description,
-                imgUrl: collectionBeingUpdated.imgUrl,
-                price: collectionBeingUpdated.price,
+                ...collectionBeingUpdated,
                 track: tempTracks,
                 fabric: tempFabrics,
                 accessory: tempAccessories,
-                trackTip: collectionBeingUpdated.trackTip,
-                accessoryTip: collectionBeingUpdated.accessoryTip,
-                fabricTip: collectionBeingUpdated.fabricTip,
             })
             setTracksArray(tempTracks)
             setFabricsArray(tempFabrics)
@@ -145,9 +138,9 @@ function EditDeleteCollection({ editCollectionId, setEditCollectionId }) {
         // WITH THE 'No Product' MENU ITEM
         let noProductResult = checkIfUserIsRemovingAProduct(collection)
         if (noProductResult) {
-            return window.alert(
-                "Currently cannot remove a product with the 'No Product' dropdown menu item. Please delete the collection and start again if you wish to remove products from a collection."
-            )
+            // return window.alert(
+            //     "Currently cannot remove a product with the 'No Product' dropdown menu item. Please delete the collection and start again if you wish to remove products from a collection."
+            // )
         }
         let result = filterProductsInCollection(collection)
         let tempCollection = result.collection
@@ -167,6 +160,7 @@ function EditDeleteCollection({ editCollectionId, setEditCollectionId }) {
             photo,
             resetCollectionForm
         )
+
         console.log(respOrError)
     }
 

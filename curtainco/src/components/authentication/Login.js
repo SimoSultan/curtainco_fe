@@ -1,78 +1,85 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react"
 
-import { useCurtainContext } from "../../config/CurtainCoContext";
-import { ACTIONS } from "../../config/stateReducer";
+import { useCurtainContext } from "../../config/CurtainCoContext"
+import { ACTIONS } from "../../config/stateReducer"
 
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom"
 
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
-import Typography from "@material-ui/core/Typography";
-import Container from "@material-ui/core/Container";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import useStyles from "../reusable/UserDataFormStyles";
+import Avatar from "@material-ui/core/Avatar"
+import Button from "@material-ui/core/Button"
+import CssBaseline from "@material-ui/core/CssBaseline"
+import TextField from "@material-ui/core/TextField"
+import FormControlLabel from "@material-ui/core/FormControlLabel"
+import Checkbox from "@material-ui/core/Checkbox"
+import Grid from "@material-ui/core/Grid"
+import Box from "@material-ui/core/Box"
+import Typography from "@material-ui/core/Typography"
+import Container from "@material-ui/core/Container"
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined"
+import useStyles from "../reusable/UserDataFormStyles"
 
-import { loginUser } from "../../services/authServices";
-import Copyright from "./Copyright";
+import { loginUser } from "../../services/authServices"
+import Copyright from "./Copyright"
 
 export default function SignIn() {
-    const classes = useStyles();
+    const classes = useStyles()
+    const history = useHistory()
 
-    const { state, dispatch } = useCurtainContext();
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [rememberMe, setRememberMe] = useState(false);
+    const { state, dispatch } = useCurtainContext()
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [rememberMe, setRememberMe] = useState(false)
+    const [prevUrl, setPrevUrl] = useState("/")
 
     async function handleLogin(e) {
-        e.preventDefault();
-        let loginError = false;
+        e.preventDefault()
+        let loginError = false
 
-        const user = { email, password, rememberMe };
+        const user = { email, password, rememberMe }
 
         try {
-            let resp = await loginUser(user);
-            console.log("---CURRENT USER---");
-            console.log(resp.data);
-            let currentUser = resp.data.user;
+            let resp = await loginUser(user)
+            console.log("---CURRENT USER---")
+            console.log(resp.data)
+            let currentUser = resp.data.user
             if (currentUser && resp.status === 200) {
                 dispatch({
                     type: ACTIONS.LOGIN,
                     payload: currentUser,
-                });
-                setEmail("");
-                setPassword("");
+                })
+                setEmail("")
+                setPassword("")
             } else {
-                loginError = `An error ocurred on login: Status Code is: ${resp.status}. Message: ${resp.message}.`;
-                console.log(loginError);
+                loginError = `An error ocurred on login: Status Code is: ${resp.status}. Message: ${resp.message}.`
+                console.log(loginError)
             }
         } catch (error) {
-            loginError = `An error ocurred on login. ${error}.`;
-            console.log(loginError);
+            loginError = `An error ocurred on login. ${error}.`
+            console.log(loginError)
         }
     }
 
     function handleEmailChange(e) {
-        setEmail(e.target.value);
+        setEmail(e.target.value)
     }
 
     function handlePasswordChange(e) {
-        setPassword(e.target.value);
+        setPassword(e.target.value)
     }
 
     function handleRememberMe() {
-        setRememberMe(!rememberMe);
+        setRememberMe(!rememberMe)
     }
+
+    // AFTER USER LOGS IN, REDIRECT THEM TO THE PREVIOUS PAGE THEY CAME FROM
+    useEffect(() => {
+        setPrevUrl(history.location.state.prevUrl.split("3000")[1])
+    }, [history])
 
     return (
         <>
             {state.loggedIn ? (
-                <Redirect to="/" />
+                <Redirect to={prevUrl} />
             ) : (
                 <Container maxWidth="xs">
                     <CssBaseline />
@@ -146,7 +153,12 @@ export default function SignIn() {
                                 <Grid item>
                                     <Link
                                         className={classes.link}
-                                        to="/register"
+                                        to={{
+                                            pathname: "/register",
+                                            state: {
+                                                prevUrl: prevUrl,
+                                            },
+                                        }}
                                     >
                                         {"Don't have an account? Sign Up"}
                                     </Link>
@@ -161,5 +173,5 @@ export default function SignIn() {
                 </Container>
             )}
         </>
-    );
+    )
 }

@@ -3,7 +3,7 @@ import PayPal from "./Paypal"
 import CartList from "./CartList"
 import CartTotal from "./CartTotal"
 
-import { Typography, Grid, Box } from "@material-ui/core"
+import { Typography, Grid, Box, Button } from "@material-ui/core"
 import {
     getCartItemsFromLocalStorage,
     changeQtyOfItemInLocalStorage,
@@ -15,12 +15,13 @@ import { createOrder } from "../../services/orderServices"
 import useStyles from "./CartStyles"
 import { useCurtainContext } from "../../config/CurtainCoContext"
 import { ACTIONS } from "../../config/stateReducer"
+import { Link } from "react-router-dom/cjs/react-router-dom.min"
 
-function Cart() {
+function Cart({ props }) {
     const classes = useStyles()
     const [cart, setCart] = useState([])
     const [totalPrice, setTotalPrice] = useState(0)
-    const { dispatch } = useCurtainContext()
+    const { state, dispatch } = useCurtainContext()
     const [paymentSuccess, setPaymentSuccess] = useState(false)
     const [paymentFailed, setPaymentFailed] = useState(false)
     const [paymentCancelled, setPaymentCancelled] = useState(false)
@@ -88,9 +89,12 @@ function Cart() {
 
     async function handleSuccess(data) {
         // data contains the response from paypal which is to be stored in server
+        console.log("----SUCCESSFUL PAYPAL PURCHASE----")
+        console.log(data)
+
         const payload = {
             _id: data.paymentID,
-            customer: {},
+            customer: state.currentUser,
             totalPrice: totalPrice,
             items: cart,
             paymentData: data,
@@ -100,7 +104,7 @@ function Cart() {
             let response = await createOrder(payload)
             console.log(response)
             // setPaymentSuccess(true) // modal confirmation?
-            // clears the cart afterwards then redirects somewhere?
+            // TODO CLEAR THE CART AND REDIRECT TO THEIR ACCOUNT PAGE TO VIEW THE PURCHASE
             return response
         } catch (error) {
             console.log(error)
@@ -108,6 +112,7 @@ function Cart() {
     }
 
     function handleError(data) {
+        console.log("----ERROR PAYPAL PURCHASE----")
         // data contains the response from paypal which is to be stored in server
         // setPaymentFailed(true) // modal ??
         console.log(data)
@@ -115,10 +120,20 @@ function Cart() {
     }
 
     function handleCancel(data) {
+        console.log("----CANCEL PAYPAL PURCHASE----")
         // data contains the response from paypal which is to be stored in server
         // setPaymentCancelled(true) // modal ??
         console.log(data)
         console.log("Transaction cancelled")
+    }
+
+    // function handleRedirectAfterLogin(event) {
+    //     event.preventDefault()
+    //     // console.log(props.location)
+    // }
+
+    function isUserLoggedIn() {
+        return state.currentUser !== null
     }
 
     return (
@@ -137,14 +152,42 @@ function Cart() {
                     className={classes.cartTotalCont}
                 >
                     <Grid item xs={6}>
-                        <CartTotal total={totalPrice}>
-                            <PayPal
-                                handleSuccess={handleSuccess}
-                                handleError={handleError}
-                                handleCancel={handleCancel}
-                                totalPrice={totalPrice}
-                            />
-                        </CartTotal>
+                        {cart.length > 0 ? (
+                            <CartTotal
+                                total={totalPrice}
+                                loginText="To purchase with PayPal, please log in first."
+                            >
+                                {isUserLoggedIn() ? (
+                                    <PayPal
+                                        handleSuccess={handleSuccess}
+                                        handleError={handleError}
+                                        handleCancel={handleCancel}
+                                        totalPrice={totalPrice}
+                                    />
+                                ) : (
+                                    <Link
+                                        to={{
+                                            pathname: "/login",
+                                            state: {
+                                                prevUrl: window.location.href,
+                                            },
+                                        }}
+                                        className="link"
+                                    >
+                                        <Button
+                                            variant="contained"
+                                            color="primary"
+                                            size="large"
+                                            // onClick={handleRedirectAfterLogin}
+                                        >
+                                            Log In
+                                        </Button>
+                                    </Link>
+                                )}
+                            </CartTotal>
+                        ) : (
+                            ""
+                        )}
                     </Grid>
                 </Grid>
             </Box>
