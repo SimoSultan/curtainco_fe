@@ -1,22 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react"
 
-import AccessoryForm from "../../../reusable/AccessoryForm";
+import AccessoryForm from "../../../reusable/AccessoryForm"
 import {
     updateProduct,
     deleteProduct,
     submitProductToDbAndUpdateState,
-} from "../../../../services/productServices";
-import { useCurtainContext } from "../../../../config/CurtainCoContext";
-import { ACTIONS } from "../../../../config/stateReducer";
-import { getOneProductFromState } from "../../../../helpers/productHelpers";
-import { isPhotoPresent } from "../../../../helpers/appHelpers";
-import { uploadPhotoToS3 } from "../../../../services/uploadServices";
+} from "../../../../services/productServices"
+import { useCurtainContext } from "../../../../config/CurtainCoContext"
+import { ACTIONS } from "../../../../config/stateReducer"
+import { getOneProductFromState } from "../../../../helpers/productHelpers"
+import { isPhotoPresent } from "../../../../helpers/appHelpers"
+import { uploadPhotoToS3 } from "../../../../services/uploadServices"
 
 function EditDeleteAccessory({ editProductId, setEditProductId }) {
-    const { state, dispatch } = useCurtainContext();
-    const [resetFile, setResetFile] = useState(false);
-    const [previousProduct, setPreviousProduct] = useState(editProductId);
-    const [photo, setPhoto] = useState({});
+    const { state, dispatch } = useCurtainContext()
+    const [resetFile, setResetFile] = useState(false)
+    const [previousProduct, setPreviousProduct] = useState(editProductId)
+    const [photo, setPhoto] = useState({})
     const [accessory, setAccessory] = useState({
         category: "Accessory",
         _id: "",
@@ -26,7 +26,7 @@ function EditDeleteAccessory({ editProductId, setEditProductId }) {
         price: "",
         description: "",
         type: "",
-    });
+    })
 
     function resetProductForm() {
         setAccessory({
@@ -37,20 +37,20 @@ function EditDeleteAccessory({ editProductId, setEditProductId }) {
             price: "",
             description: "",
             type: "",
-        });
+        })
     }
 
     function handleFileChange(file) {
-        console.log(file);
-        setPhoto(file);
+        console.log(file)
+        setPhoto(file)
     }
 
     useEffect(() => {
         // this resets the file in the FileInput component on
         // a product change / update to form
         if (editProductId !== previousProduct) {
-            setPreviousProduct(editProductId);
-            setResetFile(true);
+            setPreviousProduct(editProductId)
+            setResetFile(true)
         }
         // IF PRODUCT ID COMES THROUGH AS A PROP, SET THE FORM
         // OTHERWISE CLEAR THE FORM
@@ -58,25 +58,16 @@ function EditDeleteAccessory({ editProductId, setEditProductId }) {
             const accessoryBeingUpdated = getOneProductFromState(
                 state.products,
                 editProductId
-            );
-            setAccessory({
-                category: accessoryBeingUpdated.category,
-                _id: accessoryBeingUpdated._id,
-                name: accessoryBeingUpdated.name,
-                colour: accessoryBeingUpdated.colour,
-                imgUrl: accessoryBeingUpdated.imgUrl,
-                price: accessoryBeingUpdated.price,
-                description: accessoryBeingUpdated.description,
-                type: accessoryBeingUpdated.type,
-            });
+            )
+            setAccessory({ ...accessoryBeingUpdated })
         } else {
-            resetProductForm();
+            resetProductForm()
         }
-    }, [state.products, editProductId, previousProduct]);
+    }, [state.products, editProductId, previousProduct])
 
     const handleTextChange = (event) => {
-        setAccessory({ ...accessory, [event.target.name]: event.target.value });
-    };
+        setAccessory({ ...accessory, [event.target.name]: event.target.value })
+    }
 
     async function handleUpdateProduct() {
         // UPDATE DB AND STATE
@@ -89,8 +80,8 @@ function EditDeleteAccessory({ editProductId, setEditProductId }) {
             setPhoto,
             photo,
             false
-        );
-        console.log(respOrError);
+        )
+        console.log(respOrError)
     }
 
     function handleRemoveProduct() {
@@ -99,12 +90,12 @@ function EditDeleteAccessory({ editProductId, setEditProductId }) {
         // THEN SET THE EDIT PRODUCT ID THAT THIS COMPONENT TAKES AS A PROP TO = "" TO RESET THE FORM
         deleteProduct(accessory)
             .then((resp) => {
-                console.log(resp);
+                console.log(resp)
                 if (resp.status === 202) {
                     dispatch({
                         type: ACTIONS.DELETE_PRODUCT,
                         payload: accessory._id,
-                    });
+                    })
                     dispatch({
                         type: ACTIONS.SET_SNACKBAR,
                         payload: {
@@ -112,17 +103,17 @@ function EditDeleteAccessory({ editProductId, setEditProductId }) {
                             success: "success",
                             message: "Accessory successfully deleted",
                         },
-                    });
+                    })
                 }
             })
             .catch((error) => {
-                console.log(error);
-            });
-        setEditProductId("");
-        setPreviousProduct("");
-        setResetFile(true);
-        setPhoto({});
-        resetProductForm();
+                console.log(error)
+            })
+        setEditProductId("")
+        setPreviousProduct("")
+        setResetFile(true)
+        setPhoto({})
+        resetProductForm()
     }
 
     // PASS IN TITLE AND TEXT FOR THE BUTTON TO THE Accessory FORM
@@ -139,7 +130,7 @@ function EditDeleteAccessory({ editProductId, setEditProductId }) {
             setResetFile={setResetFile}
             resetFile={resetFile}
         />
-    );
+    )
 }
 
-export default EditDeleteAccessory;
+export default EditDeleteAccessory

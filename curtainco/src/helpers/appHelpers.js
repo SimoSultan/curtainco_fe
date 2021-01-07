@@ -1,13 +1,13 @@
 function capitalize(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+    return string.charAt(0).toUpperCase() + string.slice(1)
 }
 
 function isEmpty(object) {
-    return Object.keys(object).length === 0;
+    return Object.keys(object).length === 0
 }
 
 function isPhotoPresent(photo) {
-    return photo.size !== undefined;
+    return photo.size !== undefined
 }
 
 function displayShortDate(createdAt) {
@@ -15,10 +15,10 @@ function displayShortDate(createdAt) {
     // let newDate = new Date(createdAt);
     let [month, date, year] = new Date(createdAt)
         .toLocaleDateString("en-US")
-        .split("/");
-    let dateStr = `${date}.${month}.${year}`;
+        .split("/")
+    let dateStr = `${date}.${month}.${year}`
 
-    return dateStr;
+    return dateStr
 }
 
 function ascSort(data) {
@@ -27,22 +27,22 @@ function ascSort(data) {
     let sorted = data.sort((a, b) => {
         // Turn your strings into dates, and then subtract them
         // to get a value that is either negative, positive, or zero.
-        return new Date(a.createdAt) - new Date(b.createdAt);
-    });
+        return new Date(a.createdAt) - new Date(b.createdAt)
+    })
 
-    let completedList = [];
-    let incompleteList = [];
+    let completedList = []
+    let incompleteList = []
 
     for (let i = 0; i < sorted.length; i++) {
-        const element = sorted[i];
+        const element = sorted[i]
         if (element.isProcessed) {
-            completedList.push(element);
+            completedList.push(element)
         } else {
-            incompleteList.push(element);
+            incompleteList.push(element)
         }
     }
 
-    return [...incompleteList, ...completedList];
+    return [...incompleteList, ...completedList]
 }
 
 module.exports = {
@@ -50,5 +50,5 @@ module.exports = {
     isEmpty,
     isPhotoPresent,
     displayShortDate,
-    ascSort
-};
+    ascSort,
+}

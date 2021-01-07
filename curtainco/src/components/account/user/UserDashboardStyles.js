@@ -1,4 +1,4 @@
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles"
 
 const useStyles = makeStyles((theme) => ({
     heading: {
@@ -6,7 +6,7 @@ const useStyles = makeStyles((theme) => ({
     },
     purchaseHistoryRoot: {
         width: "100%",
-        maxWidth: "36ch",
+        // maxWidth: "36px",
     },
     textCenter: {
         textAlign: "center",
@@ -15,6 +15,11 @@ const useStyles = makeStyles((theme) => ({
         textDecoration: "none",
         color: "inherit",
     },
-}));
+    orderImg: {
+        height: "100px",
+        width: "100px",
+        objectFit: "contain",
+    },
+}))
 
-export default useStyles;
+export default useStyles

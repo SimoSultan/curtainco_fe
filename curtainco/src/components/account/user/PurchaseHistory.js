@@ -1,30 +1,47 @@
-import React from 'react'
-
-import PurchasedItem from './PurchasedItem'
-
-import Container from '@material-ui/core/Container'
-import Typography from '@material-ui/core/Typography'
-import List from '@material-ui/core/List';
-
-import useStyles from './UserDashboardStyles'
-
-// Generate Order Data
-function createData(id, date, type, amount) {
-    return { id, date, type, amount };
-  }
-  
-const rows = [
-    createData(0, '16 Mar, 2019', 'fabric', 312.44),
-    createData(1, '16 Mar, 2019', 'rod', 866.99),
-    createData(2, '16 Mar, 2019', 'accessory', 100.81),
-];
-
-
-const allPurchasedItems = rows.map(item => <PurchasedItem key={item.id} item={item} />)
-
+import React, { useState, useEffect } from "react"
+import PurchaseOrder from "./PurchaseOrder"
+import { Container, Typography, Grid, Divider } from "@material-ui/core"
+import useStyles from "./UserDashboardStyles"
+import { getUserOrders } from "../../../services/userServices"
+import { useCurtainContext } from "../../../config/CurtainCoContext"
 
 function PurchaseHistory() {
     const classes = useStyles()
+    const { state } = useCurtainContext()
+    const [purchaseHistory, setPurchaseHistory] = useState([])
+    const [loading, setLoading] = useState(false)
+
+    useEffect(() => {
+        async function getPurchaseHistoryOfUser() {
+            setLoading(true)
+            const orderIds = state.currentUser.orders
+            let ordersArray = []
+            for (let i = 0; i < orderIds.length; i++) {
+                try {
+                    const id = orderIds[i]
+                    let resp = await getUserOrders(id)
+                    if (resp.status === 200) {
+                        ordersArray.push(resp.data)
+                    }
+                } catch (error) {
+                    console.log(
+                        `Error getting order from ID: ${orderIds[i]}. ${error}`
+                    )
+                }
+            }
+            setPurchaseHistory(ordersArray)
+            setLoading(false)
+        }
+
+        getPurchaseHistoryOfUser()
+    }, [state.currentUser.orders])
+
+    const allPurchasedItems = purchaseHistory.map((order) => (
+        <Grid item xs key={order._id}>
+            <PurchaseOrder order={order} />
+            <Divider />
+        </Grid>
+    ))
 
     return (
         <Container>
@@ -32,10 +49,17 @@ function PurchaseHistory() {
                 Purchase History
             </Typography>
 
-            <List className={classes.purchaseHistoryRoot}>
-                { allPurchasedItems }
-            </List>
-            
+            {loading ? (
+                "loading..."
+            ) : (
+                <Grid
+                    container
+                    direction="column"
+                    className={classes.purchaseHistoryRoot}
+                >
+                    {allPurchasedItems}
+                </Grid>
+            )}
         </Container>
     )
 }

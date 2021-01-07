@@ -1,8 +1,10 @@
 import React from "react"
 import { Grid, Button, Typography } from "@material-ui/core"
 import { Link } from "react-router-dom"
+import { useCurtainContext } from "../../config/CurtainCoContext"
 
-function CartTotal({ total, children }) {
+function CartTotal({ total, children, loginText }) {
+    const { state } = useCurtainContext()
     return (
         <Grid container direction="column" spacing={2}>
             <Grid item container justify="center" alignItems="center">
@@ -17,6 +19,12 @@ function CartTotal({ total, children }) {
                     </Typography>
                 </Grid>
             </Grid>
+
+            {state.currentUser === null && (
+                <Grid item xs container justify="center">
+                    <Typography>{loginText}</Typography>
+                </Grid>
+            )}
             <Grid item container justify="center" alignItems="center">
                 <Grid item xs container justify="center">
                     <Link to="/products" className="link">

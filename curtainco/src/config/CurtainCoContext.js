@@ -1,10 +1,10 @@
-import React, { useReducer, createContext, useContext } from "react";
-import stateReducer from "./stateReducer";
+import React, { useReducer, createContext, useContext } from "react"
+import stateReducer from "./stateReducer"
 
-const Context = createContext();
+const Context = createContext()
 
 export function useCurtainContext() {
-    return useContext(Context);
+    return useContext(Context)
 }
 
 function CurtainContext({ children }) {
@@ -23,7 +23,8 @@ function CurtainContext({ children }) {
             title: "",
             message: "",
             data: {},
-            paymentSummary: false
+            paymentSummary: false,
+            orderSummary: false,
         },
         products: [],
         collections: [],
@@ -31,15 +32,15 @@ function CurtainContext({ children }) {
         consults: [],
         orders: [],
         cart: [],
-    };
+    }
 
-    const [state, dispatch] = useReducer(stateReducer, initialState);
+    const [state, dispatch] = useReducer(stateReducer, initialState)
 
     return (
         <Context.Provider value={{ state, dispatch }}>
             {children}
         </Context.Provider>
-    );
+    )
 }
 
-export default CurtainContext;
+export default CurtainContext

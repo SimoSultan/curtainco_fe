@@ -41,9 +41,22 @@ function checkIfProductsExistInCollection(productArray, category) {
     return false
 }
 
+function buildContentString(array, category) {
+    if (array.length >= 2) {
+        return category === "Accessory"
+            ? `${array.length} Accessories`
+            : `${array.length} ${category}s`
+    } else if (array.length === 1) {
+        return `${array.length} ${category}`
+    } else {
+        return ""
+    }
+}
+
 module.exports = {
     getOneCollectionFromState,
     filterProductsInCollection,
     checkIfUserIsRemovingAProduct,
     checkIfProductsExistInCollection,
+    buildContentString,
 }
