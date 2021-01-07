@@ -15,6 +15,11 @@ const useStyles = makeStyles((theme) => ({
         textDecoration: "none",
         color: "inherit",
     },
+    orderImg: {
+        height: "100px",
+        width: "100px",
+        objectFit: "contain",
+    },
 }))
 
 export default useStyles

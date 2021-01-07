@@ -1,22 +1,24 @@
 import React, { useState, useEffect } from "react"
 import { Typography, Grid, Button } from "@material-ui/core"
-
 import PurchasedItems from "./PurchasedItems"
 import { displayShortDate } from "../../../helpers/appHelpers"
+import useStyles from "./UserDashboardStyles"
 
 function PurchaseOrder({ order }) {
-    const [orderDetails, setOrderDetails] = useState()
+    const classes = useStyles()
     const [contentStrings, setContentStrings] = useState({
         collection: "",
         fabric: "",
         track: "",
         accessory: "",
     })
+    // USING THIS FOR THE IMAGE IN THE ORDER LIST
+    const firstItemInOrder = order.items[0].item
 
     function handleItemClick(event) {
         event.preventDefault()
         console.log("open modal here for contents of order")
-        console.log(orderDetails)
+        console.log(order)
         // TODO send item to modal to display more info
     }
 
@@ -40,7 +42,6 @@ function PurchaseOrder({ order }) {
     }
 
     useEffect(() => {
-        setOrderDetails({ ...order })
         let collectionsArray = []
         let fabricsArray = []
         let tracksArray = []
@@ -88,6 +89,20 @@ function PurchaseOrder({ order }) {
                     item
                     container
                     direction="column"
+                    justify="center"
+                    alignItems="center"
+                    xs={3}
+                >
+                    <img
+                        src={firstItemInOrder.imgUrl}
+                        alt={firstItemInOrder.name}
+                        className={classes.orderImg}
+                    />
+                </Grid>
+                <Grid
+                    item
+                    container
+                    direction="column"
                     justify="flex-start"
                     alignItems="center"
                     xs={4}
@@ -118,7 +133,7 @@ function PurchaseOrder({ order }) {
                     direction="column"
                     justify="flex-start"
                     alignItems="center"
-                    xs={4}
+                    xs={2}
                 >
                     <Grid item>
                         <Typography variant="h6" component="h6">
@@ -133,7 +148,7 @@ function PurchaseOrder({ order }) {
                 <Grid
                     item
                     container
-                    xs={4}
+                    xs={3}
                     justify="flex-end"
                     alignItems="center"
                 >
