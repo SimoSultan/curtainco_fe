@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import PayPal from "./Paypal"
 import CartList from "./CartList"
 import CartTotal from "./CartTotal"
+import { useHistory } from "react-router-dom"
 
 import { Typography, Grid, Box, Button } from "@material-ui/core"
 import {
@@ -25,6 +26,7 @@ function Cart({ props }) {
     const [paymentSuccess, setPaymentSuccess] = useState(false)
     const [paymentFailed, setPaymentFailed] = useState(false)
     const [paymentCancelled, setPaymentCancelled] = useState(false)
+    const history = useHistory()
 
     // GET THE ITEMS FROM LOCAL STORAGE
     function updateCartInStateFromLocalStorage() {
@@ -103,8 +105,13 @@ function Cart({ props }) {
         try {
             let response = await createOrder(payload)
             console.log(response)
-            // setPaymentSuccess(true) // modal confirmation?
-            // TODO CLEAR THE CART AND REDIRECT TO THEIR ACCOUNT PAGE TO VIEW THE PURCHASE
+            if (response.status === 201) {
+                // TODO CLEAR THE CART AND REDIRECT TO THEIR ACCOUNT PAGE TO VIEW THE PURCHASE
+                setPaymentSuccess(true) // modal confirmation?
+                window.localStorage.clear()
+                history.push("/account")
+            }
+
             return response
         } catch (error) {
             console.log(error)
@@ -114,7 +121,7 @@ function Cart({ props }) {
     function handleError(data) {
         console.log("----ERROR PAYPAL PURCHASE----")
         // data contains the response from paypal which is to be stored in server
-        // setPaymentFailed(true) // modal ??
+        setPaymentFailed(true) // modal ??
         console.log(data)
         console.log("There was an error when using Paypal")
     }
@@ -122,15 +129,10 @@ function Cart({ props }) {
     function handleCancel(data) {
         console.log("----CANCEL PAYPAL PURCHASE----")
         // data contains the response from paypal which is to be stored in server
-        // setPaymentCancelled(true) // modal ??
+        setPaymentCancelled(true) // modal ??
         console.log(data)
         console.log("Transaction cancelled")
     }
-
-    // function handleRedirectAfterLogin(event) {
-    //     event.preventDefault()
-    //     // console.log(props.location)
-    // }
 
     function isUserLoggedIn() {
         return state.currentUser !== null
@@ -178,7 +180,6 @@ function Cart({ props }) {
                                             variant="contained"
                                             color="primary"
                                             size="large"
-                                            // onClick={handleRedirectAfterLogin}
                                         >
                                             Log In
                                         </Button>

@@ -58,7 +58,7 @@ export default function SignUp() {
     // AFTER USER LOGS IN, REDIRECT THEM TO THE PREVIOUS PAGE THEY CAME FROM
     useEffect(() => {
         // THIS prevUrl HAS ALREADY BEEN SPLIT ON THE LOGIN PAGE
-        // SO WE JUST NEED TO KNOW WHAT IT IS
+        // SO WE JUST NEED TO KNOW WHAT THE VALUE IS
         setPrevUrl(history.location.state.prevUrl)
     }, [history])
 

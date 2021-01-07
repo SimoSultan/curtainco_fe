@@ -1,15 +1,28 @@
-import React from "react";
-
-import { useCurtainContext } from "../../config/CurtainCoContext";
-
-import Typography from "@material-ui/core/Typography";
-
-import AdminDashboard from "./admin/AdminDashboard";
-import UserDashboard from "./user/UserDashboard";
-import { Redirect } from "react-router-dom";
+import React, { useEffect } from "react"
+import { useCurtainContext } from "../../config/CurtainCoContext"
+import Typography from "@material-ui/core/Typography"
+import AdminDashboard from "./admin/AdminDashboard"
+import UserDashboard from "./user/UserDashboard"
+import { Redirect } from "react-router-dom"
+import { getUser } from "../../services/userServices"
 
 function Account() {
-    const { state } = useCurtainContext();
+    const { state, dispatch } = useCurtainContext()
+
+    // useEffect(() => {
+    //     async function getUserFromDb() {
+    //         try {
+    //             const resp = getUser(state.currentUser._id)
+    //             console.log(resp)
+    //             return resp
+    //         } catch (error) {
+    //             console.log(error)
+    //         }
+    //     }
+
+    //     let user = getUserFromDb()
+    //     console.log(user)
+    // }, [state.currentUser._id])
 
     return (
         <>
@@ -25,7 +38,7 @@ function Account() {
                 <Redirect to="/" />
             )}
         </>
-    );
+    )
 }
 
-export default Account;
+export default Account

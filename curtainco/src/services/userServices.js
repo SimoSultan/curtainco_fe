@@ -1,9 +1,13 @@
-import api from "../config/api";
+import api from "../config/api"
 
 async function updateUserInformation(userInfo, userId) {
-    const response = await api.put(`/users/${userId}`, userInfo);
-    console.log("got updated user back from server", response.data);
-    return response;
+    const response = await api.put(`/users/${userId}`, userInfo)
+    return response
 }
 
-export { updateUserInformation };
+async function getUserOrders(orderId) {
+    const response = await api.get(`/orders/${orderId}`)
+    return response
+}
+
+export { updateUserInformation, getUserOrders }
