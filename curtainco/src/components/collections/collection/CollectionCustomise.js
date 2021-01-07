@@ -156,7 +156,7 @@ function CollectionCustomise() {
                 </Grid>
             </Grid>
             <Box p={3} mt={5} mr={10}>
-                <Grid container xs={12} justify="flex-end">
+                <Grid container justify="flex-end">
                     <AddToCartButton
                         icon={false}
                         text={"Add To Cart"}

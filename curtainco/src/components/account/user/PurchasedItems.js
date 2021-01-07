@@ -20,6 +20,7 @@ function PurchasedItems({ orderItem }) {
         <>
             {/* THIS IS THE CONTAINER FOR EACH INDIVIDUAL PRODUCT 
         IN THE LIST OF ITEMS PURCHASED*/}
+
             {isCollection ? (
                 <PurchasedCollection qty={orderItem.qty} collection={product} />
             ) : (

@@ -4,7 +4,6 @@ import Typography from "@material-ui/core/Typography"
 import AdminDashboard from "./admin/AdminDashboard"
 import UserDashboard from "./user/UserDashboard"
 import { Redirect } from "react-router-dom"
-import { getUser } from "../../services/userServices"
 
 function Account() {
     const { state, dispatch } = useCurtainContext()

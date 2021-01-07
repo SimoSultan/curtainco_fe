@@ -8,35 +8,11 @@ import CloseIcon from "@material-ui/icons/Close"
 import { useCurtainContext } from "../../config/CurtainCoContext"
 import { ACTIONS } from "../../config/stateReducer"
 import { Grid, Typography, IconButton } from "@material-ui/core"
-import PaymentSummary from "./PaymentSummary"
+import PaymentSummaryModal from "./PaymentSummaryModal"
+import OrderSummaryModal from "./OrderSummaryModal"
 import { addItemToCart } from "../../services/cartServices"
 import AddToCartButton from "./AddToCartButton"
-
-const useStyles = makeStyles((theme) => ({
-    modal: {
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-    },
-    paper: {
-        backgroundColor: theme.palette.background.paper,
-        // border: "2px solid #000",
-        boxShadow: theme.shadows[5],
-        padding: theme.spacing(2, 4, 3),
-        width: "50%",
-        maxWidth: "700px",
-        minWidth: "500px",
-    },
-    closeButton: {
-        position: "absolute",
-        top: "-7%",
-        right: "-7%",
-        // border: "1px solid red",
-    },
-    closeButtonCont: {
-        position: "relative",
-    },
-}))
+import useStyles from "./ModalStyles"
 
 export default function CustomModal() {
     const classes = useStyles()
@@ -51,6 +27,7 @@ export default function CustomModal() {
                 message: "",
                 data: {},
                 paymentSummary: false,
+                orderSummary: false,
             },
         })
     }
@@ -76,7 +53,12 @@ export default function CustomModal() {
             <Fade in={state.modal.open}>
                 <div className={classes.paper}>
                     {state.modal.paymentSummary ? (
-                        <PaymentSummary data={state.modal.data} />
+                        <PaymentSummaryModal data={state.modal.data} />
+                    ) : state.modal.orderSummary ? (
+                        <OrderSummaryModal
+                            data={state.modal.data}
+                            handleClose={handleClose}
+                        />
                     ) : (
                         <Grid container>
                             <Grid

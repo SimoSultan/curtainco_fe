@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react"
 import { Typography, Grid, Button } from "@material-ui/core"
-import PurchasedItems from "./PurchasedItems"
 import { displayShortDate } from "../../../helpers/appHelpers"
 import useStyles from "./UserDashboardStyles"
+import { useCurtainContext } from "../../../config/CurtainCoContext"
+import { buildContentString } from "../../../helpers/collectionHelpers"
+import { ACTIONS } from "../../../config/stateReducer"
 
 function PurchaseOrder({ order }) {
     const classes = useStyles()
+    const { dispatch } = useCurtainContext()
     const [contentStrings, setContentStrings] = useState({
         collection: "",
         fabric: "",
@@ -17,28 +20,15 @@ function PurchaseOrder({ order }) {
 
     function handleItemClick(event) {
         event.preventDefault()
-        console.log("open modal here for contents of order")
-        console.log(order)
         // TODO send item to modal to display more info
-    }
-
-    const items = order.items.map((orderItem) => (
-        <PurchasedItems
-            key={`productId-${orderItem.id}`}
-            orderItem={orderItem}
-        />
-    ))
-
-    function buildContentString(array, category) {
-        if (array.length >= 2) {
-            return category === "Accessory"
-                ? `${array.length} Accessories`
-                : `${array.length} ${category}s`
-        } else if (array.length === 1) {
-            return `${array.length} ${category}`
-        } else {
-            return ""
-        }
+        dispatch({
+            type: ACTIONS.SET_MODAL,
+            payload: {
+                open: true,
+                data: order,
+                orderSummary: true,
+            },
+        })
     }
 
     useEffect(() => {
