@@ -45,10 +45,11 @@ function ascSort(data) {
     return [...incompleteList, ...completedList]
 }
 
-module.exports = {
-    capitalize,
-    isEmpty,
-    isPhotoPresent,
-    displayShortDate,
-    ascSort,
-}
+// module.exports = {
+//     capitalize,
+//     isEmpty,
+//     isPhotoPresent,
+//     displayShortDate,
+//     ascSort,
+// }
+export { capitalize, isEmpty, isPhotoPresent, displayShortDate, ascSort }
