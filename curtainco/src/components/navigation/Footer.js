@@ -1,10 +1,11 @@
 import React from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Typography from "@material-ui/core/Typography";
-import Container from "@material-ui/core/Container";
+import { Typography, Button, Grid, Divider } from "@material-ui/core";
+import { Link } from 'react-router-dom';
 
 import useStyles from "./NavigationStyles";
-import Copyright from "../authentication/Copyright";
+import Contact from "./Contact";
+import Legal from "./Legal";
 
 export default function StickyFooter() {
     const classes = useStyles();
@@ -14,12 +15,20 @@ export default function StickyFooter() {
             <CssBaseline />
 
             <footer className={classes.footer}>
-                <Container maxWidth="sm">
-                    <Typography variant="body1">
-                        My sticky footer can be found here.
-                    </Typography>
-                    <Copyright />
-                </Container>
+                <Divider />
+                <Grid container>
+                    <Contact />
+
+                    <Grid item sm={8} container justify="center" alignItems="center">
+                        <Button variant="contained" color="primary" >
+                            <Link to="/request" className={classes.link}>
+                                Request Consultation
+                                </Link>
+                        </Button>
+                    </Grid>
+
+                    <Legal />
+                </Grid>
             </footer>
         </div>
     );
