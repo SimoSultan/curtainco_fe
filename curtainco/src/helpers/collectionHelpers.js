@@ -42,6 +42,8 @@ function checkIfProductsExistInCollection(productArray, category) {
 }
 
 function buildContentString(array, category) {
+    console.log(array)
+    console.log(category)
     if (array.length >= 2) {
         return category === "Accessory"
             ? `${array.length} Accessories`

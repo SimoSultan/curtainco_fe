@@ -28,7 +28,7 @@ function OrderSummaryModal({ data, handleClose }) {
                         item
                         container
                         justify="center"
-                        alginItems="center"
+                        alignItems="center"
                         xs={10}
                     >
                         <Typography variant="h6" component="h6">

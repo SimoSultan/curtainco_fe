@@ -3,17 +3,17 @@ import { Grid, Avatar, Divider, Box } from "@material-ui/core"
 import { capitalize } from "../../../helpers/appHelpers"
 
 function PurchasedProduct({ qty, product }) {
+    console.log(product)
     return (
         <Box m={1}>
             <Grid item container justify="center" alignItems="center">
-                <Grid item container direction="column" justify="center" xs={2}>
-                    <Grid item>{qty}x</Grid>
-                    <Grid item>Sub: ${qty * product.price}</Grid>
-                </Grid>
                 <Grid item container justify="flex-start" xs={2}>
                     <Grid item>
                         <Avatar src={product.imgUrl} alt={product.name} />
                     </Grid>
+                </Grid>
+                <Grid item xs={4}>
+                    {qty}x {capitalize(product.name)}
                 </Grid>
                 <Grid
                     item
@@ -31,9 +31,9 @@ function PurchasedProduct({ qty, product }) {
                     container
                     justify="flex-start"
                     alignItems="center"
-                    xs={3}
+                    xs={2}
                 >
-                    <Grid item>{capitalize(product.name)}</Grid>
+                    <Grid item>${qty * product.price}</Grid>
                 </Grid>
             </Grid>
             <Box mt={1}>

@@ -1,13 +1,12 @@
 import React from "react"
+import { Container, Grid } from "@material-ui/core"
 
 import ProfileInformation from "./ProfileInformation"
 import PurchaseHistory from "./PurchaseHistory"
 import CTARequestConsultation from "./CTARequestConsultation"
+import LoadingSymbol from "../../reusable/LoadingSymbol"
 
-import Container from "@material-ui/core/Container"
-import Grid from "@material-ui/core/Grid"
-
-function UserDashboard() {
+function UserDashboard({ isLoading }) {
     return (
         <Container>
             <Grid
@@ -19,8 +18,8 @@ function UserDashboard() {
                 <Grid item xs={5}>
                     <ProfileInformation />
                 </Grid>
-                <Grid item xs={7}>
-                    <PurchaseHistory />
+                <Grid item container xs={7}>
+                    {isLoading ? <LoadingSymbol /> : <PurchaseHistory />}
                 </Grid>
             </Grid>
             <CTARequestConsultation />

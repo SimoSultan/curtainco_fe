@@ -4,7 +4,7 @@ import { ACTIONS } from "./config/stateReducer"
 import { Container } from "@material-ui/core"
 import "./styles/Main.css"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
-import { getLoggedInUser } from "./services/authServices"
+import { getLoggedInUserFromHomeRoute } from "./services/authServices"
 
 import {
     NavBar,
@@ -29,10 +29,10 @@ function App() {
 
     useEffect(() => {
         if (state.currentUser === null) {
-            getLoggedInUser()
+            getLoggedInUserFromHomeRoute()
                 .then((resp) => {
                     let currentUser = resp.data.user
-                    if (currentUser) {
+                    if (currentUser && resp.status === 200) {
                         dispatch({
                             type: ACTIONS.SET_CURRENT_USER,
                             payload: currentUser,
@@ -43,7 +43,7 @@ function App() {
                 })
                 .catch((error) => {
                     console.log(
-                        `An error ocurred on getLoggedInUser: ${error}.`
+                        `An error ocurred on getLoggedInUserFromHomeRoute: ${error}.`
                     )
                 })
         }

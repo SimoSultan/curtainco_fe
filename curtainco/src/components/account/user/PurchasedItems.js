@@ -1,27 +1,21 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
 
 import PurchasedCollection from "./PurchasedCollection"
 import PurchasedProduct from "./PurchasedProduct"
 
 function PurchasedItems({ orderItem }) {
-    const [isCollection, setIsCollection] = useState(false)
-    let product = orderItem.item
-
-    useEffect(() => {
-        if (product.fabric && product.track && product.accessory) {
-            setIsCollection(true)
-        }
-    }, [product])
+    let tempData = { ...orderItem.item }
+    console.log(tempData)
 
     return (
         <>
-            {/* THIS IS THE CONTAINER FOR EACH INDIVIDUAL PRODUCT 
-        IN THE LIST OF ITEMS PURCHASED*/}
-
-            {isCollection ? (
-                <PurchasedCollection qty={orderItem.qty} collection={product} />
+            {orderItem.item.fabric ? (
+                <PurchasedCollection
+                    qty={orderItem.qty}
+                    collection={tempData}
+                />
             ) : (
-                <PurchasedProduct qty={orderItem.qty} product={product} />
+                <PurchasedProduct qty={orderItem.qty} product={tempData} />
             )}
         </>
     )
