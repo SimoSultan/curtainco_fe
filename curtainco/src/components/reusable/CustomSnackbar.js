@@ -1,16 +1,16 @@
-import React from "react";
-import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
+import React from "react"
+import Snackbar from "@material-ui/core/Snackbar"
+import MuiAlert from "@material-ui/lab/Alert"
 
-import { useCurtainContext } from "../../config/CurtainCoContext";
-import { ACTIONS } from "../../config/stateReducer";
+import { useCurtainContext } from "../../config/CurtainCoContext"
+import { ACTIONS } from "../../config/stateReducer"
 
 function Alert(props) {
-    return <MuiAlert elevation={6} variant="filled" {...props} />;
+    return <MuiAlert elevation={6} variant="filled" {...props} />
 }
 
 export default function CustomSnackbar() {
-    const { state, dispatch } = useCurtainContext();
+    const { state, dispatch } = useCurtainContext()
 
     // <Alert severity="error">This is an error message!</Alert>
     // <Alert severity="warning">This is a warning message!</Alert>
@@ -25,8 +25,8 @@ export default function CustomSnackbar() {
                 severity: "success",
                 message: "",
             },
-        });
-    };
+        })
+    }
 
     return (
         <>
@@ -40,5 +40,5 @@ export default function CustomSnackbar() {
                 </Alert>
             </Snackbar>
         </>
-    );
+    )
 }

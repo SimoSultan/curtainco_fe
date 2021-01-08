@@ -17,19 +17,25 @@ function Account() {
                 const resp = await getUpdatedUserWithOrderObjects(
                     state.currentUser._id
                 )
+                console.log(resp)
                 let currentUser = resp.data
                 if (resp.status === 200 && currentUser) {
                     dispatch({
                         type: ACTIONS.SET_CURRENT_USER,
                         payload: currentUser,
                     })
-                    setIsLoading(false)
                 }
             } catch (error) {
                 console.log(
-                    `An error ocurred on getLoggedInUserFromHomeRoute at Account: ${error}.`
+                    `An error ocurred on getUpdatedUserWithOrderObjects at Account: ${error}.`
                 )
+                // IF AN ERROR OCCURS, LOOK FOR FALSE IN PURCHASE HISTORY AND SHOW ERROR
+                dispatch({
+                    type: ACTIONS.SET_CURRENT_USER,
+                    payload: { ...state.currentUser, orders: false },
+                })
             }
+            setIsLoading(false)
         }
 
         if (isLoading) {

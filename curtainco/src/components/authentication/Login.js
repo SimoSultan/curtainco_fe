@@ -1,25 +1,29 @@
 import React, { useState, useEffect } from "react"
-
+// SERVICES AND HELPERS
 import { useCurtainContext } from "../../config/CurtainCoContext"
 import { ACTIONS } from "../../config/stateReducer"
-
-import { Link, Redirect, useHistory } from "react-router-dom"
-
-import Avatar from "@material-ui/core/Avatar"
-import Button from "@material-ui/core/Button"
-import CssBaseline from "@material-ui/core/CssBaseline"
-import TextField from "@material-ui/core/TextField"
-import FormControlLabel from "@material-ui/core/FormControlLabel"
-import Checkbox from "@material-ui/core/Checkbox"
-import Grid from "@material-ui/core/Grid"
-import Box from "@material-ui/core/Box"
-import Typography from "@material-ui/core/Typography"
-import Container from "@material-ui/core/Container"
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined"
-import useStyles from "../reusable/UserDataFormStyles"
-
 import { loginUser } from "../../services/authServices"
+import { Link, Redirect, useHistory } from "react-router-dom"
+import { loginFieldAreBad } from "../../helpers/authHelpers"
+import { setErrorSnackBar } from "../../helpers/appHelpers"
+// COMPONENTS
 import Copyright from "./Copyright"
+// STYLES
+import useStyles from "../reusable/UserDataFormStyles"
+import {
+    Avatar,
+    Button,
+    CssBaseline,
+    TextField,
+    FormControlLabel,
+    Checkbox,
+    Grid,
+    Box,
+    Typography,
+    Container,
+} from "@material-ui/core"
+// ICONS
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined"
 
 export default function SignIn() {
     const classes = useStyles()
@@ -30,10 +34,25 @@ export default function SignIn() {
     const [password, setPassword] = useState("")
     const [rememberMe, setRememberMe] = useState(false)
     const [prevUrl, setPrevUrl] = useState("/")
+    const [helperText, setHelperText] = useState({
+        email: "",
+        password: "",
+    })
 
     async function handleLogin(e) {
         e.preventDefault()
         let loginError = false
+        const emailCheck = loginFieldAreBad(email, "email")
+        const passwordCheck = loginFieldAreBad(password, "password")
+
+        if (emailCheck) {
+            setHelperText({ ...helperText, email: emailCheck })
+            return
+        }
+        if (passwordCheck) {
+            setHelperText({ ...helperText, password: passwordCheck })
+            return
+        }
 
         const user = { email, password, rememberMe }
 
@@ -49,22 +68,25 @@ export default function SignIn() {
                 })
                 setEmail("")
                 setPassword("")
-            } else {
-                loginError = `An error ocurred on login: Status Code is: ${resp.status}. Message: ${resp.message}.`
-                console.log(loginError)
             }
         } catch (error) {
             loginError = `An error ocurred on login. ${error}.`
             console.log(loginError)
+            setErrorSnackBar(
+                dispatch,
+                "Something went wrong. Please check email address and password."
+            )
         }
     }
 
     function handleEmailChange(e) {
         setEmail(e.target.value)
+        setHelperText({ ...helperText, email: "" })
     }
 
     function handlePasswordChange(e) {
         setPassword(e.target.value)
+        setHelperText({ ...helperText, password: "" })
     }
 
     function handleRememberMe() {
@@ -109,6 +131,8 @@ export default function SignIn() {
                                 autoComplete="email"
                                 autoFocus
                                 onChange={handleEmailChange}
+                                error={helperText.email !== ""}
+                                helperText={helperText.email}
                             />
                             <TextField
                                 variant="outlined"
@@ -121,6 +145,8 @@ export default function SignIn() {
                                 id="password"
                                 autoComplete="current-password"
                                 onChange={handlePasswordChange}
+                                error={helperText.password !== ""}
+                                helperText={helperText.password}
                             />
                             <FormControlLabel
                                 control={
@@ -147,7 +173,7 @@ export default function SignIn() {
                             <Grid container>
                                 <Grid item xs>
                                     <Link className={classes.link} to="/">
-                                        Forgot password?
+                                        {/* Forgot password? */}
                                     </Link>
                                 </Grid>
                                 <Grid item>

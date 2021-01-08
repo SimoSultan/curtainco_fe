@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from "react"
+// HELPERS AND SERVICES
 import { useCurtainContext } from "../../../config/CurtainCoContext"
 import { getOneCollectionFromState } from "../../../helpers/collectionHelpers"
 import { getOneCollection } from "../../../services/collectionServices"
-import useStyles from "../CollectionStyles"
-
-import { Box, Container, Grid, Typography } from "@material-ui/core"
-import CustomAccordion from "../../reusable/CustomAccordion"
-import CollectionIncludes from "./CollectionIncludes"
 import { capitalize } from "../../../helpers/appHelpers"
-import AddToCartButton from "../../reusable/AddToCartButton"
 import { addItemToCart } from "../../../services/cartServices"
 import { ACTIONS } from "../../../config/stateReducer"
+// STYLES
+import useStyles from "../CollectionStyles"
+import { Box, Container, Grid, Typography } from "@material-ui/core"
+// COMPONENTS
+import CustomAccordion from "../../reusable/CustomAccordion"
+import CollectionIncludes from "./CollectionIncludes"
+import AddToCartButton from "../../reusable/AddToCartButton"
 
 function CollectionCustomise() {
-    const classes = useStyles()
     let collectionId = window.location.pathname.split("/customise/")[1]
+    const classes = useStyles()
     const { state, dispatch } = useCurtainContext()
     const [collection, setCollection] = useState({
         _id: "",

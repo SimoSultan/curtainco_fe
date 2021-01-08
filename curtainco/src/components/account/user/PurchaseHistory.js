@@ -4,13 +4,22 @@ import { Container, Typography, Grid, Divider } from "@material-ui/core"
 import useStyles from "./UserDashboardStyles"
 import { getUpdatedUserWithOrderObjects } from "../../../services/userServices"
 import { useCurtainContext } from "../../../config/CurtainCoContext"
+import LoadingSymbol from "../../reusable/LoadingSymbol"
 
 function PurchaseHistory() {
     const classes = useStyles()
     const { state } = useCurtainContext()
     const [purchaseHistory, setPurchaseHistory] = useState([])
+    const [purchaseHistoryError, setPurchaseHistoryError] = useState(
+        "No purchases have been made"
+    )
 
     useEffect(() => {
+        if (!state.currentUser.orders) {
+            setPurchaseHistoryError(
+                "There was an error fetching your purchase history"
+            )
+        }
         setPurchaseHistory(state.currentUser.orders)
     }, [state.currentUser])
 
@@ -32,7 +41,9 @@ function PurchaseHistory() {
                 direction="column"
                 className={classes.purchaseHistoryRoot}
             >
-                {allPurchasedItems}
+                {allPurchasedItems.length === 0
+                    ? purchaseHistoryError
+                    : allPurchasedItems}
             </Grid>
         </Container>
     )

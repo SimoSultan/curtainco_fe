@@ -1,3 +1,5 @@
+import { ACTIONS } from "../config/stateReducer"
+
 function capitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1)
 }
@@ -45,11 +47,22 @@ function ascSort(data) {
     return [...incompleteList, ...completedList]
 }
 
-// module.exports = {
-//     capitalize,
-//     isEmpty,
-//     isPhotoPresent,
-//     displayShortDate,
-//     ascSort,
-// }
-export { capitalize, isEmpty, isPhotoPresent, displayShortDate, ascSort }
+function setErrorSnackBar(dispatch, error) {
+    dispatch({
+        type: ACTIONS.SET_SNACKBAR,
+        payload: {
+            open: true,
+            severity: "error",
+            message: error,
+        },
+    })
+}
+
+export {
+    capitalize,
+    isEmpty,
+    isPhotoPresent,
+    displayShortDate,
+    ascSort,
+    setErrorSnackBar,
+}

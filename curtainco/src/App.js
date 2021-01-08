@@ -78,8 +78,8 @@ function App() {
             </Container>
 
             <CustomSnackbar
-                severity={state.snackbar.severity}
                 open={state.snackbar.open}
+                severity={state.snackbar.severity}
                 message={state.snackbar.message}
             />
             <CustomModal
