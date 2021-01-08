@@ -20,7 +20,7 @@ function PurchaseOrder({ order }) {
 
     function handleItemClick(event) {
         event.preventDefault()
-        // TODO send item to modal to display more info
+        console.log("HERE_________")
         dispatch({
             type: ACTIONS.SET_MODAL,
             payload: {
@@ -74,82 +74,86 @@ function PurchaseOrder({ order }) {
         <>
             {/* THIS IS THE CONTAINER FOR EACH INDIVIDUAL ORDER MADE BY A USER*/}
 
-            <Grid container>
-                <Grid
-                    item
-                    container
-                    direction="column"
-                    justify="center"
-                    alignItems="center"
-                    xs={3}
-                >
-                    <img
-                        src={firstItemInOrder.imgUrl}
-                        alt={firstItemInOrder.name}
-                        className={classes.orderImg}
-                    />
+            <Grid container direction="column">
+                <Grid item>
+                    <Typography>Order #: {order._id}</Typography>
                 </Grid>
-                <Grid
-                    item
-                    container
-                    direction="column"
-                    justify="flex-start"
-                    alignItems="center"
-                    xs={4}
-                >
-                    <Grid item>
-                        <Typography variant="h6" component="h6">
-                            Details
-                        </Typography>
-                    </Grid>
-                    <Grid item>
-                        <Typography>
-                            Date: {displayShortDate(order.createdAt)}
-                        </Typography>
-                    </Grid>
-                    <Grid item>
-                        <Typography>Cost: ${order.totalPrice}</Typography>
-                    </Grid>
-                    <Grid item>
-                        <Typography>
-                            Status?{" "}
-                            {order.isProcessed ? "Sent" : "Not yet sent"}
-                        </Typography>
-                    </Grid>
-                </Grid>
-                <Grid
-                    item
-                    container
-                    direction="column"
-                    justify="flex-start"
-                    alignItems="center"
-                    xs={2}
-                >
-                    <Grid item>
-                        <Typography variant="h6" component="h6">
-                            Contents
-                        </Typography>
-                    </Grid>
-                    <Grid item>{contentStrings.collection}</Grid>
-                    <Grid item>{contentStrings.track}</Grid>
-                    <Grid item>{contentStrings.fabric}</Grid>
-                    <Grid item>{contentStrings.accessory}</Grid>
-                </Grid>
-                <Grid
-                    item
-                    container
-                    xs={3}
-                    justify="flex-end"
-                    alignItems="center"
-                >
-                    <Button
-                        variant="outlined"
-                        color="primary"
-                        onClick={handleItemClick}
-                        value={order}
+                <Grid item container>
+                    <Grid
+                        item
+                        container
+                        direction="column"
+                        justify="center"
+                        alignItems="center"
+                        xs={3}
                     >
-                        See More
-                    </Button>
+                        <img
+                            src={firstItemInOrder.imgUrl}
+                            alt={firstItemInOrder.name}
+                            className={classes.orderImg}
+                        />
+                    </Grid>
+                    <Grid
+                        item
+                        container
+                        direction="column"
+                        justify="flex-start"
+                        alignItems="center"
+                        xs={4}
+                    >
+                        <Grid item>
+                            <Typography variant="h6" component="h6">
+                                Details
+                            </Typography>
+                        </Grid>
+                        <Grid item>
+                            <Typography>
+                                Date: {displayShortDate(order.createdAt)}
+                            </Typography>
+                        </Grid>
+                        <Grid item>
+                            <Typography>Cost: ${order.totalPrice}</Typography>
+                        </Grid>
+                        <Grid item>
+                            <Typography>
+                                Status?{" "}
+                                {order.isProcessed ? "Sent" : "Not yet sent"}
+                            </Typography>
+                        </Grid>
+                    </Grid>
+                    <Grid
+                        item
+                        container
+                        direction="column"
+                        justify="flex-start"
+                        alignItems="center"
+                        xs={2}
+                    >
+                        <Grid item>
+                            <Typography variant="h6" component="h6">
+                                Contents
+                            </Typography>
+                        </Grid>
+                        <Grid item>{contentStrings.collection}</Grid>
+                        <Grid item>{contentStrings.track}</Grid>
+                        <Grid item>{contentStrings.fabric}</Grid>
+                        <Grid item>{contentStrings.accessory}</Grid>
+                    </Grid>
+                    <Grid
+                        item
+                        container
+                        xs={3}
+                        justify="flex-end"
+                        alignItems="center"
+                    >
+                        <Button
+                            variant="outlined"
+                            color="primary"
+                            onClick={handleItemClick}
+                        >
+                            See More
+                        </Button>
+                    </Grid>
                 </Grid>
             </Grid>
         </>

@@ -5,9 +5,9 @@ async function updateUserInformation(userInfo, userId) {
     return response
 }
 
-async function getUserOrders(orderId) {
-    const response = await api.get(`/orders/${orderId}`)
+async function getUpdatedUserWithOrderObjects(userId) {
+    const response = await api.get(`/users/${userId}`)
     return response
 }
 
-export { updateUserInformation, getUserOrders }
+export { updateUserInformation, getUpdatedUserWithOrderObjects }

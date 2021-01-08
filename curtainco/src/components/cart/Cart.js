@@ -18,7 +18,7 @@ import { useCurtainContext } from "../../config/CurtainCoContext"
 import { ACTIONS } from "../../config/stateReducer"
 import { Link } from "react-router-dom/cjs/react-router-dom.min"
 
-function Cart({ props }) {
+function Cart() {
     const classes = useStyles()
     const [cart, setCart] = useState([])
     const [totalPrice, setTotalPrice] = useState(0)
@@ -26,7 +26,7 @@ function Cart({ props }) {
     const [paymentSuccess, setPaymentSuccess] = useState(false)
     const [paymentFailed, setPaymentFailed] = useState(false)
     const [paymentCancelled, setPaymentCancelled] = useState(false)
-    const history = useHistory()
+    // const history = useHistory()
 
     // GET THE ITEMS FROM LOCAL STORAGE
     function updateCartInStateFromLocalStorage() {
@@ -109,7 +109,7 @@ function Cart({ props }) {
                 // TODO CLEAR THE CART AND REDIRECT TO THEIR ACCOUNT PAGE TO VIEW THE PURCHASE
                 setPaymentSuccess(true) // modal confirmation?
                 window.localStorage.clear()
-                history.push("/account")
+                // history.push("/account")
             }
 
             return response
