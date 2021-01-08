@@ -32,6 +32,14 @@ function CurtainContext({ children }) {
         consults: [],
         orders: [],
         cart: [],
+        discounts: {
+            mostProducts: 12,
+            mostProductsMultiplier: 0.8,
+            someProducts: 8,
+            someProductsMultiplier: 0.9,
+            littleProducts: 4,
+            littleProductsMultiplier: 1,
+        },
     }
 
     const [state, dispatch] = useReducer(stateReducer, initialState)

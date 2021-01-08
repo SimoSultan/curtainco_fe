@@ -53,10 +53,69 @@ function buildContentString(array, category) {
     }
 }
 
-module.exports = {
+function calculateCustomizedCollectionPrice(
+    customizedCollection,
+    collection,
+    discounts
+) {
+    let newPrice = 0
+    
+    const fabricOrig = collection.fabric.length
+    const trackOrig = collection.track.length
+    const accOrig = collection.accessory.length
+
+    const fabricCustom = customizedCollection.fabric.filter((prod) => prod !== false)
+        .length
+    const trackCustom = customizedCollection.track.filter((prod) => prod !== false)
+        .length
+    const accCustom = customizedCollection.accessory.filter((prod) => prod !== false)
+        .length
+    
+    const originalAmountOfProducts = 
+    const amountOfProductsPresent = trackCustom + fabricCustom + accCustom
+    const originalPrice = collection.price
+    const {
+        mostProducts,
+        mostProductsMultiplier,
+        someProducts,
+        someProductsMultiplier,
+        littleProducts,
+        littleProductsMultiplier,
+    } = discounts
+
+    console.log(newPrice)
+    console.log(fabric)
+    console.log(amountOfProductsPresent)
+
+    switch (amountOfProductsPresent) {
+        case amountOfProductsPresent <= littleProducts:
+            console.log("here")
+            newPrice = littleProductsMultiplier * originalPrice
+            break
+        case amountOfProductsPresent <= someProducts:
+            console.log("here2")
+            newPrice = someProductsMultiplier * originalPrice
+            break
+        case amountOfProductsPresent <= mostProducts:
+            console.log("here3")
+            newPrice = mostProductsMultiplier * originalPrice
+            break
+
+        default:
+            console.log("here4")
+            newPrice = originalPrice
+            break
+    }
+    console.log(newPrice)
+
+    return newPrice
+}
+
+export {
     getOneCollectionFromState,
     filterProductsInCollection,
     checkIfUserIsRemovingAProduct,
     checkIfProductsExistInCollection,
     buildContentString,
+    calculateCustomizedCollectionPrice,
 }

@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react"
 // HELPERS AND SERVICES
 import { useCurtainContext } from "../../../config/CurtainCoContext"
-import { getOneCollectionFromState } from "../../../helpers/collectionHelpers"
+import {
+    calculateCustomizedCollectionPrice,
+    getOneCollectionFromState,
+} from "../../../helpers/collectionHelpers"
 import { getOneCollection } from "../../../services/collectionServices"
 import { capitalize } from "../../../helpers/appHelpers"
 import { addItemToCart } from "../../../services/cartServices"
@@ -18,6 +21,7 @@ function CollectionCustomise() {
     let collectionId = window.location.pathname.split("/customise/")[1]
     const classes = useStyles()
     const { state, dispatch } = useCurtainContext()
+    const [customizedPrice, setCustomizedPrice] = useState(0)
     const [collection, setCollection] = useState({
         _id: "",
         name: "",
@@ -42,6 +46,16 @@ function CollectionCustomise() {
             ...customizedCollection,
             [category]: productArray,
         })
+        setCustomizedPrice(
+            calculateCustomizedCollectionPrice(
+                {
+                    ...customizedCollection,
+                    [category]: productArray,
+                },
+                collection,
+                state.discounts
+            )
+        )
     }
 
     function handleCartClick(event) {
@@ -153,7 +167,7 @@ function CollectionCustomise() {
                         fabrics={customizedCollection.fabric}
                         tracks={customizedCollection.track}
                         accessories={customizedCollection.accessory}
-                        price={collection.price}
+                        price={customizedPrice}
                     />
                 </Grid>
             </Grid>
