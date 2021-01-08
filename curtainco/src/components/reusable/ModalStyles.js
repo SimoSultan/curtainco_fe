@@ -5,10 +5,11 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        border: "none !important",
     },
     paper: {
         backgroundColor: theme.palette.background.paper,
-        // border: "2px solid #000",
+        border: "none !important",
         boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),
         width: "50%",

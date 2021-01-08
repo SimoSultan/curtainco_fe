@@ -3,7 +3,6 @@ import { Grid, Avatar, Divider, Box } from "@material-ui/core"
 import { capitalize } from "../../../helpers/appHelpers"
 
 function PurchasedProduct({ qty, product }) {
-    console.log(product)
     return (
         <Box m={1}>
             <Grid item container justify="center" alignItems="center">
