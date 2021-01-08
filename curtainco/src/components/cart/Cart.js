@@ -122,6 +122,14 @@ function Cart() {
         console.log("----ERROR PAYPAL PURCHASE----")
         // data contains the response from paypal which is to be stored in server
         setPaymentFailed(true) // modal ??
+        dispatch({
+            type: ACTIONS.SET_SNACKBAR,
+            payload: {
+                open: true,
+                success: "error",
+                message: "Something went wrong. Payment not successful.",
+            },
+        })
         console.log(data)
         console.log("There was an error when using Paypal")
     }

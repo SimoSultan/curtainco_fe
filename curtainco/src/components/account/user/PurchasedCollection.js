@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
 import { Typography, Grid, Avatar, Divider, Box } from "@material-ui/core"
 import { capitalize } from "../../../helpers/appHelpers"
 import { buildContentString } from "../../../helpers/collectionHelpers"

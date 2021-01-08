@@ -4,8 +4,7 @@ import PurchasedCollection from "./PurchasedCollection"
 import PurchasedProduct from "./PurchasedProduct"
 
 function PurchasedItems({ orderItem }) {
-    let tempData = { ...orderItem.item }
-    console.log(tempData)
+    let tempData = orderItem.item
 
     return (
         <>

@@ -33,7 +33,6 @@ export default function CustomModal() {
 
     useEffect(() => {
         if (!isEmpty(state.modal.data)) {
-            console.log("here")
             setDataIsPresent(true)
         }
     }, [state.modal.data])

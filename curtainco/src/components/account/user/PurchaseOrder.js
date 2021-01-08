@@ -20,7 +20,6 @@ function PurchaseOrder({ order }) {
 
     function handleItemClick(event) {
         event.preventDefault()
-        console.log("HERE_________")
         dispatch({
             type: ACTIONS.SET_MODAL,
             payload: {
