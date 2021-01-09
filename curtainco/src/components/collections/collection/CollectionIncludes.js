@@ -72,6 +72,12 @@ function CollectionIncludes({ fabrics, tracks, accessories, price, discount }) {
                 </Typography>
             </Grid>
             <Grid item>
+                <Typography>
+                    (showing discount only for test purposes, unless we want to
+                    leave it here in some form?)
+                </Typography>
+            </Grid>
+            <Grid item>
                 <Typography variant="h6" component="h6">
                     {`Total: $${price.toFixed(2)}`}
                 </Typography>
