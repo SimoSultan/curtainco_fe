@@ -51,16 +51,6 @@ function CollectionCustomise() {
         })
     }
 
-    useEffect(() => {
-        let { customPrice, discount } = calculateCustomizedCollectionPrice(
-            customizedCollection,
-            collection,
-            state.discounts
-        )
-        setCustomizedPrice(customPrice)
-        setDiscount(discount)
-    }, [customizedCollection, collection, state.discounts])
-
     function handleCartClick(event) {
         event.preventDefault()
         let tempTrack = customizedCollection.track.filter(
@@ -77,6 +67,7 @@ function CollectionCustomise() {
             track: tempTrack,
             fabric: tempFabric,
             accessory: tempAccessory,
+            price: customizedPrice,
         }
         console.log(tempCollection)
         addItemToCart(tempCollection)
@@ -90,6 +81,19 @@ function CollectionCustomise() {
         })
     }
 
+    // HANDLES THE TOTAL PRICE AND DISCOUNT OF THE CUSTOMISED COLLECTION
+    useEffect(() => {
+        console.log("---HERE----")
+        let { customPrice, discount } = calculateCustomizedCollectionPrice(
+            customizedCollection,
+            collection,
+            state.discounts
+        )
+        setCustomizedPrice(customPrice)
+        setDiscount(discount)
+    }, [customizedCollection, collection, state.discounts])
+
+    // GETS THE COLLECTION FROM THE SERVER BASED ON THE ID IN THE URL
     useEffect(() => {
         if (state.collections.length < 1) {
             console.log("getting the collection from db")
