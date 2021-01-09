@@ -22,6 +22,9 @@ function CollectionCustomise() {
     const classes = useStyles()
     const { state, dispatch } = useCurtainContext()
     const [customizedPrice, setCustomizedPrice] = useState(0)
+    const [discount, setDiscount] = useState(
+        state.discounts.mostProductsMultiplier
+    )
     const [collection, setCollection] = useState({
         _id: "",
         name: "",
@@ -46,17 +49,17 @@ function CollectionCustomise() {
             ...customizedCollection,
             [category]: productArray,
         })
-        setCustomizedPrice(
-            calculateCustomizedCollectionPrice(
-                {
-                    ...customizedCollection,
-                    [category]: productArray,
-                },
-                collection,
-                state.discounts
-            )
-        )
     }
+
+    useEffect(() => {
+        let { customPrice, discount } = calculateCustomizedCollectionPrice(
+            customizedCollection,
+            collection,
+            state.discounts
+        )
+        setCustomizedPrice(customPrice)
+        setDiscount(discount)
+    }, [customizedCollection, collection, state.discounts])
 
     function handleCartClick(event) {
         event.preventDefault()
@@ -167,6 +170,7 @@ function CollectionCustomise() {
                         fabrics={customizedCollection.fabric}
                         tracks={customizedCollection.track}
                         accessories={customizedCollection.accessory}
+                        discount={discount}
                         price={customizedPrice}
                     />
                 </Grid>

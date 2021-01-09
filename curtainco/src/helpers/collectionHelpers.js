@@ -58,21 +58,30 @@ function calculateCustomizedCollectionPrice(
     collection,
     discounts
 ) {
-    let newPrice = 0
-    
+    let customPrice = 0
+    let discount = 1
+
     const fabricOrig = collection.fabric.length
     const trackOrig = collection.track.length
     const accOrig = collection.accessory.length
 
-    const fabricCustom = customizedCollection.fabric.filter((prod) => prod !== false)
-        .length
-    const trackCustom = customizedCollection.track.filter((prod) => prod !== false)
-        .length
-    const accCustom = customizedCollection.accessory.filter((prod) => prod !== false)
-        .length
-    
-    const originalAmountOfProducts = 
-    const amountOfProductsPresent = trackCustom + fabricCustom + accCustom
+    let fabricCustom = customizedCollection.fabric.filter(
+        (prod) => prod !== false
+    ).length
+    let trackCustom = customizedCollection.track.filter(
+        (prod) => prod !== false
+    ).length
+    let accCustom = customizedCollection.accessory.filter(
+        (prod) => prod !== false
+    ).length
+
+    let totalPriceOfProductsInCollection = calculateTotalPriceOfCollection(
+        customizedCollection,
+        collection
+    )
+
+    let originalAmountOfProducts = fabricOrig + trackOrig + accOrig
+    let amountOfProductsPresent = trackCustom + fabricCustom + accCustom
     const originalPrice = collection.price
     const {
         mostProducts,
@@ -83,32 +92,83 @@ function calculateCustomizedCollectionPrice(
         littleProductsMultiplier,
     } = discounts
 
-    console.log(newPrice)
-    console.log(fabric)
-    console.log(amountOfProductsPresent)
+    let lessProductCount = originalAmountOfProducts * 0.333
+    let middleProductCount = originalAmountOfProducts * 0.666
+    let mostProductCount = originalAmountOfProducts * 1
 
-    switch (amountOfProductsPresent) {
-        case amountOfProductsPresent <= littleProducts:
-            console.log("here")
-            newPrice = littleProductsMultiplier * originalPrice
-            break
-        case amountOfProductsPresent <= someProducts:
-            console.log("here2")
-            newPrice = someProductsMultiplier * originalPrice
-            break
-        case amountOfProductsPresent <= mostProducts:
-            console.log("here3")
-            newPrice = mostProductsMultiplier * originalPrice
-            break
+    lessProductCount = Math.ceil(lessProductCount)
+    middleProductCount = Math.ceil(middleProductCount)
+    mostProductCount = Math.ceil(mostProductCount)
 
+    console.log({ lessProductCount })
+    console.log({ middleProductCount })
+    console.log({ mostProductCount })
+
+    switch (true) {
+        case amountOfProductsPresent <= lessProductCount:
+            discount = littleProductsMultiplier
+            customPrice =
+                littleProductsMultiplier * totalPriceOfProductsInCollection
+            break
+        case amountOfProductsPresent <= middleProductCount:
+            discount = someProductsMultiplier
+            customPrice =
+                someProductsMultiplier * totalPriceOfProductsInCollection
+            break
         default:
-            console.log("here4")
-            newPrice = originalPrice
+            discount = mostProductsMultiplier
+            customPrice =
+                mostProductsMultiplier * totalPriceOfProductsInCollection
             break
     }
-    console.log(newPrice)
 
-    return newPrice
+    return { customPrice, discount }
+}
+
+function calculateTotalPriceOfCollection(customizedCollection, collection) {
+    const fabricPrice = calculateTotalPriceOfCategoryOfProducts(
+        customizedCollection.fabric,
+        collection.fabric
+    )
+
+    const trackPrice = calculateTotalPriceOfCategoryOfProducts(
+        customizedCollection.track,
+        collection.track
+    )
+
+    const accessoryPrice = calculateTotalPriceOfCategoryOfProducts(
+        customizedCollection.accessory,
+        collection.accessory
+    )
+
+    return fabricPrice + trackPrice + accessoryPrice
+}
+
+function calculateTotalPriceOfCategoryOfProducts(
+    customisedArray,
+    originalArray
+) {
+    if (customisedArray.includes(false)) {
+        let tempCustomisedFabric = []
+        const key = "_id"
+        const arrayUniqueByKey = [
+            ...new Map(originalArray.map((item) => [item[key], item])).values(),
+        ]
+
+        for (let i = 0; i < customisedArray.length; i++) {
+            const element = customisedArray[i]
+            const tempPrice = arrayUniqueByKey.filter(
+                (el) => el._id === element
+            )
+            if (tempPrice[0] !== undefined) {
+                tempCustomisedFabric.push(tempPrice[0].price)
+            }
+        }
+        return tempCustomisedFabric.reduce((a, b) => a + b, 0)
+    } else {
+        let tempArray = originalArray.map((el) => el.price)
+        return tempArray.reduce((a, b) => a + b, 0)
+    }
 }
 
 export {

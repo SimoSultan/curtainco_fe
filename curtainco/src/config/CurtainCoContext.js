@@ -33,12 +33,9 @@ function CurtainContext({ children }) {
         orders: [],
         cart: [],
         discounts: {
-            mostProducts: 12,
-            mostProductsMultiplier: 0.8,
-            someProducts: 8,
-            someProductsMultiplier: 0.9,
-            littleProducts: 4,
-            littleProductsMultiplier: 1,
+            mostProductsMultiplier: 0.85,
+            someProductsMultiplier: 0.87,
+            littleProductsMultiplier: 0.89,
         },
     }
 

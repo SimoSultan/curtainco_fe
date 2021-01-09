@@ -7,7 +7,7 @@ import {
     Grid,
 } from "@material-ui/core"
 
-function CollectionIncludes({ fabrics, tracks, accessories, price }) {
+function CollectionIncludes({ fabrics, tracks, accessories, price, discount }) {
     const [lengths, setLengths] = useState({
         fabricLength: 0,
         trackLength: 0,
@@ -55,11 +55,25 @@ function CollectionIncludes({ fabrics, tracks, accessories, price }) {
                             }`}
                         />
                     </ListItem>
+                    <ListItem key="total-length">
+                        <ListItemText
+                            primary={`Total Products = ${
+                                lengths.accessoryLength +
+                                lengths.trackLength +
+                                lengths.fabricLength
+                            } `}
+                        />
+                    </ListItem>
                 </List>
             </Grid>
             <Grid item>
                 <Typography variant="h6" component="h6">
-                    {`Total: $${price}`}
+                    {`Discount : ${discount * 100}%`}
+                </Typography>
+            </Grid>
+            <Grid item>
+                <Typography variant="h6" component="h6">
+                    {`Total: $${price.toFixed(2)}`}
                 </Typography>
             </Grid>
         </Grid>
